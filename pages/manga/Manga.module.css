@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+}
+.card {
+  display: inline-grid;
+}
+.table {
+  display: flex;
+}
+.addition {
+  margin: 10px 0px 10px 20px;
+}
+.tags {
+  display: block;
+}

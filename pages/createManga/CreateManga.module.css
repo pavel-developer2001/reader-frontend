@@ -1,0 +1,12 @@
+.constent {
+  width: 100%;
+}
+.header {
+  display: flex;
+}
+.info {
+  display: grid;
+}
+.body {
+  display: grid;
+}
