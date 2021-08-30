@@ -1,13 +1,13 @@
-import { PlusOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Empty, Modal } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Empty } from "antd";
 import { Typography } from "antd";
 import { Tabs } from "antd";
-import TextArea from "antd/lib/input/TextArea";
 
 const { TabPane } = Tabs;
 const { Title } = Typography;
 import React from "react";
 import CardManga from "../../components/CardManga";
+import CreateTeamModal from "../../components/CreateTeamModal";
 import MainLayout from "../../layouts/MainLayout";
 import styles from "./Users.module.css";
 
@@ -21,20 +21,7 @@ const User = () => {
   function callback(key: string) {
     console.log(key);
   }
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-  const [value, setValue] = React.useState<string>("");
   return (
     <MainLayout>
       <div>
@@ -55,33 +42,7 @@ const User = () => {
           ))}
           <div>
             <span>В составе комманд: пусто</span>
-            <Button
-              type='primary'
-              icon={<PlusOutlined />}
-              onClick={showModal}
-              size='large'
-            >
-              Создать новую
-            </Button>
-            <Modal
-              title='Создать новую команду'
-              visible={isModalVisible}
-              onOk={handleOk}
-              onCancel={handleCancel}
-            >
-              <TextArea placeholder='Название команды' autoSize />
-              <div style={{ margin: "24px 0" }} />
-              <TextArea
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                placeholder='Описание'
-                autoSize={{ minRows: 3, maxRows: 5 }}
-              />
-              <div style={{ margin: "24px 0" }} />
-              <Button type='primary' size='large'>
-                Создать
-              </Button>
-            </Modal>
+            <CreateTeamModal />
           </div>
         </div>
         <div>
