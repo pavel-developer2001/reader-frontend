@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
 export const getPosts = createAsyncThunk("user/getPosts", async () => {
   return fetch("https://jsonplaceholder.typicode.com/posts").then((res) =>
@@ -20,21 +21,34 @@ const userSlice = createSlice({
       state.counter++;
     },
   },
-  extraReducers: {
-    [getPosts.pending]: (state, action) => {
-      state.status = "loading";
-      state.loading = true;
-    },
-    [getPosts.fulfilled]: (state, action) => {
-      state.posts = action.payload;
-      state.status = "success";
-      state.loading = false;
-    },
-    [getPosts.rejected]: (state, action) => {
-      state.status = "failed";
-      state.loading = null;
-    },
-  },
+  // extraReducers: {
+  //   [HYDRATE]: (state, action) => {
+  //     state.posts = action.payload;
+  //     state.status = "success";
+  //     state.loading = false;
+  //   },
+  //   [getPosts.pending]: (state, action) => {
+  //     state.status = "loading";
+  //     state.loading = true;
+  //   },
+  //   [getPosts.fulfilled]: (state, action) => {
+  //     state.posts = action.payload;
+  //     state.status = "success";
+  //     state.loading = false;
+  //   },
+  //   [getPosts.rejected]: (state, action) => {
+  //     state.status = "failed";
+  //     state.loading = null;
+  //   },
+  // },
+  extraReducers: (builder) =>
+    builder
+      .addCase(getPosts.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
+      })
+      .addCase(HYDRATE, (state, action) => {
+        state.posts = action.payload;
+      }),
 });
 
 export default userSlice.reducer;

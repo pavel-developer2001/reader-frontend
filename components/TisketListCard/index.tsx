@@ -11,6 +11,8 @@ import { GetServerSideProps } from "next";
 const TisketListCard = () => {
   const { posts } = useSelector<any>((state) => state.user);
   const { counter } = useSelector<any>((state) => state.user);
+  const state = useSelector<any>((state) => state);
+  console.log(state);
   const dispatch = useDispatch();
   const add = () => {
     dispatch(addCounter());
@@ -53,14 +55,19 @@ const TisketListCard = () => {
 };
 export const getServerSideProps: GetServerSideProps =
   //@ts-ignore
-  wrapper.getServerSideProps(async ({ store }) => {
+  wrapper.getServerSideProps(async (ctx) => {
     try {
-      await store.dispatch(getPosts());
+      ctx.store.dispatch(getPosts());
       return {
         props: {},
       };
     } catch (error) {
       console.log("ERROR!");
+      return {
+        props: {
+          rooms: [],
+        },
+      };
     }
   });
 
