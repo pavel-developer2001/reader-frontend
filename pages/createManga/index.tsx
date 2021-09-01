@@ -28,7 +28,7 @@ const CreateManga = () => {
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
+      <div className={styles.uploadText}>Добавить обложку для манги</div>
     </div>
   );
   const handleChange = (info: any) => {
@@ -47,14 +47,14 @@ const CreateManga = () => {
   return (
     <MainLayout>
       <div className={styles.content}>
+        <h2 className={styles.title}>Добавить мангу на сайт</h2>
         <div className={styles.header}>
           <div>
             <Upload
+              className={styles.customUpload}
               name='avatar'
               listType='picture-card'
-              className='avatar-uploader'
               showUploadList={false}
-              action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
               beforeUpload={beforeUpload}
               onChange={handleChange}
             >
@@ -66,21 +66,18 @@ const CreateManga = () => {
             </Upload>
           </div>
           <div className={styles.info}>
-            <span>Test</span>
-            <TextArea
-              placeholder='Autosize height based on content lines'
-              autoSize
-            />
-            <span>Test</span>
-            <TextArea
-              placeholder='Autosize height based on content lines'
-              autoSize
-            />
-            <span>Test</span>
-            <TextArea
-              placeholder='Autosize height based on content lines'
-              autoSize
-            />
+            <div className={styles.block}>
+              <span>Русское название</span>
+              <TextArea placeholder='название' autoSize />
+            </div>
+            <div className={styles.block}>
+              <span>Иностранные названия</span>
+              <TextArea placeholder='Англиское / оригинал' autoSize />
+            </div>
+            <div className={styles.block}>
+              <span>Год выпуска</span>
+              <TextArea placeholder='Год' autoSize />
+            </div>
           </div>
         </div>
         <div className={styles.body}>
@@ -88,7 +85,7 @@ const CreateManga = () => {
           <TextArea
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder='Controlled autosize'
+            placeholder='Описание'
             autoSize={{ minRows: 3, maxRows: 5 }}
           />
         </div>

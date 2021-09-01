@@ -53,7 +53,7 @@ const TisketListCard = () => {
     </>
   );
 };
-export const getServerSideProps: GetServerSideProps =
+export const getServerSideProps =
   //@ts-ignore
   wrapper.getServerSideProps(async (ctx) => {
     try {
