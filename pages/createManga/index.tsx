@@ -71,8 +71,12 @@ const CreateManga = () => {
               <TextArea placeholder='название' autoSize />
             </div>
             <div className={styles.block}>
-              <span>Иностранные названия</span>
-              <TextArea placeholder='Англиское / оригинал' autoSize />
+              <span>Английское названия</span>
+              <TextArea placeholder='Англиское название' autoSize />
+            </div>
+            <div className={styles.block}>
+              <span>Оригинальное названия</span>
+              <TextArea placeholder='Оригинальное название ' autoSize />
             </div>
             <div className={styles.block}>
               <span>Год выпуска</span>
