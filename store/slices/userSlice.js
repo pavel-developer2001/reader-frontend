@@ -23,7 +23,7 @@ const userSlice = createSlice({
   },
   // extraReducers: {
   //   [HYDRATE]: (state, action) => {
-  //     state.posts = action.payload;
+  //     state.posts = action.payload.user.posts;
   //     state.status = "success";
   //     state.loading = false;
   //   },
@@ -43,10 +43,10 @@ const userSlice = createSlice({
   // },
   extraReducers: (builder) =>
     builder
-      .addCase(getPosts.fulfilled, (state, action) => {
-        state.posts.push(action.payload);
-      })
       .addCase(HYDRATE, (state, action) => {
+        state.posts = action.payload.user.posts;
+      })
+      .addCase(getPosts.fulfilled, (state, action) => {
         state.posts = action.payload;
       }),
 });

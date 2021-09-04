@@ -57,6 +57,7 @@ export const getServerSideProps =
   //@ts-ignore
   wrapper.getServerSideProps(async (ctx) => {
     try {
+      //@ts-ignore
       ctx.store.dispatch(getPosts());
       return {
         props: {},
