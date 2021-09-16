@@ -3,11 +3,7 @@ import Link from "next/link";
 import React from "react";
 import styles from "./TisketListCard.module.css";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { addCounter, getPosts } from "../../store/slices/userSlice";
-
-import { wrapper } from "../../store";
-import { GetServerSideProps } from "next";
-
+import { addCounter } from "../../store/slices/userSlice";
 const TisketListCard = () => {
   const { posts } = useSelector<any>((state) => state.user);
   const { counter } = useSelector<any>((state) => state.user);
@@ -19,9 +15,6 @@ const TisketListCard = () => {
   };
   console.log(posts);
   console.log(counter);
-  // React.useEffect(() => {
-  //   dispatch(getPosts());
-  // }, []);
   return (
     <>
       <div className={styles.block}>
@@ -45,31 +38,9 @@ const TisketListCard = () => {
           </a>
         </Link>
       </div>
-      <div>
-        {posts.map((post: any) => (
-          <p>{post.title}</p>
-        ))}
-      </div>
+      <div></div>
     </>
   );
 };
-export const getServerSideProps =
-  //@ts-ignore
-  wrapper.getServerSideProps(async (ctx) => {
-    try {
-      //@ts-ignore
-      ctx.store.dispatch(getPosts());
-      return {
-        props: {},
-      };
-    } catch (error) {
-      console.log("ERROR!");
-      return {
-        props: {
-          rooms: [],
-        },
-      };
-    }
-  });
 
 export default TisketListCard;
