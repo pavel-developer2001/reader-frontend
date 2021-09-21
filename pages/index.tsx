@@ -21,24 +21,23 @@ const Home: NextPage = () => {
     </MainLayout>
   );
 };
-export const getServerSideProps =
-  //@ts-ignore
-  wrapper.getServerSideProps(async (ctx) => {
-    try {
-      const posts = await fetch(
-        "https://jsonplaceholder.typicode.com/posts"
-      ).then((res) => res.json());
-      ctx.store.dispatch(setUsers(posts));
-      return {
-        props: {},
-      };
-    } catch (error) {
-      console.log("ERROR!");
-      return {
-        props: {
-          rooms: [],
-        },
-      };
-    }
-  });
+// export const getServerSideProps: GetServerSideProps =
+//   wrapper.getServerSideProps(async (ctx) => {
+//     try {
+//       // const posts = await fetch(
+//       //   "https://jsonplaceholder.typicode.com/posts"
+//       // ).then((res) => res.json());
+//       // ctx.store.dispatch(setUsers(posts));
+//       return {
+//         props: {},
+//       };
+//     } catch (error) {
+//       console.log("ERROR!");
+//       return {
+//         props: {
+//           rooms: [],
+//         },
+//       };
+//     }
+//   });
 export default Home;

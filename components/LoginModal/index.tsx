@@ -1,25 +1,53 @@
 import { GoogleOutlined, TwitterOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import Modal from "antd/lib/modal";
-import React from "react";
+import { Router, useRouter } from "next/dist/client/router";
+import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { registerUsers } from "../../store/slices/userSlice";
 
 interface LoginModalProps {
   isModalVisible: boolean | undefined;
   handleOk: () => void;
   handleCancel: () => void;
 }
-const LoginModal: React.FC<LoginModalProps> = ({
+const LoginModal: FC<LoginModalProps> = ({
   isModalVisible,
   handleOk,
   handleCancel,
 }) => {
-  const [register, setRegister] = React.useState<boolean>(false);
+  const [register, setRegister] = useState<boolean>(false);
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
-
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
+  };
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+
+  const handleRegistration = async (e: any) => {
+    e.preventDefault();
+    try {
+      if (password === password2) {
+        const payload = await {
+          name,
+          email,
+          password,
+        };
+        console.log(payload);
+        dispatch(registerUsers(payload));
+        setName("");
+        setEmail("");
+        setPassword("");
+        setPassword2("");
+        router.push("/");
+      }
+    } catch (error) {}
   };
   return (
     <Modal
@@ -38,6 +66,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
           <Form.Item
             label='Логин'
             name='name'
+            value={name}
+            onChange={(e: any) => setName(e.target.value)}
             rules={[{ required: true, message: "Please input your name!" }]}
           >
             <Input />
@@ -45,6 +75,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
           <Form.Item
             name='email'
             label='Email'
+            value={email}
+            onChange={(e: any) => setEmail(e.target.value)}
             rules={[
               {
                 type: "email",
@@ -58,6 +90,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
           <Form.Item
             label='Пароль'
             name='password'
+            value={password}
+            onChange={(e: any) => setPassword(e.target.value)}
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password />
@@ -65,13 +99,19 @@ const LoginModal: React.FC<LoginModalProps> = ({
           <Form.Item
             label='Повторить пароль'
             name='password2'
+            value={password2}
+            onChange={(e: any) => setPassword2(e.target.value)}
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password />
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type={register ? "primary" : "link"} htmlType='submit'>
+            <Button
+              type={register ? "primary" : "link"}
+              htmlType='submit'
+              onClick={handleRegistration}
+            >
               Зарегистрироваться
             </Button>
           </Form.Item>

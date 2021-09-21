@@ -14,7 +14,7 @@ import MenuUser from "../MenuUser";
 import LoginModal from "../LoginModal";
 
 const Navbar = () => {
-  const [isAuth, setIsAuth] = React.useState<boolean>(true);
+  const [isAuth, setIsAuth] = React.useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false);
 
   const showModal = () => {
