@@ -1,15 +1,22 @@
 import type { NextPage } from "next";
 import MainLayout from "../layouts/MainLayout";
 import styles from "../styles/Home.module.css";
-import { addCounter, setUsers } from "../store/slices/userSlice";
+import { addCounter, setToken, setUsers } from "../store/slices/userSlice";
 
 import { wrapper } from "../store";
 import { GetServerSideProps } from "next";
 
 import PopularList from "../components/PopularList";
 import TisketList from "../components/TisketList";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home: NextPage = () => {
+  const token = useSelector((state: any) => state.user.token);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setToken(localStorage.getItem("token")));
+  }, [token]);
   return (
     <MainLayout>
       <PopularList />

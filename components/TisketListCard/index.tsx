@@ -3,18 +3,9 @@ import Link from "next/link";
 import React from "react";
 import styles from "./TisketListCard.module.css";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { addCounter } from "../../store/slices/userSlice";
+
 const TisketListCard = () => {
-  const { posts } = useSelector<any>((state) => state.user);
-  const { counter } = useSelector<any>((state) => state.user);
   const state = useSelector<any>((state) => state);
-  console.log(state);
-  const dispatch = useDispatch();
-  const add = () => {
-    dispatch(addCounter());
-  };
-  console.log(posts);
-  console.log(counter);
   return (
     <>
       <div className={styles.block}>
@@ -23,8 +14,7 @@ const TisketListCard = () => {
           src='https://api.remanga.org//media/titles/tales_of_demons_and_gods/high_cover.jpg'
           alt='img card'
         />
-        <button onClick={add}>+</button>
-        <p>{counter}</p>
+
         <Link href='/manga/1'>
           <a>
             {" "}

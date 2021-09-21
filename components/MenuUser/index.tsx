@@ -3,8 +3,15 @@ import { Menu } from "antd";
 import React from "react";
 import Link from "next/link";
 import styles from "./MenuUser.module.css";
+import { setToken } from "../../store/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const MenuUser = () => {
+  const dispatch = useDispatch();
+  const handleExitUser = () => {
+    window.localStorage.removeItem("token");
+    dispatch(setToken(""));
+  };
   return (
     <div className={styles.block}>
       <Menu>
@@ -18,7 +25,9 @@ const MenuUser = () => {
             <a>Добавить мангу</a>
           </Link>
         </Menu.Item>
-        <Menu.Item icon={<ExportOutlined />}>Выход</Menu.Item>
+        <Menu.Item onClick={handleExitUser} icon={<ExportOutlined />}>
+          Выход
+        </Menu.Item>
       </Menu>
     </div>
   );

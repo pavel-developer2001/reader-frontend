@@ -1,7 +1,7 @@
 import { GoogleOutlined, TwitterOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import Modal from "antd/lib/modal";
-import { Router, useRouter } from "next/dist/client/router";
+import { useRouter } from "next/dist/client/router";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUsers } from "../../store/slices/userSlice";
@@ -10,11 +10,13 @@ interface LoginModalProps {
   isModalVisible: boolean | undefined;
   handleOk: () => void;
   handleCancel: () => void;
+  setIsModalVisible: any;
 }
 const LoginModal: FC<LoginModalProps> = ({
   isModalVisible,
   handleOk,
   handleCancel,
+  setIsModalVisible,
 }) => {
   const [register, setRegister] = useState<boolean>(false);
   const onFinish = (values: any) => {
@@ -39,12 +41,12 @@ const LoginModal: FC<LoginModalProps> = ({
           email,
           password,
         };
-        console.log(payload);
         dispatch(registerUsers(payload));
         setName("");
         setEmail("");
         setPassword("");
         setPassword2("");
+        setIsModalVisible(false);
         router.push("/");
       }
     } catch (error) {}

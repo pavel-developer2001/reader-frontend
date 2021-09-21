@@ -12,9 +12,10 @@ import Link from "next/link";
 import styles from "./Navbar.module.css";
 import MenuUser from "../MenuUser";
 import LoginModal from "../LoginModal";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const [isAuth, setIsAuth] = React.useState<boolean>(false);
+  const token = useSelector<any>((state) => state.user.token);
   const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false);
 
   const showModal = () => {
@@ -59,7 +60,7 @@ const Navbar = () => {
         <Menu.Item key='6'>
           <BellOutlined />
         </Menu.Item>
-        {isAuth ? (
+        {token ? (
           <Menu.Item key='7'>
             <Popover placement='bottom' content={<MenuUser />} trigger='click'>
               <Avatar size='large' icon={<UserOutlined />} />
@@ -73,6 +74,7 @@ const Navbar = () => {
             <LoginModal
               isModalVisible={isModalVisible}
               handleOk={handleOk}
+              setIsModalVisible={setIsModalVisible}
               handleCancel={handleCancel}
             />
           </>

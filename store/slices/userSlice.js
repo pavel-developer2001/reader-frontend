@@ -5,36 +5,34 @@ import UserApi from "../../services/api/userApi";
 export const registerUsers = createAsyncThunk(
   "user/registerUsers",
   async (payload) => {
-    return UserApi.registration(payload);
+    return await UserApi.registration(payload);
   }
 );
 const userSlice = createSlice({
   name: "user",
   initialState: {
     user: [],
-    counter: 0,
+    token: "",
     status: null,
     loading: true,
-    posts: [],
   },
   reducers: {
-    addCounter(state) {
-      state.counter++;
-    },
-    setUsers(state, action) {
-      state.posts.push(action.payload);
+    setToken(state, action) {
+      state.token = action.payload;
     },
   },
 
   extraReducers: (builder) =>
-    builder
-      .addCase(registerUsers.fulfilled.type, (state, action) => {
-        state.user.push(action.payload);
-      })
-      .addCase(HYDRATE, (state, action) => {
-        state.posts = action.payload.user.posts;
-      }),
+    builder.addCase(registerUsers.fulfilled, (state, action) => {
+      state.user.push(action.payload.data.user);
+      window.localStorage.setItem("token", action.payload.data.token);
+      state.loading = false;
+      state.token = action.payload.data.token;
+    }),
+  // .addCase(HYDRATE, (state, action) => {
+  //   state.posts = action.payload.user.posts;
+  // }),
 });
 
 export default userSlice.reducer;
-export const { addCounter, setUsers } = userSlice.actions;
+export const { setToken } = userSlice.actions;
