@@ -1,6 +1,5 @@
 .block {
   display: flex;
-
   max-width: 390px;
   max-height: 95px;
   border-radius: 4px;
@@ -12,4 +11,8 @@
   height: fit-content;
   min-width: 60px;
   border-radius: 4px;
+}
+.card {
+  background-color: var(#{--components-background-default});
+  color: var(#{--text-color-default});
 }

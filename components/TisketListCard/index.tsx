@@ -1,7 +1,7 @@
 import { Card } from "antd";
 import Link from "next/link";
 import React from "react";
-import styles from "./TisketListCard.module.css";
+import styles from "./TisketListCard.module.scss";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const TisketListCard = () => {

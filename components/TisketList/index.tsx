@@ -1,6 +1,6 @@
 import React from "react";
 import TisketListCard from "../TisketListCard";
-import styles from "./TisketList.module.css";
+import styles from "./TisketList.module.scss";
 
 const TisketList = () => {
   return (

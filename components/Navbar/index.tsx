@@ -1,8 +1,9 @@
 import React from "react";
-import { Layout, Menu, Modal, Popover } from "antd";
+import { Button, Layout, Menu, Modal, Popover, Tooltip } from "antd";
 const { Header } = Layout;
 import {
   BellOutlined,
+  FormatPainterOutlined,
   NotificationOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
@@ -13,9 +14,12 @@ import styles from "./Navbar.module.css";
 import MenuUser from "../MenuUser";
 import LoginModal from "../LoginModal";
 import { useSelector } from "react-redux";
+import { Theme } from "../../context/ThemeContext";
+import { useTheme } from "../../hooks/useTheme";
 
 const Navbar = () => {
   const token = useSelector<any>((state) => state.user.token);
+  const theme = useTheme();
   const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false);
 
   const showModal = () => {
@@ -29,7 +33,9 @@ const Navbar = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
+  function changeTheme() {
+    theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
+  }
   return (
     <Header className='header'>
       <div className={styles.logo}>
@@ -59,6 +65,16 @@ const Navbar = () => {
         <Menu.Item key='5'>Закладки</Menu.Item>
         <Menu.Item key='6'>
           <BellOutlined />
+        </Menu.Item>
+        <Menu.Item key='10'>
+          <Button
+            type='primary'
+            shape='circle'
+            size='large'
+            onClick={changeTheme}
+          >
+            <FormatPainterOutlined />
+          </Button>
         </Menu.Item>
         {token ? (
           <Menu.Item key='7'>
