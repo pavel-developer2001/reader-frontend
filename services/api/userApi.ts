@@ -2,6 +2,9 @@ import ReaderApi from "../ReaderApi";
 
 export default class UserApi {
   static async registration(payload: any) {
-    return ReaderApi.post("users/registration", payload);
+    return ReaderApi.post("/users/registration", payload);
+  }
+  static async login(payload: any) {
+    return ReaderApi.post("/users/login", payload);
   }
 }

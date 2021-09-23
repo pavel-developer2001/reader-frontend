@@ -4,7 +4,7 @@ import Modal from "antd/lib/modal";
 import { useRouter } from "next/dist/client/router";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { registerUsers } from "../../store/slices/userSlice";
+import { loginUsers, registerUsers } from "../../store/slices/userSlice";
 
 interface LoginModalProps {
   isModalVisible: boolean | undefined;
@@ -49,6 +49,18 @@ const LoginModal: FC<LoginModalProps> = ({
         setIsModalVisible(false);
         router.push("/");
       }
+    } catch (error) {}
+  };
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    try {
+      const payload = await {
+        email,
+        password,
+      };
+      dispatch(loginUsers(payload));
+      setEmail("");
+      setPassword("");
     } catch (error) {}
   };
   return (
@@ -131,10 +143,16 @@ const LoginModal: FC<LoginModalProps> = ({
             onFinishFailed={onFinishFailed}
           >
             <Form.Item
-              label='Логин'
-              name='username'
+              label='Email'
+              name='email'
+              value={email}
+              onChange={(e: any) => setEmail(e.target.value)}
               rules={[
-                { required: true, message: "Please input your username!" },
+                {
+                  type: "email",
+                  required: true,
+                  message: "Please input your email!",
+                },
               ]}
             >
               <Input />
@@ -143,6 +161,8 @@ const LoginModal: FC<LoginModalProps> = ({
             <Form.Item
               label='Пароль'
               name='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               rules={[
                 { required: true, message: "Please input your password!" },
               ]}
@@ -151,7 +171,7 @@ const LoginModal: FC<LoginModalProps> = ({
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Button type='primary' htmlType='submit'>
+              <Button type='primary' onClick={handleLogin} htmlType='submit'>
                 Войти
               </Button>
               <Button

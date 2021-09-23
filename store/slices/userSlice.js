@@ -8,6 +8,12 @@ export const registerUsers = createAsyncThunk(
     return await UserApi.registration(payload);
   }
 );
+export const loginUsers = createAsyncThunk(
+  "user/loginUsers",
+  async (payload) => {
+    return await UserApi.login(payload);
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -23,12 +29,19 @@ const userSlice = createSlice({
   },
 
   extraReducers: (builder) =>
-    builder.addCase(registerUsers.fulfilled, (state, action) => {
-      state.user.push(action.payload.data.user);
-      window.localStorage.setItem("token", action.payload.data.token);
-      state.loading = false;
-      state.token = action.payload.data.token;
-    }),
+    builder
+      .addCase(loginUsers.fulfilled, (state, action) => {
+        state.user.push(action.payload.data.user);
+        window.localStorage.setItem("token", action.payload.data.token);
+        state.loading = false;
+        state.token = action.payload.data.token;
+      })
+      .addCase(registerUsers.fulfilled, (state, action) => {
+        state.user.push(action.payload.data.user);
+        window.localStorage.setItem("token", action.payload.data.token);
+        state.loading = false;
+        state.token = action.payload.data.token;
+      }),
   // .addCase(HYDRATE, (state, action) => {
   //   state.posts = action.payload.user.posts;
   // }),

@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./MenuUser.module.css";
 import { setToken } from "../../store/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { dataUser } from "../../utils/getDataUserFromToken";
 
 const MenuUser = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const MenuUser = () => {
     <div className={styles.block}>
       <Menu>
         <Menu.Item icon={<UserOutlined />}>
-          <Link href='/user/1'>
+          <Link href={"/user/" + dataUser.id}>
             <a>Профиль пользователя</a>
           </Link>
         </Menu.Item>
