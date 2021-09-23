@@ -1,7 +1,6 @@
 import { Theme } from "../context/ThemeContext";
 
 export function changeCssRootVariables(theme: Theme) {
-  debugger;
   const root = document.querySelector(":root") as HTMLElement;
 
   const components = [
@@ -10,6 +9,7 @@ export function changeCssRootVariables(theme: Theme) {
     "card-background",
     "card-shadow",
     "text-color",
+    "header-color",
   ];
 
   components.forEach((component) => {

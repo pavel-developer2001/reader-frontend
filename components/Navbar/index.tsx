@@ -1,16 +1,15 @@
 import React from "react";
-import { Button, Layout, Menu, Modal, Popover, Tooltip } from "antd";
+import { Button, Layout, Popover } from "antd";
 const { Header } = Layout;
 import {
   BellOutlined,
   FormatPainterOutlined,
-  NotificationOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import styles from "./Navbar.module.css";
+import styles from "./Navbar.module.scss";
 import MenuUser from "../MenuUser";
 import LoginModal from "../LoginModal";
 import { useSelector } from "react-redux";
@@ -36,57 +35,69 @@ const Navbar = () => {
   function changeTheme() {
     theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
   }
+  const menuArrays = {
+    left: [
+      {
+        title: "Каталог",
+        link: "/catalog",
+      },
+      {
+        title: "В топе",
+        link: "/popular",
+      },
+      {
+        title: "Лента",
+        link: "/lateUpdates",
+      },
+    ],
+    right: [],
+  };
   return (
-    <Header className='header'>
-      <div className={styles.logo}>
-        <Link href='/'>
-          <a>Reader</a>
-        </Link>
+    <Header className={styles.header}>
+      <div className={styles.leftHeader}>
+        <div className={styles.logo}>
+          <Link href='/'>
+            <a>Reader</a>
+          </Link>
+        </div>
+        {menuArrays.left.map((menu, index) => (
+          <div key={index} className={styles.menu}>
+            <Link href={menu.link}>
+              <a>{menu.title}</a>
+            </Link>
+          </div>
+        ))}
       </div>
-      <Menu theme='dark' mode='horizontal' defaultSelectedKeys={["2"]}>
-        <Menu.Item key='1'>
-          <Link href='/catalog'>
-            <a>Каталог</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key=''>
-          <Link href='/popular'>
-            <a>В топе</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key='3'>
-          <Link href='/lateUpdates'>
-            <a>Лента</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key='4'>
+      <div className={styles.rightHeader}>
+        <div className={styles.menu}>
           <SearchOutlined /> Поиск
-        </Menu.Item>
-        <Menu.Item key='5'>Закладки</Menu.Item>
-        <Menu.Item key='6'>
-          <BellOutlined />
-        </Menu.Item>
-        <Menu.Item key='10'>
-          <Button
-            type='primary'
-            shape='circle'
-            size='large'
-            onClick={changeTheme}
-          >
-            <FormatPainterOutlined />
-          </Button>
-        </Menu.Item>
+        </div>
+        <div className={styles.menu}>
+          <Link href='/#'>
+            <a>Закладки</a>
+          </Link>
+        </div>
+        <div className={styles.menu}>
+          <Link href='/#'>
+            <a>
+              <BellOutlined />
+            </a>
+          </Link>
+        </div>
+        <div className={styles.menu}>
+          <FormatPainterOutlined onClick={changeTheme} />
+        </div>
         {token ? (
-          <Menu.Item key='7'>
+          <div className={styles.menu}>
             <Popover placement='bottom' content={<MenuUser />} trigger='click'>
               <Avatar size='large' icon={<UserOutlined />} />
             </Popover>
-          </Menu.Item>
+          </div>
         ) : (
           <>
-            <Menu.Item key='7' onClick={showModal}>
+            <div className={styles.menu} onClick={showModal}>
               Войти
-            </Menu.Item>
+            </div>
             <LoginModal
               isModalVisible={isModalVisible}
               handleOk={handleOk}
@@ -95,7 +106,7 @@ const Navbar = () => {
             />
           </>
         )}
-      </Menu>
+      </div>
     </Header>
   );
 };
