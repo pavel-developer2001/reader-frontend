@@ -69,8 +69,7 @@ const CreateManga = () => {
     </div>
   );
   const handleChange = (e: any) => {
-    console.log(e);
-    setMangaCover(e.target.files[0]);
+    setMangaCover(e.file.originFileObj);
     if (e.file.status === "uploading") {
       setLoading(true);
       return;
