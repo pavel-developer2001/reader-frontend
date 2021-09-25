@@ -1,28 +1,23 @@
 import "../styles/globals.scss";
 import "antd/dist/antd.css";
-import React from "react";
-import App, { AppContext } from "next/app";
+import React, { FC, useEffect } from "react";
+import App, { AppContext, AppProps } from "next/app";
 import { wrapper } from "../store";
 import { ThemeProvider } from "../provider/ThemeProvider";
+import { setToken } from "../store/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-class MyApp extends App {
-  static async getServer({ Component, ctx }: AppContext) {
-    const pageProps = Component.getInitialProps
-      ? await Component.getInitialProps(ctx)
-      : {};
-    return { pageProps };
-  }
-
-  //@ts-ignore
-  render() {
-    const { Component, pageProps } = this.props;
-    const isBrowser = typeof window !== "undefined";
-    return isBrowser ? (
-      <ThemeProvider>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    ) : null;
-  }
+export function MyApp({ Component, pageProps }: AppProps) {
+  const token = useSelector((state: any) => state.user.token);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setToken(localStorage.getItem("token")));
+  }, [token]);
+  const isBrowser = typeof window !== "undefined";
+  return isBrowser ? (
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  ) : null;
 }
-
 export default wrapper.withRedux(MyApp);

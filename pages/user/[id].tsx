@@ -9,6 +9,7 @@ const { Title } = Typography;
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardManga from "../../components/CardManga";
+import CardTeam from "../../components/CardTeam";
 import CreateTeamModal from "../../components/CreateTeamModal";
 import MainLayout from "../../layouts/MainLayout";
 import { getUserData } from "../../store/slices/userSlice";
@@ -53,6 +54,7 @@ const User = () => {
               ))}
               <div>
                 <span>В составе комманд: пусто</span>
+                <CardTeam />
                 <CreateTeamModal />
               </div>
             </div>

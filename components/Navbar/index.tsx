@@ -49,6 +49,10 @@ const Navbar = () => {
         title: "Лента",
         link: "/lateUpdates",
       },
+      {
+        title: "Команды",
+        link: "/team",
+      },
     ],
     right: [],
   };

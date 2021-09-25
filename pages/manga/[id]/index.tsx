@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import MainLayout from "../../layouts/MainLayout";
+import MainLayout from "../../../layouts/MainLayout";
 
 import { Tabs } from "antd";
-import styles from "./Manga.module.css";
-import CommentsBlock from "../../components/CommentsBlock";
+import styles from "../Manga.module.css";
+import CommentsBlock from "../../../components/CommentsBlock";
 
-import MangaData from "../../components/MangaData";
-import MangaDescriptions from "../../components/MangaDescriptions";
-import MangaAddition from "../../components/MangaAddition";
-import MangaSettings from "../../components/MangaSettings";
+import MangaData from "../../../components/MangaData";
+import MangaDescriptions from "../../../components/MangaDescriptions";
+import MangaAddition from "../../../components/MangaAddition";
+import MangaSettings from "../../../components/MangaSettings";
 import { GetServerSideProps } from "next";
-import { wrapper } from "../../store";
-import MangaApi from "../../services/api/mangaApi";
-import { getManga, setManga } from "../../store/slices/mangaSlice";
+import { wrapper } from "../../../store";
+import MangaApi from "../../../services/api/mangaApi";
+import { getManga, setManga } from "../../../store/slices/mangaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
 
@@ -26,8 +26,7 @@ const PageManga = () => {
 
   useEffect(() => {
     dispatch(getManga(router.query.id));
-  }, []);
-
+  }, [router]);
   function callback(key: string) {
     console.log(key);
   }

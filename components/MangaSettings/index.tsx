@@ -1,6 +1,7 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Image, Tag } from "antd";
 import { Select } from "antd";
+import { useRouter } from "next/dist/client/router";
 import React, { FC } from "react";
 import styles from "./MangaSettings.module.css";
 
@@ -22,6 +23,7 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
   function onSearch(val: any) {
     console.log("search:", val);
   }
+  const router = useRouter();
   return (
     <div className={styles.card}>
       <Image width={250} height={350} src={cover} />
@@ -49,7 +51,12 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
         <Option value='read6'>Отложено</Option>
       </Select>
       <Button type='link'>Редактировать</Button>
-      <Button type='primary' icon={<PlusOutlined />} size='large'>
+      <Button
+        type='primary'
+        icon={<PlusOutlined />}
+        onClick={() => router.push("/manga/" + id + "/upload")}
+        size='large'
+      >
         Добавить новые главы
       </Button>
     </div>

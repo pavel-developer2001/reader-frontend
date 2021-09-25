@@ -12,11 +12,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home: NextPage = () => {
-  const token = useSelector((state: any) => state.user.token);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setToken(localStorage.getItem("token")));
-  }, [token]);
   return (
     <MainLayout>
       <PopularList />
