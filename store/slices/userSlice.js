@@ -14,6 +14,9 @@ export const loginUsers = createAsyncThunk(
     return await UserApi.login(payload);
   }
 );
+export const getUserData = createAsyncThunk("user/getUserData", async (id) => {
+  return await UserApi.getUser(id);
+});
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -41,6 +44,10 @@ const userSlice = createSlice({
         window.localStorage.setItem("token", action.payload.data.token);
         state.loading = false;
         state.token = action.payload.data.token;
+      })
+      .addCase(getUserData.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.loading = false;
       }),
   // .addCase(HYDRATE, (state, action) => {
   //   state.posts = action.payload.user.posts;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Select } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
+import styles from "./Filters.module.scss";
 
 const { Option } = Select;
 
@@ -21,7 +22,7 @@ const Filters = () => {
     console.log("search:", val);
   }
   return (
-    <div>
+    <div className={styles.block}>
       <div>
         <strong>Фильтры</strong>
         <Button type='text' icon={<CloseOutlined />} size='large'>

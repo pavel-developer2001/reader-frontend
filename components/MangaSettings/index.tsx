@@ -1,10 +1,10 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Image, Tag } from "antd";
 import { Select } from "antd";
-import React from "react";
+import React, { FC } from "react";
 import styles from "./MangaSettings.module.css";
 
-const MangaSettings = () => {
+const MangaSettings: FC<any> = ({ cover, id }) => {
   const { Option } = Select;
 
   function onChange(value: any) {
@@ -24,11 +24,7 @@ const MangaSettings = () => {
   }
   return (
     <div className={styles.card}>
-      <Image
-        width={250}
-        height={350}
-        src='https://api.remanga.org//media/titles/extraordinary-evolutin/74a7f479e93ac92506d509b2a2ecd1ee.jpg'
-      />
+      <Image width={250} height={350} src={cover} />
       <Button type='primary' shape='round' size='large'>
         Читать
       </Button>

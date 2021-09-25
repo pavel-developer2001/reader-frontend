@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import MainLayout from "../layouts/MainLayout";
 import styles from "../styles/Home.module.css";
-import { addCounter, setToken, setUsers } from "../store/slices/userSlice";
+import { setToken } from "../store/slices/userSlice";
 
 import { wrapper } from "../store";
 import { GetServerSideProps } from "next";

@@ -8,25 +8,49 @@ export const addNewManga = createAsyncThunk(
     return await MangaApi.createManga(payload);
   }
 );
-
+export const getMangas = createAsyncThunk("manga/getMangas", async () => {
+  return await MangaApi.getAllManga();
+});
+export const getManga = createAsyncThunk("manga/getManga", async (id) => {
+  return await MangaApi.getManga(id);
+});
 const mangaSlice = createSlice({
   name: "manga",
   initialState: {
+    mangas: [],
     manga: [],
     status: null,
     loading: true,
   },
-  reducers: {},
+  reducers: {
+    setMangas(state, action) {
+      state.mangas = action.payload;
+      state.loading = false;
+    },
+    setManga(state, action) {
+      state.manga = action.payload;
+      state.loading = false;
+    },
+  },
 
   extraReducers: (builder) =>
-    builder.addCase(addNewManga.fulfilled, (state, action) => {
-      state.manga.push(action.payload);
-    }),
-
-  // .addCase(HYDRATE, (state, action) => {
-  //   state.posts = action.payload.user.posts;
-  // }),
+    builder
+      .addCase(HYDRATE, (state, action) => {
+        state.mangas = action.payload.manga.mangas;
+        state.loading = false;
+      })
+      .addCase(addNewManga.fulfilled, (state, action) => {
+        state.mangas.push(action.payload);
+      })
+      .addCase(getMangas.fulfilled, (state, action) => {
+        state.mangas = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(getManga.fulfilled, (state, action) => {
+        state.manga = action.payload.data;
+        state.loading = false;
+      }),
 });
 
 export default mangaSlice.reducer;
-export const {} = mangaSlice.actions;
+export const { setMangas, setManga } = mangaSlice.actions;

@@ -10,4 +10,10 @@ export default class MangaApi {
       },
     });
   }
+  static async getAllManga() {
+    return ReaderApi.get("/mangas/");
+  }
+  static async getManga(id: any) {
+    return ReaderApi.get("/mangas/" + id);
+  }
 }

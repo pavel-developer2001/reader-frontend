@@ -1,24 +1,19 @@
 import { Card } from "antd";
 import Meta from "antd/lib/card/Meta";
-import React from "react";
+import React, { FC } from "react";
 import Link from "next/link";
 import styles from "./CardManga.module.css";
 
-const CardManga = () => {
+const CardManga: FC<any> = ({ manga }) => {
   return (
-    <Link href='/manga/1'>
+    <Link href={"/manga/" + manga.id}>
       <Card
         hoverable
         className={styles.card}
         style={{ width: 200 }}
-        cover={
-          <img
-            alt='example'
-            src='https://api.remanga.org//media/titles/solo-leveling/3d99c504bdc727e34d12eb945f09e30a.jpg'
-          />
-        }
+        cover={<img alt='example' src={manga.mangaCover} />}
       >
-        <Meta title='Поднятие уровня в одиночку' />
+        <Meta title={manga.title} />
       </Card>
     </Link>
   );
