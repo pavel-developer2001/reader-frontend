@@ -15,6 +15,7 @@ import MangaApi from "../../../services/api/mangaApi";
 import { getManga, setManga } from "../../../store/slices/mangaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
+import ChapterList from "../../../components/ChapterList";
 
 const { TabPane } = Tabs;
 
@@ -57,7 +58,7 @@ const PageManga = () => {
                         <CommentsBlock />
                       </TabPane>
                       <TabPane tab='Главы' key='2'>
-                        Content of Tab Pane 2
+                        <ChapterList />
                       </TabPane>
                     </Tabs>
                   </div>

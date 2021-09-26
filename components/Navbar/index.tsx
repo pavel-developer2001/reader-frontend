@@ -1,37 +1,20 @@
 import React from "react";
-import { Button, Layout, Popover } from "antd";
+import { Layout } from "antd";
 const { Header } = Layout;
 import {
   BellOutlined,
   FormatPainterOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
-import MenuUser from "../MenuUser";
-import LoginModal from "../LoginModal";
-import { useSelector } from "react-redux";
 import { Theme } from "../../context/ThemeContext";
 import { useTheme } from "../../hooks/useTheme";
+import AvatarUser from "../AvatarUser";
 
 const Navbar = () => {
-  const token = useSelector<any>((state) => state.user.token);
   const theme = useTheme();
-  const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
   function changeTheme() {
     theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
   }
@@ -91,25 +74,7 @@ const Navbar = () => {
         <div className={styles.menu}>
           <FormatPainterOutlined onClick={changeTheme} />
         </div>
-        {token ? (
-          <div className={styles.menu}>
-            <Popover placement='bottom' content={<MenuUser />} trigger='click'>
-              <Avatar size='large' icon={<UserOutlined />} />
-            </Popover>
-          </div>
-        ) : (
-          <>
-            <div className={styles.menu} onClick={showModal}>
-              Войти
-            </div>
-            <LoginModal
-              isModalVisible={isModalVisible}
-              handleOk={handleOk}
-              setIsModalVisible={setIsModalVisible}
-              handleCancel={handleCancel}
-            />
-          </>
-        )}
+        <AvatarUser />
       </div>
     </Header>
   );

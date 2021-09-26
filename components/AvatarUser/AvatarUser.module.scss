@@ -1,0 +1,12 @@
+.menu {
+  margin: 0 10px;
+  color: var(#{--text-color-default});
+  cursor: pointer;
+  a {
+    color: #fff;
+    &:hover {
+      cursor: pointer;
+      color: var(#{--text-color-default});
+    }
+  }
+}

@@ -16,7 +16,7 @@ const PopularList = () => {
       {loading ? (
         <p>loading</p>
       ) : (
-        mangas?.map((manga: any) => <CardManga manga={manga} />)
+        mangas?.map((manga: any) => <CardManga key={manga.id} manga={manga} />)
       )}
     </div>
   );
