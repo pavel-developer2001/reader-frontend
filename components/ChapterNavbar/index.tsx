@@ -5,13 +5,13 @@ import {
 } from "@ant-design/icons";
 import { Header } from "antd/lib/layout/layout";
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import styles from "./ChapterNavbar.module.scss";
 import { Theme } from "../../context/ThemeContext";
 import { useTheme } from "../../hooks/useTheme";
 import AvatarUser from "../AvatarUser";
 
-const ChapterNavbar = () => {
+const ChapterNavbar: FC<any> = ({ title, page, id }) => {
   const theme = useTheme();
   function changeTheme() {
     theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
@@ -24,11 +24,11 @@ const ChapterNavbar = () => {
             <a>Reader</a>
           </Link>
         </div>
-        <strong className={styles.title}>Поднятие уровня в одиночку</strong>
+        <strong className={styles.title}>{title}</strong>
       </div>
       <div className={styles.center}>
         <CaretLeftOutlined />
-        <span># 169</span>
+        <span># {page}</span>
         <CaretRightOutlined />
       </div>
       <div className={styles.right}>
