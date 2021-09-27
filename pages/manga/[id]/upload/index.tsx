@@ -57,12 +57,14 @@ const AddNewChapter = () => {
         return alert("Введите номер тома и главы");
       }
       const formData = new FormData();
-      console.log("FRONT IMAGES LIST", imagesList);
       formData.append("numberChapter", numberChapter);
       formData.append("volumeChapter", volumeChapter);
       formData.append("mangaId", mangaId);
       formData.append("userId", dataUser.id);
-      formData.append("imagesList", imagesList);
+      for (let i = 0; i < imagesList.length; i++) {
+        formData.append("imagesList[]", imagesList[i].originFileObj);
+      }
+      // formData.append("imagesList[]", imagesList[0].originFileObj);
       dispatch(addNewChapter(formData));
       router.push("/manga/" + mangaId);
       setNumberChapter("");
