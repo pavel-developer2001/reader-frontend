@@ -1,18 +1,28 @@
 import { HeartOutlined } from "@ant-design/icons";
 import { useRouter } from "next/dist/client/router";
-import React from "react";
+import React, { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getChapters } from "../../store/slices/chapterSlice";
 import styles from "./ChapterList.module.scss";
 
-const ChapterListItem = () => {
+const ChapterListItem: FC<any> = ({
+  chapterId,
+  volume,
+  number,
+  likes,
+  date,
+}) => {
   const router = useRouter();
   return (
     <div className={styles.main}>
       <div
         className={styles.numbers}
-        onClick={() => router.push("/manga/" + router.query.id + "/chapter/5")}
+        onClick={() =>
+          router.push("/manga/" + router.query.id + "/chapter/" + chapterId)
+        }
       >
-        <strong className={styles.volume}>2</strong>
-        <span>Глава 101</span>
+        <strong className={styles.volume}>{volume}</strong>
+        <span>Глава {number}</span>
       </div>
       <div className={styles.dataChapter}>
         <span className={styles.date}>22/09/2021</span>
@@ -20,17 +30,36 @@ const ChapterListItem = () => {
       </div>
       <div className={styles.popular}>
         <HeartOutlined />
-        10k
+        {likes}
       </div>
     </div>
   );
 };
-const ChapterList = () => {
+const ChapterList: FC<any> = ({ mangaId }) => {
+  const chapters = useSelector<any>((state) => state.chapter.chapters);
+  const loading = useSelector<any>((state) => state.chapter.loading);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getChapters(mangaId));
+  }, [mangaId]);
   return (
     <div className={styles.mainList}>
-      <ChapterListItem />
-      <ChapterListItem />
-      <ChapterListItem />
+      {loading ? (
+        <p>loading</p>
+      ) : chapters.length > 0 ? (
+        chapters.map((chapter) => (
+          <ChapterListItem
+            key={chapter.id}
+            chapterId={chapter.id}
+            volume={chapter.volumeChapter}
+            number={chapter.numberChapter}
+            likes={chapter.countLikes}
+            date={chapter.createdAt}
+          />
+        ))
+      ) : (
+        <p>Нет глав</p>
+      )}
     </div>
   );
 };

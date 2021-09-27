@@ -10,9 +10,11 @@ import styles from "./ChapterNavbar.module.scss";
 import { Theme } from "../../context/ThemeContext";
 import { useTheme } from "../../hooks/useTheme";
 import AvatarUser from "../AvatarUser";
+import { useRouter } from "next/dist/client/router";
 
 const ChapterNavbar: FC<any> = ({ title, page, id }) => {
   const theme = useTheme();
+  const router = useRouter();
   function changeTheme() {
     theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
   }
@@ -24,10 +26,15 @@ const ChapterNavbar: FC<any> = ({ title, page, id }) => {
             <a>Reader</a>
           </Link>
         </div>
-        <strong className={styles.title}>{title}</strong>
+        <strong
+          className={styles.title}
+          onClick={() => router.push("/manga/" + id)}
+        >
+          {title}
+        </strong>
       </div>
       <div className={styles.center}>
-        <CaretLeftOutlined />
+        {id <= 0 ? null : <CaretLeftOutlined />}
         <span># {page}</span>
         <CaretRightOutlined />
       </div>

@@ -8,20 +8,52 @@ export const addNewChapter = createAsyncThunk(
     return await ChapterApi.createChapter(payload);
   }
 );
+export const getChapters = createAsyncThunk(
+  "chapter/getChapters",
+  async (id) => {
+    return await ChapterApi.getChaptersForManga(id);
+  }
+);
+export const getImages = createAsyncThunk("chapter/getImages ", async (id) => {
+  return await ChapterApi.getImagesForChapter(id);
+});
 const chapterSlice = createSlice({
   name: "chapter",
   initialState: {
     chapters: [],
     status: null,
     loading: true,
+    images: [],
   },
-  reducers: {},
+  reducers: {
+    setChapters(state, action) {
+      state.chapters = action.payload;
+      state.loading = false;
+    },
+    setImages(state, action) {
+      state.images = action.payload;
+      state.loading = false;
+    },
+  },
 
   extraReducers: (builder) =>
-    builder.addCase(addNewChapter.fulfilled, (state, action) => {
-      state.chapters.push(action.payload);
-    }),
+    builder
+      .addCase(HYDRATE, (state, action) => {
+        state.chapters = action.payload.chapter.chapters;
+        state.loading = false;
+      })
+      .addCase(getChapters.fulfilled, (state, action) => {
+        state.chapters = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(getImages.fulfilled, (state, action) => {
+        state.images = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(addNewChapter.fulfilled, (state, action) => {
+        state.chapters.push(action.payload);
+      }),
 });
 
 export default chapterSlice.reducer;
-export const {} = chapterSlice.actions;
+export const { setChapters, setImages } = chapterSlice.actions;

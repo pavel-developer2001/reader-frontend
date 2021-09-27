@@ -58,7 +58,7 @@ const PageManga = () => {
                         <CommentsBlock />
                       </TabPane>
                       <TabPane tab='Главы' key='2'>
-                        <ChapterList />
+                        <ChapterList mangaId={router.query.id} />
                       </TabPane>
                     </Tabs>
                   </div>
