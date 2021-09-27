@@ -5,6 +5,9 @@ import MainLayout from "../../../../layouts/MainLayout";
 
 import { Upload, Modal, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { dataUser } from "../../../../utils/getDataUserFromToken";
+import { useDispatch } from "react-redux";
+import { addNewChapter } from "../../../../store/slices/chapterSlice";
 
 function getBase64(file: any) {
   return new Promise((resolve, reject) => {
@@ -20,8 +23,8 @@ const AddNewChapter = () => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState([]);
-  const mangaId = router.query.id;
+  const [imagesList, setImagesList] = useState<any>([]);
+  const mangaId: any = router.query.id;
   console.log(mangaId);
   const uploadButton = (
     <div>
@@ -42,16 +45,50 @@ const AddNewChapter = () => {
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-  const handleChange = ({ fileList }: any) => setFileList(fileList);
+  const handleChange = ({ fileList }: any) => setImagesList(fileList);
+  ////////////////////////////////////////////////////////////////////
+  const [numberChapter, setNumberChapter] = useState("");
+  const [volumeChapter, setVolumeChapter] = useState("");
+  const dispatch = useDispatch();
+  const handleNewChapter = async (e: any) => {
+    e.preventDefault();
+    try {
+      if (numberChapter === "" && volumeChapter === "") {
+        return alert("Введите номер тома и главы");
+      }
+      const formData = new FormData();
+      console.log("FRONT IMAGES LIST", imagesList);
+      formData.append("numberChapter", numberChapter);
+      formData.append("volumeChapter", volumeChapter);
+      formData.append("mangaId", mangaId);
+      formData.append("userId", dataUser.id);
+      formData.append("imagesList", imagesList);
+      dispatch(addNewChapter(formData));
+      router.push("/manga/" + mangaId);
+      setNumberChapter("");
+      setVolumeChapter("");
+      setImagesList([]);
+    } catch (error) {}
+  };
   return (
     <MainLayout>
       <div onClick={() => router.push("/manga/" + mangaId)}>
         Начало после конца
       </div>
       <div>
-        <TextArea placeholder='Том манги' autoSize />
+        <TextArea
+          placeholder='Том манги'
+          autoSize
+          value={volumeChapter}
+          onChange={(e) => setVolumeChapter(e.target.value)}
+        />
         <div style={{ margin: "24px 0" }} />
-        <TextArea placeholder='Глава манги' autoSize />
+        <TextArea
+          placeholder='Глава манги'
+          autoSize
+          value={numberChapter}
+          onChange={(e) => setNumberChapter(e.target.value)}
+        />
         <div style={{ margin: "24px 0" }} />
       </div>
       <div>
@@ -60,11 +97,11 @@ const AddNewChapter = () => {
           <Upload
             action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
             listType='picture-card'
-            fileList={fileList}
+            fileList={imagesList}
             onPreview={handlePreview}
             onChange={handleChange}
           >
-            {fileList.length >= 8 ? null : uploadButton}
+            {imagesList.length >= 8 ? null : uploadButton}
           </Upload>
           <Modal
             visible={previewVisible}
@@ -77,7 +114,9 @@ const AddNewChapter = () => {
         </>
       </div>
       <div>
-        <Button type='primary'>Добавить главу</Button>
+        <Button type='primary' onClick={handleNewChapter}>
+          Добавить главу
+        </Button>
       </div>
     </MainLayout>
   );
