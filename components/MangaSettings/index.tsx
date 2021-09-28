@@ -2,14 +2,14 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, Image, Tag } from "antd";
 import { Select } from "antd";
 import { useRouter } from "next/dist/client/router";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styles from "./MangaSettings.module.css";
 
 const MangaSettings: FC<any> = ({ cover, id }) => {
   const { Option } = Select;
 
   function onChange(value: any) {
-    console.log(`selected ${value}`);
+    setSelect(value);
   }
 
   function onBlur() {
@@ -24,6 +24,8 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
     console.log("search:", val);
   }
   const router = useRouter();
+  const [select, setSelect] = useState("");
+  console.log("SELECTED", select);
   return (
     <div className={styles.card}>
       <Image width={250} height={350} src={cover} />
@@ -43,12 +45,12 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        <Option value='read1'>Читаю</Option>
-        <Option value='read2'>Прочитано</Option>
-        <Option value='read3'>Буду читать</Option>
-        <Option value='read4'>Брошено</Option>
-        <Option value='read5'>Неинтересно</Option>
-        <Option value='read6'>Отложено</Option>
+        <Option value='Читаю'>Читаю</Option>
+        <Option value='Прочитано'>Прочитано</Option>
+        <Option value='Буду читать'>Буду читать</Option>
+        <Option value='Брошено'>Брошено</Option>
+        <Option value='Неинтересно'>Неинтересно</Option>
+        <Option value='Отложено'>Отложено</Option>
       </Select>
       <Button type='link'>Редактировать</Button>
       <Button
