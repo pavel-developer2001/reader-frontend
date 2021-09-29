@@ -1,0 +1,38 @@
+.item {
+  display: flex;
+  margin: 0 0 4px;
+  padding: 8px 16px 12px 0;
+  border-bottom: 1px solid hsla(0, 0%, 58.8%, 0.1);
+  .leftBlock {
+    margin-right: 24px;
+    min-width: 64px;
+    img {
+      width: 64px;
+      height: 96px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  }
+  .rightBlock {
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(#{--text-secondary-color-default});
+      cursor: pointer;
+    }
+    .chapter {
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(#{--text-secondary-color-default});
+      cursor: pointer;
+    }
+    .date {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(#{--text-secondary-color-default});
+      line-height: 1.5;
+    }
+  }
+}

@@ -18,11 +18,18 @@ const Filters = () => {
   const [genres, setGenres] = useState("");
   console.log("Genres", genres);
   const genresArray = [
-    { value: "манга", title: "Манга" },
-    { value: "манхва", title: "Манхва" },
-    { value: "маньхуа", title: "Маньхуа" },
-    { value: "западный комикс", title: "Западный комикс" },
-    { value: "рукомикс", title: "Рукомикс" },
+    { value: "боевик", title: "Боевик" },
+    { value: "боевые искусства", title: "Боевые искусства" },
+    { value: "гарем", title: "Гарем" },
+    { value: "романтика", title: "Романтика" },
+    { value: "детектив", title: "Детектив" },
+    { value: "трагедия", title: "Трагедия" },
+    { value: "спорт", title: "Спорт" },
+    { value: "сёнен", title: "Сёнен" },
+    { value: "ужасы", title: "Ужасы" },
+    { value: "фантастика", title: "Фантастика" },
+    { value: "триллер", title: "Триллер" },
+    { value: "этти", title: "Этти" },
   ];
   const [tags, setTags] = useState("");
   console.log("Tags", tags);
@@ -36,20 +43,18 @@ const Filters = () => {
   const [statusTranslate, setStatusTranslate] = useState("");
   console.log("StatusTranslate,", statusTranslate);
   const statusTranslateArray = [
-    { value: "манга", title: "Манга" },
-    { value: "манхва", title: "Манхва" },
-    { value: "маньхуа", title: "Маньхуа" },
-    { value: "западный комикс", title: "Западный комикс" },
-    { value: "рукомикс", title: "Рукомикс" },
+    { value: "закончен", title: "Закончен" },
+    { value: "продолжается", title: "Продолжается" },
+    { value: "заморожен", title: "Заморожен" },
+    { value: "нет переводчика", title: "Нет переводчика" },
+    { value: "анонс", title: "Анонс" },
   ];
   const [ageRating, setAgeRating] = useState("");
   console.log("AgeRating", ageRating);
   const ageRatingArray = [
-    { value: "манга", title: "Манга" },
-    { value: "манхва", title: "Манхва" },
-    { value: "маньхуа", title: "Маньхуа" },
-    { value: "западный комикс", title: "Западный комикс" },
-    { value: "рукомикс", title: "Рукомикс" },
+    { value: "для всех", title: "Для всех" },
+    { value: "16+", title: "16+" },
+    { value: "18+", title: "18+" },
   ];
   const handleCleanCategories = () => {
     setTypes("");
@@ -69,6 +74,16 @@ const Filters = () => {
   function onSearch(val: any) {
     console.log("search:", val);
   }
+  const children = [];
+  for (let i = 10; i < 36; i++) {
+    children.push(
+      <Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>
+    );
+  }
+
+  function handleChange(value: any) {
+    console.log(`selected ${value}`);
+  }
   return (
     <div className={styles.block}>
       <div>
@@ -82,6 +97,16 @@ const Filters = () => {
           Очистить
         </Button>
       </div>
+      <Select
+        mode='multiple'
+        allowClear
+        style={{ width: "100%" }}
+        placeholder='Please select'
+        defaultValue={["a10", "c12"]}
+        onChange={handleChange}
+      >
+        {children}
+      </Select>
       <Select
         showSearch
         style={{ width: 200 }}

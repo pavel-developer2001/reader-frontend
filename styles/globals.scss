@@ -92,9 +92,6 @@ body {
 $primary-color: #4793ff;
 $light-background: #fff;
 
-$components-background-dark: #4f4f4f;
-$components-background-light: rgb(100, 75, 189);
-
 $card-background-light: rgba(71, 147, 255, 0.2);
 $card-background-dark: #2e3035;
 
@@ -106,10 +103,16 @@ $header-light-color: #e48f13;
 $header-dark-color: #1c1c1e;
 //body
 $body-background-dark: #141414;
-$body-background-light: #fff;
+$body-background-light: #fafafa;
 //text
 $text-light-color: #fff;
 $text-dark-color: #fff;
+//text-secondary
+$text-secondary-light-color: rgba(0, 0, 0, 0.87);
+$text-secondary-dark-color: #fff;
+//component-color
+$components-background-dark: #171717;
+$components-background-light: #fff;
 
 :root {
   //components-background
@@ -137,6 +140,10 @@ $text-dark-color: #fff;
   --text-color-dark: #{$text-light-color};
   --text-color-light: #{$text-dark-color};
   --text-color-default: var(#{--text-color-light});
+  //text-secondary
+  --text-secondary-color-dark: #{$text-secondary-dark-color};
+  --text-secondary-color-light: #{$text-secondary-light-color};
+  --text-secondary-color-default: var(#{--text-secondary-color-light});
 
   // header
   --header-color-dark: #{$header-dark-color};

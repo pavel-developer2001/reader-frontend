@@ -16,9 +16,9 @@ const Home: NextPage = () => {
     <MainLayout>
       <PopularList />
       <div className={styles.tisket}>
-        <TisketList />
-        <TisketList />
-        <TisketList />
+        <TisketList popularTitle='Рекомендации' />
+        <TisketList popularTitle='Топ дня' />
+        <TisketList popularTitle='Топ месяца' />
       </div>
     </MainLayout>
   );
