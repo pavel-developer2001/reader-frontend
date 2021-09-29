@@ -1,4 +1,5 @@
 import { Tag } from "antd";
+import styles from "./MangaDescriptions.module.scss";
 import React, { FC } from "react";
 
 const MangaDescriptions: FC<any> = ({ mangaDescription }) => {
@@ -12,7 +13,7 @@ const MangaDescriptions: FC<any> = ({ mangaDescription }) => {
       <Tag color='purple'>purple</Tag>
       <Tag color='purple'>purple</Tag>
       <Tag color='purple'>purple</Tag>
-      <p>{mangaDescription}</p>
+      <p className={styles.text}>{mangaDescription}</p>
     </div>
   );
 };

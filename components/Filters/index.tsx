@@ -6,7 +6,7 @@ import styles from "./Filters.module.scss";
 const { Option } = Select;
 
 const Filters = () => {
-  const [types, setTypes] = useState("");
+  const [types, setTypes] = useState<any>("");
   console.log("TYPES", types);
   const typesArray = [
     { value: "манга", title: "Манга" },
@@ -15,7 +15,7 @@ const Filters = () => {
     { value: "западный комикс", title: "Западный комикс" },
     { value: "рукомикс", title: "Рукомикс" },
   ];
-  const [genres, setGenres] = useState("");
+  const [genres, setGenres] = useState<any>("");
   console.log("Genres", genres);
   const genresArray = [
     { value: "боевик", title: "Боевик" },
@@ -31,7 +31,7 @@ const Filters = () => {
     { value: "триллер", title: "Триллер" },
     { value: "этти", title: "Этти" },
   ];
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState<any>("");
   console.log("Tags", tags);
   const tagsArray = [
     { value: "манга", title: "Манга" },
@@ -40,7 +40,7 @@ const Filters = () => {
     { value: "западный комикс", title: "Западный комикс" },
     { value: "рукомикс", title: "Рукомикс" },
   ];
-  const [statusTranslate, setStatusTranslate] = useState("");
+  const [statusTranslate, setStatusTranslate] = useState<any>("");
   console.log("StatusTranslate,", statusTranslate);
   const statusTranslateArray = [
     { value: "закончен", title: "Закончен" },
@@ -49,7 +49,7 @@ const Filters = () => {
     { value: "нет переводчика", title: "Нет переводчика" },
     { value: "анонс", title: "Анонс" },
   ];
-  const [ageRating, setAgeRating] = useState("");
+  const [ageRating, setAgeRating] = useState<any>("");
   console.log("AgeRating", ageRating);
   const ageRatingArray = [
     { value: "для всех", title: "Для всех" },
@@ -74,16 +74,22 @@ const Filters = () => {
   function onSearch(val: any) {
     console.log("search:", val);
   }
-  const children = [];
-  for (let i = 10; i < 36; i++) {
-    children.push(
-      <Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>
-    );
-  }
-
-  function handleChange(value: any) {
-    console.log(`selected ${value}`);
-  }
+  const childrenGenres = [];
+  childrenGenres.push(
+    genresArray.map((genres) => (
+      <Option value={genres.value} key={genres.value.toString()}>
+        {genres.title.toString()}
+      </Option>
+    ))
+  );
+  const childrenTags = [];
+  childrenTags.push(
+    tagsArray.map((genres) => (
+      <Option value={genres.value} key={genres.value.toString()}>
+        {genres.title.toString()}
+      </Option>
+    ))
+  );
   return (
     <div className={styles.block}>
       <div>
@@ -97,16 +103,6 @@ const Filters = () => {
           Очистить
         </Button>
       </div>
-      <Select
-        mode='multiple'
-        allowClear
-        style={{ width: "100%" }}
-        placeholder='Please select'
-        defaultValue={["a10", "c12"]}
-        onChange={handleChange}
-      >
-        {children}
-      </Select>
       <Select
         showSearch
         style={{ width: 200 }}
@@ -127,42 +123,24 @@ const Filters = () => {
         ))}
       </Select>
       <Select
-        showSearch
-        style={{ width: 200 }}
+        mode='multiple'
+        allowClear
+        style={{ width: "100%" }}
         placeholder='Жанры'
-        optionFilterProp='children'
+        defaultValue={[]}
         onChange={(value) => setGenres(value)}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onSearch={onSearch}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
       >
-        {genresArray.map((type, index) => (
-          <Option value={type.value} key={type.value}>
-            {type.title}
-          </Option>
-        ))}
+        {childrenGenres}
       </Select>
       <Select
-        showSearch
-        style={{ width: 200 }}
+        mode='multiple'
+        allowClear
+        style={{ width: "100%" }}
         placeholder='Теги'
-        optionFilterProp='children'
+        defaultValue={[]}
         onChange={(value) => setTags(value)}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onSearch={onSearch}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
       >
-        {tagsArray.map((type, index) => (
-          <Option value={type.value} key={type.value}>
-            {type.title}
-          </Option>
-        ))}
+        {childrenTags}
       </Select>
       <Select
         showSearch

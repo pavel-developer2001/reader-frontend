@@ -1,5 +1,7 @@
+import { CopyFilled, EyeFilled, HeartFilled } from "@ant-design/icons";
 import Title from "antd/lib/typography/Title";
 import React, { FC } from "react";
+import styles from "./MangaData.module.scss";
 
 const MangaData: FC<any> = ({
   title,
@@ -10,12 +12,28 @@ const MangaData: FC<any> = ({
   return (
     <div>
       <div>
-        <Title>{title}</Title>
-        <Title level={5}>
+        <Title level={5} className={styles.originalTitle}>
           {englishTitle} / {originalTitle}
         </Title>
+        <div className={styles.dataTitle}>
+          <Title className={styles.title}>{title}</Title>
+          <span className={styles.status}>[Продолжается]</span>
+        </div>
       </div>
-      <div>8.9 (голосов: 610) 17.2K 95.4K 13.8K Маньхуа {yearOfIssue}</div>
+      <div className={styles.static}>
+        <div className={styles.rating}>8.9 (голосов: 610)</div>
+        <div className={styles.likes}>
+          <HeartFilled /> 17.2K{" "}
+        </div>
+        <div className={styles.watch}>
+          <EyeFilled /> 95.4K
+        </div>
+        <div className={styles.bookmarks}>
+          <CopyFilled /> 13.8K
+        </div>
+        <div className={styles.type}>Маньхуа</div>
+        <div className={styles.date}>{yearOfIssue}</div>
+      </div>
     </div>
   );
 };

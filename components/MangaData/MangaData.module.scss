@@ -1,0 +1,41 @@
+.title {
+  font-size: 2rem;
+  color: var(#{--text-secondary-color-default}) !important;
+  margin: 0 !important;
+}
+.originalTitle {
+  color: var(#{--text-secondary-color-default}) !important;
+}
+.static {
+  color: var(#{--text-secondary-color-default}) !important;
+  display: flex;
+  padding: 8px 0px;
+  font-size: 16px;
+  .rating {
+    margin-right: 16px;
+  }
+  .likes {
+    margin-right: 16px;
+  }
+  .watch {
+    margin-right: 16px;
+  }
+  .bookmarks {
+    margin-right: 16px;
+  }
+  .type {
+    margin-right: 16px;
+  }
+  .date {
+    margin-right: 16px;
+  }
+}
+.dataTitle {
+  display: flex;
+  align-items: center;
+  .status {
+    margin-left: 8px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}

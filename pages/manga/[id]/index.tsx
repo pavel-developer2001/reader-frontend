@@ -41,7 +41,7 @@ const PageManga = () => {
             <>
               {" "}
               <MangaSettings cover={manga.mangaCover} id={manga.id} />
-              <div>
+              <div className={styles.main}>
                 <MangaData
                   title={manga.title}
                   englishTitle={manga.englishTitle}
