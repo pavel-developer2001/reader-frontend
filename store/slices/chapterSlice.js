@@ -17,6 +17,12 @@ export const getChapters = createAsyncThunk(
 export const getImages = createAsyncThunk("chapter/getImages ", async (id) => {
   return await ChapterApi.getImagesForChapter(id);
 });
+export const getUpdateChapters = createAsyncThunk(
+  "chapter/getUpdateChapters",
+  async () => {
+    return await ChapterApi.getLaterChapters();
+  }
+);
 const chapterSlice = createSlice({
   name: "chapter",
   initialState: {
@@ -24,6 +30,7 @@ const chapterSlice = createSlice({
     status: null,
     loading: true,
     images: [],
+    updateChapter: [],
   },
   reducers: {
     setChapters(state, action) {
@@ -32,6 +39,10 @@ const chapterSlice = createSlice({
     },
     setImages(state, action) {
       state.images = action.payload;
+      state.loading = false;
+    },
+    setUpdateChapter(state, action) {
+      state.updateChapter = action.payload;
       state.loading = false;
     },
   },
@@ -50,10 +61,15 @@ const chapterSlice = createSlice({
         state.images = action.payload.data;
         state.loading = false;
       })
+      .addCase(getUpdateChapters.fulfilled, (state, action) => {
+        state.updateChapter = action.payload.data;
+        state.loading = false;
+      })
       .addCase(addNewChapter.fulfilled, (state, action) => {
         state.chapters.push(action.payload);
       }),
 });
 
 export default chapterSlice.reducer;
-export const { setChapters, setImages } = chapterSlice.actions;
+export const { setChapters, setImages, setUpdateChapter } =
+  chapterSlice.actions;

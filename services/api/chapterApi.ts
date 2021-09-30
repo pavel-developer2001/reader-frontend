@@ -16,4 +16,7 @@ export default class ChapterApi {
   static async getImagesForChapter(id: any) {
     return ReaderApi.get("/chapters/images/" + id);
   }
+  static async getLaterChapters() {
+    return ReaderApi.get("/chapters/");
+  }
 }

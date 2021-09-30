@@ -1,30 +1,77 @@
-import React from "react";
+import { useRouter } from "next/dist/client/router";
+import React, { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUpdateChapters } from "../../../../store/slices/chapterSlice";
 import styles from "./UpdateList.module.scss";
 
-const UpdateListItem = () => {
+const UpdateListItem: FC<any> = ({
+  chapterId,
+  volumeChapter,
+  numberChapter,
+  mangaId,
+  cover,
+  titleManga,
+  date,
+}) => {
+  const router = useRouter();
   return (
     <div className={styles.item}>
-      <div className={styles.leftBlock}>
-        <img
-          src='https://api.remanga.org//media/titles/the-strongest-mercenary/adae270223c08b384497549e5f3b02c5.jpg'
-          alt='manga cover'
-        />
+      <div
+        className={styles.leftBlock}
+        onClick={() => router.push("/manga/" + mangaId)}
+      >
+        <img src={cover} alt='manga cover' />
       </div>
       <div className={styles.rightBlock}>
-        <strong className={styles.title}>Прирожденный наёмник</strong>
-        <p className={styles.chapter}>Том 1. Глава 52.</p>
-        <span className={styles.date}>5 часов назад</span>
+        <strong
+          className={styles.title}
+          onClick={() => router.push("/manga/" + mangaId)}
+        >
+          {titleManga}
+        </strong>
+        <p
+          className={styles.chapter}
+          onClick={() =>
+            router.push("/manga/" + mangaId + "/chapter/" + chapterId)
+          }
+        >
+          Том {volumeChapter}. Глава {numberChapter}.
+        </p>
+        <span className={styles.date}>{date} назад</span>
       </div>
     </div>
   );
 };
 
 const UpdateList = () => {
+  const dispatch = useDispatch();
+  const updateChapter = useSelector<any>(
+    (state) => state.chapter.updateChapter
+  );
+  const loading = useSelector<any>((state) => state.chapter.loading);
+  useEffect(() => {
+    dispatch(getUpdateChapters());
+  }, []);
   return (
     <div className={styles.list}>
-      <UpdateListItem />
-      <UpdateListItem />
-      <UpdateListItem />
+      {loading ? (
+        <p>Loading</p>
+      ) : updateChapter.length > 0 ? (
+        updateChapter.map((lateChapter: any) => (
+          <UpdateListItem
+            key={lateChapter.id}
+            chapterId={lateChapter.id}
+            volumeChapter={lateChapter.volumeChapter}
+            numberChapter={lateChapter.numberChapter}
+            mangaId={lateChapter.manga.id}
+            cover={lateChapter.manga.mangaCover}
+            titleManga={lateChapter.manga.title}
+            date={lateChapter.createdAt}
+          />
+        ))
+      ) : (
+        <p>Нет глав</p>
+      )}
     </div>
   );
 };

@@ -8,10 +8,6 @@ import styles from "./MangaSettings.module.css";
 const MangaSettings: FC<any> = ({ cover, id }) => {
   const { Option } = Select;
 
-  function onChange(value: any) {
-    setSelect(value);
-  }
-
   function onBlur() {
     console.log("blur");
   }
@@ -24,8 +20,8 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
     console.log("search:", val);
   }
   const router = useRouter();
-  const [select, setSelect] = useState("");
-  console.log("SELECTED", select);
+  const [category, setCategory] = useState("");
+  console.log("SELECTED", category);
   return (
     <div className={styles.card}>
       <Image width={250} height={350} src={cover} />
@@ -37,7 +33,7 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
         style={{ width: 200 }}
         placeholder='Добавить в закладки'
         optionFilterProp='children'
-        onChange={onChange}
+        onChange={(value) => setCategory(value)}
         onFocus={onFocus}
         onBlur={onBlur}
         onSearch={onSearch}
