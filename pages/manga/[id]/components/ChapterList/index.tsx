@@ -2,7 +2,7 @@ import { HeartOutlined } from "@ant-design/icons";
 import { useRouter } from "next/dist/client/router";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getChapters } from "../../store/slices/chapterSlice";
+import { getChapters } from "../../../../../store/slices/chapterSlice";
 import styles from "./ChapterList.module.scss";
 
 const ChapterListItem: FC<any> = ({

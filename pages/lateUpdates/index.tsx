@@ -2,7 +2,7 @@ import React from "react";
 import MainLayout from "../../layouts/MainLayout";
 import styles from "./LateUpdates.module.scss";
 import { Typography } from "antd";
-import UpdateList from "../../components/UpdateList";
+import UpdateList from "./components/UpdateList";
 
 const { Title } = Typography;
 

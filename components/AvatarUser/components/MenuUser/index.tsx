@@ -3,9 +3,9 @@ import { Menu } from "antd";
 import React from "react";
 import Link from "next/link";
 import styles from "./MenuUser.module.css";
-import { setToken } from "../../store/slices/userSlice";
+import { setToken } from "../../../../store/slices/userSlice";
 import { useDispatch } from "react-redux";
-import { dataUser } from "../../utils/getDataUserFromToken";
+import { dataUser } from "../../../../utils/getDataUserFromToken";
 
 const MenuUser = () => {
   const dispatch = useDispatch();

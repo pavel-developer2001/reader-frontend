@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import MyFooter from "../../components/MyFooter";
-import Navbar from "../../components/Navbar";
+import Navbar from "./components/Navbar";
 import styles from "./MainLayout.module.css";
 
 interface MainLayoutProps {

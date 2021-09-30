@@ -8,9 +8,9 @@ import {
 } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
-import { Theme } from "../../context/ThemeContext";
-import { useTheme } from "../../hooks/useTheme";
-import AvatarUser from "../AvatarUser";
+import { Theme } from "../../../../context/ThemeContext";
+import { useTheme } from "../../../../hooks/useTheme";
+import AvatarUser from "../../../../components/AvatarUser";
 
 const Navbar = () => {
   const theme = useTheme();

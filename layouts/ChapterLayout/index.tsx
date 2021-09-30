@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import ChapterNavbar from "../../components/ChapterNavbar";
+import ChapterNavbar from "./components/ChapterNavbar";
 import MyFooter from "../../components/MyFooter";
 import styles from "./ChapterLayout.module.scss";
 

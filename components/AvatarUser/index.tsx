@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import MenuUser from "../MenuUser";
-import LoginModal from "../LoginModal";
+import MenuUser from "./components/MenuUser";
+import LoginModal from "./components/LoginModal";
 import styles from "./AvatarUser.module.scss";
 import { Avatar, Popover } from "antd";
 import { UserOutlined } from "@ant-design/icons";

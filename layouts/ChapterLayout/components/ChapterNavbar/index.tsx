@@ -7,9 +7,9 @@ import { Header } from "antd/lib/layout/layout";
 import Link from "next/link";
 import React, { FC } from "react";
 import styles from "./ChapterNavbar.module.scss";
-import { Theme } from "../../context/ThemeContext";
-import { useTheme } from "../../hooks/useTheme";
-import AvatarUser from "../AvatarUser";
+import { Theme } from "../../../../context/ThemeContext";
+import { useTheme } from "../../../../hooks/useTheme";
+import AvatarUser from "../../../../components/AvatarUser";
 import { useRouter } from "next/dist/client/router";
 
 const ChapterNavbar: FC<any> = ({ title, page, id }) => {
