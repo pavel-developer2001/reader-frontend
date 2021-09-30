@@ -3,7 +3,7 @@ import MainLayout from "../../../layouts/MainLayout";
 
 import { Tabs } from "antd";
 import styles from "../Manga.module.css";
-import CommentsBlock from "../../../components/CommentsBlock";
+import CommentsBlock from "../../../components/manga/UI/CommentsBlock";
 
 import MangaData from "../../../components/manga/UI/MangaData";
 import MangaDescriptions from "../../../components/manga/UI/MangaDescriptions";

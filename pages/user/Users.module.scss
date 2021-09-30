@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+}
+.userData {
+  margin-left: 30px;
+}
+.name {
+  color: var(#{--text-secondary-color-default}) !important;
+  font-size: 36px !important;
+}
+.count {
+  color: var(#{--text-secondary-color-default});
+  font-size: 14px;
+  display: flex;
+}
+.text {
+  color: var(#{--text-secondary-color-default});
+  margin-right: 15px;
+  strong {
+    font-size: 15px;
+    margin-right: 5px;
+  }
+}
+.body {
+  color: var(#{--text-secondary-color-default});
+  margin-top: 30px;
+  margin-bottom: 10px;
+}

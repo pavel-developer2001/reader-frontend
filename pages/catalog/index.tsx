@@ -9,6 +9,14 @@ import MangaApi from "../../services/api/mangaApi";
 import { wrapper } from "../../store";
 import { getMangas, setMangas } from "../../store/slices/mangaSlice";
 import styles from "./Catalog.module.css";
+import { Tabs } from "antd";
+import CardTeam from "../../components/CardTeam";
+
+const { TabPane } = Tabs;
+
+function callback(key: any) {
+  console.log(key);
+}
 
 const Catalog = () => {
   const mangas = useSelector<any>((state) => state.manga.mangas);
@@ -20,18 +28,27 @@ const Catalog = () => {
   return (
     <MainLayout>
       <Title level={2}>Каталог</Title>
-      <div className={styles.block}>
-        <div className={styles.mangaList}>
-          {loading ? (
-            <p>loading</p>
-          ) : (
-            mangas?.map((manga: any) => (
-              <CardManga key={manga.id} manga={manga} />
-            ))
-          )}
-        </div>
-        <Filters />
-      </div>
+      <Tabs defaultActiveKey='1' onChange={callback}>
+        <TabPane tab='Тайтлы' key='1'>
+          <div className={styles.block}>
+            <div className={styles.mangaList}>
+              {loading ? (
+                <p>loading</p>
+              ) : (
+                mangas?.map((manga: any) => (
+                  <CardManga key={manga.id} manga={manga} />
+                ))
+              )}
+            </div>
+            <Filters />
+          </div>
+        </TabPane>
+        <TabPane tab='Команды переводчиков' key='2'>
+          <CardTeam />
+          <CardTeam />
+          <CardTeam />
+        </TabPane>
+      </Tabs>
     </MainLayout>
   );
 };
