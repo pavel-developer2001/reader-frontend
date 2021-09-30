@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardManga from "../../components/CardManga";
 import CardTeam from "../../components/CardTeam";
-import CreateTeamModal from "./components/CreateTeamModal";
+import CreateTeamModal from "../../components/user/UI/CreateTeamModal";
 import MainLayout from "../../layouts/MainLayout";
 import { getUserData } from "../../store/slices/userSlice";
 import styles from "./Users.module.css";

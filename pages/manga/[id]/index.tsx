@@ -5,17 +5,17 @@ import { Tabs } from "antd";
 import styles from "../Manga.module.css";
 import CommentsBlock from "../../../components/CommentsBlock";
 
-import MangaData from "./components/MangaData";
-import MangaDescriptions from "./components/MangaDescriptions";
-import MangaAddition from "./components/MangaAddition";
-import MangaSettings from "./components/MangaSettings";
+import MangaData from "../../../components/manga/UI/MangaData";
+import MangaDescriptions from "../../../components/manga/UI/MangaDescriptions";
+import MangaAddition from "../../../components/manga/UI/MangaAddition";
+import MangaSettings from "../../../components/manga/UI/MangaSettings";
 import { GetServerSideProps } from "next";
 import { wrapper } from "../../../store";
 import MangaApi from "../../../services/api/mangaApi";
 import { getManga, setManga } from "../../../store/slices/mangaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
-import ChapterList from "./components/ChapterList";
+import ChapterList from "../../../components/manga/UI/ChapterList";
 
 const { TabPane } = Tabs;
 

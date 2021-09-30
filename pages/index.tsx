@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
-import MainLayout from "../../layouts/MainLayout";
-import styles from "../../styles/Home.module.css";
-import { setToken } from "../../store/slices/userSlice";
+import MainLayout from "../layouts/MainLayout";
+import styles from "../styles/Home.module.css";
+import { setToken } from "../store/slices/userSlice";
 
-import { wrapper } from "../../store";
+import { wrapper } from "../store";
 import { GetServerSideProps } from "next";
 
-import PopularList from "./components/PopularList";
-import TisketList from "./components/TisketList";
+import PopularList from "../components/home/UI/PopularList";
+import TisketList from "../components/home/UI/TisketList";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

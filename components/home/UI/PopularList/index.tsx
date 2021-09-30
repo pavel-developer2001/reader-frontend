@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMangas } from "../../../../store/slices/mangaSlice";
-import CardManga from "../../../../components/CardManga";
+import CardManga from "../../../CardManga";
 import styles from "./PopularList.module.css";
 
 const PopularList = () => {

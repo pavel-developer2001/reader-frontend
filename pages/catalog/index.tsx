@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardManga from "../../components/CardManga";
-import Filters from "./components/Filters";
+import Filters from "../../components/catalog/UI/Filters";
 import MainLayout from "../../layouts/MainLayout";
 import MangaApi from "../../services/api/mangaApi";
 import { wrapper } from "../../store";
