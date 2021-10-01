@@ -1,6 +1,7 @@
 import { CopyFilled, EyeFilled, HeartFilled } from "@ant-design/icons";
 import Title from "antd/lib/typography/Title";
 import React, { FC } from "react";
+import Rating from "../Rating";
 import styles from "./MangaData.module.scss";
 
 const MangaData: FC<any> = ({
@@ -21,7 +22,9 @@ const MangaData: FC<any> = ({
         </div>
       </div>
       <div className={styles.static}>
-        <div className={styles.rating}>8.9 (голосов: 610)</div>
+        <div className={styles.rating}>
+          <Rating />
+        </div>
         <div className={styles.likes}>
           <HeartFilled /> 17.2K{" "}
         </div>

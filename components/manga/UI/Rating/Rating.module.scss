@@ -1,0 +1,25 @@
+.star {
+  font-size: 16px;
+}
+.starIcon {
+  color: yellow;
+  font-size: 18px;
+}
+.modal {
+  max-width: 260px;
+  min-width: 260px;
+}
+.text {
+  &:hover {
+    cursor: pointer;
+  }
+}
+.changeRating {
+  background-color: var(#{--components-background-default}) !important;
+  color: var(#{--text-secondary-color-default}) !important;
+  padding: 4px 12px;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+}

@@ -15,7 +15,9 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
   function onFocus() {
     console.log("focus");
   }
-
+  const changeMark = (value: string) => {
+    setCategory(value);
+  };
   function onSearch(val: any) {
     console.log("search:", val);
   }
@@ -33,7 +35,7 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
         style={{ width: 200 }}
         placeholder='Добавить в закладки'
         optionFilterProp='children'
-        onChange={(value) => setCategory(value)}
+        onChange={changeMark}
         onFocus={onFocus}
         onBlur={onBlur}
         onSearch={onSearch}

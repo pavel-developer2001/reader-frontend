@@ -82,6 +82,20 @@ h6 {
 .ant-modal-footer {
   display: none;
 }
+
+.ant-modal-content {
+  background-color: var(#{--body-background-default}) !important;
+  color: var(#{--text-secondary-color-default}) !important;
+}
+.ant-modal-header {
+  background-color: var(#{--body-background-default}) !important;
+}
+.ant-modal-title {
+  color: var(#{--text-secondary-color-default}) !important;
+}
+.ant-modal-close-icon {
+  color: var(#{--text-secondary-color-default}) !important;
+}
 .ant-card-meta-title {
   overflow: initial !important;
   white-space: normal !important;
