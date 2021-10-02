@@ -21,7 +21,9 @@ const { TabPane } = Tabs;
 
 const PageManga = () => {
   const dispatch = useDispatch();
-  const manga = useSelector<any>((state) => state.manga.manga);
+  const manga = useSelector<any>((state) => state.manga.manga.manga);
+  const tag = useSelector<any>((state) => state.manga.manga.tag);
+  const genre = useSelector<any>((state) => state.manga.manga.genre);
   const loading = useSelector<any>((state) => state.manga.loading);
   const router = useRouter();
 
@@ -40,20 +42,25 @@ const PageManga = () => {
           ) : (
             <>
               {" "}
-              <MangaSettings cover={manga.mangaCover} id={manga.id} />
+              <MangaSettings cover={manga?.mangaCover} id={manga?.id} />
               <div className={styles.main}>
                 <MangaData
-                  title={manga.title}
-                  englishTitle={manga.englishTitle}
-                  originalTitle={manga.originalTitle}
-                  yearOfIssue={manga.yearOfIssue}
+                  title={manga?.title}
+                  englishTitle={manga?.englishTitle}
+                  originalTitle={manga?.originalTitle}
+                  yearOfIssue={manga?.yearOfIssue}
+                  ageRating={manga?.ageRatingManga}
+                  typeManga={manga?.typeManga}
+                  statusManga={manga?.statusManga}
                 />
                 <div className={styles.table}>
                   <div>
                     <Tabs defaultActiveKey='1' onChange={callback}>
                       <TabPane tab='Описание' key='1'>
                         <MangaDescriptions
-                          mangaDescription={manga.mangaDescription}
+                          mangaDescription={manga?.mangaDescription}
+                          tags={tag}
+                          genres={genre}
                         />
                         <CommentsBlock />
                       </TabPane>

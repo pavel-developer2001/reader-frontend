@@ -9,6 +9,9 @@ const MangaData: FC<any> = ({
   englishTitle,
   originalTitle,
   yearOfIssue,
+  ageRating,
+  statusManga,
+  typeManga,
 }) => {
   return (
     <div>
@@ -18,7 +21,7 @@ const MangaData: FC<any> = ({
         </Title>
         <div className={styles.dataTitle}>
           <Title className={styles.title}>{title}</Title>
-          <span className={styles.status}>[Продолжается]</span>
+          <span className={styles.status}>[{statusManga}]</span>
         </div>
       </div>
       <div className={styles.static}>
@@ -34,7 +37,8 @@ const MangaData: FC<any> = ({
         <div className={styles.bookmarks}>
           <CopyFilled /> 13.8K
         </div>
-        <div className={styles.type}>Маньхуа</div>
+        <div>{ageRating}</div>
+        <div className={styles.type}>{typeManga}</div>
         <div className={styles.date}>{yearOfIssue}</div>
       </div>
     </div>

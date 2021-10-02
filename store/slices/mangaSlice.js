@@ -18,7 +18,7 @@ const mangaSlice = createSlice({
   name: "manga",
   initialState: {
     mangas: [],
-    manga: [],
+    manga: { manga: [], genres: [], tags: [] },
     status: null,
     loading: true,
   },

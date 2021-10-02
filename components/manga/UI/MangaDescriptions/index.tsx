@@ -2,17 +2,15 @@ import { Tag } from "antd";
 import styles from "./MangaDescriptions.module.scss";
 import React, { FC } from "react";
 
-const MangaDescriptions: FC<any> = ({ mangaDescription }) => {
+const MangaDescriptions: FC<any> = ({ mangaDescription, tags, genres }) => {
   return (
     <div>
-      <Tag color='purple'>purple</Tag>
-      <Tag color='purple'>purple</Tag>
-      <Tag color='purple'>purple</Tag>
-      <Tag color='purple'>purple</Tag>
-      <Tag color='purple'>purple</Tag>
-      <Tag color='purple'>purple</Tag>
-      <Tag color='purple'>purple</Tag>
-      <Tag color='purple'>purple</Tag>
+      {genres?.map((genre: any) => (
+        <Tag color='purple'>{genre.genre}</Tag>
+      ))}
+      {tags?.map((tag: any) => (
+        <Tag color='purple'>{tag.tag}</Tag>
+      ))}
       <p className={styles.text}>{mangaDescription}</p>
     </div>
   );

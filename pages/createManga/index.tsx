@@ -30,60 +30,60 @@ const CreateManga = () => {
   const [typeManga, setTypeManga] = useState<any>("");
 
   const typesArray = [
-    { value: "манга", title: "Манга" },
-    { value: "манхва", title: "Манхва" },
-    { value: "маньхуа", title: "Маньхуа" },
-    { value: "западный комикс", title: "Западный комикс" },
-    { value: "рукомикс", title: "Рукомикс" },
+    { value: "Манга", title: "Манга" },
+    { value: "Манхва", title: "Манхва" },
+    { value: "Маньхуа", title: "Маньхуа" },
+    { value: "Западный комикс", title: "Западный комикс" },
+    { value: "Рукомикс", title: "Рукомикс" },
   ];
   const [genres, setGenres] = useState<any>([""]);
 
   const genresArray = [
-    { value: "боевик", title: "Боевик" },
-    { value: "боевые искусства", title: "Боевые искусства" },
-    { value: "гарем", title: "Гарем" },
-    { value: "романтика", title: "Романтика" },
-    { value: "детектив", title: "Детектив" },
-    { value: "трагедия", title: "Трагедия" },
-    { value: "спорт", title: "Спорт" },
-    { value: "сёнен", title: "Сёнен" },
-    { value: "ужасы", title: "Ужасы" },
-    { value: "фантастика", title: "Фантастика" },
-    { value: "триллер", title: "Триллер" },
-    { value: "этти", title: "Этти" },
+    { value: "Боевик", title: "Боевик" },
+    { value: "Боевые искусства", title: "Боевые искусства" },
+    { value: "Гарем", title: "Гарем" },
+    { value: "Романтика", title: "Романтика" },
+    { value: "Детектив", title: "Детектив" },
+    { value: "Трагедия", title: "Трагедия" },
+    { value: "Спорт", title: "Спорт" },
+    { value: "Сёнен", title: "Сёнен" },
+    { value: "Ужасы", title: "Ужасы" },
+    { value: "Фантастика", title: "Фантастика" },
+    { value: "Триллер", title: "Триллер" },
+    { value: "Этти", title: "Этти" },
   ];
   const [tags, setTags] = useState<any>([""]);
 
   const tagsArray = [
-    { value: "алхимия", title: "Алхимия" },
-    { value: "ангелы", title: "Ангелы" },
-    { value: "в цвете", title: "В цвете" },
-    { value: "веб", title: "Веб" },
-    { value: "эльфы", title: "Эльфы" },
-    { value: "шантаж", title: "Шантаж" },
-    { value: "будущее", title: "Будущее" },
-    { value: "умный гг", title: "Умный ГГ" },
-    { value: "тупой ГГ", title: "Тупой ГГ" },
-    { value: "магия", title: "Магия" },
-    { value: "ниндзя", title: "Ниндзя" },
-    { value: "борьба за власть", title: "Борьба за власть" },
-    { value: "система", title: "Система" },
-    { value: "владыка демона", title: "Владыка демона" },
-    { value: "гг имба", title: "ГГ имба" },
+    { value: "Алхимия", title: "Алхимия" },
+    { value: "Ангелы", title: "Ангелы" },
+    { value: "В цвете", title: "В цвете" },
+    { value: "Веб", title: "Веб" },
+    { value: "Эльфы", title: "Эльфы" },
+    { value: "Шантаж", title: "Шантаж" },
+    { value: "Будущее", title: "Будущее" },
+    { value: "Умный ГГ", title: "Умный ГГ" },
+    { value: "Тупой ГГ", title: "Тупой ГГ" },
+    { value: "Магия", title: "Магия" },
+    { value: "Ниндзя", title: "Ниндзя" },
+    { value: "Борьба за власть", title: "Борьба за власть" },
+    { value: "Система", title: "Система" },
+    { value: "Владыка демона", title: "Владыка демона" },
+    { value: "ГГ имба", title: "ГГ имба" },
   ];
   const [statusManga, setStatusManga] = useState<any>("");
 
   const statusTranslateArray = [
-    { value: "закончен", title: "Закончен" },
-    { value: "продолжается", title: "Продолжается" },
-    { value: "заморожен", title: "Заморожен" },
-    { value: "нет переводчика", title: "Нет переводчика" },
-    { value: "анонс", title: "Анонс" },
+    { value: "Закончен", title: "Закончен" },
+    { value: "Продолжается", title: "Продолжается" },
+    { value: "Заморожен", title: "Заморожен" },
+    { value: "Нет переводчика", title: "Нет переводчика" },
+    { value: "Анонс", title: "Анонс" },
   ];
   const [ageRatingManga, setAgeRatingManga] = useState<any>("");
 
   const ageRatingArray = [
-    { value: "для всех", title: "Для всех" },
+    { value: "Для всех", title: "Для всех" },
     { value: "16+", title: "16+" },
     { value: "18+", title: "18+" },
   ];
