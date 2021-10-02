@@ -12,6 +12,7 @@ import CardManga from "../../components/CardManga";
 import CardTeam from "../../components/CardTeam";
 import CreateTeamModal from "../../components/user/UI/CreateTeamModal";
 import MainLayout from "../../layouts/MainLayout";
+import { getBookMarks } from "../../store/slices/bookMarkSlice";
 import { getUserData } from "../../store/slices/userSlice";
 import styles from "./Users.module.scss";
 
@@ -20,10 +21,16 @@ const User = () => {
   const router = useRouter();
   const user = useSelector<any>((state) => state.user.user);
   const loading = useSelector<any>((state) => state.user.loading);
+  const bookMarks = useSelector<any>((state) => state.bookMark.bookMarks);
+  const loadingMark = useSelector<any>((state) => state.bookMark.loading);
+  console.log("Marks", bookMarks, loadingMark);
   const [tabPosition, setTabPosition] = useState("left");
 
   useEffect(() => {
     dispatch(getUserData(router.query.id));
+  }, [router.query.id]);
+  useEffect(() => {
+    dispatch(getBookMarks(router.query.id));
   }, [router.query.id]);
   const info = [
     { count: "13.9K", text: "Прочитано глав" },
@@ -67,7 +74,15 @@ const User = () => {
                   id: {user.id} Пол: Мужской
                 </TabPane>
                 <TabPane tab='Закладки' key='2'>
-                  <Empty description={<span>Пусто</span>} />
+                  {loadingMark ? (
+                    <p>loading</p>
+                  ) : bookMarks.length > 0 ? (
+                    bookMarks.map((mark: any, index) => (
+                      <CardManga key={mark.id} manga={mark.manga} />
+                    ))
+                  ) : (
+                    <Empty description={<span>Пусто</span>} />
+                  )}
                 </TabPane>
                 <TabPane tab='Команды' key='3'>
                   <div>
