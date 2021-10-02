@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useRouter } from "next/dist/client/router";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +38,7 @@ const UpdateListItem: FC<any> = ({
         >
           Том {volumeChapter}. Глава {numberChapter}.
         </p>
-        <span className={styles.date}>{date} назад</span>
+        <span className={styles.date}>{moment().from(date)} назад</span>
       </div>
     </div>
   );

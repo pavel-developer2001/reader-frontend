@@ -1,0 +1,36 @@
+.content {
+  display: block;
+}
+.edit {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  font-size: 16px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.area {
+  width: 100%;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .left {
+    display: flex;
+    align-items: center;
+    .delete {
+      margin-right: 10px;
+    }
+  }
+}
+.ready {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  font-size: 16px;
+}
+.editBlock {
+  margin-top: 5px;
+}

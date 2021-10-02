@@ -12,6 +12,7 @@ const MangaData: FC<any> = ({
   ageRating,
   statusManga,
   typeManga,
+  watchCount,
 }) => {
   return (
     <div>
@@ -32,7 +33,7 @@ const MangaData: FC<any> = ({
           <HeartFilled /> 17.2K{" "}
         </div>
         <div className={styles.watch}>
-          <EyeFilled /> 95.4K
+          <EyeFilled /> {watchCount}
         </div>
         <div className={styles.bookmarks}>
           <CopyFilled /> 13.8K

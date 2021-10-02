@@ -10,7 +10,7 @@ import {
   updateBookMark,
 } from "../../../../store/slices/bookMarkSlice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
-import styles from "./MangaSettings.module.css";
+import styles from "./MangaSettings.module.scss";
 
 const MangaSettings: FC<any> = ({ cover, id }) => {
   const dispatch = useDispatch();
@@ -51,54 +51,56 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
   return (
     <div className={styles.card}>
       <Image width={250} height={350} src={cover} />
-      <Button type='primary' shape='round' size='large'>
-        Читать
-      </Button>
-      {loading ? (
-        <p>loading</p>
-      ) : (
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder={
-            loading
-              ? "Добавить в закладки"
-              : bookMark != null
-              ? bookMark?.category
-              : "Добавить в закладки"
-          }
-          optionFilterProp='children'
-          onChange={changeMark}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          filterOption={(input, option: any) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          <Option value='Читаю'>Читаю</Option>
-          <Option value='Прочитано'>Прочитано</Option>
-          <Option value='Буду читать'>Буду читать</Option>
-          <Option value='Брошено'>Брошено</Option>
-          <Option value='Неинтересно'>Неинтересно</Option>
-          <Option value='Отложено'>Отложено</Option>
-          {bookMark != null ? (
-            bookMark?.category ? (
-              <Option value='Удалить из закладок'>Удалить из закладок</Option>
-            ) : null
-          ) : null}
-        </Select>
-      )}
+      <div className={styles.settings}>
+        <Button type='primary' shape='round' size='large'>
+          Читать
+        </Button>
+        {loading ? (
+          <p>loading</p>
+        ) : (
+          <Select
+            showSearch
+            style={{ width: 200 }}
+            placeholder={
+              loading
+                ? "Добавить в закладки"
+                : bookMark != null
+                ? bookMark?.category
+                : "Добавить в закладки"
+            }
+            optionFilterProp='children'
+            onChange={changeMark}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onSearch={onSearch}
+            filterOption={(input, option: any) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            <Option value='Читаю'>Читаю</Option>
+            <Option value='Прочитано'>Прочитано</Option>
+            <Option value='Буду читать'>Буду читать</Option>
+            <Option value='Брошено'>Брошено</Option>
+            <Option value='Неинтересно'>Неинтересно</Option>
+            <Option value='Отложено'>Отложено</Option>
+            {bookMark != null ? (
+              bookMark?.category ? (
+                <Option value='Удалить из закладок'>Удалить из закладок</Option>
+              ) : null
+            ) : null}
+          </Select>
+        )}
 
-      <Button type='link'>Редактировать</Button>
-      <Button
-        type='primary'
-        icon={<PlusOutlined />}
-        onClick={() => router.push("/manga/" + id + "/upload")}
-        size='large'
-      >
-        Добавить новые главы
-      </Button>
+        <Button type='link'>Редактировать</Button>
+        <Button
+          type='primary'
+          icon={<PlusOutlined />}
+          onClick={() => router.push("/manga/" + id + "/upload")}
+          size='large'
+        >
+          Добавить новые главы
+        </Button>
+      </div>
     </div>
   );
 };

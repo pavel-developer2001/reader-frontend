@@ -3,7 +3,7 @@ import MainLayout from "../../../layouts/MainLayout";
 
 import { Tabs } from "antd";
 import styles from "../Manga.module.css";
-import CommentsBlock from "../../../components/manga/UI/CommentsBlock";
+import CommentsBlockList from "../../../components/manga/UI/CommentsBlockList";
 
 import MangaData from "../../../components/manga/UI/MangaData";
 import MangaDescriptions from "../../../components/manga/UI/MangaDescriptions";
@@ -52,6 +52,7 @@ const PageManga = () => {
                   ageRating={manga?.ageRatingManga}
                   typeManga={manga?.typeManga}
                   statusManga={manga?.statusManga}
+                  watchCount={manga?.watchCount}
                 />
                 <div className={styles.table}>
                   <div>
@@ -62,7 +63,7 @@ const PageManga = () => {
                           tags={tag}
                           genres={genre}
                         />
-                        <CommentsBlock />
+                        <CommentsBlockList />
                       </TabPane>
                       <TabPane tab='Главы' key='2'>
                         <ChapterList mangaId={router.query.id} />
