@@ -74,15 +74,18 @@ const User = () => {
                   id: {user.id} Пол: Мужской
                 </TabPane>
                 <TabPane tab='Закладки' key='2'>
-                  {loadingMark ? (
-                    <p>loading</p>
-                  ) : bookMarks.length > 0 ? (
-                    bookMarks.map((mark: any, index) => (
-                      <CardManga key={mark.id} manga={mark.manga} />
-                    ))
-                  ) : (
-                    <Empty description={<span>Пусто</span>} />
-                  )}
+                  <div className={styles.markList}>
+                    {" "}
+                    {loadingMark ? (
+                      <p>loading</p>
+                    ) : bookMarks.length > 0 ? (
+                      bookMarks.map((mark: any, index) => (
+                        <CardManga key={mark.id} manga={mark.manga} />
+                      ))
+                    ) : (
+                      <Empty description={<span>Пусто</span>} />
+                    )}
+                  </div>
                 </TabPane>
                 <TabPane tab='Команды' key='3'>
                   <div>

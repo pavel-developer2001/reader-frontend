@@ -27,10 +27,16 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
   }
   const changeMark = async (value: string) => {
     setCategory(value);
-    const payload = { category: value, mangaId: id, userId: dataUser.id };
-    bookMark == null || bookMark.category == "Удалить из закладок"
-      ? await dispatch(addBookMark(payload))
-      : await dispatch(updateBookMark(payload));
+    const payload = await { category: value, mangaId: id, userId: dataUser.id };
+    if (bookMark == null) {
+      await dispatch(addBookMark(payload));
+    }
+    if (payload.category != "Удалить из закладок") {
+      await dispatch(updateBookMark(payload));
+    }
+    if (payload.category == "Удалить из закладок") {
+      await dispatch(addBookMark(payload));
+    }
   };
   function onSearch(val: any) {
     console.log("search:", val);
