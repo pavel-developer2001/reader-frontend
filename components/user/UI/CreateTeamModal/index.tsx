@@ -2,11 +2,14 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, message, Modal, Upload } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addNewTeam } from "../../../../store/slices/teamSlice";
+import { dataUser } from "../../../../utils/getDataUserFromToken";
 import styles from "./CreateTeamModal.module.scss";
 
 const CreateTeamModal = () => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-
+  const dispatch = useDispatch();
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -18,9 +21,37 @@ const CreateTeamModal = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const [value, setValue] = useState<string>("");
   const [loading, setLoading] = useState<boolean | null>();
   const [imageUrl, setImageUrl] = useState("");
+
+  /////////////////////////////////////////////
+  const [teamCover, setTeamCover] = useState("");
+  const [teamName, setTeamName] = useState("");
+  const [teamSubtitle, setTeamSubtitle] = useState("");
+  const [teamDescription, setTeamDescription] = useState("");
+
+  const handleAddTeam = async (e: any) => {
+    e.preventDefault();
+    try {
+      if (teamName === "") {
+        return alert("Напишите название комнаты");
+      }
+      const formData = new FormData();
+      formData.append("teamName", teamName);
+      formData.append("teamSubtitle", teamSubtitle);
+      formData.append("teamDescription", teamDescription);
+      formData.append("userId", dataUser.id);
+      formData.append("teamCover", teamCover);
+      dispatch(addNewTeam(formData));
+      setTeamName("");
+      setTeamSubtitle("");
+      setIsModalVisible(false);
+      setTeamDescription("");
+      setTeamCover("");
+      setImageUrl("");
+    } catch (error) {}
+  };
+  ////////////////////////////////////////////////
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -45,6 +76,7 @@ const CreateTeamModal = () => {
     return isJpgOrPng && isLt2M;
   }
   const handleChange = (e: any) => {
+    setTeamCover(e.file.originFileObj);
     if (e.file.status === "uploading") {
       setLoading(true);
       return;
@@ -86,17 +118,29 @@ const CreateTeamModal = () => {
             uploadButton
           )}
         </Upload>
-        <TextArea placeholder='Название команды' autoSize />
+        <TextArea
+          placeholder='Название команды'
+          autoSize
+          value={teamName}
+          onChange={(e) => setTeamName(e.target.value)}
+        />
         <div style={{ margin: "24px 0" }} />
         <TextArea
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          placeholder='Подзагаловок команды'
+          autoSize
+          value={teamSubtitle}
+          onChange={(e) => setTeamSubtitle(e.target.value)}
+        />
+        <div style={{ margin: "24px 0" }} />
+        <TextArea
           placeholder='Описание'
+          value={teamDescription}
+          onChange={(e) => setTeamDescription(e.target.value)}
           autoSize={{ minRows: 3, maxRows: 5 }}
         />
         <div style={{ margin: "24px 0" }} />
-        <Button type='primary' size='large'>
-          Создать
+        <Button type='primary' size='large' onClick={handleAddTeam}>
+          Создать команду
         </Button>
       </Modal>
     </div>

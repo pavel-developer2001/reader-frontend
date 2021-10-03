@@ -23,7 +23,6 @@ const User = () => {
   const loading = useSelector<any>((state) => state.user.loading);
   const bookMarks = useSelector<any>((state) => state.bookMark.bookMarks);
   const loadingMark = useSelector<any>((state) => state.bookMark.loading);
-  console.log("Marks", bookMarks, loadingMark);
   const [tabPosition, setTabPosition] = useState("left");
 
   useEffect(() => {
