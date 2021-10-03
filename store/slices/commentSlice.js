@@ -48,7 +48,7 @@ const commentSlice = createSlice({
         state.loading = false;
       })
       .addCase(addComment.fulfilled, (state, action) => {
-        state.comments.push(action.payload.data);
+        state.comments.unshift(action.payload.data);
       })
       .addCase(getComments.fulfilled, (state, action) => {
         state.comments = action.payload.data;
