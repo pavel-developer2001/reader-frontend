@@ -1,5 +1,8 @@
 .star {
   font-size: 16px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .starIcon {
   color: yellow;

@@ -52,13 +52,13 @@ const CommentsBlock: FC<any> = ({
 
   const actions = [
     <Tooltip key='comment-basic-like' title='Like'>
-      <span onClick={like}>
+      <span onClick={like} className={styles.likeBtn}>
         {React.createElement(action === "liked" ? LikeFilled : LikeOutlined)}
-        <span className='comment-action'>{likes}</span>
+        <span className={styles.like}>{likes}</span>
       </span>
     </Tooltip>,
     <Tooltip key='comment-basic-dislike' title='Dislike'>
-      <span onClick={dislike}>
+      <span onClick={dislike} className={styles.likeBtn}>
         {React.createElement(
           action === "disliked" ? DislikeFilled : DislikeOutlined
         )}
@@ -71,7 +71,6 @@ const CommentsBlock: FC<any> = ({
     } catch (error) {}
   };
   const handleUpdateComment = async (e: any) => {
-    console.log("UPDATE");
     e.preventDefault();
     try {
       const data = { id: commentId, payload: { commentText, spoiler } };
@@ -84,12 +83,18 @@ const CommentsBlock: FC<any> = ({
       <Comment
         actions={!edit ? actions : null}
         author={
-          <span onClick={() => router.push("/user/" + dataUser.id)}>
+          <span
+            className={styles.userName}
+            onClick={() =>
+              router.push("/user/" + userId ? userId : dataUser.id)
+            }
+          >
             {userName}
           </span>
         }
         avatar={
           <Avatar
+            className={styles.avatar}
             src={
               userAvatar
                 ? userAvatar
@@ -110,7 +115,16 @@ const CommentsBlock: FC<any> = ({
               </div>
             )}
             {!edit ? (
-              <p className={styles.text}>{text}</p>
+              spoiler ? (
+                <Button
+                  className={styles.spoiler}
+                  onClick={() => setSpoiler(false)}
+                >
+                  Спойлер
+                </Button>
+              ) : (
+                <p className={styles.text}>{text}</p>
+              )
             ) : (
               <div className={styles.editBlock}>
                 <TextArea
@@ -149,7 +163,7 @@ const CommentsBlock: FC<any> = ({
         }
         datetime={
           <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-            <span>{moment().from(date)}</span>
+            <span>{moment().from(date)} назад</span>
           </Tooltip>
         }
       />

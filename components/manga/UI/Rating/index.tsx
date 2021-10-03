@@ -59,10 +59,10 @@ const Rating = () => {
       {loading ? (
         <p>loading </p>
       ) : (
-        <Button type='default' onClick={showModal} className={styles.star}>
+        <div onClick={showModal} className={styles.star}>
           <StarFilled className={styles.starIcon} />
           {rating == null ? "Оценить тайтл" : rating.rating} (голосов: 610)
-        </Button>
+        </div>
       )}
 
       <Modal

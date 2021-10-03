@@ -6,10 +6,14 @@ const MangaDescriptions: FC<any> = ({ mangaDescription, tags, genres }) => {
   return (
     <div>
       {genres?.map((genre: any) => (
-        <Tag color='purple'>{genre.genre}</Tag>
+        <Tag color='purple' key={genre.id}>
+          {genre.genre}
+        </Tag>
       ))}
       {tags?.map((tag: any) => (
-        <Tag color='purple'>{tag.tag}</Tag>
+        <Tag color='purple' key={tag.id}>
+          {tag.tag}
+        </Tag>
       ))}
       <p className={styles.text}>{mangaDescription}</p>
     </div>
