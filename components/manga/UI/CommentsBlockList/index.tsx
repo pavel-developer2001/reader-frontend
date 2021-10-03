@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Comment, Tooltip, Avatar, Switch, Button } from "antd";
 import moment from "moment";
 import {
@@ -14,11 +14,30 @@ import styles from "./CommentsBlockList.module.scss";
 import Link from "next/link";
 import AddCommentForManga from "../AddCommentForManga";
 import TextArea from "rc-textarea";
+import { useRouter } from "next/dist/client/router";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteComment,
+  getComments,
+  updateComment,
+} from "../../../../store/slices/commentSlice";
+import { dataUser } from "../../../../utils/getDataUserFromToken";
 
-const CommentsBlock = () => {
-  const [likes, setLikes] = useState(0);
-  const [spoiler, setSpoiler] = useState(false);
-  console.log("SPOILER", spoiler);
+const CommentsBlock: FC<any> = ({
+  commentId,
+  text,
+  commentSpoiler,
+  commentLikes,
+  date,
+  userAvatar,
+  userName,
+  userId,
+}) => {
+  const dispatch = useDispatch();
+  const [likes, setLikes] = useState(commentLikes);
+  const router = useRouter();
+  const [spoiler, setSpoiler] = useState(commentSpoiler);
+  const [commentText, setCommentText] = useState(text);
   const [edit, setEdit] = useState(false);
   const [action, setAction] = React.useState<string | null>(null);
 
@@ -46,21 +65,37 @@ const CommentsBlock = () => {
       </span>
     </Tooltip>,
   ];
-  const handleRemoveComment = () => {
-    console.log("REMOVE");
+  const handleRemoveComment = async () => {
+    try {
+      await dispatch(deleteComment(commentId));
+    } catch (error) {}
   };
-  const handleUpdateComment = () => {
+  const handleUpdateComment = async (e: any) => {
     console.log("UPDATE");
+    e.preventDefault();
+    try {
+      const data = { id: commentId, payload: { commentText, spoiler } };
+      await dispatch(updateComment(data));
+      setEdit(false);
+    } catch (error) {}
   };
   return (
     <div>
       <Comment
         actions={!edit ? actions : null}
-        author={<Link href={"/user/19"}>Han Solo</Link>}
+        author={
+          <span onClick={() => router.push("/user/" + dataUser.id)}>
+            {userName}
+          </span>
+        }
         avatar={
           <Avatar
-            src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-            alt='Han Solo'
+            src={
+              userAvatar
+                ? userAvatar
+                : "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            }
+            alt={userName}
           />
         }
         content={
@@ -75,21 +110,17 @@ const CommentsBlock = () => {
               </div>
             )}
             {!edit ? (
-              <p className={styles.text}>
-                e supply a series of design principles, practical patterns and
-                high quality design resources (Sketch and Axure), to help people
-                create their product prototypes beautifully and efficiently.W
-              </p>
+              <p className={styles.text}>{text}</p>
             ) : (
               <div className={styles.editBlock}>
                 <TextArea
                   showCount
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
                   autoSize={{ minRows: 2, maxRows: 3 }}
                   className={styles.area}
                   maxLength={500}
-                  defaultValue='e supply a series of design principles, practical patterns and
-                high quality design resources (Sketch and Axure), to help people
-                create their product prototypes beautifully and efficiently.W'
+                  defaultValue={text}
                 />
 
                 <div className={styles.footer}>
@@ -118,7 +149,7 @@ const CommentsBlock = () => {
         }
         datetime={
           <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-            <span>{moment().from("2021-10-02T13:05:23.593Z")}</span>
+            <span>{moment().from(date)}</span>
           </Tooltip>
         }
       />
@@ -126,16 +157,41 @@ const CommentsBlock = () => {
   );
 };
 const CommentBlockList = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const mangaId = router.query.id;
+  const comments = useSelector<any>((state) => state.comment.comments);
+  const loading = useSelector<any>((state) => state.comment.loading);
+  useEffect(() => {
+    dispatch(getComments(mangaId));
+  }, [mangaId]);
   return (
     <div className={styles.list}>
-      <div className={styles.title}>Комментарии 89</div>
-      <AddCommentForManga />
-      <div className={styles.commentList}>
-        <CommentsBlock />
-        <CommentsBlock />
-        <CommentsBlock />
-        <CommentsBlock />
-      </div>
+      {loading ? (
+        <p>Loading</p>
+      ) : (
+        <>
+          <div className={styles.title}>Комментарии {comments.length}</div>
+          <AddCommentForManga mangaId={mangaId} />
+          {comments.length > 0 ? (
+            comments.map((comment) => (
+              <CommentsBlock
+                key={comment.id}
+                commentId={comment.id}
+                text={comment.commentText}
+                commentSpoiler={comment.spoiler}
+                commentLikes={comment.countLikes}
+                date={comment.createdAt}
+                userAvatar={comment?.user?.avatar}
+                userName={comment?.user?.name}
+                userId={comment?.user?.id}
+              />
+            ))
+          ) : (
+            <p>Пусто</p>
+          )}
+        </>
+      )}
     </div>
   );
 };
