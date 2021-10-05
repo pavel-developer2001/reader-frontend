@@ -37,16 +37,16 @@ const Team = () => {
                 shape='square'
                 size={150}
                 src={
-                  team.team.teamCover
-                    ? team.team.teamCover
+                  team?.team?.teamCover
+                    ? team?.team?.teamCover
                     : "https://api.remanga.org//media/publishers/1910/high_cover.jpg"
                 }
               />
-              <span>{team.team.teamRank} Переводчик</span>
+              <span>{team?.team?.teamRank} Переводчик</span>
             </div>
             <div>
               <Title level={2}>{team.team.teamName}</Title>
-              <Paragraph>{team.team.teamSubtitle}</Paragraph>
+              <Paragraph>{team?.team?.teamSubtitle}</Paragraph>
               <Text strong>30 тайтлов 823.8K лайков 81 глав/мес</Text>
             </div>
           </div>
@@ -54,7 +54,7 @@ const Team = () => {
             {" "}
             <Tabs defaultActiveKey='1' onChange={callback}>
               <TabPane tab='Профиль' key='1'>
-                <Paragraph>{team.team.teamDescription}</Paragraph>
+                <Paragraph>{team?.team?.teamDescription}</Paragraph>
                 Профиль Состав команды
               </TabPane>
               <TabPane tab='Тайтлы' key='2'>

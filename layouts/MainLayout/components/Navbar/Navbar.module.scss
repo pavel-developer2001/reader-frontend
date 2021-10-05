@@ -11,8 +11,6 @@
   }
 }
 .header {
-  display: flex;
-  justify-content: space-between;
   position: fixed;
   top: 0;
   width: 100%;
@@ -37,4 +35,8 @@
       color: var(#{--text-color-default});
     }
   }
+}
+.wrapper {
+  display: flex;
+  justify-content: space-between;
 }

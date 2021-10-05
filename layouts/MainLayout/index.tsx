@@ -24,7 +24,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </Head>
       <Navbar />
-      <div className={styles.container}>{children}</div>
+      <div className={styles.container}>
+        <div className='main-container'>{children}</div>
+      </div>
       <MyFooter />
     </div>
   );

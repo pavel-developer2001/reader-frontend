@@ -116,11 +116,10 @@ body {
 }
 //////////////////
 .main-container {
-  max-width: -webkit-calc(1440px + (100vw/72 * 2) * 2);
-  max-width: calc(1440px + (100vw / 72 * 2) * 2);
-  padding-left: calc(100vw / 72 * 7);
-  padding-right: calc(100vw / 72 * 7);
+  margin: 0 auto !important;
+  max-width: calc(1440px + (100vw / 72 * 2) * 2) !important;
 }
+
 //////////////
 $primary-color: #4793ff;
 $light-background: #fff;

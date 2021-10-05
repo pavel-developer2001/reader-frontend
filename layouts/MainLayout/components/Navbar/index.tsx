@@ -37,40 +37,44 @@ const Navbar = () => {
   };
   return (
     <Header className={styles.header}>
-      <div className={styles.leftHeader}>
-        <div className={styles.logo}>
-          <Link href='/'>
-            <a>Reader</a>
-          </Link>
-        </div>
-        {menuArrays.left.map((menu, index) => (
-          <div key={index} className={styles.menu}>
-            <Link href={menu.link}>
-              <a>{menu.title}</a>
-            </Link>
+      <div className='main-container'>
+        <div className={styles.wrapper}>
+          <div className={styles.leftHeader}>
+            <div className={styles.logo}>
+              <Link href='/'>
+                <a>Reader</a>
+              </Link>
+            </div>
+            {menuArrays.left.map((menu, index) => (
+              <div key={index} className={styles.menu}>
+                <Link href={menu.link}>
+                  <a>{menu.title}</a>
+                </Link>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className={styles.rightHeader}>
-        <div className={styles.menu}>
-          <SearchOutlined /> Поиск
+          <div className={styles.rightHeader}>
+            <div className={styles.menu}>
+              <SearchOutlined /> Поиск
+            </div>
+            <div className={styles.menu}>
+              <Link href='/#'>
+                <a>Закладки</a>
+              </Link>
+            </div>
+            <div className={styles.menu}>
+              <Link href='/#'>
+                <a>
+                  <BellOutlined />
+                </a>
+              </Link>
+            </div>
+            <div className={styles.menu}>
+              <FormatPainterOutlined onClick={changeTheme} />
+            </div>
+            <AvatarUser />
+          </div>
         </div>
-        <div className={styles.menu}>
-          <Link href='/#'>
-            <a>Закладки</a>
-          </Link>
-        </div>
-        <div className={styles.menu}>
-          <Link href='/#'>
-            <a>
-              <BellOutlined />
-            </a>
-          </Link>
-        </div>
-        <div className={styles.menu}>
-          <FormatPainterOutlined onClick={changeTheme} />
-        </div>
-        <AvatarUser />
       </div>
     </Header>
   );
