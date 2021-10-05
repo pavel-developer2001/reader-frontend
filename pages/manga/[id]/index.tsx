@@ -55,7 +55,7 @@ const PageManga = () => {
                   watchCount={manga?.watchCount}
                 />
                 <div className={styles.table}>
-                  <div>
+                  <div className={styles.mainBlock}>
                     <Tabs defaultActiveKey='1' onChange={callback}>
                       <TabPane tab='Описание' key='1'>
                         <MangaDescriptions

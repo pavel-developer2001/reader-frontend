@@ -11,3 +11,8 @@
 .main {
   margin-left: 25px;
 }
+.mainBlock {
+  flex-grow: 1;
+  max-width: 100%;
+  flex-basis: 0px;
+}

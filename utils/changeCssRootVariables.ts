@@ -11,6 +11,7 @@ export function changeCssRootVariables(theme: Theme) {
     "text-color",
     "text-secondary-color",
     "header-color",
+    "gray-color",
   ];
 
   components.forEach((component) => {

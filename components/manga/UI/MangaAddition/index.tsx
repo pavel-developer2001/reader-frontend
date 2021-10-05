@@ -5,9 +5,9 @@ import styles from "./MangaAddition.module.css";
 const MangaAddition = () => {
   return (
     <div className={styles.addition}>
-      <div>Переводчики</div>
+      <div className={styles.title}>Переводчики</div>
       <CardTeam />
-      <div>Похожее</div>
+      <div className={styles.title}>Похожее</div>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { wrapper } from "../../store";
 import { getMangas, setMangas } from "../../store/slices/mangaSlice";
 import styles from "./Catalog.module.css";
 import { Tabs } from "antd";
-import CardTeam from "../../components/CardTeam";
+import TeamList from "../../components/catalog/UI/TeamList";
 
 const { TabPane } = Tabs;
 
@@ -44,9 +44,7 @@ const Catalog = () => {
           </div>
         </TabPane>
         <TabPane tab='Команды переводчиков' key='2'>
-          <CardTeam />
-          <CardTeam />
-          <CardTeam />
+          <TeamList />
         </TabPane>
       </Tabs>
     </MainLayout>

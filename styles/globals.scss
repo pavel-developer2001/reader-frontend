@@ -114,6 +114,14 @@ h6 {
 body {
   background-color: var(#{--body-background-default}) !important;
 }
+//////////////////
+.main-container {
+  max-width: -webkit-calc(1440px + (100vw/72 * 2) * 2);
+  max-width: calc(1440px + (100vw / 72 * 2) * 2);
+  padding-left: calc(100vw / 72 * 7);
+  padding-right: calc(100vw / 72 * 7);
+}
+//////////////
 $primary-color: #4793ff;
 $light-background: #fff;
 
@@ -135,6 +143,9 @@ $text-dark-color: #fff;
 //text-secondary
 $text-secondary-light-color: rgba(0, 0, 0, 0.87);
 $text-secondary-dark-color: #fff;
+//text-secondary
+$gray-light-color: rgba(0, 0, 0, 0.6);
+$gray-dark-color: hsla(0, 0%, 100%, 0.6);
 //component-color
 $components-background-dark: #171717;
 $components-background-light: #fff;
@@ -169,7 +180,10 @@ $components-background-light: #fff;
   --text-secondary-color-dark: #{$text-secondary-dark-color};
   --text-secondary-color-light: #{$text-secondary-light-color};
   --text-secondary-color-default: var(#{--text-secondary-color-light});
-
+  //text-secondary
+  --gray-color-dark: #{$gray-dark-color};
+  --gray-color-light: #{$gray-light-color};
+  --gray-color-default: var(#{--gray-color-light});
   // header
   --header-color-dark: #{$header-dark-color};
   --header-color-light: #{$header-light-color};

@@ -9,7 +9,12 @@ const CardTeam = () => {
   return (
     <div className={styles.main} onClick={() => router.push("/team/1")}>
       <div className={styles.left}>
-        <Avatar shape='square' size={64} icon={<UserOutlined />} />
+        <Avatar
+          shape='square'
+          className={styles.avatar}
+          size={56}
+          src='https://api.remanga.org//media/publishers/syndicate_manga_team/low_cover.jpg'
+        />
       </div>
       <div className={styles.right}>
         <strong>ArticaProject</strong>

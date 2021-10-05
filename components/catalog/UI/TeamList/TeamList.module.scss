@@ -1,11 +1,17 @@
-.main {
+.mainList {
   display: flex;
+  flex-wrap: wrap;
+}
+.main {
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 2px;
   &:hover {
     cursor: pointer;
   }
 }
-.right {
-  margin-left: 15px;
+.content {
+  margin-top: 12px;
   strong {
     color: var(#{--text-secondary-color-default}) !important;
     font-size: 16px;
@@ -13,13 +19,10 @@
     line-height: 1.2;
   }
   p {
-    max-width: 165px;
+    max-width: 145px;
     color: var(#{--gray-color-default}) !important;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.43;
   }
-}
-.avatar {
-  border-radius: 6px;
 }

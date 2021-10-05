@@ -5,6 +5,9 @@ export default class TeamApi {
     return ReaderApi.post("/teams/add", payload);
   }
   static async getAllTeam() {
-    return ReaderApi.post("/teams/");
+    return ReaderApi.get("/teams/");
+  }
+  static async getTeam(id: any) {
+    return ReaderApi.get("/teams/" + id);
   }
 }
