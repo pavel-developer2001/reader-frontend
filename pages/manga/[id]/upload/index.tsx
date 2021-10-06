@@ -1,13 +1,17 @@
 import TextArea from "antd/lib/input/TextArea";
 import { useRouter } from "next/dist/client/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainLayout from "../../../../layouts/MainLayout";
 
-import { Upload, Modal, Button } from "antd";
+import { Upload, Modal, Button, Select } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNewChapter } from "../../../../store/slices/chapterSlice";
+import styles from "./Upload.module.scss";
+import { getTeamsForUser } from "../../../../store/slices/teamSlice";
+
+const { Option } = Select;
 
 function getBase64(file: any) {
   return new Promise((resolve, reject) => {
@@ -19,6 +23,17 @@ function getBase64(file: any) {
 }
 
 const AddNewChapter = () => {
+  function onBlur() {
+    console.log("blur");
+  }
+
+  function onFocus() {
+    console.log("focus");
+  }
+
+  function onSearch(val: string) {
+    console.log("search:", val);
+  }
   const router = useRouter();
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -35,6 +50,7 @@ const AddNewChapter = () => {
   const handleCancel = () => {
     setPreviewVisible(false);
   };
+
   const handlePreview = async (file: any) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -46,9 +62,30 @@ const AddNewChapter = () => {
     );
   };
   const handleChange = ({ fileList }: any) => setImagesList(fileList);
+  const [teamId, setTeamId] = useState<any>("");
+  console.log("team id", teamId);
+  const teams = useSelector<any>((state) => state.team.teamsUser);
+  const loading = useSelector<any>((state) => state.team.loading);
+  useEffect(() => {
+    dispatch(getTeamsForUser(dataUser.id));
+  }, []);
   ////////////////////////////////////////////////////////////////////
   const [numberChapter, setNumberChapter] = useState("");
   const [volumeChapter, setVolumeChapter] = useState("");
+  const [titleChapter, setTitleChapter] = useState("");
+  const [language, setLanguage] = useState("");
+  const languageArray = [
+    { lang: "Русский" },
+    { lang: "Английский" },
+    { lang: "Укрианский" },
+    { lang: "Японский" },
+    { lang: "Корейский" },
+    { lang: "Китайский" },
+    { lang: "Испанский" },
+    { lang: "Француский" },
+    { lang: "Португальский" },
+    { lang: "Другой" },
+  ];
   const dispatch = useDispatch();
   const handleNewChapter = async (e: any) => {
     e.preventDefault();
@@ -59,14 +96,19 @@ const AddNewChapter = () => {
       const formData = new FormData();
       formData.append("numberChapter", numberChapter);
       formData.append("volumeChapter", volumeChapter);
+      formData.append("titleChapter", titleChapter);
+      formData.append("language", language);
       formData.append("mangaId", mangaId);
       formData.append("userId", dataUser.id);
+      formData.append("teamId", teamId);
       for (let i = 0; i < imagesList.length; i++) {
         formData.append("imagesList[]", imagesList[i].originFileObj);
       }
-      // formData.append("imagesList[]", imagesList[0].originFileObj);
       dispatch(addNewChapter(formData));
       router.push("/manga/" + mangaId);
+      setLanguage("");
+      setTeamId("");
+      setTitleChapter("");
       setNumberChapter("");
       setVolumeChapter("");
       setImagesList([]);
@@ -92,6 +134,66 @@ const AddNewChapter = () => {
           onChange={(e) => setNumberChapter(e.target.value)}
         />
         <div style={{ margin: "24px 0" }} />
+        <TextArea
+          placeholder='Загаловок главы'
+          autoSize
+          value={titleChapter}
+          onChange={(e) => setTitleChapter(e.target.value)}
+        />
+        <div style={{ margin: "24px 0" }} />
+        <div className={styles.footerBlock}>
+          {loading ? (
+            <p>loading</p>
+          ) : (
+            <div className={styles.select}>
+              <div>Выбрать команду, если вы состоите в команде</div>
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder='Выбрать команду'
+                optionFilterProp='children'
+                onChange={(value) => setTeamId(value)}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+                filterOption={(input, option: any) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+              >
+                {teams
+                  .filter((item: any) => item.roleInTeam == "Глава")
+                  .map((team: any) => (
+                    <Option key={team.id} value={team.team.id}>
+                      {team.team.teamName}
+                    </Option>
+                  ))}
+              </Select>
+            </div>
+          )}
+          <div className={styles.language}>
+            {" "}
+            <Select
+              showSearch
+              style={{ width: 200 }}
+              placeholder='Выбрать язык'
+              optionFilterProp='children'
+              onChange={(value) => setLanguage(value)}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              onSearch={onSearch}
+              filterOption={(input, option: any) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {languageArray.map((arr, index) => (
+                <Option key={index} value={arr.lang}>
+                  {arr.lang}
+                </Option>
+              ))}
+            </Select>
+          </div>
+        </div>
       </div>
       <div>
         {" "}
