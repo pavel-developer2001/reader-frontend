@@ -14,12 +14,19 @@ export const getTeams = createAsyncThunk("team/getTeams", async () => {
 export const getTeam = createAsyncThunk("team/getTeam", async (id) => {
   return await TeamApi.getTeam(id);
 });
+export const getTeamsForUser = createAsyncThunk(
+  "team/getTeamsForUser",
+  async (id) => {
+    return await TeamApi.getAllTeamsForUser(id);
+  }
+);
 
 const teamSlice = createSlice({
   name: "team",
   initialState: {
     teams: [],
     team: [],
+    teamsUser: [],
     status: null,
     loading: true,
   },
@@ -41,6 +48,10 @@ const teamSlice = createSlice({
       })
       .addCase(getTeams.fulfilled, (state, action) => {
         state.teams = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(getTeamsForUser.fulfilled, (state, action) => {
+        state.teamsUser = action.payload.data;
         state.loading = false;
       })
       .addCase(getTeam.fulfilled, (state, action) => {

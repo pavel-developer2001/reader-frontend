@@ -10,4 +10,7 @@ export default class TeamApi {
   static async getTeam(id: any) {
     return ReaderApi.get("/teams/" + id);
   }
+  static async getAllTeamsForUser(id: any) {
+    return ReaderApi.get("/teams/user/" + id);
+  }
 }

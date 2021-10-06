@@ -1,5 +1,5 @@
 import React from "react";
-import CardTeam from "../../../CardTeam";
+import CardTeam from "../CardTeam";
 import styles from "./MangaAddition.module.css";
 
 const MangaAddition = () => {

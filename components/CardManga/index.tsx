@@ -13,7 +13,10 @@ const CardManga: FC<any> = ({ manga }) => {
         style={{ width: 200 }}
         cover={<img alt='example' src={manga.mangaCover} />}
       >
-        <Meta title={manga.title} />
+        <Meta
+          title={manga.title}
+          description={manga.typeManga ? manga.typeManga : ""}
+        />
       </Card>
     </Link>
   );

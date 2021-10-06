@@ -1,5 +1,6 @@
 .block {
   display: flex;
+  justify-content: space-between;
 }
 .mangaList {
   display: flex;

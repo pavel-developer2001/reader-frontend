@@ -9,8 +9,8 @@ const { Title } = Typography;
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardManga from "../../components/CardManga";
-import CardTeam from "../../components/CardTeam";
 import CreateTeamModal from "../../components/user/UI/CreateTeamModal";
+import UserInTeamsBlock from "../../components/user/UI/UserInTeamsBlock";
 import MainLayout from "../../layouts/MainLayout";
 import { getBookMarks } from "../../store/slices/bookMarkSlice";
 import { getUserData } from "../../store/slices/userSlice";
@@ -59,8 +59,8 @@ const User = () => {
                   {user.name}
                 </Title>
                 <div className={styles.count}>
-                  {info.map((obj) => (
-                    <div className={styles.text}>
+                  {info.map((obj, index) => (
+                    <div className={styles.text} key={index}>
                       <strong>{obj.count}</strong> {obj.text}
                     </div>
                   ))}
@@ -88,8 +88,7 @@ const User = () => {
                 </TabPane>
                 <TabPane tab='Команды' key='3'>
                   <div>
-                    <span>В составе комманд: пусто</span>
-                    <CardTeam />
+                    <UserInTeamsBlock />
                     <CreateTeamModal />
                   </div>
                 </TabPane>

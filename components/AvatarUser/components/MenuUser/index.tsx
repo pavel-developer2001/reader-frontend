@@ -16,17 +16,21 @@ const MenuUser = () => {
   return (
     <div className={styles.block}>
       <Menu>
-        <Menu.Item icon={<UserOutlined />}>
+        <Menu.Item key='profile' icon={<UserOutlined />}>
           <Link href={"/user/" + dataUser.id}>
             <a>Профиль пользователя</a>
           </Link>
         </Menu.Item>
-        <Menu.Item icon={<PlusOutlined />}>
+        <Menu.Item key='create manga' icon={<PlusOutlined />}>
           <Link href='/createManga'>
             <a>Добавить мангу</a>
           </Link>
         </Menu.Item>
-        <Menu.Item onClick={handleExitUser} icon={<ExportOutlined />}>
+        <Menu.Item
+          key='exit'
+          onClick={handleExitUser}
+          icon={<ExportOutlined />}
+        >
           Выход
         </Menu.Item>
       </Menu>

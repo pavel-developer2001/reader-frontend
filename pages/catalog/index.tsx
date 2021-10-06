@@ -40,7 +40,9 @@ const Catalog = () => {
                 ))
               )}
             </div>
-            <Filters />
+            <div className={styles.filters}>
+              <Filters />
+            </div>
           </div>
         </TabPane>
         <TabPane tab='Команды переводчиков' key='2'>

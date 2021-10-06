@@ -1,0 +1,35 @@
+.mainBlock {
+  margin: 24px 0;
+  border-radius: 8px;
+  padding: 16px 24px;
+  background-color: var(#{--components-background-default});
+  .title {
+    font-weight: 600;
+    line-height: 1.235;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .mainList {
+    display: flex;
+  }
+  .main {
+    margin: 12px;
+    text-align: center;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.data {
+  margin-top: 5px;
+  strong {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.66;
+  }
+}
