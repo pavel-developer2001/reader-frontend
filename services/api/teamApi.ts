@@ -13,4 +13,7 @@ export default class TeamApi {
   static async getAllTeamsForUser(id: any) {
     return ReaderApi.get("/teams/user/" + id);
   }
+  static async addTeamForManga(payload: any) {
+    return ReaderApi.post("/teams/manga/add", payload);
+  }
 }

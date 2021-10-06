@@ -20,12 +20,17 @@ export const getTeamsForUser = createAsyncThunk(
     return await TeamApi.getAllTeamsForUser(id);
   }
 );
-
+export const connectMangaForTeam = createAsyncThunk(
+  "team/connectMangaForTeam",
+  async (payload) => {
+    return await TeamApi.addTeamForManga(payload);
+  }
+);
 const teamSlice = createSlice({
   name: "team",
   initialState: {
     teams: [],
-    team: [],
+    team: { team: [], members: [], mangas: [] },
     teamsUser: [],
     status: null,
     loading: true,
@@ -57,6 +62,9 @@ const teamSlice = createSlice({
       .addCase(getTeam.fulfilled, (state, action) => {
         state.team = action.payload.data;
         state.loading = false;
+      })
+      .addCase(connectMangaForTeam.fulfilled, (state, action) => {
+        state.team.mangas.push(action.payload.data);
       }),
 });
 

@@ -1,5 +1,5 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Image, Tag } from "antd";
+import { Button, Image, Modal, Tag } from "antd";
 import { Select } from "antd";
 import { useRouter } from "next/dist/client/router";
 import React, { FC, useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import {
   updateBookMark,
 } from "../../../../store/slices/bookMarkSlice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
+import AddMangaForTeam from "./components/AddMangaForTeam";
 import styles from "./MangaSettings.module.scss";
 
 const MangaSettings: FC<any> = ({ cover, id }) => {
@@ -38,6 +39,7 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
       await dispatch(addBookMark(payload));
     }
   };
+
   function onSearch(val: any) {
     console.log("search:", val);
   }
@@ -100,6 +102,7 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
         >
           Добавить новые главы
         </Button>
+        <AddMangaForTeam />
       </div>
     </div>
   );
