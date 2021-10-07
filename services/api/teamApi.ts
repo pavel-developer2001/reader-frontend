@@ -16,4 +16,19 @@ export default class TeamApi {
   static async addTeamForManga(payload: any) {
     return ReaderApi.post("/teams/manga/add", payload);
   }
+  static async getAllTeamsForManga(id: any) {
+    return ReaderApi.get("/teams/manga/" + id);
+  }
+  static async addInvitationForUser(payload: any) {
+    return ReaderApi.post("/teams/invitation/add", payload);
+  }
+  static async getAllInvitationsForUser(id: any) {
+    return ReaderApi.get("/teams/invitation/user/" + id);
+  }
+  static async agreeToJoinToTeam(payload: any) {
+    return ReaderApi.post("/teams/invitation/user/join", payload);
+  }
+  static async refucalToJoinTeam(id: any) {
+    return ReaderApi.delete("/teams/invitation/user/refusal/" + id);
+  }
 }

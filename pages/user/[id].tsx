@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardManga from "../../components/CardManga";
 import CreateTeamModal from "../../components/user/UI/CreateTeamModal";
+import InvitationsInTeamsBlock from "../../components/user/UI/InvitationsInTeamsBlock";
 import UserInTeamsBlock from "../../components/user/UI/UserInTeamsBlock";
 import MainLayout from "../../layouts/MainLayout";
 import { getBookMarks } from "../../store/slices/bookMarkSlice";
@@ -89,6 +90,7 @@ const User = () => {
                 <TabPane tab='Команды' key='3'>
                   <div>
                     <UserInTeamsBlock />
+                    <InvitationsInTeamsBlock />
                     <CreateTeamModal />
                   </div>
                 </TabPane>

@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
 import { getTeam } from "../../store/slices/teamSlice";
 import MemberBlock from "../../components/team/UI/MemberBlock";
+import CardManga from "../../components/CardManga";
+import { UpdateListItem } from "../../components/lateUpdates/UI/UpdateList";
 
 const { TabPane } = Tabs;
 
@@ -21,7 +23,6 @@ const Team = () => {
   const dispatch = useDispatch();
   const team = useSelector<any>((state) => state.team.team);
   const loading = useSelector<any>((state) => state.team.loading);
-  console.log("Team", team, loading);
   useEffect(() => {
     dispatch(getTeam(router.query.id));
   }, [router.query.id]);
@@ -59,10 +60,31 @@ const Team = () => {
                 <MemberBlock members={team?.members} />
               </TabPane>
               <TabPane tab='Тайтлы' key='2'>
-                Тайтлы
+                <div className={styles.mangaList}>
+                  {team?.mangas?.map((manga: any) => (
+                    <CardManga key={manga.id} manga={manga.manga} />
+                  ))}
+                </div>
               </TabPane>
               <TabPane tab='Лента' key='3'>
-                Лента
+                <div className={styles.update}>
+                  {team?.chapters?.length > 0 ? (
+                    team?.chapters?.map((chapter: any) => (
+                      <UpdateListItem
+                        key={chapter.id}
+                        chapterId={chapter.chapter.id}
+                        mangaId={chapter.manga.id}
+                        cover={chapter.manga.mangaCover}
+                        titleManga={chapter.manga.title}
+                        numberChapter={chapter.chapter.numberChapter}
+                        volumeChapter={chapter.chapter.volumeChapter}
+                        date={chapter.chapter.createdAt}
+                      />
+                    ))
+                  ) : (
+                    <p>Команда не добавляла главы</p>
+                  )}{" "}
+                </div>
               </TabPane>
             </Tabs>
           </div>
