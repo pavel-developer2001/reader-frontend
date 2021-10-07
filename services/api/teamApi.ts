@@ -31,4 +31,7 @@ export default class TeamApi {
   static async refucalToJoinTeam(id: any) {
     return ReaderApi.delete("/teams/invitation/user/refusal/" + id);
   }
+  static async deleteMemberFromTeam(id: any) {
+    return ReaderApi.delete("/teams/member/" + id);
+  }
 }

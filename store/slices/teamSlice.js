@@ -56,6 +56,12 @@ export const refucalToJoin = createAsyncThunk(
     return await TeamApi.refucalToJoinTeam(id);
   }
 );
+export const removeMember = createAsyncThunk(
+  "team/removeMember",
+  async (id) => {
+    return await TeamApi.deleteMemberFromTeam(id);
+  }
+);
 const teamSlice = createSlice({
   name: "team",
   initialState: {
@@ -110,15 +116,18 @@ const teamSlice = createSlice({
         state.teamInvitations.push(action.payload.data);
       })
       .addCase(agreeToJoin.fulfilled, (state, action) => {
-        console.log("agree SLICE data - ", action.payload.data);
-        state.teamInvitations.filter(
+        state.team.members.push(action.payload.data.newMember);
+        state.teamInvitations = state.teamInvitations.filter(
           (item) => item.id != action.payload.data.deleteInvitation.id
         );
-        state.team.team.members.push(action.payload.data.newMember);
       })
       .addCase(refucalToJoin.fulfilled, (state, action) => {
-        console.log("refusal SLICE data - ", action.payload.data);
-        state.teamInvitations.filter(
+        state.teamInvitations = state.teamInvitations.filter(
+          (item) => item.id != action.payload.data.id
+        );
+      })
+      .addCase(removeMember.fulfilled, (state, action) => {
+        state.team.members = state.team.members.filter(
           (item) => item.id != action.payload.data.id
         );
       }),
