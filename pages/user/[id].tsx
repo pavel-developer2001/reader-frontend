@@ -94,6 +94,9 @@ const User = () => {
                     <CreateTeamModal />
                   </div>
                 </TabPane>
+                <TabPane tab='Сообщения' key='4'>
+                  <div>сообщения</div>
+                </TabPane>
               </Tabs>
             </div>
           </>

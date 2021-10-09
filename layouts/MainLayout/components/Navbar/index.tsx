@@ -58,12 +58,7 @@ const Navbar = () => {
               <SearchOutlined /> Поиск
             </div>
             <div className={styles.menu}>
-              <Link href='/#'>
-                <a>Закладки</a>
-              </Link>
-            </div>
-            <div className={styles.menu}>
-              <Link href='/#'>
+              <Link href='/notification'>
                 <a>
                   <BellOutlined />
                 </a>
