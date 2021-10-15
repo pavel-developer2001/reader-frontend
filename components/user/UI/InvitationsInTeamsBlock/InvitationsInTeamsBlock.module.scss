@@ -23,3 +23,9 @@
 .answer {
   margin-top: 15px;
 }
+.nameTeam {
+  color: var(#{--text-secondary-color-default}) !important;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0 5px;
+}

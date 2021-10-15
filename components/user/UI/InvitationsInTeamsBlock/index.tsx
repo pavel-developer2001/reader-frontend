@@ -1,5 +1,6 @@
 import { Button } from "antd";
 import { useRouter } from "next/dist/client/router";
+import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,7 +18,6 @@ const InvitationsInTeamsBlockItem: FC<any> = ({
   teamId,
   name,
 }) => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const handleAgreetoJoin = async (e: any) => {
     e.preventDefault();
@@ -36,8 +36,10 @@ const InvitationsInTeamsBlockItem: FC<any> = ({
     <div className={styles.item}>
       <p>
         Хотите вступить в команду{" "}
-        <strong onClick={() => router.push("/team/" + teamId)}>{name}</strong> в
-        качестве
+        <Link href={"/team/" + teamId}>
+          <a className={styles.nameTeam}>{name}</a>
+        </Link>
+        в качестве
         <span> "{rank}а"</span>?
         <div className={styles.answer}>
           <Button type='primary' onClick={handleAgreetoJoin}>
