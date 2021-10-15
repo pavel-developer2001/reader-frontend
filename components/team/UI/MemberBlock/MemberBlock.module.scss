@@ -13,6 +13,9 @@
     display: flex;
   }
   .main {
+    color: var(#{--text-secondary-color-default}) !important;
+    display: flex;
+    flex-direction: column;
     margin: 12px;
     text-align: center;
     &:hover {

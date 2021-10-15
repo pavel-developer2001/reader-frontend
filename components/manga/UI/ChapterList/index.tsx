@@ -1,5 +1,6 @@
 import { HeartOutlined } from "@ant-design/icons";
 import { useRouter } from "next/dist/client/router";
+import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getChapters } from "../../../../store/slices/chapterSlice";
@@ -15,15 +16,12 @@ const ChapterListItem: FC<any> = ({
   const router = useRouter();
   return (
     <div className={styles.main}>
-      <div
-        className={styles.numbers}
-        onClick={() =>
-          router.push("/manga/" + router.query.id + "/chapter/" + chapterId)
-        }
-      >
-        <strong className={styles.volume}>{volume}</strong>
-        <span>Глава {number}</span>
-      </div>
+      <Link href={"/manga/" + router.query.id + "/chapter/" + chapterId}>
+        <a className={styles.numbers}>
+          <strong className={styles.volume}>{volume}</strong>
+          <span>Глава {number}</span>
+        </a>
+      </Link>
       <div className={styles.dataChapter}>
         <span className={styles.date}>22/09/2021</span>
         <span>Assley Team</span>

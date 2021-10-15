@@ -14,5 +14,6 @@
 .mainBlock {
   flex-grow: 1;
   max-width: 100%;
+  min-width: 640px;
   flex-basis: 0px;
 }

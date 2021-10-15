@@ -27,5 +27,6 @@
   strong {
     font-size: 14px;
     max-width: 80px;
+    color: var(#{--text-secondary-color-default}) !important;
   }
 }

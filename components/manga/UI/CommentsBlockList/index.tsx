@@ -21,7 +21,6 @@ import {
   getComments,
   updateComment,
 } from "../../../../store/slices/commentSlice";
-import { dataUser } from "../../../../utils/getDataUserFromToken";
 
 const CommentsBlock: FC<any> = ({
   commentId,
@@ -35,7 +34,6 @@ const CommentsBlock: FC<any> = ({
 }) => {
   const dispatch = useDispatch();
   const [likes, setLikes] = useState(commentLikes);
-  const router = useRouter();
   const [spoiler, setSpoiler] = useState(commentSpoiler);
   const [commentText, setCommentText] = useState(text);
   const [edit, setEdit] = useState(false);
@@ -83,14 +81,9 @@ const CommentsBlock: FC<any> = ({
       <Comment
         actions={!edit ? actions : null}
         author={
-          <span
-            className={styles.userName}
-            onClick={() =>
-              router.push("/user/" + userId ? userId : dataUser.id)
-            }
-          >
-            {userName}
-          </span>
+          <Link href={"/user/" + userId}>
+            <a className={styles.userName}>{userName}</a>
+          </Link>
         }
         avatar={
           <Avatar

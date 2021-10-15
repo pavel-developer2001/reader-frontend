@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useRouter } from "next/dist/client/router";
+import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUpdateChapters } from "../../../../store/slices/chapterSlice";
@@ -14,30 +14,25 @@ export const UpdateListItem: FC<any> = ({
   titleManga,
   date,
 }) => {
-  const router = useRouter();
   return (
     <div className={styles.item}>
-      <div
-        className={styles.leftBlock}
-        onClick={() => router.push("/manga/" + mangaId)}
-      >
-        <img src={cover} alt='manga cover' />
-      </div>
+      <Link href={"/manga/" + mangaId}>
+        <a className={styles.leftBlock}>
+          <img src={cover} alt='manga cover' />
+        </a>
+      </Link>
+
       <div className={styles.rightBlock}>
-        <strong
-          className={styles.title}
-          onClick={() => router.push("/manga/" + mangaId)}
-        >
-          {titleManga}
-        </strong>
-        <p
-          className={styles.chapter}
-          onClick={() =>
-            router.push("/manga/" + mangaId + "/chapter/" + chapterId)
-          }
-        >
-          Том {volumeChapter}. Глава {numberChapter}.
-        </p>
+        <Link href={"/manga/" + mangaId}>
+          <a className={styles.title}>{titleManga}</a>
+        </Link>
+
+        <Link href={"/manga/" + mangaId + "/chapter/" + chapterId}>
+          <a className={styles.chapter}>
+            Том {volumeChapter}. Глава {numberChapter}.
+          </a>
+        </Link>
+
         <span className={styles.date}>{moment().from(date)} назад</span>
       </div>
     </div>

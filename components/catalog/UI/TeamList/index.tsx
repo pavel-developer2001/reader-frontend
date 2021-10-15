@@ -1,27 +1,29 @@
 import { Avatar } from "antd";
-import { useRouter } from "next/dist/client/router";
+import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeams } from "../../../../store/slices/teamSlice";
 import styles from "./TeamList.module.scss";
 
 const TeamListItem: FC<any> = ({ teamId, name, subtitle, cover }) => {
-  const router = useRouter();
   return (
-    <div className={styles.main} onClick={() => router.push("/team/" + teamId)}>
-      <Avatar
-        size={100}
-        src={
-          cover
-            ? cover
-            : "https://api.remanga.org//media/publishers/254/mid_cover.jpg"
-        }
-      />
-      <div className={styles.content}>
-        <strong>{name}</strong>
-        <p>{subtitle}</p>
-      </div>
-    </div>
+    <Link href={"/team/" + teamId}>
+      <a className={styles.main}>
+        {" "}
+        <Avatar
+          size={100}
+          src={
+            cover
+              ? cover
+              : "https://api.remanga.org//media/publishers/254/mid_cover.jpg"
+          }
+        />
+        <div className={styles.content}>
+          <strong>{name}</strong>
+          <p>{subtitle}</p>
+        </div>
+      </a>
+    </Link>
   );
 };
 const TeamList = () => {

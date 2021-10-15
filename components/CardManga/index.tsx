@@ -7,17 +7,19 @@ import styles from "./CardManga.module.css";
 const CardManga: FC<any> = ({ manga }) => {
   return (
     <Link href={"/manga/" + manga.id}>
-      <Card
-        hoverable
-        className={styles.card}
-        style={{ width: 200 }}
-        cover={<img alt='example' src={manga.mangaCover} />}
-      >
-        <Meta
-          title={manga.title}
-          description={manga.typeManga ? manga.typeManga : ""}
-        />
-      </Card>
+      <a>
+        <Card
+          hoverable
+          className={styles.card}
+          style={{ width: 200 }}
+          cover={<img alt='example' src={manga.mangaCover} />}
+        >
+          <Meta
+            title={manga.title}
+            description={manga.typeManga ? manga.typeManga : ""}
+          />
+        </Card>
+      </a>
     </Link>
   );
 };

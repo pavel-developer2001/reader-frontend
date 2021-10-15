@@ -2,6 +2,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, Image, Modal, Tag } from "antd";
 import { Select } from "antd";
 import { useRouter } from "next/dist/client/router";
+import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -94,14 +95,14 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
         )}
 
         <Button type='link'>Редактировать</Button>
-        <Button
-          type='primary'
-          icon={<PlusOutlined />}
-          onClick={() => router.push("/manga/" + id + "/upload")}
-          size='large'
-        >
-          Добавить новые главы
-        </Button>
+        <Link href={"/manga/" + id + "/upload"}>
+          <a>
+            <Button type='primary' icon={<PlusOutlined />} size='large'>
+              Добавить новые главы
+            </Button>
+          </a>
+        </Link>
+
         <AddMangaForTeam />
       </div>
     </div>
