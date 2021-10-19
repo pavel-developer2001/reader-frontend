@@ -7,7 +7,10 @@ import { addComment } from "../../../../store/slices/commentSlice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import styles from "./AddCommentForManga.module.scss";
 
-const AddCommentForManga: FC<any> = ({ mangaId }) => {
+interface AddCommentForMangaProps {
+  mangaId: number;
+}
+const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
   const dispatch = useDispatch();
   const [spoiler, setSpoiler] = useState(false);
   const [commentText, setCommentText] = useState("");

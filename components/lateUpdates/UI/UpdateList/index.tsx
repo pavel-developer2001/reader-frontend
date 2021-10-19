@@ -5,7 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUpdateChapters } from "../../../../store/slices/chapterSlice";
 import styles from "./UpdateList.module.scss";
 
-export const UpdateListItem: FC<any> = ({
+interface UpdateListItemProps {
+  chapterId: number;
+  volumeChapter: string;
+  numberChapter: string;
+  mangaId: number;
+  cover: string;
+  titleManga: string;
+  date: string;
+}
+export const UpdateListItem: FC<UpdateListItemProps> = ({
   chapterId,
   volumeChapter,
   numberChapter,

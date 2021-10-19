@@ -4,7 +4,7 @@ import CommentsApi from "../../services/api/commentsApi";
 
 export const getComments = createAsyncThunk(
   "comment/getComments",
-  async (id) => {
+  async (id: number) => {
     return await CommentsApi.getAllCommentsForManga(id);
   }
 );
@@ -16,24 +16,29 @@ export const addComment = createAsyncThunk(
 );
 export const updateComment = createAsyncThunk(
   "comment/updateComment",
-  async (data) => {
+  async (data: { id: number; payload: any }) => {
     return await CommentsApi.updateCommentForManga(data.id, data.payload);
   }
 );
 export const deleteComment = createAsyncThunk(
   "comment/deleteComment",
-  async (id) => {
+  async (id: number) => {
     return await CommentsApi.deleteCommentForManga(id);
   }
 );
-
+interface CommentState {
+  comments: any;
+  status: null | string;
+  loading: boolean;
+}
+const initialState: CommentState = {
+  comments: [],
+  status: null,
+  loading: true,
+};
 const commentSlice = createSlice({
   name: "comment",
-  initialState: {
-    comments: [],
-    status: null,
-    loading: true,
-  },
+  initialState,
   reducers: {
     setComments(state, action) {
       state.comments = action.payload;
@@ -56,13 +61,13 @@ const commentSlice = createSlice({
       })
       .addCase(updateComment.fulfilled, (state, action) => {
         state.comments = state.comments.filter(
-          (item) => item.id != action.payload.data.id
+          (item: any) => item.id != action.payload.data.id
         );
         state.comments.push(action.payload.data);
       })
       .addCase(deleteComment.fulfilled, (state, action) => {
         state.comments = state.comments.filter(
-          (item) => item.id != action.payload.data.id
+          (item: any) => item.id != action.payload.data.id
         );
       }),
 });

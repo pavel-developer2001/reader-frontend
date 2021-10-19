@@ -62,17 +62,33 @@ export const removeMember = createAsyncThunk(
     return await TeamApi.deleteMemberFromTeam(id);
   }
 );
+interface TeamItems {
+  team: any;
+  members: any;
+  mangas: any;
+  chapters: any;
+}
+interface TeamState {
+  teams: any;
+  team: TeamItems;
+  teamsUser: any;
+  teamsManga: any;
+  teamInvitations: any;
+  status: null;
+  loading: boolean;
+}
+const initialState: TeamState = {
+  teams: [],
+  team: { team: [], members: [], mangas: [], chapters: [] },
+  teamsUser: [],
+  teamsManga: [],
+  teamInvitations: [],
+  status: null,
+  loading: true,
+};
 const teamSlice = createSlice({
   name: "team",
-  initialState: {
-    teams: [],
-    team: { team: [], members: [], mangas: [] },
-    teamsUser: [],
-    teamsManga: [],
-    teamInvitations: [],
-    status: null,
-    loading: true,
-  },
+  initialState,
   reducers: {
     setTeams(state, action) {
       state.teams = action.payload;
@@ -118,17 +134,17 @@ const teamSlice = createSlice({
       .addCase(agreeToJoin.fulfilled, (state, action) => {
         state.team.members.push(action.payload.data.newMember);
         state.teamInvitations = state.teamInvitations.filter(
-          (item) => item.id != action.payload.data.deleteInvitation.id
+          (item: any) => item.id != action.payload.data.deleteInvitation.id
         );
       })
       .addCase(refucalToJoin.fulfilled, (state, action) => {
         state.teamInvitations = state.teamInvitations.filter(
-          (item) => item.id != action.payload.data.id
+          (item: any) => item.id != action.payload.data.id
         );
       })
       .addCase(removeMember.fulfilled, (state, action) => {
         state.team.members = state.team.members.filter(
-          (item) => item.id != action.payload.data.id
+          (item: any) => item.id != action.payload.data.id
         );
       }),
 });

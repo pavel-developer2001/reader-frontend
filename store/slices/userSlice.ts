@@ -17,14 +17,21 @@ export const loginUsers = createAsyncThunk(
 export const getUserData = createAsyncThunk("user/getUserData", async (id) => {
   return await UserApi.getUser(id);
 });
+interface UserState {
+  user: any;
+  token: string;
+  status: null | string;
+  loading: boolean;
+}
+const initialState: UserState = {
+  user: [],
+  token: "",
+  status: null,
+  loading: true,
+};
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    user: [],
-    token: "",
-    status: null,
-    loading: true,
-  },
+  initialState,
   reducers: {
     setToken(state, action) {
       state.token = action.payload;

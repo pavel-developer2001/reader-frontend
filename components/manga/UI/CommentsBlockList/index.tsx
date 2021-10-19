@@ -22,7 +22,17 @@ import {
   updateComment,
 } from "../../../../store/slices/commentSlice";
 
-const CommentsBlock: FC<any> = ({
+interface CommentsBlockProps {
+  commentId: number;
+  text: string;
+  commentSpoiler: boolean;
+  commentLikes: number;
+  date: string;
+  userAvatar: string;
+  userName: string;
+  userId: number;
+}
+const CommentsBlock: FC<CommentsBlockProps> = ({
   commentId,
   text,
   commentSpoiler,

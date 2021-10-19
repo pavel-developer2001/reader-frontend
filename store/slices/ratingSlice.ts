@@ -16,20 +16,26 @@ export const updateRating = createAsyncThunk(
 );
 export const getRating = createAsyncThunk(
   "rating/getRating",
-  async (dataManga) => {
+  async (dataManga: { id: number; userId: number }) => {
     return await RatingApi.getRatingForManga(dataManga.id, dataManga.userId);
   }
 );
+interface RatingState {
+  rating: any;
+  ratings: any;
+  status: null;
+  loading: boolean;
+}
+const initialState: RatingState = {
+  rating: [],
+  ratings: [],
+  status: null,
+  loading: true,
+};
 const ratingSlice = createSlice({
   name: "rating",
-  initialState: {
-    rating: [],
-    ratings: [],
-    status: null,
-    loading: true,
-  },
+  initialState,
   reducers: {},
-
   extraReducers: (builder) =>
     builder
       .addCase(HYDRATE, (state, action) => {

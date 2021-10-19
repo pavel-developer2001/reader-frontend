@@ -22,22 +22,28 @@ export const getBookMarks = createAsyncThunk(
 );
 export const getBookMarkToManga = createAsyncThunk(
   "bookMark/getBookMarkToManga",
-  async (dataManga) => {
+  async (dataManga: { mangaId: number; userId: number }) => {
     return await BookMarksApi.getBookMarkForManga(
       dataManga.mangaId,
       dataManga.userId
     );
   }
 );
-
+interface BookMarkState {
+  bookMarks: any;
+  bookMark: any;
+  status: null | string;
+  loading: boolean;
+}
+const initialState: BookMarkState = {
+  bookMarks: [],
+  bookMark: [],
+  status: null,
+  loading: true,
+};
 const bookMarkSlice = createSlice({
   name: "bookMark",
-  initialState: {
-    bookMarks: [],
-    bookMark: [],
-    status: null,
-    loading: true,
-  },
+  initialState,
   reducers: {
     setBookMarks(state, action) {
       state.bookMarks = action.payload;
@@ -58,14 +64,14 @@ const bookMarkSlice = createSlice({
       .addCase(addBookMark.fulfilled, (state, action) => {
         if (action.payload.data.category == "Удалить из закладок") {
           return (state.bookMarks = state.bookMarks.filter(
-            (item) => item.id !== action.payload.data.id
+            (item: any) => item.id !== action.payload.data.id
           ));
         }
         state.bookMarks.push(action.payload.data);
       })
       .addCase(updateBookMark.fulfilled, (state, action) => {
         state.bookMarks = state.bookMarks.filter(
-          (item) => item.id != action.payload.data.id
+          (item: any) => item.id != action.payload.data.id
         );
         state.bookMarks.push(action.payload.data);
       })

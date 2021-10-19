@@ -14,14 +14,26 @@ export const getMangas = createAsyncThunk("manga/getMangas", async () => {
 export const getManga = createAsyncThunk("manga/getManga", async (id) => {
   return await MangaApi.getManga(id);
 });
+interface MangaItems {
+  manga: any;
+  genres: any;
+  tags: any;
+}
+interface MangaState {
+  mangas: any;
+  manga: MangaItems;
+  status: null | string;
+  loading: boolean;
+}
+const initialState: MangaState = {
+  mangas: [],
+  manga: { manga: [], genres: [], tags: [] },
+  status: null,
+  loading: true,
+};
 const mangaSlice = createSlice({
   name: "manga",
-  initialState: {
-    mangas: [],
-    manga: { manga: [], genres: [], tags: [] },
-    status: null,
-    loading: true,
-  },
+  initialState,
   reducers: {
     setMangas(state, action) {
       state.mangas = action.payload;

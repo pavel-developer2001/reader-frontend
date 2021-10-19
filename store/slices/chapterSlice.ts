@@ -23,15 +23,23 @@ export const getUpdateChapters = createAsyncThunk(
     return await ChapterApi.getLaterChapters();
   }
 );
+interface ChapterState {
+  chapters: any;
+  status: null;
+  loading: boolean;
+  images: any;
+  updateChapter: any;
+}
+const initialState: ChapterState = {
+  chapters: [],
+  status: null,
+  loading: true,
+  images: [],
+  updateChapter: [],
+};
 const chapterSlice = createSlice({
   name: "chapter",
-  initialState: {
-    chapters: [],
-    status: null,
-    loading: true,
-    images: [],
-    updateChapter: [],
-  },
+  initialState,
   reducers: {
     setChapters(state, action) {
       state.chapters = action.payload;

@@ -6,7 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getChapters } from "../../../../store/slices/chapterSlice";
 import styles from "./ChapterList.module.scss";
 
-const ChapterListItem: FC<any> = ({
+interface ChapterListItemProps {
+  chapterId: number;
+  volume: string;
+  number: number;
+  likes: number;
+  date: string;
+}
+const ChapterListItem: FC<ChapterListItemProps> = ({
   chapterId,
   volume,
   number,
@@ -33,7 +40,10 @@ const ChapterListItem: FC<any> = ({
     </div>
   );
 };
-const ChapterList: FC<any> = ({ mangaId }) => {
+interface ChapterListProps {
+  mangaId: number;
+}
+const ChapterList: FC<ChapterListProps> = ({ mangaId }) => {
   const chapters = useSelector<any>((state) => state.chapter.chapters);
   const loading = useSelector<any>((state) => state.chapter.loading);
   const dispatch = useDispatch();
