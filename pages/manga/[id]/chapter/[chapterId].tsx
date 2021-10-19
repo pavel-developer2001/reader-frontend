@@ -13,15 +13,17 @@ const Chapter = () => {
   const images = useSelector<any>((state) => state.chapter.images);
   const loading = useSelector<any>((state) => state.chapter.loading);
   useEffect(() => {
-    dispatch(getImages(chapterId));
-  }, []);
+    if (chapterId) {
+      dispatch(getImages(chapterId));
+    }
+  }, [chapterId]);
   return loading ? (
     <p>loading</p>
   ) : (
     <ChapterLayout
-      title={"Поднятие уровня в одиночку"}
+      title={images[0]?.manga?.title}
       id={mangaId}
-      page={chapterId}
+      page={images[0]?.chapter?.numberChapter}
     >
       <div className={styles.main}>
         {images?.map((image) => (

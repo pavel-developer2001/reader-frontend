@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MainLayout from "../../layouts/MainLayout";
-import styles from "./CreateManga.module.css";
+import styles from "./CreateManga.module.scss";
 import { Upload, message, Button, Select } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import TextArea from "rc-textarea";
@@ -189,8 +189,8 @@ const CreateManga = () => {
     <MainLayout>
       <div className={styles.content}>
         <h2 className={styles.title}>Добавить мангу на сайт</h2>
-        <div className={styles.header}>
-          <div>
+        <div className={styles.topBlock}>
+          <div className={styles.upload}>
             <Upload
               className={styles.customUpload}
               name='file'
@@ -208,131 +208,170 @@ const CreateManga = () => {
           </div>
           <div className={styles.info}>
             <div className={styles.block}>
-              <span>Русское название</span>
+              <span className={styles.text}>Русское название</span>
               <TextArea
                 placeholder='название'
                 value={title}
+                className={styles.input}
                 onChange={(e) => setTitle(e.target.value)}
                 autoSize
               />
             </div>
             <div className={styles.block}>
-              <span>Английское названия</span>
+              <span className={styles.text}>Английское названия</span>
               <TextArea
                 placeholder='Англиское название'
                 value={englishTitle}
+                className={styles.input}
                 onChange={(e) => setEnglishTitle(e.target.value)}
                 autoSize
               />
             </div>
             <div className={styles.block}>
-              <span>Оригинальное названия</span>
+              <span className={styles.text}>Оригинальное названия</span>
               <TextArea
                 placeholder='Оригинальное название '
                 value={originalTitle}
+                className={styles.input}
                 onChange={(e) => setOriginalTitle(e.target.value)}
                 autoSize
-              />
-            </div>
-            <div className={styles.block}>
-              <span>Год выпуска</span>
-              <TextArea
-                placeholder='Год'
-                autoSize
-                value={yearOfIssue}
-                onChange={(e) => setYearOfIssue(e.target.value)}
               />
             </div>
           </div>
         </div>
         <div className={styles.body}>
-          <span>Описание</span>
+          <span className={styles.text}>Описание</span>
           <TextArea
             value={mangaDescription}
+            className={styles.input}
             onChange={(e) => setMangaDescription(e.target.value)}
             placeholder='Описание'
             autoSize={{ minRows: 3, maxRows: 5 }}
           />
         </div>
-        <div className={styles.categories}>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder='Типы'
-            optionFilterProp='children'
-            onChange={(value) => setTypeManga(value)}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
-            filterOption={(input, option: any) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            {typesArray.map((type, index) => (
-              <Option value={type.value} key={type.value}>
-                {type.title}
-              </Option>
-            ))}
-          </Select>
-          <Select
-            mode='multiple'
-            allowClear
-            style={{ width: "100%" }}
-            placeholder='Жанры'
-            defaultValue={[]}
-            onChange={(value) => setGenres(value)}
-          >
-            {childrenGenres}
-          </Select>
-          <Select
-            mode='multiple'
-            allowClear
-            style={{ width: "100%" }}
-            placeholder='Теги'
-            defaultValue={[]}
-            onChange={(value) => setTags(value)}
-          >
-            {childrenTags}
-          </Select>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder='Статус перевода'
-            optionFilterProp='children'
-            onChange={(value) => setStatusManga(value)}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
-            filterOption={(input, option: any) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            {statusTranslateArray.map((type, index) => (
-              <Option value={type.value} key={type.value}>
-                {type.title}
-              </Option>
-            ))}
-          </Select>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder='Возрастной рейтинг'
-            optionFilterProp='children'
-            onChange={(value) => setAgeRatingManga(value)}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
-            filterOption={(input, option: any) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            {ageRatingArray.map((type, index) => (
-              <Option value={type.value} key={type.value}>
-                {type.title}
-              </Option>
-            ))}
-          </Select>
+        <div className={styles.bottomBlock}>
+          <div className={styles.left}>
+            <div className={styles.top}>
+              <div className={styles.select}>
+                <span className={styles.text}>Тип</span>
+                <Select
+                  showSearch
+                  style={{ width: 200 }}
+                  placeholder='Типы'
+                  optionFilterProp='children'
+                  onChange={(value) => setTypeManga(value)}
+                  onFocus={onFocus}
+                  onBlur={onBlur}
+                  onSearch={onSearch}
+                  filterOption={(input, option: any) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {typesArray.map((type, index) => (
+                    <Option value={type.value} key={type.value}>
+                      {type.title}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+              <div className={styles.select}>
+                <span className={styles.text}>Статус перевода</span>
+                <Select
+                  showSearch
+                  style={{ width: 200 }}
+                  placeholder='Статус перевода'
+                  optionFilterProp='children'
+                  onChange={(value) => setStatusManga(value)}
+                  onFocus={onFocus}
+                  onBlur={onBlur}
+                  onSearch={onSearch}
+                  filterOption={(input, option: any) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {statusTranslateArray.map((type, index) => (
+                    <Option value={type.value} key={type.value}>
+                      {type.title}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+            </div>
+            <div className={styles.bottom}>
+              <div className={styles.mainSelect}>
+                <span className={styles.text}>Категории</span>
+                <Select
+                  mode='multiple'
+                  allowClear
+                  style={{ width: "100%" }}
+                  placeholder='Теги'
+                  defaultValue={[]}
+                  onChange={(value) => setTags(value)}
+                >
+                  {childrenTags}
+                </Select>
+              </div>
+            </div>
+          </div>
+          <div className={styles.right}>
+            <div className={styles.top}>
+              <div className={styles.select}>
+                <span className={styles.text}>Возрастной рейтинг</span>
+                <Select
+                  showSearch
+                  style={{ width: 200 }}
+                  placeholder='Возрастной рейтинг'
+                  optionFilterProp='children'
+                  onChange={(value) => setAgeRatingManga(value)}
+                  onFocus={onFocus}
+                  onBlur={onBlur}
+                  onSearch={onSearch}
+                  filterOption={(input, option: any) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {ageRatingArray.map((type, index) => (
+                    <Option value={type.value} key={type.value}>
+                      {type.title}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+              <div className={styles.select}>
+                <span className={styles.text}>Год выпуска</span>
+                <TextArea
+                  className={styles.input}
+                  placeholder='Год'
+                  autoSize
+                  value={yearOfIssue}
+                  onChange={(e) => setYearOfIssue(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className={styles.bottom}>
+              <div className={styles.mainSelect}>
+                <span className={styles.text}>Жанры</span>
+                <Select
+                  mode='multiple'
+                  allowClear
+                  style={{ width: "100%" }}
+                  placeholder='Жанры'
+                  defaultValue={[]}
+                  onChange={(value) => setGenres(value)}
+                >
+                  {childrenGenres}
+                </Select>
+              </div>
+            </div>
+          </div>
         </div>
+
         <Button type='primary' onClick={handleCreateNewManga}>
           Создать
         </Button>

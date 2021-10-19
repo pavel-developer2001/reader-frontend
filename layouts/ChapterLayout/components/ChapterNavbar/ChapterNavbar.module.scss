@@ -10,9 +10,11 @@
     color: var(#{--text-color-default});
   }
 }
-.header {
+.wrapper {
   display: flex;
   justify-content: space-between;
+}
+.header {
   background-color: var(#{--header-color-default});
 }
 .menu {
@@ -29,4 +31,7 @@
 }
 .right {
   display: flex;
+}
+.title {
+  color: var(#{--text-color-default});
 }

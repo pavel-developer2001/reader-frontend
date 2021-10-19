@@ -40,7 +40,6 @@ const AddNewChapter = () => {
   const [previewTitle, setPreviewTitle] = useState("");
   const [imagesList, setImagesList] = useState<any>([]);
   const mangaId: any = router.query.id;
-  console.log(mangaId);
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -63,7 +62,6 @@ const AddNewChapter = () => {
   };
   const handleChange = ({ fileList }: any) => setImagesList(fileList);
   const [teamId, setTeamId] = useState<any>("");
-  console.log("team id", teamId);
   const teams = useSelector<any>((state) => state.team.teamsUser);
   const loading = useSelector<any>((state) => state.team.loading);
   useEffect(() => {

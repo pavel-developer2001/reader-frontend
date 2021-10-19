@@ -1,0 +1,17 @@
+.main {
+  margin-top: 20px;
+}
+.countPages {
+  margin-bottom: 5px;
+}
+.bodyBlock {
+  background-color: var(#{--components-background-default});
+  border-radius: 20px;
+  .item {
+    font-size: 22px;
+    padding: 5px 13px;
+  }
+}
+.complaint {
+  font-size: 20px;
+}

@@ -38,7 +38,9 @@ const ChapterList: FC<any> = ({ mangaId }) => {
   const loading = useSelector<any>((state) => state.chapter.loading);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getChapters(mangaId));
+    if (mangaId) {
+      dispatch(getChapters(mangaId));
+    }
   }, [mangaId]);
   return (
     <div className={styles.mainList}>

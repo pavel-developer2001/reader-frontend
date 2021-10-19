@@ -170,7 +170,9 @@ const CommentBlockList = () => {
   const comments = useSelector<any>((state) => state.comment.comments);
   const loading = useSelector<any>((state) => state.comment.loading);
   useEffect(() => {
-    dispatch(getComments(mangaId));
+    if (mangaId) {
+      dispatch(getComments(mangaId));
+    }
   }, [mangaId]);
   return (
     <div className={styles.list}>

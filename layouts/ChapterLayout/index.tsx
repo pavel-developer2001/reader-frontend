@@ -3,6 +3,7 @@ import React from "react";
 import ChapterNavbar from "./components/ChapterNavbar";
 import MyFooter from "../../components/MyFooter";
 import styles from "./ChapterLayout.module.scss";
+import SettingPage from "./components/SettingsPage";
 
 interface ChapterLayoutProps {
   children: any;
@@ -34,7 +35,9 @@ const ChapterLayout: React.FC<ChapterLayoutProps> = ({
       <ChapterNavbar title={title} page={page} id={id} />
       <div className={styles.main}>
         <div className={styles.container}>{children}</div>
-        <div className={styles.right}>Параметры страницы</div>
+        <div className={styles.right}>
+          <SettingPage />
+        </div>
       </div>
       <MyFooter />
     </div>
