@@ -1,11 +1,11 @@
 import Head from "next/head";
-import React from "react";
+import React, { ReactNode } from "react";
 import MyFooter from "../../components/MyFooter";
 import Navbar from "./components/Navbar";
 import styles from "./MainLayout.module.css";
 
 interface MainLayoutProps {
-  children: any;
+  children: ReactNode;
 }
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (

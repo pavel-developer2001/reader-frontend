@@ -12,7 +12,13 @@ import { dataUser } from "../../../../utils/getDataUserFromToken";
 import InvitationBtn from "./components/InvitationBtn";
 import styles from "./InvitationsInTeamsBlock.module.scss";
 
-const InvitationsInTeamsBlockItem: FC<any> = ({
+interface InvitationsInTeamsBlockItemProps {
+  invitationId: number;
+  rank: string;
+  teamId: number;
+  name: string;
+}
+const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = ({
   invitationId,
   rank,
   teamId,

@@ -14,7 +14,11 @@ import { dataUser } from "../../../../utils/getDataUserFromToken";
 import AddMangaForTeam from "./components/AddMangaForTeam";
 import styles from "./MangaSettings.module.scss";
 
-const MangaSettings: FC<any> = ({ cover, id }) => {
+interface MangaSettingsProps {
+  cover: string;
+  id: number;
+}
+const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   const dispatch = useDispatch();
   const bookMark = useSelector<any>((state) => state.bookMark.bookMark);
   const loading = useSelector<any>((state) => state.bookMark.loading);

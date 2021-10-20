@@ -10,10 +10,10 @@ export default class ChapterApi {
       },
     });
   }
-  static async getChaptersForManga(id: any) {
+  static async getChaptersForManga(id: number) {
     return ReaderApi.get("/chapters/" + id);
   }
-  static async getImagesForChapter(id: any) {
+  static async getImagesForChapter(id: number) {
     return ReaderApi.get("/chapters/images/" + id);
   }
   static async getLaterChapters() {

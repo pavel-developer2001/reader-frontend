@@ -4,7 +4,17 @@ import React, { FC } from "react";
 import Rating from "../Rating";
 import styles from "./MangaData.module.scss";
 
-const MangaData: FC<any> = ({
+interface MangaDataProps {
+  title: string;
+  englishTitle: string;
+  originalTitle: string;
+  yearOfIssue: string;
+  ageRating: string;
+  statusManga: string;
+  typeManga: string;
+  watchCount: string;
+}
+const MangaData: FC<MangaDataProps> = ({
   title,
   englishTitle,
   originalTitle,

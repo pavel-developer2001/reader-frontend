@@ -1,4 +1,3 @@
-import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Empty } from "antd";
 import { Typography } from "antd";
 import { Tabs } from "antd";

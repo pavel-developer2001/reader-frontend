@@ -6,11 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTeamsForUser } from "../../../../store/slices/teamSlice";
 import styles from "./UserInTeamsBlock.module.scss";
 
-const UserInTeamsBlockItem: FC<any> = ({ cover, name, teamId }) => {
+interface UserInTeamsBlockItemProps {
+  cover: string;
+  name: string;
+  teamId: number;
+}
+const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = ({
+  cover,
+  name,
+  teamId,
+}) => {
   return (
     <Link href={"/team/" + teamId}>
       <a className={styles.main}>
-        {" "}
         <Avatar
           shape='square'
           size={72}

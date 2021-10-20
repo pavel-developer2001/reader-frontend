@@ -1,6 +1,5 @@
-import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Typography } from "antd";
-const { Title, Paragraph, Text, Link } = Typography;
+const { Title, Paragraph, Text } = Typography;
 import React, { useEffect } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import styles from "./Team.module.css";
@@ -14,7 +13,7 @@ import { UpdateListItem } from "../../components/lateUpdates/UI/UpdateList";
 
 const { TabPane } = Tabs;
 
-function callback(key: any) {
+function callback(key: string) {
   console.log(key);
 }
 

@@ -1,28 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { IRating } from "../../models/IRating";
 import RatingApi from "../../services/api/ratingApi";
 
 export const addRating = createAsyncThunk(
   "rating/addRating",
-  async (payload) => {
+  async (payload: { rating: number; mangaId: string; userId: number }) => {
     return await RatingApi.addRatingForManga(payload);
   }
 );
 export const updateRating = createAsyncThunk(
   "rating/updateRating",
-  async (payload) => {
+  async (payload: { rating: number; mangaId: string; userId: number }) => {
     return await RatingApi.updateRatingForManga(payload);
   }
 );
 export const getRating = createAsyncThunk(
   "rating/getRating",
-  async (dataManga: { id: number; userId: number }) => {
+  async (dataManga: { id: string; userId: number }) => {
     return await RatingApi.getRatingForManga(dataManga.id, dataManga.userId);
   }
 );
 interface RatingState {
-  rating: any;
-  ratings: any;
+  rating: IRating[];
+  ratings: IRating[];
   status: null;
   loading: boolean;
 }
@@ -38,7 +39,7 @@ const ratingSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(HYDRATE, (state, action) => {
+      .addCase(HYDRATE, (state, action: any) => {
         state.ratings = action.payload.rating.ratings;
         state.loading = false;
       })

@@ -24,7 +24,9 @@ const InvitationBtn = () => {
   const teams = useSelector<any>((state) => state.team.teamsUser);
   const loading = useSelector<any>((state) => state.team.loading);
   useEffect(() => {
-    dispatch(getTeamsForUser(dataUser.id));
+    if (dataUser) {
+      dispatch(getTeamsForUser(dataUser.id));
+    }
   }, []);
   const handleAddInvitation = async (e: any) => {
     e.preventDefault();

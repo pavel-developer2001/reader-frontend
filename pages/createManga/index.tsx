@@ -102,7 +102,7 @@ const CreateManga = () => {
     console.log("focus");
   }
 
-  function onSearch(val: any) {
+  function onSearch(val: string) {
     console.log("search:", val);
   }
   const childrenGenres = [];

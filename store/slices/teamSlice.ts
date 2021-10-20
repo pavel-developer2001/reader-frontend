@@ -1,79 +1,103 @@
+import { IChapter } from "./../../models/IChapter";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { IManga } from "../../models/IManga";
+import { IMember } from "../../models/IMember";
+import {
+  ITeam,
+  ITeamInvitationsForUser,
+  ITeamsForManga,
+  ITeamsForUser,
+} from "../../models/ITeam";
 import TeamApi from "../../services/api/teamApi";
 
 export const addNewTeam = createAsyncThunk(
   "team/addNewTeam",
-  async (payload) => {
+  async (payload: {
+    teamName: string;
+    teamSubtitle: string;
+    teamDescription: string;
+    userId: number;
+  }) => {
     return await TeamApi.createTeam(payload);
   }
 );
 export const getTeams = createAsyncThunk("team/getTeams", async () => {
   return await TeamApi.getAllTeam();
 });
-export const getTeam = createAsyncThunk("team/getTeam", async (id) => {
+export const getTeam = createAsyncThunk("team/getTeam", async (id: string) => {
   return await TeamApi.getTeam(id);
 });
 export const getTeamsForUser = createAsyncThunk(
   "team/getTeamsForUser",
-  async (id) => {
+  async (id: string) => {
     return await TeamApi.getAllTeamsForUser(id);
   }
 );
 export const connectMangaForTeam = createAsyncThunk(
   "team/connectMangaForTeam",
-  async (payload) => {
+  async (payload: { mangaId: number; teamId: number }) => {
     return await TeamApi.addTeamForManga(payload);
   }
 );
 export const getTeamsForManga = createAsyncThunk(
   "team/getTeamsForManga",
-  async (id) => {
+  async (id: string) => {
     return await TeamApi.getAllTeamsForManga(id);
   }
 );
 export const addInvitation = createAsyncThunk(
   "team/addInvitation",
-  async (payload) => {
+  async (payload: {
+    invitationId: number;
+    rank: string;
+    teamId: number;
+    userId: number;
+  }) => {
     return await TeamApi.addInvitationForUser(payload);
   }
 );
 export const getInvitationsForUser = createAsyncThunk(
   "team/getInvitationsForUser",
-  async (id) => {
+  async (id: string) => {
     return await TeamApi.getAllInvitationsForUser(id);
   }
 );
 export const agreeToJoin = createAsyncThunk(
   "team/agreeToJoin",
-  async (payload) => {
+  async (payload: {
+    invitationId: number;
+    rank: string;
+    teamId: number;
+    userId: number;
+  }) => {
     return await TeamApi.agreeToJoinToTeam(payload);
   }
 );
 export const refucalToJoin = createAsyncThunk(
   "team/refucalToJoin",
-  async (id) => {
+  async (id: string) => {
     return await TeamApi.refucalToJoinTeam(id);
   }
 );
 export const removeMember = createAsyncThunk(
   "team/removeMember",
-  async (id) => {
+  async (id: string) => {
     return await TeamApi.deleteMemberFromTeam(id);
   }
 );
 interface TeamItems {
-  team: any;
-  members: any;
-  mangas: any;
-  chapters: any;
+  team: ITeam[];
+  members: IMember[];
+  mangas: IManga[];
+  chapters: IChapter[];
 }
 interface TeamState {
-  teams: any;
+  teams: ITeam[];
   team: TeamItems;
-  teamsUser: any;
-  teamsManga: any;
-  teamInvitations: any;
+  teamsUser: ITeamsForUser[];
+  teamsManga: ITeamsForManga[];
+  teamInvitations: ITeamInvitationsForUser[];
   status: null;
   loading: boolean;
 }
@@ -98,7 +122,7 @@ const teamSlice = createSlice({
 
   extraReducers: (builder) =>
     builder
-      .addCase(HYDRATE, (state, action) => {
+      .addCase(HYDRATE, (state, action: any) => {
         state.teams = action.payload.team.teams;
         state.loading = false;
       })
@@ -134,17 +158,17 @@ const teamSlice = createSlice({
       .addCase(agreeToJoin.fulfilled, (state, action) => {
         state.team.members.push(action.payload.data.newMember);
         state.teamInvitations = state.teamInvitations.filter(
-          (item: any) => item.id != action.payload.data.deleteInvitation.id
+          (item) => item.id != action.payload.data.deleteInvitation.id
         );
       })
       .addCase(refucalToJoin.fulfilled, (state, action) => {
         state.teamInvitations = state.teamInvitations.filter(
-          (item: any) => item.id != action.payload.data.id
+          (item) => item.id != action.payload.data.id
         );
       })
       .addCase(removeMember.fulfilled, (state, action) => {
         state.team.members = state.team.members.filter(
-          (item: any) => item.id != action.payload.data.id
+          (item) => item.id != action.payload.data.id
         );
       }),
 });

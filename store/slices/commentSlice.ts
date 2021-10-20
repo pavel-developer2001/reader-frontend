@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { IComment } from "../../models/IComment";
 import CommentsApi from "../../services/api/commentsApi";
 
 export const getComments = createAsyncThunk(
@@ -10,13 +11,21 @@ export const getComments = createAsyncThunk(
 );
 export const addComment = createAsyncThunk(
   "comment/addComment",
-  async (payload) => {
+  async (payload: {
+    commentText: string;
+    mangaId: string;
+    spoiler: boolean;
+    userId: number;
+  }) => {
     return await CommentsApi.addCommentForManga(payload);
   }
 );
 export const updateComment = createAsyncThunk(
   "comment/updateComment",
-  async (data: { id: number; payload: any }) => {
+  async (data: {
+    id: number;
+    payload: { commentText: string; spoiler: boolean };
+  }) => {
     return await CommentsApi.updateCommentForManga(data.id, data.payload);
   }
 );
@@ -27,7 +36,7 @@ export const deleteComment = createAsyncThunk(
   }
 );
 interface CommentState {
-  comments: any;
+  comments: IComment[];
   status: null | string;
   loading: boolean;
 }
@@ -48,7 +57,7 @@ const commentSlice = createSlice({
 
   extraReducers: (builder) =>
     builder
-      .addCase(HYDRATE, (state, action) => {
+      .addCase(HYDRATE, (state, action: any) => {
         state.comments = action.payload.comment.comments;
         state.loading = false;
       })
@@ -61,13 +70,13 @@ const commentSlice = createSlice({
       })
       .addCase(updateComment.fulfilled, (state, action) => {
         state.comments = state.comments.filter(
-          (item: any) => item.id != action.payload.data.id
+          (item) => item.id != action.payload.data.id
         );
         state.comments.push(action.payload.data);
       })
       .addCase(deleteComment.fulfilled, (state, action) => {
         state.comments = state.comments.filter(
-          (item: any) => item.id != action.payload.data.id
+          (item) => item.id != action.payload.data.id
         );
       }),
 });

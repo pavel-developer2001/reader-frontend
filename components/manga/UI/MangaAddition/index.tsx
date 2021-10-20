@@ -9,6 +9,7 @@ const MangaAddition = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const teams = useSelector<any>((state) => state.team.teamsManga);
+
   const loading = useSelector<any>((state) => state.team.loading);
   useEffect(() => {
     dispatch(getTeamsForManga(router.query.id));

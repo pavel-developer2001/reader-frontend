@@ -2,10 +2,24 @@ import { Avatar, Button } from "antd";
 import Link from "next/link";
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
+import { IMember } from "../../../../models/IMember";
 import { removeMember } from "../../../../store/slices/teamSlice";
 import styles from "./MemberBlock.module.scss";
 
-const MemberBlockItem: FC<any> = ({ id, role, userId, name, avatar }) => {
+interface MemberBlockItemProps {
+  id: number;
+  role: string;
+  userId: number;
+  name: string;
+  avatar: string;
+}
+const MemberBlockItem: FC<MemberBlockItemProps> = ({
+  id,
+  role,
+  userId,
+  name,
+  avatar,
+}) => {
   const dispatch = useDispatch();
   const handleRemoveMember = async () => {
     await dispatch(removeMember(id));
@@ -39,13 +53,15 @@ const MemberBlockItem: FC<any> = ({ id, role, userId, name, avatar }) => {
     </div>
   );
 };
-
-const MemberBlock: FC<any> = ({ members }) => {
+interface MemberBlockProps {
+  members: IMember[];
+}
+const MemberBlock: FC<MemberBlockProps> = ({ members }) => {
   return (
     <div className={styles.mainBlock}>
       <div className={styles.title}>Состав</div>
       <div className={styles.mainList}>
-        {members?.map((member: any) => (
+        {members?.map((member) => (
           <MemberBlockItem
             key={member.id}
             id={member.id}
