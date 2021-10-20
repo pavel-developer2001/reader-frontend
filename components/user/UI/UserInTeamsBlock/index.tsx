@@ -3,6 +3,8 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ITeamsForUser } from "../../../../models/ITeam";
+import { RootState } from "../../../../store/reducer";
 import { getTeamsForUser } from "../../../../store/slices/teamSlice";
 import styles from "./UserInTeamsBlock.module.scss";
 
@@ -36,8 +38,10 @@ const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = ({
 const UserInTeamsBlock = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const teams = useSelector<any>((state) => state.team.teamsUser);
-  const loading = useSelector<any>((state) => state.team.loading);
+  const teams = useSelector<RootState, ITeamsForUser[]>(
+    (state) => state.team.teamsUser
+  );
+  const loading = useSelector<RootState>((state) => state.team.loading);
 
   useEffect(() => {
     dispatch(getTeamsForUser(router.query.id));
@@ -49,7 +53,7 @@ const UserInTeamsBlock = () => {
         {loading ? (
           <p>loading</p>
         ) : teams.length > 0 ? (
-          teams.map((team: any) => (
+          teams.map((team) => (
             <UserInTeamsBlockItem
               key={team.id}
               cover={team.team.teamCover}

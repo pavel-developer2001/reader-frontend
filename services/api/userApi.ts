@@ -11,7 +11,7 @@ export default class UserApi {
   static async login(payload: { email: string; password: string }) {
     return ReaderApi.post("/users/login", payload);
   }
-  static async getUser(id: number) {
+  static async getUser(id: string | string[] | undefined) {
     return ReaderApi.get("/users/" + id);
   }
 }

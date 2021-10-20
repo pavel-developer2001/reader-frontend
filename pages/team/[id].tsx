@@ -10,6 +10,8 @@ import { getTeam } from "../../store/slices/teamSlice";
 import MemberBlock from "../../components/team/UI/MemberBlock";
 import CardManga from "../../components/CardManga";
 import { UpdateListItem } from "../../components/lateUpdates/UI/UpdateList";
+import { RootState } from "../../store/reducer";
+import { ITeam } from "../../models/ITeam";
 
 const { TabPane } = Tabs;
 
@@ -20,8 +22,8 @@ function callback(key: string) {
 const Team = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const team = useSelector<any>((state) => state.team.team);
-  const loading = useSelector<any>((state) => state.team.loading);
+  const team = useSelector<RootState>((state) => state.team.team);
+  const loading = useSelector<RootState>((state) => state.team.loading);
   useEffect(() => {
     dispatch(getTeam(router.query.id));
   }, [router.query.id]);

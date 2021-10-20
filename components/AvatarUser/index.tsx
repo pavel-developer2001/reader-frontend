@@ -5,9 +5,10 @@ import LoginModal from "./components/LoginModal";
 import styles from "./AvatarUser.module.scss";
 import { Avatar, Popover } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { RootState } from "../../store/reducer";
 
 const AvatarUser = () => {
-  const token = useSelector<any>((state) => state.user.token);
+  const token = useSelector<RootState>((state) => state.user.token);
   const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false);
 
   const showModal = () => {

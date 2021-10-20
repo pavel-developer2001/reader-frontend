@@ -9,6 +9,8 @@ import {
 } from "../../../../../../store/slices/teamSlice";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
 import { useRouter } from "next/dist/client/router";
+import { RootState } from "../../../../../../store/reducer";
+import { ITeamsForUser } from "../../../../../../models/ITeam";
 
 const { Option } = Select;
 
@@ -17,8 +19,10 @@ const AddMangaForTeam = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [teamId, setTeamId] = useState<string | undefined>("");
   const dispatch = useDispatch();
-  const teams = useSelector<any>((state) => state.team.teamsUser);
-  const loading = useSelector<any>((state) => state.team.loading);
+  const teams = useSelector<RootState, ITeamsForUser[]>(
+    (state) => state.team.teamsUser
+  );
+  const loading = useSelector<RootState>((state) => state.team.loading);
   useEffect(() => {
     dispatch(getTeamsForUser(dataUser.id));
   }, []);
@@ -69,7 +73,7 @@ const AddMangaForTeam = () => {
           style={{ width: 200 }}
           placeholder='Выбрать команду'
           optionFilterProp='children'
-          onChange={(value) => setTeamId(value)}
+          onChange={(value: string) => setTeamId(value)}
           onFocus={onFocus}
           onBlur={onBlur}
           onSearch={onSearch}
@@ -78,8 +82,8 @@ const AddMangaForTeam = () => {
           }
         >
           {teams
-            .filter((item: any) => item.roleInTeam == "Глава")
-            .map((team: any) => (
+            .filter((item) => item.roleInTeam == "Глава")
+            .map((team) => (
               <Option key={team.id} value={team.team.id}>
                 {team.team.teamName}
               </Option>

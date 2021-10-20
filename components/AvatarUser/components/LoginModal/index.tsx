@@ -2,7 +2,7 @@ import { GoogleOutlined, TwitterOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import Modal from "antd/lib/modal";
 import { useRouter } from "next/dist/client/router";
-import React, { FC, useState } from "react";
+import React, { FC, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUsers, registerUsers } from "../../../../store/slices/userSlice";
 
@@ -19,7 +19,7 @@ const LoginModal: FC<LoginModalProps> = ({
   setIsModalVisible,
 }) => {
   const [register, setRegister] = useState<boolean>(false);
-  const onFinish = (values: any) => {
+  const onFinish = (values: string) => {
     console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo: any) => {

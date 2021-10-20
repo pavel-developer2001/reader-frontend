@@ -12,13 +12,13 @@ export const addNewChapter = createAsyncThunk(
 );
 export const getChapters = createAsyncThunk(
   "chapter/getChapters",
-  async (id: number) => {
+  async (id: string | string[]) => {
     return await ChapterApi.getChaptersForManga(id);
   }
 );
 export const getImages = createAsyncThunk(
   "chapter/getImages ",
-  async (id: number) => {
+  async (id: string | string[]) => {
     return await ChapterApi.getImagesForChapter(id);
   }
 );

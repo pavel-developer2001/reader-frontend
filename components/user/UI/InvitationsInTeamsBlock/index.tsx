@@ -3,6 +3,8 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ITeamInvitationsForUser } from "../../../../models/ITeam";
+import { RootState } from "../../../../store/reducer";
 import {
   agreeToJoin,
   getInvitationsForUser,
@@ -61,8 +63,10 @@ const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = ({
 const InvitationsInTeamsBlock = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const invitaions = useSelector<any>((state) => state.team.teamInvitations);
-  const loading = useSelector<any>((state) => state.team.loading);
+  const invitaions = useSelector<RootState, ITeamInvitationsForUser[]>(
+    (state) => state.team.teamInvitations
+  );
+  const loading = useSelector<RootState>((state) => state.team.loading);
   useEffect(() => {
     dispatch(getInvitationsForUser(router.query.id));
   }, [router]);
@@ -73,7 +77,7 @@ const InvitationsInTeamsBlock = () => {
         {loading ? (
           <p>loading</p>
         ) : invitaions?.length > 0 ? (
-          invitaions?.map((invitation: any) => (
+          invitaions?.map((invitation) => (
             <InvitationsInTeamsBlockItem
               key={invitation.id}
               invitationId={invitation.id}

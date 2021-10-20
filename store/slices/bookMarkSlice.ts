@@ -17,13 +17,16 @@ export const updateBookMark = createAsyncThunk(
 );
 export const getBookMarks = createAsyncThunk(
   "bookMark/getBookMarks",
-  async (id: number) => {
+  async (id: string | string[] | undefined) => {
     return await BookMarksApi.getAllBookMarksForUser(id);
   }
 );
 export const getBookMarkToManga = createAsyncThunk(
   "bookMark/getBookMarkToManga",
-  async (dataManga: { mangaId: number; userId: number }) => {
+  async (dataManga: {
+    mangaId: string | string[] | undefined;
+    userId: number;
+  }) => {
     return await BookMarksApi.getBookMarkForManga(
       dataManga.mangaId,
       dataManga.userId

@@ -10,7 +10,7 @@ import { addNewManga } from "../../store/slices/mangaSlice";
 import { useRouter } from "next/dist/client/router";
 const { Option } = Select;
 
-function getBase64(img: any, callback: any) {
+function getBase64(img: Blob, callback: any) {
   const reader = new FileReader();
   reader.addEventListener("load", () => callback(reader.result));
   reader.readAsDataURL(img);
@@ -179,7 +179,7 @@ const CreateManga = () => {
       return;
     }
     if (e.file.status === "done") {
-      getBase64(e.file.originFileObj, (imageUrl: any) => {
+      getBase64(e.file.originFileObj, (imageUrl: string) => {
         setImageUrl(imageUrl);
         setLoading(false);
       });

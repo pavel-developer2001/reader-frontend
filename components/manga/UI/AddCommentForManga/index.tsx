@@ -8,7 +8,7 @@ import { dataUser } from "../../../../utils/getDataUserFromToken";
 import styles from "./AddCommentForManga.module.scss";
 
 interface AddCommentForMangaProps {
-  mangaId: number;
+  mangaId: string | string[] | undefined;
 }
 const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
   const dispatch = useDispatch();
@@ -17,7 +17,12 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
   const handleAddComment = async (e: any) => {
     e.preventDefault();
     try {
-      const payload = { commentText, spoiler, mangaId, userId: dataUser.id };
+      const payload: {
+        commentText: string;
+        mangaId: string | string[] | undefined;
+        spoiler: boolean;
+        userId: number;
+      } = { commentText, spoiler, mangaId, userId: dataUser.id };
       await dispatch(addComment(payload));
       setCommentText("");
       setSpoiler(false);

@@ -14,7 +14,7 @@ import AvatarUser from "../../../../components/AvatarUser";
 interface ChapterNavbarProps {
   title: string;
   page: string;
-  id: number;
+  id: string | string[] | undefined;
 }
 const ChapterNavbar: FC<ChapterNavbarProps> = ({ title, page, id }) => {
   const theme = useTheme();

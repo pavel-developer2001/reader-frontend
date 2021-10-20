@@ -5,19 +5,27 @@ import RatingApi from "../../services/api/ratingApi";
 
 export const addRating = createAsyncThunk(
   "rating/addRating",
-  async (payload: { rating: number; mangaId: string; userId: number }) => {
+  async (payload: {
+    rating: number | null;
+    mangaId: string | string[] | undefined;
+    userId: number;
+  }) => {
     return await RatingApi.addRatingForManga(payload);
   }
 );
 export const updateRating = createAsyncThunk(
   "rating/updateRating",
-  async (payload: { rating: number; mangaId: string; userId: number }) => {
+  async (payload: {
+    rating: number | null;
+    mangaId: string | string[] | undefined;
+    userId: number;
+  }) => {
     return await RatingApi.updateRatingForManga(payload);
   }
 );
 export const getRating = createAsyncThunk(
   "rating/getRating",
-  async (dataManga: { id: string; userId: number }) => {
+  async (dataManga: { id: string | string[] | undefined; userId: number }) => {
     return await RatingApi.getRatingForManga(dataManga.id, dataManga.userId);
   }
 );

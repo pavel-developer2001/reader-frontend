@@ -148,7 +148,7 @@ const Filters = () => {
         style={{ width: "100%" }}
         placeholder='Теги'
         defaultValue={[]}
-        onChange={(value) => setTags(value)}
+        onChange={(value: string) => setTags(value)}
       >
         {childrenTags}
       </Select>

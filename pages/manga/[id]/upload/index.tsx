@@ -10,10 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addNewChapter } from "../../../../store/slices/chapterSlice";
 import styles from "./Upload.module.scss";
 import { getTeamsForUser } from "../../../../store/slices/teamSlice";
+import { RootState } from "../../../../store/reducer";
+import { ITeamsForUser } from "../../../../models/ITeam";
 
 const { Option } = Select;
 
-function getBase64(file: any) {
+function getBase64(file: Blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -62,8 +64,10 @@ const AddNewChapter = () => {
   };
   const handleChange = ({ fileList }: any) => setImagesList(fileList);
   const [teamId, setTeamId] = useState<any>("");
-  const teams = useSelector<any>((state) => state.team.teamsUser);
-  const loading = useSelector<any>((state) => state.team.loading);
+  const teams = useSelector<RootState, ITeamsForUser[]>(
+    (state) => state.team.teamsUser
+  );
+  const loading = useSelector<RootState>((state) => state.team.loading);
   useEffect(() => {
     dispatch(getTeamsForUser(dataUser.id));
   }, []);
@@ -160,8 +164,8 @@ const AddNewChapter = () => {
                 }
               >
                 {teams
-                  .filter((item: any) => item.roleInTeam == "Глава")
-                  .map((team: any) => (
+                  .filter((item) => item.roleInTeam == "Глава")
+                  .map((team) => (
                     <Option key={team.id} value={team.team.id}>
                       {team.team.teamName}
                     </Option>
@@ -176,7 +180,7 @@ const AddNewChapter = () => {
               style={{ width: 200 }}
               placeholder='Выбрать язык'
               optionFilterProp='children'
-              onChange={(value) => setLanguage(value)}
+              onChange={(value: string) => setLanguage(value)}
               onFocus={onFocus}
               onBlur={onBlur}
               onSearch={onSearch}

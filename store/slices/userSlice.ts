@@ -17,7 +17,7 @@ export const loginUsers = createAsyncThunk(
 );
 export const getUserData = createAsyncThunk(
   "user/getUserData",
-  async (id: number) => {
+  async (id: string | string[] | undefined) => {
     return await UserApi.getUser(id);
   }
 );

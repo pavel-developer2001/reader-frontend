@@ -16,12 +16,12 @@ const MangaDescriptions: FC<MangaDescriptionsProps> = ({
 }) => {
   return (
     <div>
-      {genres?.map((genre: any) => (
+      {genres?.map((genre) => (
         <Tag color='purple' key={genre.id}>
           {genre.genre}
         </Tag>
       ))}
-      {tags?.map((tag: any) => (
+      {tags?.map((tag) => (
         <Tag color='purple' key={tag.id}>
           {tag.tag}
         </Tag>

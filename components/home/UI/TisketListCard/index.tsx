@@ -2,10 +2,8 @@ import { Card } from "antd";
 import Link from "next/link";
 import React from "react";
 import styles from "./TisketListCard.module.scss";
-import { useSelector } from "react-redux";
 
 const TisketListCard = () => {
-  const state = useSelector<any>((state) => state);
   return (
     <div className={styles.main}>
       <div className={styles.leftBlock}>

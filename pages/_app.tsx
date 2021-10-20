@@ -6,9 +6,10 @@ import { wrapper } from "../store";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { setToken } from "../store/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/reducer";
 
 export function MyApp({ Component, pageProps }: AppProps) {
-  const token = useSelector((state: any) => state.user.token);
+  const token = useSelector<RootState>((state) => state.user.token);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setToken(localStorage.getItem("token")));

@@ -3,14 +3,16 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IChapter } from "../../../../models/IChapter";
+import { RootState } from "../../../../store/reducer";
 import { getChapters } from "../../../../store/slices/chapterSlice";
 import styles from "./ChapterList.module.scss";
 
 interface ChapterListItemProps {
   chapterId: number;
   volume: string;
-  number: number;
-  likes: number;
+  number: string;
+  likes: string;
   date: string;
 }
 const ChapterListItem: FC<ChapterListItemProps> = ({
@@ -41,11 +43,13 @@ const ChapterListItem: FC<ChapterListItemProps> = ({
   );
 };
 interface ChapterListProps {
-  mangaId: number;
+  mangaId: string | string[] | undefined;
 }
 const ChapterList: FC<ChapterListProps> = ({ mangaId }) => {
-  const chapters = useSelector<any>((state) => state.chapter.chapters);
-  const loading = useSelector<any>((state) => state.chapter.loading);
+  const chapters = useSelector<RootState, IChapter[]>(
+    (state) => state.chapter.chapters
+  );
+  const loading = useSelector<RootState>((state) => state.chapter.loading);
   const dispatch = useDispatch();
   useEffect(() => {
     if (mangaId) {

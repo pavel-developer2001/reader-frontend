@@ -9,7 +9,7 @@ interface ChapterLayoutProps {
   children: ReactNode;
   title: string;
   page: string;
-  id: number;
+  id: string | string[] | undefined;
 }
 const ChapterLayout: React.FC<ChapterLayoutProps> = ({
   title,

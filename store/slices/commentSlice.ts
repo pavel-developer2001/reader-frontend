@@ -5,7 +5,7 @@ import CommentsApi from "../../services/api/commentsApi";
 
 export const getComments = createAsyncThunk(
   "comment/getComments",
-  async (id: number) => {
+  async (id: string | string[]) => {
     return await CommentsApi.getAllCommentsForManga(id);
   }
 );
@@ -13,7 +13,7 @@ export const addComment = createAsyncThunk(
   "comment/addComment",
   async (payload: {
     commentText: string;
-    mangaId: string;
+    mangaId: string | string[] | undefined;
     spoiler: boolean;
     userId: number;
   }) => {

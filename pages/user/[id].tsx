@@ -12,6 +12,9 @@ import CreateTeamModal from "../../components/user/UI/CreateTeamModal";
 import InvitationsInTeamsBlock from "../../components/user/UI/InvitationsInTeamsBlock";
 import UserInTeamsBlock from "../../components/user/UI/UserInTeamsBlock";
 import MainLayout from "../../layouts/MainLayout";
+import { IBookMark } from "../../models/IBookMark";
+import { IUser } from "../../models/IUser";
+import { RootState } from "../../store/reducer";
 import { getBookMarks } from "../../store/slices/bookMarkSlice";
 import { getUserData } from "../../store/slices/userSlice";
 import styles from "./Users.module.scss";
@@ -19,10 +22,12 @@ import styles from "./Users.module.scss";
 const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const user = useSelector<any>((state) => state.user.user);
-  const loading = useSelector<any>((state) => state.user.loading);
-  const bookMarks = useSelector<any>((state) => state.bookMark.bookMarks);
-  const loadingMark = useSelector<any>((state) => state.bookMark.loading);
+  const user = useSelector<RootState, IUser[]>((state) => state.user.user);
+  const loading = useSelector<RootState>((state) => state.user.loading);
+  const bookMarks = useSelector<RootState, IBookMark[]>(
+    (state) => state.bookMark.bookMarks
+  );
+  const loadingMark = useSelector<RootState>((state) => state.bookMark.loading);
   const [tabPosition, setTabPosition] = useState("left");
 
   useEffect(() => {
@@ -78,7 +83,7 @@ const User = () => {
                     {loadingMark ? (
                       <p>loading</p>
                     ) : bookMarks.length > 0 ? (
-                      bookMarks.map((mark: any, index) => (
+                      bookMarks.map((mark, index) => (
                         <CardManga key={mark.id} manga={mark.manga} />
                       ))
                     ) : (

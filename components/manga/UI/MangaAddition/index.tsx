@@ -1,6 +1,8 @@
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ITeamsForManga } from "../../../../models/ITeam";
+import { RootState } from "../../../../store/reducer";
 import { getTeamsForManga } from "../../../../store/slices/teamSlice";
 import CardTeam from "../CardTeam";
 import styles from "./MangaAddition.module.css";
@@ -8,9 +10,11 @@ import styles from "./MangaAddition.module.css";
 const MangaAddition = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const teams = useSelector<any>((state) => state.team.teamsManga);
+  const teams = useSelector<RootState, ITeamsForManga[]>(
+    (state) => state.team.teamsManga
+  );
 
-  const loading = useSelector<any>((state) => state.team.loading);
+  const loading = useSelector<RootState>((state) => state.team.loading);
   useEffect(() => {
     dispatch(getTeamsForManga(router.query.id));
   }, [router.query.id]);
@@ -21,7 +25,7 @@ const MangaAddition = () => {
         {loading ? (
           <p>loading</p>
         ) : teams.length > 0 ? (
-          teams.map((team: any) => (
+          teams.map((team) => (
             <CardTeam
               key={team.id}
               teamId={team.team.id}

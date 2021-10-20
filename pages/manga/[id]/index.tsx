@@ -16,15 +16,23 @@ import { getManga, setManga } from "../../../store/slices/mangaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
 import ChapterList from "../../../components/manga/UI/ChapterList";
+import { RootState } from "../../../store/reducer";
+import { IManga } from "../../../models/IManga";
+import { ITag } from "../../../models/ITag";
+import { IGenre } from "../../../models/IGenre";
 
 const { TabPane } = Tabs;
 
 const PageManga = () => {
   const dispatch = useDispatch();
-  const manga = useSelector<any>((state) => state.manga.manga.manga);
-  const tag = useSelector<any>((state) => state.manga.manga.tag);
-  const genre = useSelector<any>((state) => state.manga.manga.genre);
-  const loading = useSelector<any>((state) => state.manga.loading);
+  const manga = useSelector<RootState, IManga[]>(
+    (state) => state.manga.manga.manga
+  );
+  const tag = useSelector<RootState, ITag[]>((state) => state.manga.manga.tag);
+  const genre = useSelector<RootState, IGenre[]>(
+    (state) => state.manga.manga.genre
+  );
+  const loading = useSelector<RootState>((state) => state.manga.loading);
   const router = useRouter();
 
   useEffect(() => {

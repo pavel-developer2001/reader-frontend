@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ITeam } from "../../../../models/ITeam";
+import { RootState } from "../../../../store/reducer";
 import { getTeams } from "../../../../store/slices/teamSlice";
 import styles from "./TeamList.module.scss";
 
@@ -39,8 +40,8 @@ const TeamListItem: FC<TeamListItemProps> = ({
 };
 const TeamList = () => {
   const dispatch = useDispatch();
-  const teams = useSelector((state) => state.team.teams);
-  const loading = useSelector<any>((state) => state.team.loading);
+  const teams = useSelector<RootState, ITeam[]>((state) => state.team.teams);
+  const loading = useSelector<RootState>((state) => state.team.loading);
   useEffect(() => {
     dispatch(getTeams());
   }, []);

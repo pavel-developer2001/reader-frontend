@@ -16,14 +16,14 @@ export const getMangas = createAsyncThunk("manga/getMangas", async () => {
 });
 export const getManga = createAsyncThunk(
   "manga/getManga",
-  async (id: string) => {
+  async (id: string | string[] | undefined) => {
     return await MangaApi.getManga(id);
   }
 );
 interface MangaItems {
   manga: IManga[];
-  genres: IGenre[];
-  tags: ITag[];
+  genre: IGenre[];
+  tag: ITag[];
 }
 interface MangaState {
   mangas: IManga[];
@@ -33,7 +33,7 @@ interface MangaState {
 }
 const initialState: MangaState = {
   mangas: [],
-  manga: { manga: [], genres: [], tags: [] },
+  manga: { manga: [], genre: [], tag: [] },
   status: null,
   loading: true,
 };

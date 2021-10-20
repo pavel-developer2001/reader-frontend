@@ -10,19 +10,30 @@ import {
   getRating,
   updateRating,
 } from "../../../../store/slices/ratingSlice";
+import { RootState } from "../../../../store/reducer";
+import { IRating } from "../../../../models/IRating";
 
 const Rating = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [ratingCount, setRatingCount] = useState<null | number>(null);
-  const rating = useSelector<any>((state) => state.rating.rating);
-  const loading = useSelector<any>((state) => state.rating.loading);
-  const dataManga = { id: router.query.id, userId: dataUser.id };
+  const rating = useSelector<RootState, IRating[]>(
+    (state) => state.rating.rating
+  );
+  const loading = useSelector<RootState>((state) => state.rating.loading);
+  const dataManga: { id: string | string[] | undefined; userId: number } = {
+    id: router.query.id,
+    userId: dataUser.id,
+  };
   useEffect(() => {
     dispatch(getRating(dataManga));
   }, [router]);
-  const payload = {
+  const payload: {
+    rating: number | null;
+    mangaId: string | string[] | undefined;
+    userId: number;
+  } = {
     rating: ratingCount,
     mangaId: router.query.id,
     userId: dataUser.id,
