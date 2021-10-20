@@ -130,7 +130,9 @@ const CreateManga = () => {
   const [mangaDescription, setMangaDescription] = useState("");
   const [yearOfIssue, setYearOfIssue] = useState("");
   const [mangaCover, setMangaCover] = useState("");
-  const handleCreateNewManga = async (e: any) => {
+  const handleCreateNewManga = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
       if (title === "") {

@@ -80,7 +80,9 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
       await dispatch(deleteComment(commentId));
     } catch (error) {}
   };
-  const handleUpdateComment = async (e: any) => {
+  const handleUpdateComment = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
       const data = { id: commentId, payload: { commentText, spoiler } };

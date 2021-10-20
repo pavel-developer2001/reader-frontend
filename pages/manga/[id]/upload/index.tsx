@@ -89,7 +89,7 @@ const AddNewChapter = () => {
     { lang: "Другой" },
   ];
   const dispatch = useDispatch();
-  const handleNewChapter = async (e: any) => {
+  const handleNewChapter = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       if (numberChapter === "" && volumeChapter === "") {

@@ -32,7 +32,9 @@ const InvitationBtn = () => {
       dispatch(getTeamsForUser(dataUser.id));
     }
   }, []);
-  const handleAddInvitation = async (e: any) => {
+  const handleAddInvitation = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
       const payload: { rank: string; teamId: number; userId: number } = await {

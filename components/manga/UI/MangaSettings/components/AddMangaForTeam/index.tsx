@@ -48,7 +48,9 @@ const AddMangaForTeam = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const handleAddMangaForTeam = async (e: any) => {
+  const handleAddMangaForTeam = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
       const payload = await { mangaId: router.query.id, teamId };

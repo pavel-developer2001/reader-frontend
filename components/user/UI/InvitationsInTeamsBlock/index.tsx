@@ -27,14 +27,16 @@ const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = ({
   name,
 }) => {
   const dispatch = useDispatch();
-  const handleAgreetoJoin = async (e: any) => {
+  const handleAgreetoJoin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       const payload = await { invitationId, rank, teamId, userId: dataUser.id };
       await dispatch(agreeToJoin(payload));
     } catch (error) {}
   };
-  const handleRefucalToJoin = async (e: any) => {
+  const handleRefucalToJoin = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
       await dispatch(refucalToJoin(invitationId));

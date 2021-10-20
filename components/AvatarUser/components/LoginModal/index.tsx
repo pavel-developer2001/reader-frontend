@@ -2,7 +2,7 @@ import { GoogleOutlined, TwitterOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import Modal from "antd/lib/modal";
 import { useRouter } from "next/dist/client/router";
-import React, { FC, FormEvent, useState } from "react";
+import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUsers, registerUsers } from "../../../../store/slices/userSlice";
 
@@ -32,7 +32,7 @@ const LoginModal: FC<LoginModalProps> = ({
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const handleRegistration = async (e: any) => {
+  const handleRegistration = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       if (password === password2) {
@@ -51,7 +51,7 @@ const LoginModal: FC<LoginModalProps> = ({
       }
     } catch (error) {}
   };
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       const payload = await {
@@ -81,7 +81,9 @@ const LoginModal: FC<LoginModalProps> = ({
             label='Логин'
             name='name'
             value={name}
-            onChange={(e: any) => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
             rules={[{ required: true, message: "Please input your name!" }]}
           >
             <Input />
@@ -90,7 +92,9 @@ const LoginModal: FC<LoginModalProps> = ({
             name='email'
             label='Email'
             value={email}
-            onChange={(e: any) => setEmail(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
             rules={[
               {
                 type: "email",
@@ -105,7 +109,9 @@ const LoginModal: FC<LoginModalProps> = ({
             label='Пароль'
             name='password'
             value={password}
-            onChange={(e: any) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password />
@@ -114,7 +120,9 @@ const LoginModal: FC<LoginModalProps> = ({
             label='Повторить пароль'
             name='password2'
             value={password2}
-            onChange={(e: any) => setPassword2(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword2(e.target.value)
+            }
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password />
@@ -146,7 +154,9 @@ const LoginModal: FC<LoginModalProps> = ({
               label='Email'
               name='email'
               value={email}
-              onChange={(e: any) => setEmail(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value)
+              }
               rules={[
                 {
                   type: "email",
@@ -162,7 +172,9 @@ const LoginModal: FC<LoginModalProps> = ({
               label='Пароль'
               name='password'
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value)
+              }
               rules={[
                 { required: true, message: "Please input your password!" },
               ]}

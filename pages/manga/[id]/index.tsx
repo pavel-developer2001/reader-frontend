@@ -25,9 +25,7 @@ const { TabPane } = Tabs;
 
 const PageManga = () => {
   const dispatch = useDispatch();
-  const manga = useSelector<RootState, IManga[]>(
-    (state) => state.manga.manga.manga
-  );
+  const manga = useSelector<RootState, any>((state) => state.manga.manga.manga);
   const tag = useSelector<RootState, ITag[]>((state) => state.manga.manga.tag);
   const genre = useSelector<RootState, IGenre[]>(
     (state) => state.manga.manga.genre

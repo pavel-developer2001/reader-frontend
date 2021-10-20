@@ -14,7 +14,7 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
   const dispatch = useDispatch();
   const [spoiler, setSpoiler] = useState(false);
   const [commentText, setCommentText] = useState("");
-  const handleAddComment = async (e: any) => {
+  const handleAddComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       const payload: {

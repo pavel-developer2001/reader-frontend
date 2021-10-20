@@ -12,4 +12,5 @@ export interface IManga {
   updatedAt: string;
   userId: number;
   watchCount: "0";
+  yearOfIssue: string;
 }
