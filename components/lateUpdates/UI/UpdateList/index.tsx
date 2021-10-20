@@ -2,10 +2,21 @@ import moment from "moment";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IUpdateChapter } from "../../../../models/IChapter";
+import { RootState } from "../../../../store/reducer";
 import { getUpdateChapters } from "../../../../store/slices/chapterSlice";
 import styles from "./UpdateList.module.scss";
 
-export const UpdateListItem: FC<any> = ({
+interface UpdateListItemProps {
+  chapterId: number;
+  volumeChapter: string;
+  numberChapter: string;
+  mangaId: number;
+  cover: string;
+  titleManga: string;
+  date: string;
+}
+export const UpdateListItem: FC<UpdateListItemProps> = ({
   chapterId,
   volumeChapter,
   numberChapter,
@@ -41,10 +52,10 @@ export const UpdateListItem: FC<any> = ({
 
 const UpdateList = () => {
   const dispatch = useDispatch();
-  const updateChapter = useSelector<any>(
+  const updateChapter = useSelector<RootState, IUpdateChapter[]>(
     (state) => state.chapter.updateChapter
   );
-  const loading = useSelector<any>((state) => state.chapter.loading);
+  const loading = useSelector<RootState>((state) => state.chapter.loading);
   useEffect(() => {
     dispatch(getUpdateChapters());
   }, []);
@@ -53,7 +64,7 @@ const UpdateList = () => {
       {loading ? (
         <p>Loading</p>
       ) : updateChapter.length > 0 ? (
-        updateChapter.map((lateChapter: any) => (
+        updateChapter.map((lateChapter) => (
           <UpdateListItem
             key={lateChapter.id}
             chapterId={lateChapter.id}

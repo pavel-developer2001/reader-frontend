@@ -7,6 +7,8 @@ import {
   getTeamsForUser,
 } from "../../../../../../store/slices/teamSlice";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
+import { RootState } from "../../../../../../store/reducer";
+import { ITeamsForUser } from "../../../../../../models/ITeam";
 const { Option } = Select;
 
 const InvitationBtn = () => {
@@ -21,15 +23,25 @@ const InvitationBtn = () => {
     { role: "Редактор" },
   ];
   const dispatch = useDispatch();
-  const teams = useSelector<any>((state) => state.team.teamsUser);
-  const loading = useSelector<any>((state) => state.team.loading);
+  const teams = useSelector<RootState, ITeamsForUser[]>(
+    (state) => state.team.teamsUser
+  );
+  const loading = useSelector<RootState>((state) => state.team.loading);
   useEffect(() => {
-    dispatch(getTeamsForUser(dataUser.id));
+    if (dataUser) {
+      dispatch(getTeamsForUser(dataUser.id));
+    }
   }, []);
-  const handleAddInvitation = async (e: any) => {
+  const handleAddInvitation = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
-      const payload = await { rank, teamId, userId: dataUser.id };
+      const payload: { rank: string; teamId: number; userId: number } = await {
+        rank,
+        teamId,
+        userId: dataUser.id,
+      };
       dispatch(addInvitation(payload));
       setIsModalVisible(false);
       setRank("");
@@ -77,7 +89,7 @@ const InvitationBtn = () => {
           style={{ width: 200 }}
           placeholder='Выбрать команду'
           optionFilterProp='children'
-          onChange={(value) => setTeamId(value)}
+          onChange={(value: string) => setTeamId(value)}
           onFocus={onFocus}
           onBlur={onBlur}
           onSearch={onSearch}
@@ -86,8 +98,8 @@ const InvitationBtn = () => {
           }
         >
           {teams
-            .filter((item: any) => item.roleInTeam == "Глава")
-            .map((team: any) => (
+            .filter((item) => item.roleInTeam == "Глава")
+            .map((team) => (
               <Option key={team.id} value={team.team.id}>
                 {team.team.teamName}
               </Option>
@@ -99,7 +111,7 @@ const InvitationBtn = () => {
           style={{ width: 200 }}
           placeholder='Должность'
           optionFilterProp='children'
-          onChange={(value) => setRank(value)}
+          onChange={(value: string) => setRank(value)}
           onFocus={onFocus}
           onBlur={onBlur}
           onSearch={onSearch}
@@ -107,7 +119,7 @@ const InvitationBtn = () => {
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
-          {rankArray.map((rank: any, index) => (
+          {rankArray.map((rank, index) => (
             <Option key={index} value={rank.role}>
               {rank.role}
             </Option>

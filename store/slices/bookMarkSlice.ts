@@ -1,43 +1,53 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { IBookMark } from "../../models/IBookMark";
 import BookMarksApi from "../../services/api/bookMarksApi";
 
 export const addBookMark = createAsyncThunk(
   "bookMark/addBookMark",
-  async (payload) => {
+  async (payload: { category: string; mangaId: number; userId: number }) => {
     return await BookMarksApi.addBookMarkForUser(payload);
   }
 );
 export const updateBookMark = createAsyncThunk(
   "bookMark/updateBookMark",
-  async (payload) => {
+  async (payload: { category: string; mangaId: number; userId: number }) => {
     return await BookMarksApi.updateBookMark(payload);
   }
 );
 export const getBookMarks = createAsyncThunk(
   "bookMark/getBookMarks",
-  async (id) => {
+  async (id: string | string[] | undefined) => {
     return await BookMarksApi.getAllBookMarksForUser(id);
   }
 );
 export const getBookMarkToManga = createAsyncThunk(
   "bookMark/getBookMarkToManga",
-  async (dataManga) => {
+  async (dataManga: {
+    mangaId: string | string[] | undefined;
+    userId: number;
+  }) => {
     return await BookMarksApi.getBookMarkForManga(
       dataManga.mangaId,
       dataManga.userId
     );
   }
 );
-
+interface BookMarkState {
+  bookMarks: IBookMark[];
+  bookMark: IBookMark[];
+  status: null | string;
+  loading: boolean;
+}
+const initialState: BookMarkState = {
+  bookMarks: [],
+  bookMark: [],
+  status: null,
+  loading: true,
+};
 const bookMarkSlice = createSlice({
   name: "bookMark",
-  initialState: {
-    bookMarks: [],
-    bookMark: [],
-    status: null,
-    loading: true,
-  },
+  initialState,
   reducers: {
     setBookMarks(state, action) {
       state.bookMarks = action.payload;
@@ -51,7 +61,7 @@ const bookMarkSlice = createSlice({
 
   extraReducers: (builder) =>
     builder
-      .addCase(HYDRATE, (state, action) => {
+      .addCase(HYDRATE, (state, action: any) => {
         state.bookMarks = action.payload.bookMark.bookMarks;
         state.loading = false;
       })

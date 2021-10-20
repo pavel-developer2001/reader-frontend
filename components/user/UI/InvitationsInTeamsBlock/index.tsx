@@ -3,6 +3,8 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ITeamInvitationsForUser } from "../../../../models/ITeam";
+import { RootState } from "../../../../store/reducer";
 import {
   agreeToJoin,
   getInvitationsForUser,
@@ -12,21 +14,29 @@ import { dataUser } from "../../../../utils/getDataUserFromToken";
 import InvitationBtn from "./components/InvitationBtn";
 import styles from "./InvitationsInTeamsBlock.module.scss";
 
-const InvitationsInTeamsBlockItem: FC<any> = ({
+interface InvitationsInTeamsBlockItemProps {
+  invitationId: number;
+  rank: string;
+  teamId: number;
+  name: string;
+}
+const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = ({
   invitationId,
   rank,
   teamId,
   name,
 }) => {
   const dispatch = useDispatch();
-  const handleAgreetoJoin = async (e: any) => {
+  const handleAgreetoJoin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       const payload = await { invitationId, rank, teamId, userId: dataUser.id };
       await dispatch(agreeToJoin(payload));
     } catch (error) {}
   };
-  const handleRefucalToJoin = async (e: any) => {
+  const handleRefucalToJoin = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
       await dispatch(refucalToJoin(invitationId));
@@ -55,8 +65,10 @@ const InvitationsInTeamsBlockItem: FC<any> = ({
 const InvitationsInTeamsBlock = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const invitaions = useSelector<any>((state) => state.team.teamInvitations);
-  const loading = useSelector<any>((state) => state.team.loading);
+  const invitaions = useSelector<RootState, ITeamInvitationsForUser[]>(
+    (state) => state.team.teamInvitations
+  );
+  const loading = useSelector<RootState>((state) => state.team.loading);
   useEffect(() => {
     dispatch(getInvitationsForUser(router.query.id));
   }, [router]);
@@ -67,7 +79,7 @@ const InvitationsInTeamsBlock = () => {
         {loading ? (
           <p>loading</p>
         ) : invitaions?.length > 0 ? (
-          invitaions?.map((invitation: any) => (
+          invitaions?.map((invitation) => (
             <InvitationsInTeamsBlockItem
               key={invitation.id}
               invitationId={invitation.id}

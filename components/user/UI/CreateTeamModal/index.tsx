@@ -30,7 +30,7 @@ const CreateTeamModal = () => {
   const [teamSubtitle, setTeamSubtitle] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
 
-  const handleAddTeam = async (e: any) => {
+  const handleAddTeam = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       if (teamName === "") {

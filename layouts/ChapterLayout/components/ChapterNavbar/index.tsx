@@ -11,7 +11,12 @@ import { Theme } from "../../../../context/ThemeContext";
 import { useTheme } from "../../../../hooks/useTheme";
 import AvatarUser from "../../../../components/AvatarUser";
 
-const ChapterNavbar: FC<any> = ({ title, page, id }) => {
+interface ChapterNavbarProps {
+  title: string;
+  page: string;
+  id: string | string[] | undefined;
+}
+const ChapterNavbar: FC<ChapterNavbarProps> = ({ title, page, id }) => {
   const theme = useTheme();
   function changeTheme() {
     theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);

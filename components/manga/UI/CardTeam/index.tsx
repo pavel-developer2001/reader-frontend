@@ -3,7 +3,13 @@ import Link from "next/link";
 import React, { FC } from "react";
 import styles from "./CardTeam.module.scss";
 
-const CardTeam: FC<any> = ({ teamId, name, subtitle, cover }) => {
+interface CardTeamProps {
+  teamId: number;
+  name: string;
+  subtitle: string;
+  cover: string;
+}
+const CardTeam: FC<CardTeamProps> = ({ teamId, name, subtitle, cover }) => {
   return (
     <Link href={"/team/" + teamId}>
       <a className={styles.main}>

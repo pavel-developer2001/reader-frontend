@@ -9,7 +9,6 @@ import { GetServerSideProps } from "next";
 import PopularList from "../components/home/UI/PopularList";
 import TisketList from "../components/home/UI/TisketList";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 const Home: NextPage = () => {
   return (

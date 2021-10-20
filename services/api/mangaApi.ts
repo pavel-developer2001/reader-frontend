@@ -13,7 +13,7 @@ export default class MangaApi {
   static async getAllManga() {
     return ReaderApi.get("/mangas/");
   }
-  static async getManga(id: any) {
+  static async getManga(id: string | string[] | undefined) {
     return ReaderApi.get("/mangas/" + id);
   }
 }

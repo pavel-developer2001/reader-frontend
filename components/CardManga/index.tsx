@@ -3,8 +3,12 @@ import Meta from "antd/lib/card/Meta";
 import React, { FC } from "react";
 import Link from "next/link";
 import styles from "./CardManga.module.css";
+import { IManga } from "../../models/IManga";
 
-const CardManga: FC<any> = ({ manga }) => {
+interface CardMangaProps {
+  manga: IManga;
+}
+const CardManga: FC<CardMangaProps> = ({ manga }) => {
   return (
     <Link href={"/manga/" + manga.id}>
       <a>

@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { IChapter, IUpdateChapter } from "../../models/IChapter";
+import { IImage } from "../../models/IImage";
 import ChapterApi from "../../services/api/chapterApi";
 
 export const addNewChapter = createAsyncThunk(
@@ -10,28 +12,39 @@ export const addNewChapter = createAsyncThunk(
 );
 export const getChapters = createAsyncThunk(
   "chapter/getChapters",
-  async (id) => {
+  async (id: string | string[]) => {
     return await ChapterApi.getChaptersForManga(id);
   }
 );
-export const getImages = createAsyncThunk("chapter/getImages ", async (id) => {
-  return await ChapterApi.getImagesForChapter(id);
-});
+export const getImages = createAsyncThunk(
+  "chapter/getImages ",
+  async (id: string | string[]) => {
+    return await ChapterApi.getImagesForChapter(id);
+  }
+);
 export const getUpdateChapters = createAsyncThunk(
   "chapter/getUpdateChapters",
   async () => {
     return await ChapterApi.getLaterChapters();
   }
 );
+interface ChapterState {
+  chapters: IChapter[];
+  status: null;
+  loading: boolean;
+  images: IImage[];
+  updateChapter: IUpdateChapter[];
+}
+const initialState: ChapterState = {
+  chapters: [],
+  status: null,
+  loading: true,
+  images: [],
+  updateChapter: [],
+};
 const chapterSlice = createSlice({
   name: "chapter",
-  initialState: {
-    chapters: [],
-    status: null,
-    loading: true,
-    images: [],
-    updateChapter: [],
-  },
+  initialState,
   reducers: {
     setChapters(state, action) {
       state.chapters = action.payload;
@@ -49,7 +62,7 @@ const chapterSlice = createSlice({
 
   extraReducers: (builder) =>
     builder
-      .addCase(HYDRATE, (state, action) => {
+      .addCase(HYDRATE, (state, action: any) => {
         state.chapters = action.payload.chapter.chapters;
         state.loading = false;
       })
@@ -65,7 +78,7 @@ const chapterSlice = createSlice({
         state.updateChapter = action.payload.data;
         state.loading = false;
       })
-      .addCase(addNewChapter.fulfilled, (state, action) => {
+      .addCase(addNewChapter.fulfilled, (state, action: any) => {
         state.chapters.push(action.payload);
       }),
 });

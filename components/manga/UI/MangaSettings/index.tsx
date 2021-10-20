@@ -5,6 +5,8 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IBookMark } from "../../../../models/IBookMark";
+import { RootState } from "../../../../store/reducer";
 import {
   addBookMark,
   getBookMarkToManga,
@@ -14,10 +16,16 @@ import { dataUser } from "../../../../utils/getDataUserFromToken";
 import AddMangaForTeam from "./components/AddMangaForTeam";
 import styles from "./MangaSettings.module.scss";
 
-const MangaSettings: FC<any> = ({ cover, id }) => {
+interface MangaSettingsProps {
+  cover: string;
+  id: number;
+}
+const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   const dispatch = useDispatch();
-  const bookMark = useSelector<any>((state) => state.bookMark.bookMark);
-  const loading = useSelector<any>((state) => state.bookMark.loading);
+  const bookMark = useSelector<RootState, IBookMark[]>(
+    (state) => state.bookMark.bookMark
+  );
+  const loading = useSelector<RootState>((state) => state.bookMark.loading);
   const { Option } = Select;
 
   function onBlur() {
@@ -41,13 +49,14 @@ const MangaSettings: FC<any> = ({ cover, id }) => {
     }
   };
 
-  function onSearch(val: any) {
+  function onSearch(val: string) {
     console.log("search:", val);
   }
   const router = useRouter();
   const [category, setCategory] = useState("");
 
-  const dataManga = { mangaId: router.query.id, userId: dataUser.id };
+  const dataManga: { mangaId: string | string[] | undefined; userId: number } =
+    { mangaId: router.query.id, userId: dataUser.id };
   useEffect(() => {
     dispatch(getBookMarkToManga(dataManga));
   }, [router, loading]);

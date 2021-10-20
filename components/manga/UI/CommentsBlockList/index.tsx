@@ -21,8 +21,20 @@ import {
   getComments,
   updateComment,
 } from "../../../../store/slices/commentSlice";
+import { RootState } from "../../../../store/reducer";
+import { IComment } from "../../../../models/IComment";
 
-const CommentsBlock: FC<any> = ({
+interface CommentsBlockProps {
+  commentId: number;
+  text: string;
+  commentSpoiler: boolean;
+  commentLikes: number;
+  date: string;
+  userAvatar: string;
+  userName: string;
+  userId: number;
+}
+const CommentsBlock: FC<CommentsBlockProps> = ({
   commentId,
   text,
   commentSpoiler,
@@ -68,7 +80,9 @@ const CommentsBlock: FC<any> = ({
       await dispatch(deleteComment(commentId));
     } catch (error) {}
   };
-  const handleUpdateComment = async (e: any) => {
+  const handleUpdateComment = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
       const data = { id: commentId, payload: { commentText, spoiler } };
@@ -79,7 +93,7 @@ const CommentsBlock: FC<any> = ({
   return (
     <div>
       <Comment
-        actions={!edit ? actions : null}
+        actions={!edit ? actions : undefined}
         author={
           <Link href={"/user/" + userId}>
             <a className={styles.userName}>{userName}</a>
@@ -167,8 +181,10 @@ const CommentBlockList = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const mangaId = router.query.id;
-  const comments = useSelector<any>((state) => state.comment.comments);
-  const loading = useSelector<any>((state) => state.comment.loading);
+  const comments = useSelector<RootState, IComment[]>(
+    (state) => state.comment.comments
+  );
+  const loading = useSelector<RootState>((state) => state.comment.loading);
   useEffect(() => {
     if (mangaId) {
       dispatch(getComments(mangaId));

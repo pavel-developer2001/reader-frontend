@@ -1,78 +1,119 @@
+import { IChapter } from "./../../models/IChapter";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { IManga } from "../../models/IManga";
+import { IMember } from "../../models/IMember";
+import {
+  ITeam,
+  ITeamInvitationsForUser,
+  ITeamsForManga,
+  ITeamsForUser,
+} from "../../models/ITeam";
 import TeamApi from "../../services/api/teamApi";
 
 export const addNewTeam = createAsyncThunk(
   "team/addNewTeam",
-  async (payload) => {
+  async (payload: {
+    teamName: string;
+    teamSubtitle: string;
+    teamDescription: string;
+    userId: number;
+  }) => {
     return await TeamApi.createTeam(payload);
   }
 );
 export const getTeams = createAsyncThunk("team/getTeams", async () => {
   return await TeamApi.getAllTeam();
 });
-export const getTeam = createAsyncThunk("team/getTeam", async (id) => {
-  return await TeamApi.getTeam(id);
-});
+export const getTeam = createAsyncThunk(
+  "team/getTeam",
+  async (id: string | string[] | undefined) => {
+    return await TeamApi.getTeam(id);
+  }
+);
 export const getTeamsForUser = createAsyncThunk(
   "team/getTeamsForUser",
-  async (id) => {
+  async (id: string | string[] | undefined) => {
     return await TeamApi.getAllTeamsForUser(id);
   }
 );
 export const connectMangaForTeam = createAsyncThunk(
   "team/connectMangaForTeam",
-  async (payload) => {
+  async (payload: {
+    mangaId: string | string[] | undefined;
+    teamId: string | undefined;
+  }) => {
     return await TeamApi.addTeamForManga(payload);
   }
 );
 export const getTeamsForManga = createAsyncThunk(
   "team/getTeamsForManga",
-  async (id) => {
+  async (id: string | string[] | undefined) => {
     return await TeamApi.getAllTeamsForManga(id);
   }
 );
 export const addInvitation = createAsyncThunk(
   "team/addInvitation",
-  async (payload) => {
+  async (payload: { rank: string; teamId: number; userId: number }) => {
     return await TeamApi.addInvitationForUser(payload);
   }
 );
 export const getInvitationsForUser = createAsyncThunk(
   "team/getInvitationsForUser",
-  async (id) => {
+  async (id: string | string[] | undefined) => {
     return await TeamApi.getAllInvitationsForUser(id);
   }
 );
 export const agreeToJoin = createAsyncThunk(
   "team/agreeToJoin",
-  async (payload) => {
+  async (payload: {
+    invitationId: number;
+    rank: string;
+    teamId: number;
+    userId: number;
+  }) => {
     return await TeamApi.agreeToJoinToTeam(payload);
   }
 );
 export const refucalToJoin = createAsyncThunk(
   "team/refucalToJoin",
-  async (id) => {
+  async (id: number) => {
     return await TeamApi.refucalToJoinTeam(id);
   }
 );
 export const removeMember = createAsyncThunk(
   "team/removeMember",
-  async (id) => {
+  async (id: string) => {
     return await TeamApi.deleteMemberFromTeam(id);
   }
 );
+interface TeamItems {
+  team: ITeam[];
+  members: IMember[];
+  mangas: IManga[];
+  chapters: IChapter[];
+}
+interface TeamState {
+  teams: ITeam[];
+  team: TeamItems;
+  teamsUser: ITeamsForUser[];
+  teamsManga: ITeamsForManga[];
+  teamInvitations: ITeamInvitationsForUser[];
+  status: null;
+  loading: boolean;
+}
+const initialState: TeamState = {
+  teams: [],
+  team: { team: [], members: [], mangas: [], chapters: [] },
+  teamsUser: [],
+  teamsManga: [],
+  teamInvitations: [],
+  status: null,
+  loading: true,
+};
 const teamSlice = createSlice({
   name: "team",
-  initialState: {
-    teams: [],
-    team: { team: [], members: [], mangas: [] },
-    teamsUser: [],
-    teamsManga: [],
-    teamInvitations: [],
-    status: null,
-    loading: true,
-  },
+  initialState,
   reducers: {
     setTeams(state, action) {
       state.teams = action.payload;
@@ -82,7 +123,7 @@ const teamSlice = createSlice({
 
   extraReducers: (builder) =>
     builder
-      .addCase(HYDRATE, (state, action) => {
+      .addCase(HYDRATE, (state, action: any) => {
         state.teams = action.payload.team.teams;
         state.loading = false;
       })

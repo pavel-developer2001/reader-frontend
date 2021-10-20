@@ -11,16 +11,20 @@ import { getMangas, setMangas } from "../../store/slices/mangaSlice";
 import styles from "./Catalog.module.css";
 import { Tabs } from "antd";
 import TeamList from "../../components/catalog/UI/TeamList";
+import { RootState } from "../../store/reducer";
+import { IManga } from "../../models/IManga";
 
 const { TabPane } = Tabs;
 
-function callback(key: any) {
+function callback(key: string) {
   console.log(key);
 }
 
 const Catalog = () => {
-  const mangas = useSelector<any>((state) => state.manga.mangas);
-  const loading = useSelector<any>((state) => state.manga.loading);
+  const mangas = useSelector<RootState, IManga[]>(
+    (state) => state.manga.mangas
+  );
+  const loading = useSelector<RootState>((state) => state.manga.loading);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMangas());
@@ -35,7 +39,7 @@ const Catalog = () => {
               {loading ? (
                 <p>loading</p>
               ) : (
-                mangas?.map((manga: any) => (
+                mangas?.map((manga) => (
                   <CardManga key={manga.id} manga={manga} />
                 ))
               )}

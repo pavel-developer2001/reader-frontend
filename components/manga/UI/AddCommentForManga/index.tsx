@@ -7,14 +7,22 @@ import { addComment } from "../../../../store/slices/commentSlice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import styles from "./AddCommentForManga.module.scss";
 
-const AddCommentForManga: FC<any> = ({ mangaId }) => {
+interface AddCommentForMangaProps {
+  mangaId: string | string[] | undefined;
+}
+const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
   const dispatch = useDispatch();
   const [spoiler, setSpoiler] = useState(false);
   const [commentText, setCommentText] = useState("");
-  const handleAddComment = async (e: any) => {
+  const handleAddComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const payload = { commentText, spoiler, mangaId, userId: dataUser.id };
+      const payload: {
+        commentText: string;
+        mangaId: string | string[] | undefined;
+        spoiler: boolean;
+        userId: number;
+      } = { commentText, spoiler, mangaId, userId: dataUser.id };
       await dispatch(addComment(payload));
       setCommentText("");
       setSpoiler(false);

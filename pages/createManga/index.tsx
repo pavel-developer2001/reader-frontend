@@ -10,7 +10,7 @@ import { addNewManga } from "../../store/slices/mangaSlice";
 import { useRouter } from "next/dist/client/router";
 const { Option } = Select;
 
-function getBase64(img: any, callback: any) {
+function getBase64(img: Blob, callback: any) {
   const reader = new FileReader();
   reader.addEventListener("load", () => callback(reader.result));
   reader.readAsDataURL(img);
@@ -102,7 +102,7 @@ const CreateManga = () => {
     console.log("focus");
   }
 
-  function onSearch(val: any) {
+  function onSearch(val: string) {
     console.log("search:", val);
   }
   const childrenGenres = [];
@@ -130,7 +130,9 @@ const CreateManga = () => {
   const [mangaDescription, setMangaDescription] = useState("");
   const [yearOfIssue, setYearOfIssue] = useState("");
   const [mangaCover, setMangaCover] = useState("");
-  const handleCreateNewManga = async (e: any) => {
+  const handleCreateNewManga = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
       if (title === "") {
@@ -179,7 +181,7 @@ const CreateManga = () => {
       return;
     }
     if (e.file.status === "done") {
-      getBase64(e.file.originFileObj, (imageUrl: any) => {
+      getBase64(e.file.originFileObj, (imageUrl: string) => {
         setImageUrl(imageUrl);
         setLoading(false);
       });

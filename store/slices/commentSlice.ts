@@ -1,39 +1,53 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { IComment } from "../../models/IComment";
 import CommentsApi from "../../services/api/commentsApi";
 
 export const getComments = createAsyncThunk(
   "comment/getComments",
-  async (id) => {
+  async (id: string | string[]) => {
     return await CommentsApi.getAllCommentsForManga(id);
   }
 );
 export const addComment = createAsyncThunk(
   "comment/addComment",
-  async (payload) => {
+  async (payload: {
+    commentText: string;
+    mangaId: string | string[] | undefined;
+    spoiler: boolean;
+    userId: number;
+  }) => {
     return await CommentsApi.addCommentForManga(payload);
   }
 );
 export const updateComment = createAsyncThunk(
   "comment/updateComment",
-  async (data) => {
+  async (data: {
+    id: number;
+    payload: { commentText: string; spoiler: boolean };
+  }) => {
     return await CommentsApi.updateCommentForManga(data.id, data.payload);
   }
 );
 export const deleteComment = createAsyncThunk(
   "comment/deleteComment",
-  async (id) => {
+  async (id: number) => {
     return await CommentsApi.deleteCommentForManga(id);
   }
 );
-
+interface CommentState {
+  comments: IComment[];
+  status: null | string;
+  loading: boolean;
+}
+const initialState: CommentState = {
+  comments: [],
+  status: null,
+  loading: true,
+};
 const commentSlice = createSlice({
   name: "comment",
-  initialState: {
-    comments: [],
-    status: null,
-    loading: true,
-  },
+  initialState,
   reducers: {
     setComments(state, action) {
       state.comments = action.payload;
@@ -43,7 +57,7 @@ const commentSlice = createSlice({
 
   extraReducers: (builder) =>
     builder
-      .addCase(HYDRATE, (state, action) => {
+      .addCase(HYDRATE, (state, action: any) => {
         state.comments = action.payload.comment.comments;
         state.loading = false;
       })

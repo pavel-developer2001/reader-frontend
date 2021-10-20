@@ -1,15 +1,15 @@
 import Head from "next/head";
-import React from "react";
+import React, { ReactNode } from "react";
 import ChapterNavbar from "./components/ChapterNavbar";
 import MyFooter from "../../components/MyFooter";
 import styles from "./ChapterLayout.module.scss";
 import SettingPage from "./components/SettingsPage";
 
 interface ChapterLayoutProps {
-  children: any;
+  children: ReactNode;
   title: string;
-  page: any;
-  id: any;
+  page: string;
+  id: string | string[] | undefined;
 }
 const ChapterLayout: React.FC<ChapterLayoutProps> = ({
   title,

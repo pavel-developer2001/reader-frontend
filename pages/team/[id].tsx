@@ -1,6 +1,5 @@
-import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Typography } from "antd";
-const { Title, Paragraph, Text, Link } = Typography;
+const { Title, Paragraph, Text } = Typography;
 import React, { useEffect } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import styles from "./Team.module.css";
@@ -11,18 +10,20 @@ import { getTeam } from "../../store/slices/teamSlice";
 import MemberBlock from "../../components/team/UI/MemberBlock";
 import CardManga from "../../components/CardManga";
 import { UpdateListItem } from "../../components/lateUpdates/UI/UpdateList";
+import { RootState } from "../../store/reducer";
+import { ITeam } from "../../models/ITeam";
 
 const { TabPane } = Tabs;
 
-function callback(key: any) {
+function callback(key: string) {
   console.log(key);
 }
 
 const Team = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const team = useSelector<any>((state) => state.team.team);
-  const loading = useSelector<any>((state) => state.team.loading);
+  const team = useSelector<RootState>((state) => state.team.team);
+  const loading = useSelector<RootState>((state) => state.team.loading);
   useEffect(() => {
     dispatch(getTeam(router.query.id));
   }, [router.query.id]);
