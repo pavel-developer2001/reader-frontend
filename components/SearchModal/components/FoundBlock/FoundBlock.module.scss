@@ -1,0 +1,16 @@
+.mainList {
+  margin-top: 25px;
+}
+.main {
+  display: flex;
+  align-items: center;
+  background-color: var(#{--components-background-default});
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  strong {
+    color: var(#{--text-secondary-color-default}) !important;
+    margin-left: 10px;
+    font-size: 16px;
+  }
+}

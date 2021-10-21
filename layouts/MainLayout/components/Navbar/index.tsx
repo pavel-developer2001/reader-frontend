@@ -11,6 +11,7 @@ import styles from "./Navbar.module.scss";
 import { Theme } from "../../../../context/ThemeContext";
 import { useTheme } from "../../../../hooks/useTheme";
 import AvatarUser from "../../../../components/AvatarUser";
+import SearchModal from "../../../../components/SearchModal";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -55,7 +56,7 @@ const Navbar = () => {
           </div>
           <div className={styles.rightHeader}>
             <div className={styles.menu}>
-              <SearchOutlined /> Поиск
+              <SearchModal />
             </div>
             <div className={styles.menu}>
               <Link href='/notification'>
