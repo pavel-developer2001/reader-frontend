@@ -1,5 +1,5 @@
 import { SendOutlined } from "@ant-design/icons";
-import { Button, Switch } from "antd";
+import { Button, message, Switch } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -24,9 +24,12 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
         userId: number;
       } = { commentText, spoiler, mangaId, userId: dataUser.id };
       await dispatch(addComment(payload));
+      message.success("Комментарий был создан");
       setCommentText("");
       setSpoiler(false);
-    } catch (error) {}
+    } catch (e: any) {
+      message.error("Произошла ошибка", e);
+    }
   };
   return (
     <div className={styles.addComment}>

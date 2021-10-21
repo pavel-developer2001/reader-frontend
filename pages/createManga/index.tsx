@@ -156,6 +156,7 @@ const CreateManga = () => {
       formData.append("userId", dataUser.id);
       formData.append("mangaCover", mangaCover);
       dispatch(addNewManga(formData));
+      message.success("Тайтл был успешно добавлен на сайт");
       setTitle("");
       setEnglishTitle("");
       setOriginalTitle("");
@@ -163,7 +164,9 @@ const CreateManga = () => {
       setYearOfIssue("");
       setImageUrl("");
       router.push("/");
-    } catch (error) {}
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   ////////////////////////
   const [loading, setLoading] = useState<boolean | null>();
@@ -190,7 +193,7 @@ const CreateManga = () => {
   return (
     <MainLayout>
       <div className={styles.content}>
-        <h2 className={styles.title}>Добавить мангу на сайт</h2>
+        <h2 className={styles.title}>Добавить тайтл на сайт</h2>
         <div className={styles.topBlock}>
           <div className={styles.upload}>
             <Upload

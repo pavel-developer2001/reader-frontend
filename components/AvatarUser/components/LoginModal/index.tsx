@@ -1,5 +1,5 @@
 import { GoogleOutlined, TwitterOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import Modal from "antd/lib/modal";
 import { useRouter } from "next/dist/client/router";
 import React, { FC, useState } from "react";
@@ -42,6 +42,7 @@ const LoginModal: FC<LoginModalProps> = ({
           password,
         };
         dispatch(registerUsers(payload));
+        message.success("Вы успешно создали свои аккаунт");
         setName("");
         setEmail("");
         setPassword("");
@@ -49,7 +50,9 @@ const LoginModal: FC<LoginModalProps> = ({
         setIsModalVisible(false);
         router.push("/");
       }
-    } catch (error) {}
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -59,9 +62,12 @@ const LoginModal: FC<LoginModalProps> = ({
         password,
       };
       dispatch(loginUsers(payload));
+      message.success("Вы успешно вошли в свой аккаунт");
       setEmail("");
       setPassword("");
-    } catch (error) {}
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   return (
     <Modal

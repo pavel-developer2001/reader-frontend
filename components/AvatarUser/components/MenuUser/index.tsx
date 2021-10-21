@@ -1,5 +1,5 @@
 import { ExportOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Menu, message } from "antd";
 import React from "react";
 import Link from "next/link";
 import styles from "./MenuUser.module.css";
@@ -12,6 +12,7 @@ const MenuUser = () => {
   const handleExitUser = () => {
     window.localStorage.removeItem("token");
     dispatch(setToken(""));
+    message.success("Вы вышли из аккаунта");
   };
   return (
     <div className={styles.block}>

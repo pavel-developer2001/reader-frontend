@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Rating.module.scss";
-import { Modal, Button } from "antd";
+import { Modal, Button, message } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
@@ -42,9 +42,11 @@ const Rating = () => {
     if (ratingCount !== null) {
       setIsModalVisible(false);
       dispatch(addRating(payload));
+      message.success("Ваша оценка для манги была добавлена");
     }
     if (ratingCount !== null && rating) {
       dispatch(updateRating(payload));
+      message.success("Ваша оценка была успешна обновлена");
     }
   }, [ratingCount]);
   const ratingArray = [

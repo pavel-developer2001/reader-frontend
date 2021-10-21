@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./InvitationBtn.module.scss";
-import { Modal, Button, Select } from "antd";
+import { Modal, Button, Select, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addInvitation,
@@ -43,10 +43,13 @@ const InvitationBtn = () => {
         userId: dataUser.id,
       };
       dispatch(addInvitation(payload));
+      message.success("Приглашение было создано");
       setIsModalVisible(false);
       setRank("");
       setTeamId("");
-    } catch (error) {}
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   function onBlur() {
     console.log("blur");
@@ -75,7 +78,7 @@ const InvitationBtn = () => {
     <div>
       {" "}
       <Button type='primary' onClick={showModal}>
-        Приглавсить в команду
+        Пригласить в команду
       </Button>
       <Modal
         title='Приглашение в команду'

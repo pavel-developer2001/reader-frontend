@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
@@ -32,7 +32,10 @@ const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = ({
     try {
       const payload = await { invitationId, rank, teamId, userId: dataUser.id };
       await dispatch(agreeToJoin(payload));
-    } catch (error) {}
+      message.success("Вы были успешно приняты в команду");
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   const handleRefucalToJoin = async (
     e: React.MouseEvent<HTMLButtonElement>
@@ -40,7 +43,10 @@ const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = ({
     e.preventDefault();
     try {
       await dispatch(refucalToJoin(invitationId));
-    } catch (error) {}
+      message.success("Отказ был принят");
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   return (
     <div className={styles.item}>

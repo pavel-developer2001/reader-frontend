@@ -1,5 +1,5 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Image, Modal, Tag } from "antd";
+import { Button, Image, message } from "antd";
 import { Select } from "antd";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
@@ -40,12 +40,15 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
     const payload = await { category: value, mangaId: id, userId: dataUser.id };
     if (bookMark == null) {
       await dispatch(addBookMark(payload));
+      message.success("Манга добавлена в закладки");
     }
-    if (payload.category != "Удалить из закладок") {
+    if (bookMark && payload.category != "Удалить из закладок") {
       await dispatch(updateBookMark(payload));
+      message.success("Манга была добавлена в другую категорию закладкок");
     }
     if (payload.category == "Удалить из закладок") {
       await dispatch(addBookMark(payload));
+      message.success("Манга была удалена из закладок");
     }
   };
 

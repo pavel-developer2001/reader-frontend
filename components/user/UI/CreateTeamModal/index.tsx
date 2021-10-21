@@ -43,13 +43,16 @@ const CreateTeamModal = () => {
       formData.append("userId", dataUser.id);
       formData.append("teamCover", teamCover);
       dispatch(addNewTeam(formData));
+      message.success("Команда была создана");
       setTeamName("");
       setTeamSubtitle("");
       setIsModalVisible(false);
       setTeamDescription("");
       setTeamCover("");
       setImageUrl("");
-    } catch (error) {}
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   ////////////////////////////////////////////////
   const uploadButton = (

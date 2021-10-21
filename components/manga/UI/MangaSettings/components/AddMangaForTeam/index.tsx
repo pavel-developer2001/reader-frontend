@@ -1,4 +1,4 @@
-import { Button, Modal } from "antd";
+import { Button, message, Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import styles from "./AddMangaForTeam.module.scss";
 import { Select } from "antd";
@@ -55,9 +55,12 @@ const AddMangaForTeam = () => {
     try {
       const payload = await { mangaId: router.query.id, teamId };
       await dispatch(connectMangaForTeam(payload));
+      message.success("Манга была в список команды для перевода");
       setTeamId("");
       setIsModalVisible(false);
-    } catch (error) {}
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   return !loading ? (
     <div>

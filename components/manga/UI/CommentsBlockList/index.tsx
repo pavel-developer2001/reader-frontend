@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Comment, Tooltip, Avatar, Switch, Button } from "antd";
+import { Comment, Tooltip, Avatar, Switch, Button, message } from "antd";
 import moment from "moment";
 import {
   DislikeOutlined,
@@ -78,7 +78,10 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
   const handleRemoveComment = async () => {
     try {
       await dispatch(deleteComment(commentId));
-    } catch (error) {}
+      message.success("Комментарий был удалён");
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   const handleUpdateComment = async (
     e: React.MouseEvent<HTMLButtonElement>
@@ -87,8 +90,11 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
     try {
       const data = { id: commentId, payload: { commentText, spoiler } };
       await dispatch(updateComment(data));
+      message.success("Комментарий был обновлён");
       setEdit(false);
-    } catch (error) {}
+    } catch (error: any) {
+      message.error("Произошла ошибка", error);
+    }
   };
   return (
     <div>
