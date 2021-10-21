@@ -1,0 +1,47 @@
+.main {
+  margin: 0 auto;
+  width: 65%;
+}
+.userData {
+  background-color: var(#{--components-background-default});
+  margin-bottom: 15px;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+.top {
+  display: flex;
+  border-radius: 8px;
+  padding: 5px 10px;
+  background-color: var(#{--components-background-default});
+  margin-bottom: 15px;
+  .select {
+    margin-right: 10px;
+  }
+}
+.bottom {
+  display: flex;
+  border-radius: 8px;
+  padding: 5px 10px;
+  background-color: var(#{--components-background-default});
+  margin-bottom: 15px;
+  .selectSecondary {
+    margin-right: 10px;
+  }
+}
+.text {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: var(#{--text-secondary-color-default}) !important;
+}
+// .modalSelect {
+//   width: 50%;
+// }
+.pages {
+  margin-top: 15px;
+}
+.btnCreate {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

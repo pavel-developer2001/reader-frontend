@@ -118,36 +118,152 @@ const AddNewChapter = () => {
   };
   return (
     <MainLayout>
-      <div onClick={() => router.push("/manga/" + mangaId)}>
-        Начало после конца
+      <div className={styles.main}>
+        <div
+          className={styles.userData}
+          onClick={() => router.push("/manga/" + mangaId)}
+        >
+          Начало после конца
+        </div>
+        <div className={styles.top}>
+          <div className={styles.select}>
+            <span className={styles.text}>Топ манги</span>
+            <TextArea
+              placeholder='Том'
+              autoSize
+              value={volumeChapter}
+              onChange={(e) => setVolumeChapter(e.target.value)}
+            />
+          </div>
+          <div className={styles.select}>
+            <span className={styles.text}>Глава манги</span>
+            <TextArea
+              placeholder='Глава'
+              autoSize
+              value={numberChapter}
+              onChange={(e) => setNumberChapter(e.target.value)}
+            />
+          </div>
+          <div className={styles.select}>
+            <span className={styles.text}>Выбрать язык</span>
+            <Select
+              showSearch
+              style={{ width: 200 }}
+              placeholder='Язык'
+              optionFilterProp='children'
+              onChange={(value: string) => setLanguage(value)}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              onSearch={onSearch}
+              filterOption={(input, option: any) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {languageArray.map((arr, index) => (
+                <Option key={index} value={arr.lang}>
+                  {arr.lang}
+                </Option>
+              ))}
+            </Select>
+          </div>
+        </div>
+        <div className={styles.bottom}>
+          <div className={styles.selectSecondary}>
+            <span className={styles.text}>Загаловок главы</span>
+            <TextArea
+              placeholder='Загаловок'
+              autoSize
+              value={titleChapter}
+              onChange={(e) => setTitleChapter(e.target.value)}
+            />
+          </div>
+          <div className={styles.selectSecondary}>
+            {loading ? (
+              <p>loading</p>
+            ) : (
+              <div className={styles.modalSelect}>
+                <span className={styles.text}>
+                  Выбрать команду, если вы состоите в команде
+                </span>
+                <Select
+                  showSearch
+                  style={{ width: 200 }}
+                  placeholder='Выбрать команду'
+                  optionFilterProp='children'
+                  onChange={(value) => setTeamId(value)}
+                  onFocus={onFocus}
+                  onBlur={onBlur}
+                  onSearch={onSearch}
+                  filterOption={(input, option: any) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {teams
+                    .filter((item) => item.roleInTeam == "Глава")
+                    .map((team) => (
+                      <Option key={team.id} value={team.team.id}>
+                        {team.team.teamName}
+                      </Option>
+                    ))}
+                </Select>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={styles.pages}>
+          <span className={styles.text}>Страницы главы</span>
+          <Upload
+            action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+            listType='picture-card'
+            fileList={imagesList}
+            onPreview={handlePreview}
+            onChange={handleChange}
+          >
+            {imagesList.length >= 8 ? null : uploadButton}
+          </Upload>
+          <Modal
+            visible={previewVisible}
+            title={previewTitle}
+            footer={null}
+            onCancel={handleCancel}
+          >
+            <img alt='example' style={{ width: "100%" }} src={previewImage} />
+          </Modal>
+        </div>
+        <div className={styles.btnCreate}>
+          <Button type='primary' onClick={handleNewChapter}>
+            Добавить главу
+          </Button>
+        </div>
       </div>
-      <div>
-        <TextArea
+      {/* <div>
+        {/* <TextArea
           placeholder='Том манги'
           autoSize
           value={volumeChapter}
           onChange={(e) => setVolumeChapter(e.target.value)}
-        />
-        <div style={{ margin: "24px 0" }} />
-        <TextArea
+        /> */}
+      {/* <div style={{ margin: "24px 0" }} /> */}
+      {/* <TextArea
           placeholder='Глава манги'
           autoSize
           value={numberChapter}
           onChange={(e) => setNumberChapter(e.target.value)}
-        />
-        <div style={{ margin: "24px 0" }} />
-        <TextArea
+        /> */}
+      {/* <div style={{ margin: "24px 0" }} /> */}
+      {/* <TextArea
           placeholder='Загаловок главы'
           autoSize
           value={titleChapter}
           onChange={(e) => setTitleChapter(e.target.value)}
-        />
-        <div style={{ margin: "24px 0" }} />
-        <div className={styles.footerBlock}>
-          {loading ? (
+        /> */}
+      {/* <div className={styles.footerBlock}> */}
+      {/* {loading ? (
             <p>loading</p>
           ) : (
-            <div className={styles.select}>
+            <div className={styles.modalSelect}>
               <div>Выбрать команду, если вы состоите в команде</div>
               <Select
                 showSearch
@@ -172,10 +288,9 @@ const AddNewChapter = () => {
                   ))}
               </Select>
             </div>
-          )}
-          <div className={styles.language}>
-            {" "}
-            <Select
+          )} */}
+      {/* <div className={styles.language}> */}{" "}
+      {/* <Select
               showSearch
               style={{ width: 200 }}
               placeholder='Выбрать язык'
@@ -193,14 +308,13 @@ const AddNewChapter = () => {
                   {arr.lang}
                 </Option>
               ))}
-            </Select>
-          </div>
-        </div>
-      </div>
-      <div>
-        {" "}
-        <>
-          <Upload
+            </Select> */}
+      {/* </div> */}
+      {/* </div> */}
+      {/* </div> */}
+      {/* <div> */}{" "}
+      <>
+        {/* <Upload
             action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
             listType='picture-card'
             fileList={imagesList}
@@ -216,14 +330,14 @@ const AddNewChapter = () => {
             onCancel={handleCancel}
           >
             <img alt='example' style={{ width: "100%" }} src={previewImage} />
-          </Modal>
-        </>
-      </div>
-      <div>
+          </Modal> */}
+      </>
+      {/* </div> */}
+      {/* <div>
         <Button type='primary' onClick={handleNewChapter}>
           Добавить главу
         </Button>
-      </div>
+      </div> */}
     </MainLayout>
   );
 };
