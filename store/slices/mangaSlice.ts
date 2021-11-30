@@ -55,6 +55,7 @@ const mangaSlice = createSlice({
     builder
       .addCase(HYDRATE, (state, action: any) => {
         state.mangas = action.payload.manga.mangas;
+        state.manga = action.payload.manga.manga;
         state.loading = false;
       })
       .addCase(addNewManga.fulfilled, (state, action: any) => {

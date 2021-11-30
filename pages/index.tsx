@@ -1,14 +1,14 @@
 import type { NextPage } from "next";
 import MainLayout from "../layouts/MainLayout";
 import styles from "../styles/Home.module.css";
-import { setToken } from "../store/slices/userSlice";
 
 import { wrapper } from "../store";
 import { GetServerSideProps } from "next";
 
 import PopularList from "../components/home/UI/PopularList";
 import TisketList from "../components/home/UI/TisketList";
-import { useEffect } from "react";
+
+import { getMangas } from "../store/slices/mangaSlice";
 
 const Home: NextPage = () => {
   return (
@@ -22,23 +22,19 @@ const Home: NextPage = () => {
     </MainLayout>
   );
 };
-// export const getServerSideProps: GetServerSideProps =
-//   wrapper.getServerSideProps(async (ctx) => {
-//     try {
-//       // const posts = await fetch(
-//       //   "https://jsonplaceholder.typicode.com/posts"
-//       // ).then((res) => res.json());
-//       // ctx.store.dispatch(setUsers(posts));
-//       return {
-//         props: {},
-//       };
-//     } catch (error) {
-//       console.log("ERROR!");
-//       return {
-//         props: {
-//           rooms: [],
-//         },
-//       };
-//     }
-//   });
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    try {
+      //@ts-ignore
+      await store.dispatch(getMangas());
+      return {
+        props: {},
+      };
+    } catch (error) {
+      console.log("ERROR!");
+      return {
+        props: {},
+      };
+    }
+  });
 export default Home;

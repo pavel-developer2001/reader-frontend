@@ -11,20 +11,19 @@ import MangaAddition from "../../../components/manga/UI/MangaAddition";
 import MangaSettings from "../../../components/manga/UI/MangaSettings";
 import { GetServerSideProps } from "next";
 import { wrapper } from "../../../store";
-import MangaApi from "../../../services/api/mangaApi";
-import { getManga, setManga } from "../../../store/slices/mangaSlice";
+
+import { getManga } from "../../../store/slices/mangaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
 import ChapterList from "../../../components/manga/UI/ChapterList";
 import { RootState } from "../../../store/reducer";
-import { IManga } from "../../../models/IManga";
+
 import { ITag } from "../../../models/ITag";
 import { IGenre } from "../../../models/IGenre";
 
 const { TabPane } = Tabs;
 
 const PageManga = () => {
-  const dispatch = useDispatch();
   const manga = useSelector<RootState, any>((state) => state.manga.manga.manga);
   const tag = useSelector<RootState, ITag[]>((state) => state.manga.manga.tag);
   const genre = useSelector<RootState, IGenre[]>(
@@ -33,9 +32,6 @@ const PageManga = () => {
   const loading = useSelector<RootState>((state) => state.manga.loading);
   const router = useRouter();
 
-  useEffect(() => {
-    dispatch(getManga(router.query.id));
-  }, [router]);
   function callback(key: string) {
     console.log(key);
   }
@@ -86,21 +82,19 @@ const PageManga = () => {
     </MainLayout>
   );
 };
-// export const getServerSideProps: GetServerSideProps =
-//   wrapper.getServerSideProps(async (ctx, params) => {
-//     try {
-//       const manga = await MangaApi.getManga(params.id);
-//       ctx.store.dispatch(setManga(manga));
-//       return {
-//         props: {},
-//       };
-//     } catch (error) {
-//       console.log("ERROR!");
-//       return {
-//         props: {
-//           rooms: [],
-//         },
-//       };
-//     }
-//   });
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async ({ params }) => {
+    try {
+      //@ts-ignore
+      await store.dispatch(getManga(params.id));
+      return {
+        props: {},
+      };
+    } catch (error) {
+      console.log("ERROR!", error);
+      return {
+        props: {},
+      };
+    }
+  });
 export default PageManga;
