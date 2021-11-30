@@ -1,17 +1,19 @@
 import { Avatar, Typography } from "antd";
 const { Title, Paragraph, Text } = Typography;
-import React, { useEffect } from "react";
+import React from "react";
 import MainLayout from "../../layouts/MainLayout";
 import styles from "./Team.module.css";
 import { Tabs } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/dist/client/router";
+import { useSelector } from "react-redux";
+
 import { getTeam } from "../../store/slices/teamSlice";
 import MemberBlock from "../../components/team/UI/MemberBlock";
 import CardManga from "../../components/CardManga";
 import { UpdateListItem } from "../../components/lateUpdates/UI/UpdateList";
 import { RootState } from "../../store/reducer";
 import { ITeam } from "../../models/ITeam";
+import { wrapper } from "../../store";
+import { GetServerSideProps } from "next";
 
 const { TabPane } = Tabs;
 
@@ -20,13 +22,8 @@ function callback(key: string) {
 }
 
 const Team = () => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const team = useSelector<RootState>((state) => state.team.team);
+  const team = useSelector<RootState, any>((state) => state.team.team);
   const loading = useSelector<RootState>((state) => state.team.loading);
-  useEffect(() => {
-    dispatch(getTeam(router.query.id));
-  }, [router.query.id]);
   return (
     <MainLayout>
       {loading ? (
@@ -95,4 +92,19 @@ const Team = () => {
   );
 };
 
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async ({ params }) => {
+    try {
+      //@ts-ignore
+      await store.dispatch(getTeam(params.id));
+      return {
+        props: {},
+      };
+    } catch (error) {
+      console.log("ERROR!", error);
+      return {
+        props: {},
+      };
+    }
+  });
 export default Team;

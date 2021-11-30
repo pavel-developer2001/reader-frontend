@@ -64,6 +64,7 @@ const chapterSlice = createSlice({
     builder
       .addCase(HYDRATE, (state, action: any) => {
         state.chapters = action.payload.chapter.chapters;
+        state.images = action.payload.chapter.images;
         state.loading = false;
       })
       .addCase(getChapters.fulfilled, (state, action) => {

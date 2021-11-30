@@ -125,6 +125,7 @@ const teamSlice = createSlice({
     builder
       .addCase(HYDRATE, (state, action: any) => {
         state.teams = action.payload.team.teams;
+        state.team = action.payload.team.team;
         state.loading = false;
       })
       .addCase(addNewTeam.fulfilled, (state, action) => {

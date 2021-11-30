@@ -44,6 +44,10 @@ const userSlice = createSlice({
 
   extraReducers: (builder) =>
     builder
+      .addCase(HYDRATE, (state, action) => {
+        state.user = action.payload.user.user;
+        state.loading = false;
+      })
       .addCase(loginUsers.fulfilled, (state, action) => {
         state.user.push(action.payload.data.user);
         window.localStorage.setItem("token", action.payload.data.token);
@@ -60,9 +64,6 @@ const userSlice = createSlice({
         state.user = action.payload.data;
         state.loading = false;
       }),
-  // .addCase(HYDRATE, (state, action) => {
-  //   state.posts = action.payload.user.posts;
-  // }),
 });
 
 export default userSlice.reducer;

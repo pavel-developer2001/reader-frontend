@@ -1,6 +1,7 @@
 import { Avatar, Empty } from "antd";
 import { Typography } from "antd";
 import { Tabs } from "antd";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
 
 const { TabPane } = Tabs;
@@ -14,6 +15,7 @@ import UserInTeamsBlock from "../../components/user/UI/UserInTeamsBlock";
 import MainLayout from "../../layouts/MainLayout";
 import { IBookMark } from "../../models/IBookMark";
 import { IUser } from "../../models/IUser";
+import { wrapper } from "../../store";
 import { RootState } from "../../store/reducer";
 import { getBookMarks } from "../../store/slices/bookMarkSlice";
 import { getUserData } from "../../store/slices/userSlice";
@@ -30,9 +32,6 @@ const User = () => {
   const loadingMark = useSelector<RootState>((state) => state.bookMark.loading);
   const [tabPosition, setTabPosition] = useState("left");
 
-  useEffect(() => {
-    dispatch(getUserData(router.query.id));
-  }, [router.query.id]);
   useEffect(() => {
     dispatch(getBookMarks(router.query.id));
   }, [router.query.id]);
@@ -109,5 +108,19 @@ const User = () => {
     </MainLayout>
   );
 };
-
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async ({ params }) => {
+    try {
+      //@ts-ignore
+      await store.dispatch(getUserData(params.id));
+      return {
+        props: {},
+      };
+    } catch (error) {
+      console.log("ERROR!", error);
+      return {
+        props: {},
+      };
+    }
+  });
 export default User;
