@@ -4,7 +4,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ITeam } from "../../../../models/ITeam";
 import { RootState } from "../../../../store/reducer";
-import { getTeams } from "../../../../store/slices/teamSlice";
+import { getTeams } from "../../../../store/modules/team/teamSlice";
 import styles from "./TeamList.module.scss";
 
 interface TeamListItemProps {

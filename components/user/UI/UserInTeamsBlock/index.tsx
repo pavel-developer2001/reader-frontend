@@ -5,7 +5,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ITeamsForUser } from "../../../../models/ITeam";
 import { RootState } from "../../../../store/reducer";
-import { getTeamsForUser } from "../../../../store/slices/teamSlice";
+import { getTeamsForUser } from "../../../../store/modules/team/teamSlice";
 import styles from "./UserInTeamsBlock.module.scss";
 
 interface UserInTeamsBlockItemProps {

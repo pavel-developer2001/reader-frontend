@@ -6,7 +6,7 @@ import styles from "./Team.module.css";
 import { Tabs } from "antd";
 import { useSelector } from "react-redux";
 
-import { getTeam } from "../../store/slices/teamSlice";
+import { getTeam } from "../../store/modules/team/teamSlice";
 import MemberBlock from "../../components/team/UI/MemberBlock";
 import CardManga from "../../components/CardManga";
 import { UpdateListItem } from "../../components/lateUpdates/UI/UpdateList";

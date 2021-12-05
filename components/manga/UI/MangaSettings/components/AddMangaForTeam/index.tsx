@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   connectMangaForTeam,
   getTeamsForUser,
-} from "../../../../../../store/slices/teamSlice";
+} from "../../../../../../store/modules/team/teamSlice";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
 import { useRouter } from "next/dist/client/router";
 import { RootState } from "../../../../../../store/reducer";

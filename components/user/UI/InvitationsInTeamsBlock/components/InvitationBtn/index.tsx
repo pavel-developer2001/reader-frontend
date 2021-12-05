@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addInvitation,
   getTeamsForUser,
-} from "../../../../../../store/slices/teamSlice";
+} from "../../../../../../store/modules/team/teamSlice";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
 import { RootState } from "../../../../../../store/reducer";
 import { ITeamsForUser } from "../../../../../../models/ITeam";

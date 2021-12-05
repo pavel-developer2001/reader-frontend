@@ -12,24 +12,25 @@ import MangaSettings from "../../../components/manga/UI/MangaSettings";
 import { GetServerSideProps } from "next";
 import { wrapper } from "../../../store";
 
-import { getManga } from "../../../store/slices/mangaSlice";
+import { getManga } from "../../../store/modules/manga/manga.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
 import ChapterList from "../../../components/manga/UI/ChapterList";
 import { RootState } from "../../../store/reducer";
-
-import { ITag } from "../../../models/ITag";
-import { IGenre } from "../../../models/IGenre";
+import {
+  selectMangaGenres,
+  selectMangaItem,
+  selectMangaLoading,
+  selectMangaTags,
+} from "../../../store/modules/manga/manga.selector";
 
 const { TabPane } = Tabs;
 
 const PageManga = () => {
-  const manga = useSelector<RootState, any>((state) => state.manga.manga.manga);
-  const tag = useSelector<RootState, ITag[]>((state) => state.manga.manga.tag);
-  const genre = useSelector<RootState, IGenre[]>(
-    (state) => state.manga.manga.genre
-  );
-  const loading = useSelector<RootState>((state) => state.manga.loading);
+  const manga = useSelector<RootState, any>(selectMangaItem);
+  const tag = useSelector(selectMangaTags);
+  const genre = useSelector(selectMangaGenres);
+  const loading = useSelector(selectMangaLoading);
   const router = useRouter();
 
   function callback(key: string) {

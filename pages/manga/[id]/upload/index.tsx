@@ -7,9 +7,9 @@ import { Upload, Modal, Button, Select, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewChapter } from "../../../../store/slices/chapterSlice";
+import { addNewChapter } from "../../../../store/modules/chapter/chapterSlice";
 import styles from "./Upload.module.scss";
-import { getTeamsForUser } from "../../../../store/slices/teamSlice";
+import { getTeamsForUser } from "../../../../store/modules/team/teamSlice";
 import { RootState } from "../../../../store/reducer";
 import { ITeamsForUser } from "../../../../models/ITeam";
 

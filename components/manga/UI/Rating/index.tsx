@@ -9,7 +9,7 @@ import {
   addRating,
   getRating,
   updateRating,
-} from "../../../../store/slices/ratingSlice";
+} from "../../../../store/modules/rating/ratingSlice";
 import { RootState } from "../../../../store/reducer";
 import { IRating } from "../../../../models/IRating";
 

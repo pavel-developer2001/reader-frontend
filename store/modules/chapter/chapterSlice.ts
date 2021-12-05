@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { IChapter, IUpdateChapter } from "../../models/IChapter";
-import { IImage } from "../../models/IImage";
-import ChapterApi from "../../services/api/chapterApi";
+import { IChapter, IUpdateChapter } from "../../../models/IChapter";
+import { IImage } from "../../../models/IImage";
+import ChapterApi from "../../../services/api/chapterApi";
 
 export const addNewChapter = createAsyncThunk(
   "chapter/addNewChapter",

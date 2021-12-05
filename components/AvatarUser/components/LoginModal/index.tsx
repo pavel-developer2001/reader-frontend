@@ -4,7 +4,7 @@ import Modal from "antd/lib/modal";
 import { useRouter } from "next/dist/client/router";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUsers, registerUsers } from "../../../../store/slices/userSlice";
+import { loginUsers, registerUsers } from "../../../../store/modules/user/userSlice";
 
 interface LoginModalProps {
   isModalVisible: boolean | undefined;

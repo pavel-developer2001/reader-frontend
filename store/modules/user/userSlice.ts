@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { IUser } from "../../models/IUser";
-import UserApi from "../../services/api/userApi";
+import { IUser } from "../../../models/IUser";
+import UserApi from "../../../services/api/userApi";
 
 export const registerUsers = createAsyncThunk(
   "user/registerUsers",

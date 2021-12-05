@@ -4,7 +4,7 @@ import React, { FC, useEffect } from "react";
 import App, { AppContext, AppProps } from "next/app";
 import { wrapper } from "../store";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import { setToken } from "../store/slices/userSlice";
+import { setToken } from "../store/modules/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/reducer";
 

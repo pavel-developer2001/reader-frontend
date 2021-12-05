@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { IBookMark } from "../../models/IBookMark";
-import BookMarksApi from "../../services/api/bookMarksApi";
+import { IBookMark } from "../../../models/IBookMark";
+import BookMarksApi from "../../../services/api/bookMarksApi";
 
 export const addBookMark = createAsyncThunk(
   "bookMark/addBookMark",

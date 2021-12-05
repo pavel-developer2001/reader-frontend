@@ -4,7 +4,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IUpdateChapter } from "../../../../models/IChapter";
 import { RootState } from "../../../../store/reducer";
-import { getUpdateChapters } from "../../../../store/slices/chapterSlice";
+import { getUpdateChapters } from "../../../../store/modules/chapter/chapterSlice";
 import styles from "./UpdateList.module.scss";
 
 interface UpdateListItemProps {

@@ -9,7 +9,7 @@ import {
   agreeToJoin,
   getInvitationsForUser,
   refucalToJoin,
-} from "../../../../store/slices/teamSlice";
+} from "../../../../store/modules/team/teamSlice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import InvitationBtn from "./components/InvitationBtn";
 import styles from "./InvitationsInTeamsBlock.module.scss";

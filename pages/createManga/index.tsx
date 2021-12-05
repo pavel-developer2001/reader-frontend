@@ -6,7 +6,7 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import TextArea from "rc-textarea";
 import { dataUser } from "../../utils/getDataUserFromToken";
 import { useDispatch } from "react-redux";
-import { addNewManga } from "../../store/slices/mangaSlice";
+import { addNewManga } from "../../store/modules/manga/manga.slice";
 import { useRouter } from "next/dist/client/router";
 const { Option } = Select;
 

@@ -20,7 +20,7 @@ import {
   deleteComment,
   getComments,
   updateComment,
-} from "../../../../store/slices/commentSlice";
+} from "../../../../store/modules/comment/commentSlice";
 import { RootState } from "../../../../store/reducer";
 import { IComment } from "../../../../models/IComment";
 

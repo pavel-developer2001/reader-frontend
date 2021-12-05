@@ -5,7 +5,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IChapter } from "../../../../models/IChapter";
 import { RootState } from "../../../../store/reducer";
-import { getChapters } from "../../../../store/slices/chapterSlice";
+import { getChapters } from "../../../../store/modules/chapter/chapterSlice";
 import styles from "./ChapterList.module.scss";
 
 interface ChapterListItemProps {

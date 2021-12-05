@@ -11,7 +11,7 @@ import {
   addBookMark,
   getBookMarkToManga,
   updateBookMark,
-} from "../../../../store/slices/bookMarkSlice";
+} from "../../../../store/modules/bookMark/bookMarkSlice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import AddMangaForTeam from "./components/AddMangaForTeam";
 import styles from "./MangaSettings.module.scss";

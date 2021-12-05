@@ -17,8 +17,8 @@ import { IBookMark } from "../../models/IBookMark";
 import { IUser } from "../../models/IUser";
 import { wrapper } from "../../store";
 import { RootState } from "../../store/reducer";
-import { getBookMarks } from "../../store/slices/bookMarkSlice";
-import { getUserData } from "../../store/slices/userSlice";
+import { getBookMarks } from "../../store/modules/bookMark/bookMarkSlice";
+import { getUserData } from "../../store/modules/user/userSlice";
 import styles from "./Users.module.scss";
 
 const User = () => {

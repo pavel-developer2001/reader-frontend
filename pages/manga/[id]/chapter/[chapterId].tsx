@@ -6,7 +6,7 @@ import ChapterLayout from "../../../../layouts/ChapterLayout";
 import { IImage } from "../../../../models/IImage";
 import { wrapper } from "../../../../store";
 import { RootState } from "../../../../store/reducer";
-import { getImages } from "../../../../store/slices/chapterSlice";
+import { getImages } from "../../../../store/modules/chapter/chapterSlice";
 import styles from "./Chapter.module.scss";
 
 const Chapter = () => {

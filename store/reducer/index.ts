@@ -1,10 +1,10 @@
-import userSlice from "../slices/userSlice";
-import mangaSlice from "../slices/mangaSlice";
-import chapterSlice from "../slices/chapterSlice";
-import bookMarkSlice from "../slices/bookMarkSlice";
-import ratingSlice from "../slices/ratingSlice";
-import commentSlice from "../slices/commentSlice";
-import teamSlice from "../slices/teamSlice";
+import userSlice from "../modules/user/userSlice";
+import mangaSlice from "../modules/manga/manga.slice";
+import chapterSlice from "../modules/chapter/chapterSlice";
+import bookMarkSlice from "../modules/bookMark/bookMarkSlice";
+import ratingSlice from "../modules/rating/ratingSlice";
+import commentSlice from "../modules/comment/commentSlice";
+import teamSlice from "../modules/team/teamSlice";
 import { combineReducers } from "redux";
 
 export const rootReducer = combineReducers({

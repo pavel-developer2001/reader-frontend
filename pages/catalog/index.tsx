@@ -7,12 +7,14 @@ import Filters from "../../components/catalog/UI/Filters";
 import MainLayout from "../../layouts/MainLayout";
 import MangaApi from "../../services/api/mangaApi";
 import { wrapper } from "../../store";
-import { getMangas, setMangas } from "../../store/slices/mangaSlice";
+import { getMangas, setMangas } from "../../store/modules/manga/manga.slice";
 import styles from "./Catalog.module.css";
 import { Tabs } from "antd";
 import TeamList from "../../components/catalog/UI/TeamList";
-import { RootState } from "../../store/reducer";
-import { IManga } from "../../models/IManga";
+import {
+  selectMangaLoading,
+  selectMangasData,
+} from "../../store/modules/manga/manga.selector";
 
 const { TabPane } = Tabs;
 
@@ -21,10 +23,8 @@ function callback(key: string) {
 }
 
 const Catalog = () => {
-  const mangas = useSelector<RootState, IManga[]>(
-    (state) => state.manga.mangas
-  );
-  const loading = useSelector<RootState>((state) => state.manga.loading);
+  const mangas = useSelector(selectMangasData);
+  const loading = useSelector(selectMangaLoading);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMangas());

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ITeamsForManga } from "../../../../models/ITeam";
 import { RootState } from "../../../../store/reducer";
-import { getTeamsForManga } from "../../../../store/slices/teamSlice";
+import { getTeamsForManga } from "../../../../store/modules/team/teamSlice";
 import CardTeam from "../CardTeam";
 import styles from "./MangaAddition.module.css";
 
