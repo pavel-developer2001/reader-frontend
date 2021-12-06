@@ -1,15 +1,15 @@
 import "../styles/globals.scss";
 import "antd/dist/antd.css";
-import React, { FC, useEffect } from "react";
-import App, { AppContext, AppProps } from "next/app";
+import React, { useEffect } from "react";
+import { AppProps } from "next/app";
 import { wrapper } from "../store";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import { setToken } from "../store/slices/userSlice";
+import { setToken } from "../store/modules/user/user.slice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/reducer";
+import { selectUserToken } from "../store/modules/user/user.selector";
 
 export function MyApp({ Component, pageProps }: AppProps) {
-  const token = useSelector<RootState>((state) => state.user.token);
+  const token = useSelector(selectUserToken);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setToken(localStorage.getItem("token")));

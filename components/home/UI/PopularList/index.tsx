@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { IManga } from "../../../../models/IManga";
-import { RootState } from "../../../../store/reducer";
+import {
+  selectMangaLoading,
+  selectMangasData,
+} from "../../../../store/modules/manga/manga.selector";
 import CardManga from "../../../CardManga";
 import styles from "./PopularList.module.css";
 
 const PopularList = () => {
-  const mangas = useSelector<RootState, IManga[]>(
-    (state) => state.manga.mangas
-  );
-  const loading = useSelector<RootState>((state) => state.manga.loading);
+  const mangas = useSelector(selectMangasData);
+  const loading = useSelector(selectMangaLoading);
   return (
     <div className={styles.list}>
       {loading ? (

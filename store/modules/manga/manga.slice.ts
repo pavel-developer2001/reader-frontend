@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { IGenre } from "../../models/IGenre";
-import { IManga } from "../../models/IManga";
-import { ITag } from "../../models/ITag";
-import MangaApi from "../../services/api/mangaApi";
+import { IGenre } from "./types/IGenre";
+import { IManga } from "./types/IManga";
+import { ITag } from "./types/ITag";
+import MangaApi from "../../../services/api/mangaApi";
 
 export const addNewManga = createAsyncThunk(
   "manga/addNewManga",

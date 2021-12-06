@@ -1,4 +1,4 @@
-import { IManga } from "./IManga";
+import { IManga } from "../../manga/types/IManga";
 export interface IChapter {
   id: number;
   numberChapter: string;

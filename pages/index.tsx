@@ -8,7 +8,7 @@ import { GetServerSideProps } from "next";
 import PopularList from "../components/home/UI/PopularList";
 import TisketList from "../components/home/UI/TisketList";
 
-import { getMangas } from "../store/slices/mangaSlice";
+import { getMangas } from "../store/modules/manga/manga.slice";
 
 const Home: NextPage = () => {
   return (

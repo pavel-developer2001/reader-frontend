@@ -3,7 +3,7 @@ import { Button, message, Modal, Upload } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNewTeam } from "../../../../store/slices/teamSlice";
+import { addNewTeam } from "../../../../store/modules/team/team.slice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import styles from "./CreateTeamModal.module.scss";
 

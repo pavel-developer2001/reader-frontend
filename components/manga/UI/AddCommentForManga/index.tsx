@@ -3,7 +3,7 @@ import { Button, message, Switch } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addComment } from "../../../../store/slices/commentSlice";
+import { addComment } from "../../../../store/modules/comment/comment.slice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import styles from "./AddCommentForManga.module.scss";
 

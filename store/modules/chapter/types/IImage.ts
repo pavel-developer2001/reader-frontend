@@ -1,5 +1,5 @@
 import { IChapter } from "./IChapter";
-import { IManga } from "./IManga";
+import { IManga } from "../../manga/types/IManga";
 
 export interface IImage {
   id: number;

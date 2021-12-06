@@ -3,7 +3,7 @@ import Meta from "antd/lib/card/Meta";
 import React, { FC } from "react";
 import Link from "next/link";
 import styles from "./CardManga.module.css";
-import { IManga } from "../../models/IManga";
+import { IManga } from "../../store/modules/manga/types/IManga";
 
 interface CardMangaProps {
   manga: IManga;

@@ -3,10 +3,12 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ITeamsForUser } from "../../../../models/ITeam";
-import { RootState } from "../../../../store/reducer";
-import { getTeamsForUser } from "../../../../store/slices/teamSlice";
+import { getTeamsForUser } from "../../../../store/modules/team/team.slice";
 import styles from "./UserInTeamsBlock.module.scss";
+import {
+  selectTeamLoading,
+  selectTeamsUserData,
+} from "../../../../store/modules/team/team.selector";
 
 interface UserInTeamsBlockItemProps {
   cover: string;
@@ -38,10 +40,8 @@ const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = ({
 const UserInTeamsBlock = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const teams = useSelector<RootState, ITeamsForUser[]>(
-    (state) => state.team.teamsUser
-  );
-  const loading = useSelector<RootState>((state) => state.team.loading);
+  const teams = useSelector(selectTeamsUserData);
+  const loading = useSelector(selectTeamLoading);
 
   useEffect(() => {
     dispatch(getTeamsForUser(router.query.id));

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { IComment } from "../../models/IComment";
-import CommentsApi from "../../services/api/commentsApi";
+import { IComment } from "./types/IComment";
+import CommentsApi from "../../../services/api/commentsApi";
 
 export const getComments = createAsyncThunk(
   "comment/getComments",

@@ -3,16 +3,18 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ITeamInvitationsForUser } from "../../../../models/ITeam";
-import { RootState } from "../../../../store/reducer";
 import {
   agreeToJoin,
   getInvitationsForUser,
   refucalToJoin,
-} from "../../../../store/slices/teamSlice";
+} from "../../../../store/modules/team/team.slice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import InvitationBtn from "./components/InvitationBtn";
 import styles from "./InvitationsInTeamsBlock.module.scss";
+import {
+  selectTeamInvitationsData,
+  selectTeamLoading,
+} from "../../../../store/modules/team/team.selector";
 
 interface InvitationsInTeamsBlockItemProps {
   invitationId: number;
@@ -71,10 +73,8 @@ const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = ({
 const InvitationsInTeamsBlock = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const invitaions = useSelector<RootState, ITeamInvitationsForUser[]>(
-    (state) => state.team.teamInvitations
-  );
-  const loading = useSelector<RootState>((state) => state.team.loading);
+  const invitaions = useSelector(selectTeamInvitationsData);
+  const loading = useSelector(selectTeamLoading);
   useEffect(() => {
     dispatch(getInvitationsForUser(router.query.id));
   }, [router]);

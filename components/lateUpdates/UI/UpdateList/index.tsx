@@ -2,10 +2,12 @@ import moment from "moment";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IUpdateChapter } from "../../../../models/IChapter";
-import { RootState } from "../../../../store/reducer";
-import { getUpdateChapters } from "../../../../store/slices/chapterSlice";
+import { getUpdateChapters } from "../../../../store/modules/chapter/chapter.slice";
 import styles from "./UpdateList.module.scss";
+import {
+  selectChapterLoading,
+  selectUpdateChapterData,
+} from "../../../../store/modules/chapter/chapter.selector";
 
 interface UpdateListItemProps {
   chapterId: number;
@@ -52,10 +54,8 @@ export const UpdateListItem: FC<UpdateListItemProps> = ({
 
 const UpdateList = () => {
   const dispatch = useDispatch();
-  const updateChapter = useSelector<RootState, IUpdateChapter[]>(
-    (state) => state.chapter.updateChapter
-  );
-  const loading = useSelector<RootState>((state) => state.chapter.loading);
+  const updateChapter = useSelector(selectUpdateChapterData);
+  const loading = useSelector(selectChapterLoading);
   useEffect(() => {
     dispatch(getUpdateChapters());
   }, []);
