@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addInvitation,
   getTeamsForUser,
-} from "../../../../../../store/modules/team/teamSlice";
+} from "../../../../../../store/modules/team/team.slice";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
-import { RootState } from "../../../../../../store/reducer";
-import { ITeamsForUser } from "../../../../../../models/ITeam";
+import {
+  selectTeamLoading,
+  selectTeamsUserData,
+} from "../../../../../../store/modules/team/team.selector";
 const { Option } = Select;
 
 const InvitationBtn = () => {
@@ -23,10 +25,8 @@ const InvitationBtn = () => {
     { role: "Редактор" },
   ];
   const dispatch = useDispatch();
-  const teams = useSelector<RootState, ITeamsForUser[]>(
-    (state) => state.team.teamsUser
-  );
-  const loading = useSelector<RootState>((state) => state.team.loading);
+  const teams = useSelector(selectTeamsUserData);
+  const loading = useSelector(selectTeamLoading);
   useEffect(() => {
     if (dataUser) {
       dispatch(getTeamsForUser(dataUser.id));

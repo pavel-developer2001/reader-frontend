@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Rating.module.scss";
-import { Modal, Button, message } from "antd";
+import { Modal, message } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
@@ -9,19 +9,19 @@ import {
   addRating,
   getRating,
   updateRating,
-} from "../../../../store/modules/rating/ratingSlice";
-import { RootState } from "../../../../store/reducer";
-import { IRating } from "../../../../models/IRating";
+} from "../../../../store/modules/rating/rating.slice";
+import {
+  selectRatingItemData,
+  selectRatingLoading,
+} from "../../../../store/modules/rating/rating.selector";
 
 const Rating = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [ratingCount, setRatingCount] = useState<null | number>(null);
-  const rating = useSelector<RootState, IRating[]>(
-    (state) => state.rating.rating
-  );
-  const loading = useSelector<RootState>((state) => state.rating.loading);
+  const rating = useSelector(selectRatingItemData);
+  const loading = useSelector(selectRatingLoading);
   const dataManga: { id: string | string[] | undefined; userId: number } = {
     id: router.query.id,
     userId: dataUser.id,

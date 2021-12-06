@@ -2,16 +2,17 @@ import TextArea from "antd/lib/input/TextArea";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
 import MainLayout from "../../../../layouts/MainLayout";
-
 import { Upload, Modal, Button, Select, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewChapter } from "../../../../store/modules/chapter/chapterSlice";
+import { addNewChapter } from "../../../../store/modules/chapter/chapter.slice";
 import styles from "./Upload.module.scss";
-import { getTeamsForUser } from "../../../../store/modules/team/teamSlice";
-import { RootState } from "../../../../store/reducer";
-import { ITeamsForUser } from "../../../../models/ITeam";
+import { getTeamsForUser } from "../../../../store/modules/team/team.slice";
+import {
+  selectTeamLoading,
+  selectTeamsUserData,
+} from "../../../../store/modules/team/team.selector";
 
 const { Option } = Select;
 
@@ -64,10 +65,8 @@ const AddNewChapter = () => {
   };
   const handleChange = ({ fileList }: any) => setImagesList(fileList);
   const [teamId, setTeamId] = useState<any>("");
-  const teams = useSelector<RootState, ITeamsForUser[]>(
-    (state) => state.team.teamsUser
-  );
-  const loading = useSelector<RootState>((state) => state.team.loading);
+  const teams = useSelector(selectTeamsUserData);
+  const loading = useSelector(selectTeamLoading);
   useEffect(() => {
     dispatch(getTeamsForUser(dataUser.id));
   }, []);

@@ -20,9 +20,11 @@ import {
   deleteComment,
   getComments,
   updateComment,
-} from "../../../../store/modules/comment/commentSlice";
-import { RootState } from "../../../../store/reducer";
-import { IComment } from "../../../../models/IComment";
+} from "../../../../store/modules/comment/comment.slice";
+import {
+  selectCommentLoading,
+  selectCommentsData,
+} from "../../../../store/modules/comment/comment.selector";
 
 interface CommentsBlockProps {
   commentId: number;
@@ -187,10 +189,8 @@ const CommentBlockList = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const mangaId = router.query.id;
-  const comments = useSelector<RootState, IComment[]>(
-    (state) => state.comment.comments
-  );
-  const loading = useSelector<RootState>((state) => state.comment.loading);
+  const comments = useSelector(selectCommentsData);
+  const loading = useSelector(selectCommentLoading);
   useEffect(() => {
     if (mangaId) {
       dispatch(getComments(mangaId));

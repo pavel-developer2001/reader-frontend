@@ -6,11 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   connectMangaForTeam,
   getTeamsForUser,
-} from "../../../../../../store/modules/team/teamSlice";
+} from "../../../../../../store/modules/team/team.slice";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
 import { useRouter } from "next/dist/client/router";
-import { RootState } from "../../../../../../store/reducer";
-import { ITeamsForUser } from "../../../../../../models/ITeam";
+import {
+  selectTeamLoading,
+  selectTeamsUserData,
+} from "../../../../../../store/modules/team/team.selector";
 
 const { Option } = Select;
 
@@ -19,10 +21,8 @@ const AddMangaForTeam = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [teamId, setTeamId] = useState<string | undefined>("");
   const dispatch = useDispatch();
-  const teams = useSelector<RootState, ITeamsForUser[]>(
-    (state) => state.team.teamsUser
-  );
-  const loading = useSelector<RootState>((state) => state.team.loading);
+  const teams = useSelector(selectTeamsUserData);
+  const loading = useSelector(selectTeamLoading);
   useEffect(() => {
     dispatch(getTeamsForUser(dataUser.id));
   }, []);

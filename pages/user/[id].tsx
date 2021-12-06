@@ -13,23 +13,26 @@ import CreateTeamModal from "../../components/user/UI/CreateTeamModal";
 import InvitationsInTeamsBlock from "../../components/user/UI/InvitationsInTeamsBlock";
 import UserInTeamsBlock from "../../components/user/UI/UserInTeamsBlock";
 import MainLayout from "../../layouts/MainLayout";
-import { IBookMark } from "../../models/IBookMark";
-import { IUser } from "../../models/IUser";
 import { wrapper } from "../../store";
-import { RootState } from "../../store/reducer";
-import { getBookMarks } from "../../store/modules/bookMark/bookMarkSlice";
-import { getUserData } from "../../store/modules/user/userSlice";
+import { getBookMarks } from "../../store/modules/bookMark/bookMark.slice";
+import { getUserData } from "../../store/modules/user/user.slice";
 import styles from "./Users.module.scss";
+import {
+  selectUserData,
+  selectUserLoading,
+} from "../../store/modules/user/user.selector";
+import {
+  selectBookMarkLoading,
+  selectBookMarksData,
+} from "../../store/modules/bookMark/bookMark.selector";
 
 const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const user = useSelector<RootState, IUser[]>((state) => state.user.user);
-  const loading = useSelector<RootState>((state) => state.user.loading);
-  const bookMarks = useSelector<RootState, IBookMark[]>(
-    (state) => state.bookMark.bookMarks
-  );
-  const loadingMark = useSelector<RootState>((state) => state.bookMark.loading);
+  const user = useSelector(selectUserData);
+  const loading = useSelector(selectUserLoading);
+  const bookMarks = useSelector(selectBookMarksData);
+  const loadingMark = useSelector(selectBookMarkLoading);
   const [tabPosition, setTabPosition] = useState("left");
 
   useEffect(() => {

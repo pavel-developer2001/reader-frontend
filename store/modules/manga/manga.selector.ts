@@ -1,6 +1,6 @@
-import { IGenre } from "../../../models/IGenre";
-import { IManga } from "../../../models/IManga";
-import { ITag } from "../../../models/ITag";
+import { IGenre } from "./types/IGenre";
+import { IManga } from "./types/IManga";
+import { ITag } from "./types/ITag";
 import { RootState } from "../../reducer";
 
 export const selectManga = (state: RootState) => state.manga;

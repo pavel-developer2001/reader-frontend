@@ -2,8 +2,8 @@ import { Avatar, Button } from "antd";
 import Link from "next/link";
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { IMember } from "../../../../models/IMember";
-import { removeMember } from "../../../../store/modules/team/teamSlice";
+import { IMember } from "../../../../store/modules/team/types/IMember";
+import { removeMember } from "../../../../store/modules/team/team.slice";
 import styles from "./MemberBlock.module.scss";
 
 interface MemberBlockItemProps {

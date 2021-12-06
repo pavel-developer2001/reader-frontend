@@ -2,10 +2,12 @@ import { Avatar } from "antd";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ITeam } from "../../../../models/ITeam";
-import { RootState } from "../../../../store/reducer";
-import { getTeams } from "../../../../store/modules/team/teamSlice";
+import { getTeams } from "../../../../store/modules/team/team.slice";
 import styles from "./TeamList.module.scss";
+import {
+  selectTeamLoading,
+  selectTeamsData,
+} from "../../../../store/modules/team/team.selector";
 
 interface TeamListItemProps {
   teamId: number;
@@ -40,8 +42,8 @@ const TeamListItem: FC<TeamListItemProps> = ({
 };
 const TeamList = () => {
   const dispatch = useDispatch();
-  const teams = useSelector<RootState, ITeam[]>((state) => state.team.teams);
-  const loading = useSelector<RootState>((state) => state.team.loading);
+  const teams = useSelector(selectTeamsData);
+  const loading = useSelector(selectTeamLoading);
   useEffect(() => {
     dispatch(getTeams());
   }, []);

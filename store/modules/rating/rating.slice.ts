@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { IRating } from "../../../models/IRating";
+import { IRating } from "./types/IRating";
 import RatingApi from "../../../services/api/ratingApi";
 
 export const addRating = createAsyncThunk(

@@ -3,20 +3,20 @@ import { useRouter } from "next/dist/client/router";
 import React from "react";
 import { useSelector } from "react-redux";
 import ChapterLayout from "../../../../layouts/ChapterLayout";
-import { IImage } from "../../../../models/IImage";
 import { wrapper } from "../../../../store";
-import { RootState } from "../../../../store/reducer";
-import { getImages } from "../../../../store/modules/chapter/chapterSlice";
+import { getImages } from "../../../../store/modules/chapter/chapter.slice";
 import styles from "./Chapter.module.scss";
+import {
+  selectChapterImagesData,
+  selectChapterLoading,
+} from "../../../../store/modules/chapter/chapter.selector";
 
 const Chapter = () => {
   const router = useRouter();
   const mangaId = router.query?.id;
 
-  const images = useSelector<RootState, IImage[]>(
-    (state) => state.chapter.images
-  );
-  const loading = useSelector<RootState>((state) => state.chapter.loading);
+  const images = useSelector(selectChapterImagesData);
+  const loading = useSelector(selectChapterLoading);
 
   return loading ? (
     <p>loading</p>

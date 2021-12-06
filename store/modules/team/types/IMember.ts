@@ -1,4 +1,4 @@
-import { IUser } from "./IUser";
+import { IUser } from "../../user/types/IUser";
 
 export interface IMember {
   createdAt: string;

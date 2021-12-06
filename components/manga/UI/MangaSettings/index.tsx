@@ -5,16 +5,18 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IBookMark } from "../../../../models/IBookMark";
-import { RootState } from "../../../../store/reducer";
 import {
   addBookMark,
   getBookMarkToManga,
   updateBookMark,
-} from "../../../../store/modules/bookMark/bookMarkSlice";
+} from "../../../../store/modules/bookMark/bookMark.slice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import AddMangaForTeam from "./components/AddMangaForTeam";
 import styles from "./MangaSettings.module.scss";
+import {
+  selectBookMarkItemData,
+  selectBookMarkLoading,
+} from "../../../../store/modules/bookMark/bookMark.selector";
 
 interface MangaSettingsProps {
   cover: string;
@@ -22,10 +24,8 @@ interface MangaSettingsProps {
 }
 const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   const dispatch = useDispatch();
-  const bookMark = useSelector<RootState, IBookMark[]>(
-    (state) => state.bookMark.bookMark
-  );
-  const loading = useSelector<RootState>((state) => state.bookMark.loading);
+  const bookMark = useSelector(selectBookMarkItemData);
+  const loading = useSelector(selectBookMarkLoading);
   const { Option } = Select;
 
   function onBlur() {

@@ -3,7 +3,7 @@ import { Menu, message } from "antd";
 import React from "react";
 import Link from "next/link";
 import styles from "./MenuUser.module.css";
-import { setToken } from "../../../../store/modules/user/userSlice";
+import { setToken } from "../../../../store/modules/user/user.slice";
 import { useDispatch } from "react-redux";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 

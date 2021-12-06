@@ -1,8 +1,8 @@
 import { Tag } from "antd";
 import styles from "./MangaDescriptions.module.scss";
 import React, { FC } from "react";
-import { ITag } from "../../../../models/ITag";
-import { IGenre } from "../../../../models/IGenre";
+import { ITag } from "../../../../store/modules/manga/types/ITag";
+import { IGenre } from "../../../../store/modules/manga/types/IGenre";
 
 interface MangaDescriptionsProps {
   mangaDescription: string;

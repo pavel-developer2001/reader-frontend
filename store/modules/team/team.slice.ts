@@ -1,14 +1,14 @@
-import { IChapter } from "../../../models/IChapter";
+import { IChapter } from "../chapter/types/IChapter";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { IManga } from "../../../models/IManga";
-import { IMember } from "../../../models/IMember";
+import { IManga } from "../manga/types/IManga";
+import { IMember } from "./types/IMember";
 import {
   ITeam,
   ITeamInvitationsForUser,
   ITeamsForManga,
   ITeamsForUser,
-} from "../../../models/ITeam";
+} from "./types/ITeam";
 import TeamApi from "../../../services/api/teamApi";
 
 export const addNewTeam = createAsyncThunk(
