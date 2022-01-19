@@ -24,7 +24,6 @@ interface MangaSettingsProps {
 const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   const dispatch = useDispatch();
   const bookMark = useSelector(selectBookMarkItemData);
-  console.log("BOOK", bookMark);
   const loading = useSelector(selectBookMarkLoading);
   const { Option } = Select;
 
@@ -38,11 +37,11 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   const changeMark = async (value: string) => {
     setCategory(value);
     const payload = await { category: value, mangaId: id };
-    if (bookMark.length == 0) {
+    if (!bookMark) {
       await dispatch(addBookMark(payload));
       message.success("Манга добавлена в закладки");
     }
-    if (bookMark.length > 0 && payload.category != "Удалить из закладок") {
+    if (bookMark && payload.category != "Удалить из закладок") {
       await dispatch(updateBookMark(payload));
       message.success("Манга была добавлена в другую категорию закладкок");
     }

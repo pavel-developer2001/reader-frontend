@@ -33,8 +33,8 @@ export const getTeam = createAsyncThunk(
 );
 export const getTeamsForUser = createAsyncThunk(
   "team/getTeamsForUser",
-  async () => {
-    return await TeamApi.getAllTeamsForUser();
+  async (id: string) => {
+    return await TeamApi.getAllTeamsForUser(id);
   }
 );
 export const connectMangaForTeam = createAsyncThunk(

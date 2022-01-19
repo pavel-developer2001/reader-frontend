@@ -68,7 +68,7 @@ const AddNewChapter = () => {
   const teams = useSelector(selectTeamsUserData);
   const loading = useSelector(selectTeamLoading);
   useEffect(() => {
-    dispatch(getTeamsForUser());
+    dispatch(getTeamsForUser(dataUser));
   }, []);
   ////////////////////////////////////////////////////////////////////
   const [numberChapter, setNumberChapter] = useState("");

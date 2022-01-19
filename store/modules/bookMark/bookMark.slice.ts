@@ -29,13 +29,13 @@ export const getBookMarkToManga = createAsyncThunk(
 );
 interface BookMarkState {
   bookMarks: IBookMark[];
-  bookMark: IBookMark[];
+  bookMark: null;
   status: null | string;
   loading: boolean;
 }
 const initialState: BookMarkState = {
   bookMarks: [],
-  bookMark: [],
+  bookMark: null,
   status: null,
   loading: true,
 };
@@ -78,7 +78,6 @@ const bookMarkSlice = createSlice({
         state.loading = false;
       })
       .addCase(getBookMarkToManga.fulfilled, (state, action) => {
-        console.log("ijaivae", action.payload.data);
         state.bookMark = action.payload.data;
         state.loading = false;
       }),

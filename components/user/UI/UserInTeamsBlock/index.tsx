@@ -9,6 +9,7 @@ import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../store/modules/team/team.selector";
+import { dataUser } from "../../../../utils/getDataUserFromToken";
 
 interface UserInTeamsBlockItemProps {
   cover: string;
@@ -44,7 +45,7 @@ const UserInTeamsBlock = () => {
   const loading = useSelector(selectTeamLoading);
 
   useEffect(() => {
-    dispatch(getTeamsForUser());
+    dispatch(getTeamsForUser(dataUser));
   }, [router.query.id]);
   return (
     <div className={styles.block}>
