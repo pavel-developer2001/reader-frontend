@@ -10,7 +10,6 @@ import {
   getBookMarkToManga,
   updateBookMark,
 } from "../../../../store/modules/bookMark/bookMark.slice";
-import { dataUser } from "../../../../utils/getDataUserFromToken";
 import AddMangaForTeam from "./components/AddMangaForTeam";
 import styles from "./MangaSettings.module.scss";
 import {
@@ -25,6 +24,7 @@ interface MangaSettingsProps {
 const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   const dispatch = useDispatch();
   const bookMark = useSelector(selectBookMarkItemData);
+  console.log("BOOK", bookMark);
   const loading = useSelector(selectBookMarkLoading);
   const { Option } = Select;
 
@@ -37,12 +37,12 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   }
   const changeMark = async (value: string) => {
     setCategory(value);
-    const payload = await { category: value, mangaId: id, userId: dataUser.id };
-    if (bookMark == null) {
+    const payload = await { category: value, mangaId: id };
+    if (bookMark.length == 0) {
       await dispatch(addBookMark(payload));
       message.success("Манга добавлена в закладки");
     }
-    if (bookMark && payload.category != "Удалить из закладок") {
+    if (bookMark.length > 0 && payload.category != "Удалить из закладок") {
       await dispatch(updateBookMark(payload));
       message.success("Манга была добавлена в другую категорию закладкок");
     }
@@ -58,8 +58,9 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   const router = useRouter();
   const [category, setCategory] = useState("");
 
-  const dataManga: { mangaId: string | string[] | undefined; userId: number } =
-    { mangaId: router.query.id, userId: dataUser.id };
+  const dataManga: { mangaId: string | string[] | undefined } = {
+    mangaId: router.query.id,
+  };
   useEffect(() => {
     dispatch(getBookMarkToManga(dataManga));
   }, [router, loading]);

@@ -153,7 +153,6 @@ const CreateManga = () => {
       formData.append("statusManga", statusManga);
       formData.append("ageRatingManga", ageRatingManga);
       formData.append("yearOfIssue", yearOfIssue);
-      formData.append("userId", dataUser.id);
       formData.append("mangaCover", mangaCover);
       dispatch(addNewManga(formData));
       message.success("Тайтл был успешно добавлен на сайт");

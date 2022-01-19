@@ -29,7 +29,7 @@ const InvitationBtn = () => {
   const loading = useSelector(selectTeamLoading);
   useEffect(() => {
     if (dataUser) {
-      dispatch(getTeamsForUser(dataUser.id));
+      dispatch(getTeamsForUser());
     }
   }, []);
   const handleAddInvitation = async (

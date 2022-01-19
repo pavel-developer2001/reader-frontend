@@ -5,13 +5,13 @@ import BookMarksApi from "../../../services/api/bookMarksApi";
 
 export const addBookMark = createAsyncThunk(
   "bookMark/addBookMark",
-  async (payload: { category: string; mangaId: number; userId: number }) => {
+  async (payload: { category: string; mangaId: number }) => {
     return await BookMarksApi.addBookMarkForUser(payload);
   }
 );
 export const updateBookMark = createAsyncThunk(
   "bookMark/updateBookMark",
-  async (payload: { category: string; mangaId: number; userId: number }) => {
+  async (payload: { category: string; mangaId: number }) => {
     return await BookMarksApi.updateBookMark(payload);
   }
 );
@@ -23,14 +23,8 @@ export const getBookMarks = createAsyncThunk(
 );
 export const getBookMarkToManga = createAsyncThunk(
   "bookMark/getBookMarkToManga",
-  async (dataManga: {
-    mangaId: string | string[] | undefined;
-    userId: number;
-  }) => {
-    return await BookMarksApi.getBookMarkForManga(
-      dataManga.mangaId,
-      dataManga.userId
-    );
+  async (dataManga: { mangaId: string | string[] | undefined }) => {
+    return await BookMarksApi.getBookMarkForManga(dataManga.mangaId);
   }
 );
 interface BookMarkState {
@@ -84,6 +78,7 @@ const bookMarkSlice = createSlice({
         state.loading = false;
       })
       .addCase(getBookMarkToManga.fulfilled, (state, action) => {
+        console.log("ijaivae", action.payload.data);
         state.bookMark = action.payload.data;
         state.loading = false;
       }),

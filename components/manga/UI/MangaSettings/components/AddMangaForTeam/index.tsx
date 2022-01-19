@@ -24,7 +24,7 @@ const AddMangaForTeam = () => {
   const teams = useSelector(selectTeamsUserData);
   const loading = useSelector(selectTeamLoading);
   useEffect(() => {
-    dispatch(getTeamsForUser(dataUser.id));
+    dispatch(getTeamsForUser());
   }, []);
   function onBlur() {
     console.log("blur");

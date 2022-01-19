@@ -18,7 +18,7 @@ const MenuUser = () => {
     <div className={styles.block}>
       <Menu>
         <Menu.Item key='profile' icon={<UserOutlined />}>
-          <Link href={"/user/" + dataUser.id}>
+          <Link href={"/user/" + dataUser}>
             <a>Профиль пользователя</a>
           </Link>
         </Menu.Item>

@@ -8,7 +8,6 @@ export const addRating = createAsyncThunk(
   async (payload: {
     rating: number | null;
     mangaId: string | string[] | undefined;
-    userId: number;
   }) => {
     return await RatingApi.addRatingForManga(payload);
   }
@@ -18,15 +17,14 @@ export const updateRating = createAsyncThunk(
   async (payload: {
     rating: number | null;
     mangaId: string | string[] | undefined;
-    userId: number;
   }) => {
     return await RatingApi.updateRatingForManga(payload);
   }
 );
 export const getRating = createAsyncThunk(
   "rating/getRating",
-  async (dataManga: { id: string | string[] | undefined; userId: number }) => {
-    return await RatingApi.getRatingForManga(dataManga.id, dataManga.userId);
+  async (dataManga: { id: string | string[] | undefined }) => {
+    return await RatingApi.getRatingForManga(dataManga.id);
   }
 );
 interface RatingState {

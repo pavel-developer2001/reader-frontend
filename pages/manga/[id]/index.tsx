@@ -18,18 +18,14 @@ import { useRouter } from "next/dist/client/router";
 import ChapterList from "../../../components/manga/UI/ChapterList";
 import { RootState } from "../../../store/reducer";
 import {
-  selectMangaGenres,
   selectMangaItem,
   selectMangaLoading,
-  selectMangaTags,
 } from "../../../store/modules/manga/manga.selector";
 
 const { TabPane } = Tabs;
 
 const PageManga = () => {
   const manga = useSelector<RootState, any>(selectMangaItem);
-  const tag = useSelector(selectMangaTags);
-  const genre = useSelector(selectMangaGenres);
   const loading = useSelector(selectMangaLoading);
   const router = useRouter();
 
@@ -63,8 +59,8 @@ const PageManga = () => {
                       <TabPane tab='Описание' key='1'>
                         <MangaDescriptions
                           mangaDescription={manga?.mangaDescription}
-                          tags={tag}
-                          genres={genre}
+                          tags={manga.tags}
+                          genres={manga.genres}
                         />
                         <CommentsBlockList />
                       </TabPane>

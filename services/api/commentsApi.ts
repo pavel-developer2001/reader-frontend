@@ -8,7 +8,6 @@ export default class CommentsApi {
     commentText: string;
     mangaId: string | string[] | undefined;
     spoiler: boolean;
-    userId: number;
   }) {
     return ReaderApi.post("/comments/add", payload);
   }

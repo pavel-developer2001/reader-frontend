@@ -6,10 +6,10 @@ export default class UserApi {
     email: string;
     password: string;
   }) {
-    return ReaderApi.post("/users/registration", payload);
+    return ReaderApi.post("/auth/register", payload);
   }
   static async login(payload: { email: string; password: string }) {
-    return ReaderApi.post("/users/login", payload);
+    return ReaderApi.post("/auth/login", payload);
   }
   static async getUser(id: string | string[] | undefined) {
     return ReaderApi.get("/users/" + id);
