@@ -72,6 +72,7 @@ const chapterSlice = createSlice({
         state.loading = false;
       })
       .addCase(getImages.fulfilled, (state, action) => {
+        console.log("IIIIIIIIIIIi", action.payload.data);
         state.images = action.payload.data;
         state.loading = false;
       })
