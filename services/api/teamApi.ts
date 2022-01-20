@@ -15,8 +15,8 @@ export default class TeamApi {
   static async getTeam(id: string | string[] | undefined) {
     return ReaderApi.get("/teams/" + id);
   }
-  static async getAllTeamsForUser(id: string | string[] | undefined) {
-    return ReaderApi.get("/teams/user/" + id);
+  static async getAllTeamsForUser(userId: string) {
+    return ReaderApi.get("/teams/user/" + userId);
   }
   static async addTeamForManga(payload: {
     mangaId: string | string[] | undefined;

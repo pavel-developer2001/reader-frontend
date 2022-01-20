@@ -4,7 +4,6 @@ import { Modal, message } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
-import { dataUser } from "../../../../utils/getDataUserFromToken";
 import {
   addRating,
   getRating,
@@ -22,9 +21,8 @@ const Rating = () => {
   const [ratingCount, setRatingCount] = useState<null | number>(null);
   const rating = useSelector(selectRatingItemData);
   const loading = useSelector(selectRatingLoading);
-  const dataManga: { id: string | string[] | undefined; userId: number } = {
+  const dataManga: { id: string | string[] | undefined } = {
     id: router.query.id,
-    userId: dataUser.id,
   };
   useEffect(() => {
     dispatch(getRating(dataManga));
@@ -32,21 +30,20 @@ const Rating = () => {
   const payload: {
     rating: number | null;
     mangaId: string | string[] | undefined;
-    userId: number;
   } = {
     rating: ratingCount,
     mangaId: router.query.id,
-    userId: dataUser.id,
   };
   useEffect(() => {
-    if (ratingCount !== null) {
+    if (ratingCount && !rating) {
       setIsModalVisible(false);
       dispatch(addRating(payload));
       message.success("Ваша оценка для манги была добавлена");
     }
-    if (ratingCount !== null && rating) {
+    if (ratingCount && rating) {
       dispatch(updateRating(payload));
       message.success("Ваша оценка была успешна обновлена");
+      setIsModalVisible(false);
     }
   }, [ratingCount]);
   const ratingArray = [

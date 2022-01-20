@@ -9,6 +9,7 @@ import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../store/modules/team/team.selector";
+import { dataUser } from "../../../../utils/getDataUserFromToken";
 
 interface UserInTeamsBlockItemProps {
   cover: string;

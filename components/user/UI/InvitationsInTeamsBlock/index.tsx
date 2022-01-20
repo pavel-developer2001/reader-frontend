@@ -21,18 +21,25 @@ interface InvitationsInTeamsBlockItemProps {
   rank: string;
   teamId: number;
   name: string;
+  userId: string | string[] | undefined;
 }
 const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = ({
   invitationId,
   rank,
   teamId,
   name,
+  userId,
 }) => {
   const dispatch = useDispatch();
   const handleAgreetoJoin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const payload = await { invitationId, rank, teamId, userId: dataUser.id };
+      const payload = await {
+        invitationId,
+        rank,
+        teamId,
+        userId,
+      };
       await dispatch(agreeToJoin(payload));
       message.success("Вы были успешно приняты в команду");
     } catch (error: any) {
@@ -92,6 +99,7 @@ const InvitationsInTeamsBlock = () => {
               rank={invitation.rank}
               teamId={invitation.team?.id}
               name={invitation.team.teamName}
+              userId={router.query.id}
             />
           ))
         ) : (

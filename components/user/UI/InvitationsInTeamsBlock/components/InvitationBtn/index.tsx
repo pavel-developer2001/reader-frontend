@@ -11,12 +11,14 @@ import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../../../store/modules/team/team.selector";
+import { useRouter } from "next/dist/client/router";
 const { Option } = Select;
 
 const InvitationBtn = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [teamId, setTeamId] = useState<string | undefined>("");
   const [rank, setRank] = useState("");
+  const router = useRouter();
   const rankArray = [
     { role: "Переводчик" },
     { role: "Модератор" },
@@ -29,7 +31,7 @@ const InvitationBtn = () => {
   const loading = useSelector(selectTeamLoading);
   useEffect(() => {
     if (dataUser) {
-      dispatch(getTeamsForUser(dataUser.id));
+      dispatch(getTeamsForUser(dataUser));
     }
   }, []);
   const handleAddInvitation = async (
@@ -37,10 +39,14 @@ const InvitationBtn = () => {
   ) => {
     e.preventDefault();
     try {
-      const payload: { rank: string; teamId: number; userId: number } = await {
+      const payload: {
+        rank: string;
+        teamId: number;
+        userId: any;
+      } = await {
         rank,
         teamId,
-        userId: dataUser.id,
+        userId: router.query.id,
       };
       dispatch(addInvitation(payload));
       message.success("Приглашение было создано");

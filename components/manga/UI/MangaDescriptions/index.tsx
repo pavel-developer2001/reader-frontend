@@ -18,12 +18,12 @@ const MangaDescriptions: FC<MangaDescriptionsProps> = ({
     <div>
       {genres?.map((genre) => (
         <Tag color='purple' key={genre.id}>
-          {genre.genre}
+          {genre.name}
         </Tag>
       ))}
       {tags?.map((tag) => (
         <Tag color='purple' key={tag.id}>
-          {tag.tag}
+          {tag.name}
         </Tag>
       ))}
       <p className={styles.text}>{mangaDescription}</p>

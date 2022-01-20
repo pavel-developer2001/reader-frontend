@@ -2,6 +2,7 @@ import ReaderApi from "../ReaderApi";
 
 export default class ChapterApi {
   static async createChapter(payload: any) {
+    console.log("dagia", payload);
     return ReaderApi.post("/chapters/addChapter", payload, {
       headers: {
         accept: "application/json",

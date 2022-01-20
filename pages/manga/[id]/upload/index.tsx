@@ -68,7 +68,7 @@ const AddNewChapter = () => {
   const teams = useSelector(selectTeamsUserData);
   const loading = useSelector(selectTeamLoading);
   useEffect(() => {
-    dispatch(getTeamsForUser(dataUser.id));
+    dispatch(getTeamsForUser(dataUser));
   }, []);
   ////////////////////////////////////////////////////////////////////
   const [numberChapter, setNumberChapter] = useState("");
@@ -100,7 +100,6 @@ const AddNewChapter = () => {
       formData.append("titleChapter", titleChapter);
       formData.append("language", language);
       formData.append("mangaId", mangaId);
-      formData.append("userId", dataUser.id);
       formData.append("teamId", teamId);
       for (let i = 0; i < imagesList.length; i++) {
         formData.append("imagesList[]", imagesList[i].originFileObj);

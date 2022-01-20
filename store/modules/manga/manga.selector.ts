@@ -11,11 +11,4 @@ export const selectMangasData = (state: RootState): IManga[] =>
 export const selectMangaLoading = (state: RootState): boolean =>
   selectManga(state).loading;
 
-export const selectMangaTags = (state: RootState): ITag[] =>
-  selectManga(state).manga.tag;
-
-export const selectMangaGenres = (state: RootState): IGenre[] =>
-  selectManga(state).manga.genre;
-
-export const selectMangaItem = (state: RootState) =>
-  selectManga(state).manga.manga;
+export const selectMangaItem = (state: RootState) => selectManga(state).manga;

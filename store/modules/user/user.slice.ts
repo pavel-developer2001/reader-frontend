@@ -49,16 +49,16 @@ const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(loginUsers.fulfilled, (state, action) => {
-        state.user.push(action.payload.data.user);
-        window.localStorage.setItem("token", action.payload.data.token);
+        state.user.push(action.payload.data);
+        window.localStorage.setItem("token", action.payload.data.access_token);
         state.loading = false;
         state.token = action.payload.data.token;
       })
       .addCase(registerUsers.fulfilled, (state, action) => {
-        state.user.push(action.payload.data.user);
-        window.localStorage.setItem("token", action.payload.data.token);
+        state.user.push(action.payload.data);
+        window.localStorage.setItem("token", action.payload.data.access_token);
         state.loading = false;
-        state.token = action.payload.data.token;
+        state.token = action.payload.data.access_token;
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         state.user = action.payload.data;
