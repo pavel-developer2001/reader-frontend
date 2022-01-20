@@ -25,7 +25,6 @@ function callback(key: string) {
 
 const Team = () => {
   const team = useSelector(selectTeamItemData);
-  console.log("TEAM", team);
   const loading = useSelector(selectTeamLoading);
   return (
     <MainLayout>
@@ -68,8 +67,8 @@ const Team = () => {
                 </div>
               </TabPane>
               <TabPane tab='Лента' key='3'>
-                {/* <div className={styles.update}> */}
-                {/* {team?.chapters?.length > 0 ? (
+                <div className={styles.update}>
+                  {team?.chapters?.length > 0 ? (
                     team?.chapters?.map((chapter: any) => (
                       <UpdateListItem
                         key={chapter.id}
@@ -85,7 +84,7 @@ const Team = () => {
                   ) : (
                     <p>Команда не добавляла главы</p>
                   )}{" "}
-                </div> */}
+                </div>
               </TabPane>
             </Tabs>
           </div>
