@@ -14,7 +14,6 @@ import {
 const Chapter = () => {
   const router = useRouter();
   const mangaId = router.query?.id;
-
   const images = useSelector(selectChapterImagesData);
   console.log("IMAGES", images);
   const loading = useSelector(selectChapterLoading);
