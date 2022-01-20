@@ -42,6 +42,7 @@ const UserInTeamsBlock = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const teams = useSelector(selectTeamsUserData);
+  console.log("TEAMS", teams);
   const loading = useSelector(selectTeamLoading);
 
   useEffect(() => {

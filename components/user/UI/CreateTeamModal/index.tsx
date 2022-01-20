@@ -40,7 +40,6 @@ const CreateTeamModal = () => {
       formData.append("teamName", teamName);
       formData.append("teamSubtitle", teamSubtitle);
       formData.append("teamDescription", teamDescription);
-      formData.append("userId", dataUser.id);
       formData.append("teamCover", teamCover);
       dispatch(addNewTeam(formData));
       message.success("Команда была создана");

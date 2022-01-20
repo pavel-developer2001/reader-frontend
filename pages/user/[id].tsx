@@ -30,8 +30,6 @@ const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector(selectUserData);
-  console.log("USER", user);
-  console.log("fsgds", user);
   const loading = useSelector(selectUserLoading);
   const bookMarks = useSelector(selectBookMarksData);
   const loadingMark = useSelector(selectBookMarkLoading);

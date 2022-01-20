@@ -29,7 +29,7 @@ const InvitationBtn = () => {
   const loading = useSelector(selectTeamLoading);
   useEffect(() => {
     if (dataUser) {
-      dispatch(getTeamsForUser());
+      dispatch(getTeamsForUser(dataUser));
     }
   }, []);
   const handleAddInvitation = async (
@@ -40,7 +40,6 @@ const InvitationBtn = () => {
       const payload: { rank: string; teamId: number; userId: number } = await {
         rank,
         teamId,
-        userId: dataUser.id,
       };
       dispatch(addInvitation(payload));
       message.success("Приглашение было создано");

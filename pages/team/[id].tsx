@@ -25,6 +25,7 @@ function callback(key: string) {
 
 const Team = () => {
   const team = useSelector(selectTeamItemData);
+  console.log("TEAM", team);
   const loading = useSelector(selectTeamLoading);
   return (
     <MainLayout>
