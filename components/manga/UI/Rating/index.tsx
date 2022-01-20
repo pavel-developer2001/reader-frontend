@@ -35,14 +35,15 @@ const Rating = () => {
     mangaId: router.query.id,
   };
   useEffect(() => {
-    if (ratingCount !== null) {
+    if (ratingCount && !rating) {
       setIsModalVisible(false);
       dispatch(addRating(payload));
       message.success("Ваша оценка для манги была добавлена");
     }
-    if (ratingCount !== null && rating) {
+    if (ratingCount && rating) {
       dispatch(updateRating(payload));
       message.success("Ваша оценка была успешна обновлена");
+      setIsModalVisible(false);
     }
   }, [ratingCount]);
   const ratingArray = [
