@@ -36,4 +36,6 @@ yarn dev
 ```
 
 !!! Для полноценной работы, надо поднять бекэнд.
-Бэкенд этого проекта [здесь](https://github.com/pavel-developer2001/reader-backend).
+Новая версия бекэнда этого проекта [здесь](https://github.com/pavel-developer2001/reader-backend-nest).
+
+Старая версия бекэнда этого проекта [здесь](https://github.com/pavel-developer2001/reader-backend).
