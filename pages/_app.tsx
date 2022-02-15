@@ -1,4 +1,4 @@
-import "../styles/globals.scss";
+import "../styles/index.scss";
 import "antd/dist/antd.css";
 import React, { useEffect } from "react";
 import { AppProps } from "next/app";

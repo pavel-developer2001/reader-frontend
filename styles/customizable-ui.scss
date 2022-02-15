@@ -1,0 +1,32 @@
+.ant-modal-footer {
+  display: none;
+}
+
+.ant-modal-content {
+  background-color: var(#{--body-background-default}) !important;
+  color: var(#{--text-secondary-color-default}) !important;
+}
+.ant-modal-header {
+  background-color: var(#{--body-background-default}) !important;
+}
+.ant-modal-title {
+  color: var(#{--text-secondary-color-default}) !important;
+}
+.ant-modal-close-icon {
+  color: var(#{--text-secondary-color-default}) !important;
+}
+.ant-card-meta-title {
+  overflow: initial !important;
+  white-space: normal !important;
+}
+.ant-comment-inner {
+  padding: 8px 0 !important;
+}
+.ant-comment-actions {
+  margin-top: 0px !important;
+}
+.ant-input-textarea-show-count::after {
+  font-size: 12.8px !important;
+  float: left !important;
+  margin-left: 4px;
+}
