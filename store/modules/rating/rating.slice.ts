@@ -62,4 +62,4 @@ const ratingSlice = createSlice({
 });
 
 export default ratingSlice.reducer;
-export const {} = ratingSlice.actions;
+// export const {} = ratingSlice.actions;
