@@ -4,7 +4,6 @@ const { Header } = Layout;
 import {
   BellOutlined,
   FormatPainterOutlined,
-  SearchOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
@@ -12,6 +11,9 @@ import { Theme } from "../../../../context/ThemeContext";
 import { useTheme } from "../../../../hooks/useTheme";
 import AvatarUser from "../../../../components/AvatarUser";
 import SearchModal from "../../../../components/SearchModal";
+import { Desktop } from "../../../../devices/Desktop";
+import { Mobile } from "../../../../devices/Mobile";
+import AvatarDrawer from "./components/AvatarDrawer";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -38,40 +40,68 @@ const Navbar = () => {
   };
   return (
     <Header className={styles.header}>
-      <div className='main-container'>
-        <div className={styles.wrapper}>
-          <div className={styles.leftHeader}>
-            <div className={styles.logo}>
-              <Link href='/'>
-                <a>Reader</a>
-              </Link>
-            </div>
-            {menuArrays.left.map((menu, index) => (
-              <div key={index} className={styles.menu}>
-                <Link href={menu.link}>
-                  <a>{menu.title}</a>
+      <Desktop>
+        <div className='main-container'>
+          <div className={styles.wrapper}>
+            <div className={styles.leftHeader}>
+              <div className={styles.logo}>
+                <Link href='/'>
+                  <a>Reader</a>
                 </Link>
               </div>
-            ))}
-          </div>
-          <div className={styles.rightHeader}>
-            <div className={styles.menu}>
-              <SearchModal />
+              {menuArrays.left.map((menu, index) => (
+                <div key={index} className={styles.menu}>
+                  <Link href={menu.link}>
+                    <a>{menu.title}</a>
+                  </Link>
+                </div>
+              ))}
             </div>
-            <div className={styles.menu}>
-              <Link href='/notification'>
-                <a>
-                  <BellOutlined />
-                </a>
-              </Link>
+            <div className={styles.rightHeader}>
+              <div className={styles.menu}>
+                <SearchModal />
+              </div>
+              <div className={styles.menu}>
+                <Link href='/notification'>
+                  <a>
+                    <BellOutlined />
+                  </a>
+                </Link>
+              </div>
+              <div className={styles.menu}>
+                <FormatPainterOutlined onClick={changeTheme} />
+              </div>
+              <AvatarUser />
             </div>
-            <div className={styles.menu}>
-              <FormatPainterOutlined onClick={changeTheme} />
-            </div>
-            <AvatarUser />
           </div>
         </div>
-      </div>
+      </Desktop>
+      <Mobile>
+        <div className='main-container'>
+          <div className={styles.wrapper}>
+            <div className={styles.leftHeader}>
+              <div className={styles.logo}>
+                <Link href='/'>
+                  <a>Reader</a>
+                </Link>
+              </div>
+            </div>
+            <div className={styles.rightHeader}>
+              <div className={styles.menu}>
+                <SearchModal />
+              </div>
+              <div className={styles.menu}>
+                <Link href='/notification'>
+                  <a>
+                    <BellOutlined />
+                  </a>
+                </Link>
+              </div>
+              <AvatarDrawer changeTheme={changeTheme} menuArrays={menuArrays} />
+            </div>
+          </div>
+        </div>
+      </Mobile>
     </Header>
   );
 };
