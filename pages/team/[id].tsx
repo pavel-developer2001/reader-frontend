@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { getTeam } from "../../store/modules/team/team.slice";
 import MemberBlock from "../../components/team/UI/MemberBlock";
 import CardManga from "../../components/CardManga";
-import { UpdateListItem } from "../../components/lateUpdates/UI/UpdateList";
+import { UpdateListItem } from "../../components/home/UI/UpdateList";
 import { wrapper } from "../../store";
 import { GetServerSideProps } from "next";
 import {

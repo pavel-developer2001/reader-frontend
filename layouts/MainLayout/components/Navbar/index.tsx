@@ -1,10 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
 const { Header } = Layout;
-import {
-  BellOutlined,
-  FormatPainterOutlined,
-} from "@ant-design/icons";
+import { BellOutlined, FormatPainterOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import { Theme } from "../../../../context/ThemeContext";
@@ -30,10 +27,6 @@ const Navbar = () => {
       {
         title: "В топе",
         link: "/popular",
-      },
-      {
-        title: "Лента",
-        link: "/lateUpdates",
       },
     ],
     right: [],
