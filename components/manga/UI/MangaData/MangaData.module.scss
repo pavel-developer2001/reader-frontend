@@ -39,3 +39,34 @@
     color: rgba(0, 0, 0, 0.6);
   }
 }
+@media (max-width: 550px) {
+  .title {
+    font-size: 1.5rem;
+    color: var(#{--text-secondary-color-default}) !important;
+    margin: 0 !important;
+  }
+  .dataTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .static {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 451px) {
+  .title {
+    font-size: 2rem !important;
+    color: var(#{--text-secondary-color-default}) !important;
+    margin: 0 !important;
+  }
+  .originalTitle {
+    text-align: center;
+  }
+  .ageRating {
+    display: block;
+  }
+}

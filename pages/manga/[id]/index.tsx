@@ -1,7 +1,7 @@
 import React from "react";
 import MainLayout from "../../../layouts/MainLayout";
 import { Tabs } from "antd";
-import styles from "../Manga.module.css";
+import styles from "../Manga.module.scss";
 import dynamic from "next/dynamic";
 import MangaData from "../../../components/manga/UI/MangaData";
 import MangaDescriptions from "../../../components/manga/UI/MangaDescriptions";
@@ -68,6 +68,7 @@ const PageManga = () => {
                           tags={manga.tags}
                           genres={manga.genres}
                         />
+                        <MangaAddition />
                       </TabPane>
                       <TabPane tab='Главы' key='2'>
                         <ChapterList mangaId={router.query.id} />
@@ -77,7 +78,6 @@ const PageManga = () => {
                       </TabPane>
                     </Tabs>
                   </div>
-                  <MangaAddition />
                 </div>
               </div>
             </>

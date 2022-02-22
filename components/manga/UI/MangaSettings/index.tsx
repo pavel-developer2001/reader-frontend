@@ -1,5 +1,6 @@
 import { EditOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons";
-import { Button, Image, message, Tooltip } from "antd";
+import { Button, message, Tooltip } from "antd";
+import Image from "next/image";
 import { Select } from "antd";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
@@ -64,88 +65,91 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
     dispatch(getBookMarkToManga(dataManga));
   }, [router, loading]);
   return (
-    <div className={styles.card}>
-      <Image width={250} height={350} src={cover} />
-      <div className={styles.settings}>
-        <div className={styles.features}>
-          <div className={styles.feature}>
-            <Link href={"/manga/" + id + "/upload"}>
-              <a>
-                <Tooltip title='Добавить новые главы'>
-                  <Button
-                    type='primary'
-                    shape='circle'
-                    icon={<PlusOutlined />}
-                  />
-                </Tooltip>
-              </a>
-            </Link>
+    <>
+      <div className={styles.card}>
+        <Image width={250} height={350} src={cover} className={styles.img} />
+        <div className={styles.settings}>
+          <div className={styles.features}>
+            <div className={styles.feature}>
+              <Link href={"/manga/" + id + "/upload"}>
+                <a>
+                  <Tooltip title='Добавить новые главы'>
+                    <Button
+                      type='primary'
+                      shape='circle'
+                      icon={<PlusOutlined />}
+                    />
+                  </Tooltip>
+                </a>
+              </Link>
+            </div>
+            <div className={styles.feature}>
+              <AddMangaForTeam />
+            </div>
+            <div className={styles.feature}>
+              <Tooltip title='Сообщение модератору'>
+                <Button
+                  type='primary'
+                  shape='circle'
+                  icon={<WarningOutlined />}
+                />
+              </Tooltip>
+            </div>
+            <div className={styles.feature}>
+              <Tooltip title='Редактировать мангу'>
+                <Button type='primary' shape='circle' icon={<EditOutlined />} />
+              </Tooltip>
+            </div>
           </div>
-          <div className={styles.feature}>
-            <AddMangaForTeam />
+          <div className={styles.item}>
+            {" "}
+            {loading ? (
+              <p>loading</p>
+            ) : (
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder={
+                  loading
+                    ? "Добавить в закладки"
+                    : bookMark != null
+                    ? bookMark?.category
+                    : "Добавить в закладки"
+                }
+                optionFilterProp='children'
+                onChange={changeMark}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+                filterOption={(input, option: any) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+              >
+                <Option value='Читаю'>Читаю</Option>
+                <Option value='Прочитано'>Прочитано</Option>
+                <Option value='Буду читать'>Буду читать</Option>
+                <Option value='Брошено'>Брошено</Option>
+                <Option value='Неинтересно'>Неинтересно</Option>
+                <Option value='Отложено'>Отложено</Option>
+                {bookMark != null ? (
+                  bookMark?.category ? (
+                    <Option value='Удалить из закладок'>
+                      Удалить из закладок
+                    </Option>
+                  ) : null
+                ) : null}
+              </Select>
+            )}
           </div>
-          <div className={styles.feature}>
-            <Tooltip title='Сообщение модератору'>
-              <Button
-                type='primary'
-                shape='circle'
-                icon={<WarningOutlined />}
-              />
-            </Tooltip>
+          <div className={styles.item}>
+            <Button type='primary' shape='round' size='large'>
+              Читать
+            </Button>
           </div>
-          <div className={styles.feature}>
-            <Tooltip title='Редактировать мангу'>
-              <Button type='primary' shape='circle' icon={<EditOutlined />} />
-            </Tooltip>
-          </div>
-        </div>
-        <div className={styles.item}>
-          {" "}
-          {loading ? (
-            <p>loading</p>
-          ) : (
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              placeholder={
-                loading
-                  ? "Добавить в закладки"
-                  : bookMark != null
-                  ? bookMark?.category
-                  : "Добавить в закладки"
-              }
-              optionFilterProp='children'
-              onChange={changeMark}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              onSearch={onSearch}
-              filterOption={(input, option: any) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              <Option value='Читаю'>Читаю</Option>
-              <Option value='Прочитано'>Прочитано</Option>
-              <Option value='Буду читать'>Буду читать</Option>
-              <Option value='Брошено'>Брошено</Option>
-              <Option value='Неинтересно'>Неинтересно</Option>
-              <Option value='Отложено'>Отложено</Option>
-              {bookMark != null ? (
-                bookMark?.category ? (
-                  <Option value='Удалить из закладок'>
-                    Удалить из закладок
-                  </Option>
-                ) : null
-              ) : null}
-            </Select>
-          )}
-        </div>
-        <div className={styles.item}>
-          <Button type='primary' shape='round' size='large'>
-            Читать
-          </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
