@@ -3,6 +3,7 @@ import styles from "./MangaDescriptions.module.scss";
 import React, { FC } from "react";
 import { ITag } from "../../../../store/modules/manga/types/ITag";
 import { IGenre } from "../../../../store/modules/manga/types/IGenre";
+import AuthorBlock from "../AuthorBlock";
 
 interface MangaDescriptionsProps {
   mangaDescription: string;
@@ -16,6 +17,7 @@ const MangaDescriptions: FC<MangaDescriptionsProps> = ({
 }) => {
   return (
     <div>
+      <p className={styles.text}>{mangaDescription}</p>
       {genres?.map((genre) => (
         <Tag color='purple' key={genre.id}>
           {genre.name}
@@ -26,7 +28,13 @@ const MangaDescriptions: FC<MangaDescriptionsProps> = ({
           {tag.name}
         </Tag>
       ))}
-      <p className={styles.text}>{mangaDescription}</p>
+      <div className={styles.authors}>
+        <strong className={styles.title}>Авторы</strong>
+        <div>
+          <AuthorBlock />
+          <AuthorBlock />
+        </div>
+      </div>
     </div>
   );
 };

@@ -6,3 +6,12 @@
   margin: 4px 0;
   color: var(#{--text-secondary-color-default}) !important;
 }
+.authors {
+  margin-top: 15px;
+  .title {
+    font-size: 22px;
+  }
+  div {
+    display: flex;
+  }
+}

@@ -1,22 +1,28 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MainLayout from "../../../layouts/MainLayout";
-
 import { Tabs } from "antd";
 import styles from "../Manga.module.css";
-import CommentsBlockList from "../../../components/manga/UI/CommentsBlockList";
-
+import dynamic from "next/dynamic";
 import MangaData from "../../../components/manga/UI/MangaData";
 import MangaDescriptions from "../../../components/manga/UI/MangaDescriptions";
-import MangaAddition from "../../../components/manga/UI/MangaAddition";
 import MangaSettings from "../../../components/manga/UI/MangaSettings";
 import { GetServerSideProps } from "next";
 import { wrapper } from "../../../store";
-
 import { getManga } from "../../../store/modules/manga/manga.slice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
-import ChapterList from "../../../components/manga/UI/ChapterList";
 import { RootState } from "../../../store/reducer";
+
+const CommentsBlockList = dynamic(
+  () => import("../../../components/manga/UI/CommentsBlockList")
+);
+const ChapterList = dynamic(
+  () => import("../../../components/manga/UI/ChapterList")
+);
+const MangaAddition = dynamic(
+  () => import("../../../components/manga/UI/MangaAddition")
+);
+
 import {
   selectMangaItem,
   selectMangaLoading,
@@ -62,10 +68,12 @@ const PageManga = () => {
                           tags={manga.tags}
                           genres={manga.genres}
                         />
-                        <CommentsBlockList />
                       </TabPane>
                       <TabPane tab='Главы' key='2'>
                         <ChapterList mangaId={router.query.id} />
+                      </TabPane>
+                      <TabPane tab='Комментарии' key='3'>
+                        <CommentsBlockList />
                       </TabPane>
                     </Tabs>
                   </div>

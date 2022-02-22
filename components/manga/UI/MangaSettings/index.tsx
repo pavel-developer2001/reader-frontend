@@ -1,5 +1,5 @@
-import { PlusOutlined } from "@ant-design/icons";
-import { Button, Image, message } from "antd";
+import { EditOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons";
+import { Button, Image, message, Tooltip } from "antd";
 import { Select } from "antd";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
@@ -67,10 +67,37 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
     <div className={styles.card}>
       <Image width={250} height={350} src={cover} />
       <div className={styles.settings}>
-        <div className={styles.item}>
-          <Button type='primary' shape='round' size='large'>
-            Читать
-          </Button>
+        <div className={styles.features}>
+          <div className={styles.feature}>
+            <Link href={"/manga/" + id + "/upload"}>
+              <a>
+                <Tooltip title='Добавить новые главы'>
+                  <Button
+                    type='primary'
+                    shape='circle'
+                    icon={<PlusOutlined />}
+                  />
+                </Tooltip>
+              </a>
+            </Link>
+          </div>
+          <div className={styles.feature}>
+            <AddMangaForTeam />
+          </div>
+          <div className={styles.feature}>
+            <Tooltip title='Сообщение модератору'>
+              <Button
+                type='primary'
+                shape='circle'
+                icon={<WarningOutlined />}
+              />
+            </Tooltip>
+          </div>
+          <div className={styles.feature}>
+            <Tooltip title='Редактировать мангу'>
+              <Button type='primary' shape='circle' icon={<EditOutlined />} />
+            </Tooltip>
+          </div>
         </div>
         <div className={styles.item}>
           {" "}
@@ -113,19 +140,9 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
           )}
         </div>
         <div className={styles.item}>
-          <Button type='link'>Редактировать</Button>
-        </div>
-        <div className={styles.item}>
-          <Link href={"/manga/" + id + "/upload"}>
-            <a>
-              <Button type='primary' icon={<PlusOutlined />} size='large'>
-                Добавить новые главы
-              </Button>
-            </a>
-          </Link>
-        </div>
-        <div className={styles.item}>
-          <AddMangaForTeam />
+          <Button type='primary' shape='round' size='large'>
+            Читать
+          </Button>
         </div>
       </div>
     </div>

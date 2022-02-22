@@ -9,3 +9,29 @@
   flex-direction: column;
   overflow: hidden;
 }
+@media (max-width: 1400px) {
+  .container {
+    margin-top: 6%;
+  }
+}
+@media (max-width: 1150px) {
+  .container {
+    margin-top: 8%;
+  }
+}
+@media (max-width: 835px) {
+  .container {
+    margin-top: 10%;
+    padding: 0 40px;
+  }
+}
+@media (max-width: 450px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+@media (max-width: 710px) {
+  .container {
+    margin-top: 12%;
+  }
+}
