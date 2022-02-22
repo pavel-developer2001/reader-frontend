@@ -5,6 +5,9 @@
 body {
   background-color: var(#{--body-background-default}) !important;
 }
+a {
+  color: var(#{--text-secondary-color-default}) !important;
+}
 .main-container {
   margin: 0 auto !important;
   max-width: calc(1440px + (100vw / 72 * 2) * 2) !important;

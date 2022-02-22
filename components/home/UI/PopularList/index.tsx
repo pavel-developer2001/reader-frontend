@@ -4,7 +4,7 @@ import {
   selectMangaLoading,
   selectMangasData,
 } from "../../../../store/modules/manga/manga.selector";
-import CardManga from "../../../CardManga";
+import { CardManga } from "../../../CardManga";
 import styles from "./PopularList.module.css";
 
 const PopularList = () => {
@@ -15,7 +15,7 @@ const PopularList = () => {
       {loading ? (
         <p>loading</p>
       ) : (
-        mangas?.map((manga) => <CardManga key={manga.id} manga={manga} />)
+        mangas?.map((manga) => <CardManga key={manga?.id} manga={manga} />)
       )}
     </div>
   );

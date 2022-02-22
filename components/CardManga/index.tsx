@@ -1,31 +1,28 @@
-import { Card } from "antd";
-import Meta from "antd/lib/card/Meta";
-import React, { FC } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import styles from "./CardManga.module.css";
+import React, { FC } from "react";
 import { IManga } from "../../store/modules/manga/types/IManga";
+import styles from "./CardManga.module.scss";
 
 interface CardMangaProps {
   manga: IManga;
 }
-const CardManga: FC<CardMangaProps> = ({ manga }) => {
+
+export const CardManga: FC<CardMangaProps> = ({ manga }) => {
   return (
     <Link href={"/manga/" + manga.id}>
       <a>
-        <Card
-          hoverable
-          className={styles.card}
-          style={{ width: 200 }}
-          cover={<img alt='example' src={manga.mangaCover} />}
-        >
-          <Meta
-            title={manga.title}
-            description={manga.typeManga ? manga.typeManga : ""}
+        <div className={styles.main}>
+          <Image
+            src={manga && manga.mangaCover}
+            width={144}
+            height={216}
+            className={styles.img}
           />
-        </Card>
+          <strong>{manga.title}</strong>
+          <span>{manga.typeManga}</span>
+        </div>
       </a>
     </Link>
   );
 };
-
-export default CardManga;
