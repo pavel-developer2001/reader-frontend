@@ -2,6 +2,7 @@
   padding: 0 51px;
   flex: 1 1 auto;
   margin-top: 5%;
+  min-height: 100vh;
 }
 .wrapper {
   min-height: 100%;

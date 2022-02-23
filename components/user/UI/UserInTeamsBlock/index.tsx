@@ -9,7 +9,6 @@ import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../store/modules/team/team.selector";
-import { dataUser } from "../../../../utils/getDataUserFromToken";
 
 interface UserInTeamsBlockItemProps {
   cover: string;
@@ -26,6 +25,7 @@ const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = ({
       <a className={styles.main}>
         <Avatar
           shape='square'
+          alt='avatar team'
           size={72}
           src={
             cover

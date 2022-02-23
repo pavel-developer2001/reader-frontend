@@ -10,6 +10,7 @@
 }
 .top {
   display: flex;
+  flex-wrap: wrap;
   border-radius: 8px;
   padding: 5px 10px;
   background-color: var(#{--components-background-default});
@@ -20,6 +21,7 @@
 }
 .bottom {
   display: flex;
+  flex-wrap: wrap;
   border-radius: 8px;
   padding: 5px 10px;
   background-color: var(#{--components-background-default});

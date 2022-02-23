@@ -4,6 +4,7 @@ import { Drawer } from "antd";
 import {
   ExportOutlined,
   FormatPainterOutlined,
+  PlusOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import Avatar from "antd/lib/avatar/avatar";
@@ -46,7 +47,7 @@ interface AvatarDrawerProps {
   menuArrays: any;
 }
 
-const AvatarDrawer = ({ changeTheme, menuArrays }): FC<AvatarDrawerProps> => {
+const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector(selectUserToken);
@@ -80,6 +81,14 @@ const AvatarDrawer = ({ changeTheme, menuArrays }): FC<AvatarDrawerProps> => {
             </Link>
           </p>
         ))}
+        <p>
+          <Link href='/createManga'>
+            <a>
+              <PlusOutlined />
+              Добавить мангу
+            </a>
+          </Link>
+        </p>
         <p>
           <div className={styles.menu} onClick={changeTheme}>
             <FormatPainterOutlined /> Сменить цвет

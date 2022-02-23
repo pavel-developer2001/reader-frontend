@@ -15,6 +15,7 @@ export const CardManga: FC<CardMangaProps> = ({ manga }) => {
         <div className={styles.main}>
           <Image
             src={manga && manga.mangaCover}
+            alt='MangaCover'
             width={144}
             height={216}
             className={styles.img}
