@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import styles from "./AvatarDrawer.module.scss";
 import { Drawer } from "antd";
 import {
@@ -13,6 +13,7 @@ import { message } from "antd";
 import { setToken } from "../../../../../../store/modules/user/user.slice";
 import { selectUserToken } from "../../../../../../store/modules/user/user.selector";
 import AuthModal from "../../../../../../components/AuthModal";
+import { dataUser } from "../../../../../../utils/getDataUserFromToken";
 
 const AvatarHeader = ({ token }: any) => {
   return (
@@ -20,9 +21,15 @@ const AvatarHeader = ({ token }: any) => {
       {token ? (
         <>
           <div className={styles.headerUser}>
-            <Avatar size='large' icon={<UserOutlined />} />
+            <Link href={"/user/" + dataUser}>
+              <Avatar size='large' icon={<UserOutlined />} />
+            </Link>
+
             <div className={styles.headerData}>
-              <strong>UserName</strong>
+              {" "}
+              <strong>
+                <Link href={"/user/" + dataUser}>UserName</Link>
+              </strong>{" "}
               <span>0 ₽</span>
             </div>
           </div>
@@ -34,8 +41,12 @@ const AvatarHeader = ({ token }: any) => {
     </div>
   );
 };
+interface AvatarDrawerProps {
+  changeTheme: any;
+  menuArrays: any;
+}
 
-const AvatarDrawer = ({ changeTheme, menuArrays }: any) => {
+const AvatarDrawer = ({ changeTheme, menuArrays }): FC<AvatarDrawerProps> => {
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector(selectUserToken);

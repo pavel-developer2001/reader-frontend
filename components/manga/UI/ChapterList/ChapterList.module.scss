@@ -20,3 +20,15 @@
     margin-left: 12px;
   }
 }
+@media (max-width: 541px) {
+  .numbers {
+    min-width: 190px !important;
+    max-width: 190px !important;
+  }
+}
+@media (max-width: 451px) {
+  .numbers {
+    min-width: 100px !important;
+    max-width: 100px !important;
+  }
+}
