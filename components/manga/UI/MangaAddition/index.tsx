@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeamsForManga } from "../../../../store/modules/team/team.slice";
 import CardTeam from "../CardTeam";
-import styles from "./MangaAddition.module.css";
+import styles from "./MangaAddition.module.scss";
 import {
   selectTeamLoading,
   selectTeamsMangaData,

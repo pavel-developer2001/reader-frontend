@@ -1,6 +1,6 @@
-import { Card } from "antd";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 import styles from "./TisketListCard.module.scss";
 
 const TisketListCard = () => {
@@ -8,10 +8,12 @@ const TisketListCard = () => {
     <div className={styles.main}>
       <div className={styles.leftBlock}>
         {" "}
-        <img
+        <Image
           className={styles.img}
           src='https://api.remanga.org//media/titles/tales_of_demons_and_gods/high_cover.jpg'
           alt='img card'
+          width={60}
+          height={90}
         />
       </div>
       <div className={styles.rightBlock}>

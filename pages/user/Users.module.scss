@@ -30,3 +30,15 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+@media (max-width: 955px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .name {
+    text-align: center;
+  }
+}

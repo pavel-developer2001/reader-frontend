@@ -4,3 +4,20 @@
 .avatar {
   display: grid;
 }
+.mangaList {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (max-width: 550px) {
+  .header {
+    margin-top: 5%;
+  }
+  .mangaList {
+    flex-direction: column;
+  }
+}
+@media (max-width: 400px) {
+  .header {
+    margin-top: 10%;
+  }
+}

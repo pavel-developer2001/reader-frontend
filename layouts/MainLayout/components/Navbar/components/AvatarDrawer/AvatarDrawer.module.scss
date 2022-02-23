@@ -1,0 +1,14 @@
+.main {
+  margin-left: 10px;
+}
+.header {
+  .headerUser {
+    display: flex;
+    margin-bottom: 10px;
+    .headerData {
+      display: flex;
+      flex-direction: column;
+      margin-left: 15px;
+    }
+  }
+}

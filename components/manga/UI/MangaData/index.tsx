@@ -48,7 +48,7 @@ const MangaData: FC<MangaDataProps> = ({
         <div className={styles.bookmarks}>
           <CopyFilled /> 13.8K
         </div>
-        <div className={styles.bookmarks}>{ageRating}</div>
+        <div className={styles.ageRating}>{ageRating}</div>
         <div className={styles.type}>{typeManga}</div>
         <div className={styles.date}>{yearOfIssue}</div>
       </div>

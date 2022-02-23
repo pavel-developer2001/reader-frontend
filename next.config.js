@@ -10,5 +10,6 @@ module.exports = withTM({
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    domains: ["api.remanga.org", "res.cloudinary.com"],
   },
 });

@@ -1,13 +1,9 @@
 import Title from "antd/lib/typography/Title";
-import { GetServerSideProps } from "next";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CardManga from "../../components/CardManga";
 import Filters from "../../components/catalog/UI/Filters";
 import MainLayout from "../../layouts/MainLayout";
-import MangaApi from "../../services/api/mangaApi";
-import { wrapper } from "../../store";
-import { getMangas, setMangas } from "../../store/modules/manga/manga.slice";
+import { getMangas } from "../../store/modules/manga/manga.slice";
 import styles from "./Catalog.module.css";
 import { Tabs } from "antd";
 import TeamList from "../../components/catalog/UI/TeamList";
@@ -15,7 +11,7 @@ import {
   selectMangaLoading,
   selectMangasData,
 } from "../../store/modules/manga/manga.selector";
-
+import { CardManga } from "../../components/CardManga";
 const { TabPane } = Tabs;
 
 function callback(key: string) {
@@ -56,21 +52,5 @@ const Catalog = () => {
     </MainLayout>
   );
 };
-// export const getServerSideProps: GetServerSideProps =
-//   wrapper.getServerSideProps(async (ctx) => {
-//     try {
-//       const mangas = await MangaApi.getAllManga();
-//       ctx.store.dispatch(setMangas(mangas));
-//       return {
-//         props: {},
-//       };
-//     } catch (error) {
-//       console.log("ERROR!");
-//       return {
-//         props: {
-//           rooms: [],
-//         },
-//       };
-//     }
-//   });
+
 export default Catalog;

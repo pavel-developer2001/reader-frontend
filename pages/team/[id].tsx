@@ -5,17 +5,20 @@ import MainLayout from "../../layouts/MainLayout";
 import styles from "./Team.module.css";
 import { Tabs } from "antd";
 import { useSelector } from "react-redux";
-
 import { getTeam } from "../../store/modules/team/team.slice";
-import MemberBlock from "../../components/team/UI/MemberBlock";
-import CardManga from "../../components/CardManga";
-import { UpdateListItem } from "../../components/lateUpdates/UI/UpdateList";
+import { CardManga } from "../../components/CardManga";
+import { UpdateListItem } from "../../components/home/UI/UpdateList";
 import { wrapper } from "../../store";
 import { GetServerSideProps } from "next";
 import {
   selectTeamItemData,
   selectTeamLoading,
 } from "../../store/modules/team/team.selector";
+import dynamic from "next/dynamic";
+
+const MemberBlock = dynamic(
+  () => import("../../components/team/UI/MemberBlock")
+);
 
 const { TabPane } = Tabs;
 

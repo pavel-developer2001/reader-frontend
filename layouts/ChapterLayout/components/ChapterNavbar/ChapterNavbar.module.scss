@@ -35,3 +35,11 @@
 .title {
   color: var(#{--text-color-default});
 }
+@media (max-width: 520px) {
+  .logo {
+    width: 80px;
+  }
+  .wrapper {
+    justify-content: space-around;
+  }
+}

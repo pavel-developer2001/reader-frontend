@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import MainLayout from "../layouts/MainLayout";
 import styles from "../styles/Home.module.css";
 
@@ -6,7 +7,8 @@ import { wrapper } from "../store";
 import { GetServerSideProps } from "next";
 
 import PopularList from "../components/home/UI/PopularList";
-import TisketList from "../components/home/UI/TisketList";
+const TisketList = dynamic(() => import("../components/home/UI/TisketList"));
+const UpdateList = dynamic(() => import("../components/home/UI/UpdateList"));
 
 import { getMangas } from "../store/modules/manga/manga.slice";
 
@@ -19,6 +21,7 @@ const Home: NextPage = () => {
         <TisketList popularTitle='Топ дня' />
         <TisketList popularTitle='Топ месяца' />
       </div>
+      <UpdateList />
     </MainLayout>
   );
 };

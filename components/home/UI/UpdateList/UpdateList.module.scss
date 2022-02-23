@@ -7,8 +7,6 @@
     margin-right: 24px;
     min-width: 64px;
     img {
-      width: 64px;
-      height: 96px;
       border-radius: 6px;
       cursor: pointer;
     }
@@ -38,4 +36,7 @@
       margin-top: 10px;
     }
   }
+}
+.list {
+  margin-left: 15px;
 }

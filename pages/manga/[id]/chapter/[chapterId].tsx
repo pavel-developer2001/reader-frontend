@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -28,9 +29,11 @@ const Chapter = () => {
     >
       <div className={styles.main}>
         {images?.map((image) => (
-          <img
+          <Image
             key={image.id}
             className={styles.page}
+            width={900}
+            height={900}
             alt='chapter page'
             src={image.imageChapter}
           />
