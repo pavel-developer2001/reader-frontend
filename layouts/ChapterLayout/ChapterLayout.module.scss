@@ -21,3 +21,8 @@
   text-align: center;
   padding-top: 60px;
 }
+@media (max-width: 955px) {
+  .container {
+    padding: 0;
+  }
+}

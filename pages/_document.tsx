@@ -8,7 +8,7 @@ class AppDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang='ru'>
         <Head>
           <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link

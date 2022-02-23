@@ -1,6 +1,12 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .page {
-  display: block;
-  margin: 0 auto;
-  width: 900px;
+  display: block !important;
+  margin: 0 auto !important;
+  width: 900px !important;
   object-fit: contain;
 }

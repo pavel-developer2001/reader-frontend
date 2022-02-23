@@ -1,4 +1,4 @@
-import { Button, message, Modal } from "antd";
+import { Button, message, Modal, Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import styles from "./AddMangaForTeam.module.scss";
 import { Select } from "antd";
@@ -13,6 +13,7 @@ import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../../../store/modules/team/team.selector";
+import { UsergroupAddOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -64,9 +65,14 @@ const AddMangaForTeam = () => {
   };
   return !loading ? (
     <div>
-      <Button type='primary' onClick={showModal}>
-        Добавить эту мангу для команды
-      </Button>
+      <Tooltip title='Добавить эту мангу для команды'>
+        <Button
+          onClick={showModal}
+          type='primary'
+          shape='circle'
+          icon={<UsergroupAddOutlined />}
+        />
+      </Tooltip>
       <Modal
         title='Добавить эту мангу для команды'
         visible={isModalVisible}

@@ -8,10 +8,7 @@ const { TabPane } = Tabs;
 const { Title } = Typography;
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CardManga from "../../components/CardManga";
-import CreateTeamModal from "../../components/user/UI/CreateTeamModal";
-import InvitationsInTeamsBlock from "../../components/user/UI/InvitationsInTeamsBlock";
-import UserInTeamsBlock from "../../components/user/UI/UserInTeamsBlock";
+import { CardManga } from "../../components/CardManga";
 import MainLayout from "../../layouts/MainLayout";
 import { wrapper } from "../../store";
 import { getBookMarks } from "../../store/modules/bookMark/bookMark.slice";
@@ -25,6 +22,17 @@ import {
   selectBookMarkLoading,
   selectBookMarksData,
 } from "../../store/modules/bookMark/bookMark.selector";
+import dynamic from "next/dynamic";
+
+const CreateTeamModal = dynamic(
+  () => import("../../components/user/UI/CreateTeamModal")
+);
+const InvitationsInTeamsBlock = dynamic(
+  () => import("../../components/user/UI/InvitationsInTeamsBlock")
+);
+const UserInTeamsBlock = dynamic(
+  () => import("../../components/user/UI/UserInTeamsBlock")
+);
 
 const User = () => {
   const dispatch = useDispatch();
