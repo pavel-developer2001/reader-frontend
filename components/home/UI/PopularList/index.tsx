@@ -13,7 +13,7 @@ const PopularList = () => {
   return (
     <div className={styles.list}>
       {loading ? (
-        <p>loading</p>
+        <p data-testid='loading'>loading</p>
       ) : (
         mangas?.map((manga) => <CardManga key={manga?.id} manga={manga} />)
       )}

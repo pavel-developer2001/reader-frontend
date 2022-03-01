@@ -61,9 +61,9 @@ const UpdateList = () => {
     dispatch(getUpdateChapters());
   }, []);
   return (
-    <div className={styles.list}>
+    <div className={styles.list} >
       {loading ? (
-        <p>Loading</p>
+        <p data-testid='loading'> Loading</p>
       ) : updateChapter.length > 0 ? (
         updateChapter.map((lateChapter) => (
           <UpdateListItem
