@@ -17,6 +17,7 @@ import styles from "./Users.module.scss";
 import {
   selectUserData,
   selectUserLoading,
+  selectUserToken,
 } from "../../store/modules/user/user.selector";
 import {
   selectBookMarkLoading,
@@ -37,6 +38,7 @@ const UserInTeamsBlock = dynamic(
 const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const token = useSelector(selectUserToken);
   const user = useSelector(selectUserData);
   const loading = useSelector(selectUserLoading);
   const bookMarks = useSelector(selectBookMarksData);
@@ -104,8 +106,11 @@ const User = () => {
                 <TabPane tab='Команды' key='3'>
                   <div>
                     <UserInTeamsBlock />
-                    <InvitationsInTeamsBlock />
-                    <CreateTeamModal />
+                    {token && (
+                      <>
+                        <InvitationsInTeamsBlock /> <CreateTeamModal />
+                      </>
+                    )}
                   </div>
                 </TabPane>
                 <TabPane tab='Сообщения' key='4'>

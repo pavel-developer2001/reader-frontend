@@ -81,14 +81,17 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
             </Link>
           </p>
         ))}
-        <p>
-          <Link href='/createManga'>
-            <a>
-              <PlusOutlined />
-              Добавить мангу
-            </a>
-          </Link>
-        </p>
+        {token && (
+          <p>
+            <Link href='/createManga'>
+              <a>
+                <PlusOutlined />
+                Добавить мангу
+              </a>
+            </Link>
+          </p>
+        )}
+
         <p>
           <div className={styles.menu} onClick={changeTheme}>
             <FormatPainterOutlined /> Сменить цвет

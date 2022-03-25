@@ -1,6 +1,9 @@
 import { CopyFilled, EyeFilled, HeartFilled } from "@ant-design/icons";
 import Title from "antd/lib/typography/Title";
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
+import { selectRatingItemData } from "../../../../store/modules/rating/rating.selector";
+import { selectUserToken } from "../../../../store/modules/user/user.selector";
 import Rating from "../Rating";
 import styles from "./MangaData.module.scss";
 
@@ -24,6 +27,8 @@ const MangaData: FC<MangaDataProps> = ({
   typeManga,
   watchCount,
 }) => {
+  const rating = useSelector(selectRatingItemData);
+  const token = useSelector(selectUserToken);
   return (
     <div>
       <div>
@@ -37,7 +42,7 @@ const MangaData: FC<MangaDataProps> = ({
       </div>
       <div className={styles.static}>
         <div className={styles.rating}>
-          <Rating />
+          {token ? <Rating /> : rating.rating}
         </div>
         <div className={styles.likes}>
           <HeartFilled /> 17.2K{" "}

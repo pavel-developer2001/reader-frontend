@@ -11,9 +11,12 @@ import SearchModal from "../../../../components/SearchModal";
 import { Desktop } from "../../../../devices/Desktop";
 import { Mobile } from "../../../../devices/Mobile";
 import AvatarDrawer from "./components/AvatarDrawer";
+import { selectUserToken } from "../../../../store/modules/user/user.selector";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const theme = useTheme();
+  const token = useSelector(selectUserToken);
 
   function changeTheme() {
     theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
@@ -54,13 +57,16 @@ const Navbar = () => {
               <div className={styles.menu}>
                 <SearchModal />
               </div>
-              <div className={styles.menu}>
-                <Link href='/notification'>
-                  <a>
-                    <BellOutlined />
-                  </a>
-                </Link>
-              </div>
+              {token && (
+                <div className={styles.menu}>
+                  <Link href='/notification'>
+                    <a>
+                      <BellOutlined />
+                    </a>
+                  </Link>
+                </div>
+              )}
+
               <div className={styles.menu}>
                 <FormatPainterOutlined onClick={changeTheme} />
               </div>
@@ -83,13 +89,16 @@ const Navbar = () => {
               <div className={styles.menu}>
                 <SearchModal />
               </div>
-              <div className={styles.menu}>
-                <Link href='/notification'>
-                  <a>
-                    <BellOutlined />
-                  </a>
-                </Link>
-              </div>
+              {token && (
+                <div className={styles.menu}>
+                  <Link href='/notification'>
+                    <a>
+                      <BellOutlined />
+                    </a>
+                  </Link>
+                </div>
+              )}
+
               <AvatarDrawer changeTheme={changeTheme} menuArrays={menuArrays} />
             </div>
           </div>

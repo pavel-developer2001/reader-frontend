@@ -25,6 +25,7 @@ import {
   selectCommentLoading,
   selectCommentsData,
 } from "../../../../store/modules/comment/comment.selector";
+import { selectUserToken } from "../../../../store/modules/user/user.selector";
 
 interface CommentsBlockProps {
   commentId: number;
@@ -35,6 +36,7 @@ interface CommentsBlockProps {
   userAvatar: string;
   userName: string;
   userId: number;
+  token: string;
 }
 const CommentsBlock: FC<CommentsBlockProps> = ({
   commentId,
@@ -45,6 +47,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
   userAvatar,
   userName,
   userId,
+  token,
 }) => {
   const dispatch = useDispatch();
   const [likes, setLikes] = useState(commentLikes);
@@ -122,12 +125,14 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
           <div className={styles.content}>
             {!edit ? (
               <div className={styles.edit} onClick={() => setEdit(true)}>
-                <EditOutlined size={30} />
+                {token && <EditOutlined size={30} />}
               </div>
             ) : (
-              <div onClick={handleUpdateComment} className={styles.ready}>
-                <Button shape='circle' icon={<CheckOutlined />} />
-              </div>
+              token && (
+                <div onClick={handleUpdateComment} className={styles.ready}>
+                  <Button shape='circle' icon={<CheckOutlined />} />
+                </div>
+              )
             )}
             {!edit ? (
               spoiler ? (
@@ -186,6 +191,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
   );
 };
 const CommentBlockList = () => {
+  const token = useSelector(selectUserToken);
   const router = useRouter();
   const dispatch = useDispatch();
   const mangaId = router.query.id;
@@ -203,10 +209,12 @@ const CommentBlockList = () => {
       ) : (
         <>
           <div className={styles.title}>Комментарии {comments.length}</div>
-          <AddCommentForManga mangaId={mangaId} />
+          {token && <AddCommentForManga mangaId={mangaId} />}
+
           {comments.length > 0 ? (
             comments.map((comment) => (
               <CommentsBlock
+                token={token}
                 key={comment.id}
                 commentId={comment.id}
                 text={comment.commentText}
