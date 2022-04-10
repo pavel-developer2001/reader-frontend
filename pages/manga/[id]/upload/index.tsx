@@ -3,7 +3,6 @@ import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
 import MainLayout from "../../../../layouts/MainLayout";
 import { Upload, Modal, Button, Select, message } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewChapter } from "../../../../store/modules/chapter/chapter.slice";
@@ -45,8 +44,7 @@ const AddNewChapter = () => {
   const mangaId: any = router.query.id;
   const uploadButton = (
     <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>+</div>
+      <div className={styles.plus}>+</div>
     </div>
   );
   const handleCancel = () => {
@@ -219,7 +217,6 @@ const AddNewChapter = () => {
             action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
             listType='picture-card'
             fileList={imagesList}
-            className={styles.upload}
             onPreview={handlePreview}
             onChange={handleChange}
           >
@@ -233,7 +230,6 @@ const AddNewChapter = () => {
           >
             <img
               alt='example'
-              className={styles.img}
               style={{ width: "100%" }}
               src={previewImage}
             />
