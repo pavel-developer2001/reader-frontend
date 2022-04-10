@@ -219,10 +219,11 @@ const AddNewChapter = () => {
             action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
             listType='picture-card'
             fileList={imagesList}
+            className={styles.upload}
             onPreview={handlePreview}
             onChange={handleChange}
           >
-            {imagesList.length >= 8 ? null : uploadButton}
+            {uploadButton}
           </Upload>
           <Modal
             visible={previewVisible}
@@ -230,7 +231,12 @@ const AddNewChapter = () => {
             footer={null}
             onCancel={handleCancel}
           >
-            <img alt='example' style={{ width: "100%" }} src={previewImage} />
+            <img
+              alt='example'
+              className={styles.img}
+              style={{ width: "100%" }}
+              src={previewImage}
+            />
           </Modal>
         </div>
         <div className={styles.btnCreate}>
