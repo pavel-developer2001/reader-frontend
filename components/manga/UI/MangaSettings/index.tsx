@@ -11,13 +11,13 @@ import {
   getBookMarkToManga,
   updateBookMark,
 } from "../../../../store/modules/bookMark/bookMark.slice";
-import AddMangaForTeam from "./components/AddMangaForTeam";
-import styles from "./MangaSettings.module.scss";
 import {
   selectBookMarkItemData,
   selectBookMarkLoading,
 } from "../../../../store/modules/bookMark/bookMark.selector";
 import { selectUserToken } from "../../../../store/modules/user/user.selector";
+import AddMangaForTeam from "./components/AddMangaForTeam";
+import styles from "./MangaSettings.module.scss";
 
 interface MangaSettingsProps {
   cover: string;
@@ -75,7 +75,7 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
           width={250}
           height={350}
           src={cover}
-          alt='cover manga'
+          alt="cover manga"
           className={styles.img}
         />
         {token && (
@@ -84,10 +84,10 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
               <div className={styles.feature}>
                 <Link href={"/manga/" + id + "/upload"}>
                   <a>
-                    <Tooltip title='Добавить новые главы'>
+                    <Tooltip title="Добавить новые главы">
                       <Button
-                        type='primary'
-                        shape='circle'
+                        type="primary"
+                        shape="circle"
                         icon={<PlusOutlined />}
                       />
                     </Tooltip>
@@ -98,19 +98,19 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
                 <AddMangaForTeam />
               </div>
               <div className={styles.feature}>
-                <Tooltip title='Сообщение модератору'>
+                <Tooltip title="Сообщение модератору">
                   <Button
-                    type='primary'
-                    shape='circle'
+                    type="primary"
+                    shape="circle"
                     icon={<WarningOutlined />}
                   />
                 </Tooltip>
               </div>
               <div className={styles.feature}>
-                <Tooltip title='Редактировать мангу'>
+                <Tooltip title="Редактировать мангу">
                   <Button
-                    type='primary'
-                    shape='circle'
+                    type="primary"
+                    shape="circle"
                     icon={<EditOutlined />}
                   />
                 </Tooltip>
@@ -131,7 +131,7 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
                       ? bookMark?.category
                       : "Добавить в закладки"
                   }
-                  optionFilterProp='children'
+                  optionFilterProp="children"
                   onChange={changeMark}
                   onFocus={onFocus}
                   onBlur={onBlur}
@@ -142,15 +142,15 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-                  <Option value='Читаю'>Читаю</Option>
-                  <Option value='Прочитано'>Прочитано</Option>
-                  <Option value='Буду читать'>Буду читать</Option>
-                  <Option value='Брошено'>Брошено</Option>
-                  <Option value='Неинтересно'>Неинтересно</Option>
-                  <Option value='Отложено'>Отложено</Option>
+                  <Option value="Читаю">Читаю</Option>
+                  <Option value="Прочитано">Прочитано</Option>
+                  <Option value="Буду читать">Буду читать</Option>
+                  <Option value="Брошено">Брошено</Option>
+                  <Option value="Неинтересно">Неинтересно</Option>
+                  <Option value="Отложено">Отложено</Option>
                   {bookMark != null ? (
                     bookMark?.category ? (
-                      <Option value='Удалить из закладок'>
+                      <Option value="Удалить из закладок">
                         Удалить из закладок
                       </Option>
                     ) : null
@@ -159,7 +159,7 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
               )}
             </div>
             <div className={styles.item}>
-              <Button type='primary' shape='round' size='large'>
+              <Button type="primary" shape="round" size="large">
                 Читать
               </Button>
             </div>

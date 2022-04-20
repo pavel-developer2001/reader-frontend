@@ -2,13 +2,13 @@ import moment from "moment";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUpdateChapters } from "../../../../store/modules/chapter/chapter.slice";
-import styles from "./UpdateList.module.scss";
 import Image from "next/image";
+import { getUpdateChapters } from "../../../../store/modules/chapter/chapter.slice";
 import {
   selectChapterLoading,
   selectUpdateChapterData,
 } from "../../../../store/modules/chapter/chapter.selector";
+import styles from "./UpdateList.module.scss";
 
 interface UpdateListItemProps {
   chapterId: number;
@@ -32,7 +32,7 @@ export const UpdateListItem: FC<UpdateListItemProps> = ({
     <div className={styles.item}>
       <Link href={"/manga/" + mangaId}>
         <a className={styles.leftBlock}>
-          <Image width={64} height={96} src={cover} alt='manga cover' />
+          <Image width={64} height={96} src={cover} alt="manga cover" />
         </a>
       </Link>
 

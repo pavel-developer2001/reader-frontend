@@ -30,8 +30,8 @@ const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder='Типы'
-        optionFilterProp='children'
+        placeholder="Типы"
+        optionFilterProp="children"
         onChange={(value) => setTypeManga(value)}
         onFocus={onFocus}
         onBlur={onBlur}

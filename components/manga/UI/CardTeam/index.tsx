@@ -16,7 +16,7 @@ const CardTeam: FC<CardTeamProps> = ({ teamId, name, subtitle, cover }) => {
         {" "}
         <div className={styles.left}>
           <Avatar
-            shape='square'
+            shape="square"
             className={styles.avatar}
             size={56}
             src={

@@ -23,7 +23,7 @@ const AvatarHeader = ({ token }: any) => {
         <>
           <div className={styles.headerUser}>
             <Link href={"/user/" + dataUser}>
-              <Avatar size='large' icon={<UserOutlined />} />
+              <Avatar size="large" icon={<UserOutlined />} />
             </Link>
 
             <div className={styles.headerData}>
@@ -65,7 +65,7 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
   };
   return (
     <div className={styles.main}>
-      <Avatar size='large' icon={<UserOutlined />} onClick={showDrawer} />
+      <Avatar size="large" icon={<UserOutlined />} onClick={showDrawer} />
       <Drawer
         title={<AvatarHeader token={token} />}
         placement={"right"}
@@ -83,7 +83,7 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
         ))}
         {token && (
           <p>
-            <Link href='/createManga'>
+            <Link href="/createManga">
               <a>
                 <PlusOutlined />
                 Добавить мангу

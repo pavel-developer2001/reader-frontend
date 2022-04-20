@@ -3,11 +3,11 @@ import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeams } from "../../../../store/modules/team/team.slice";
-import styles from "./TeamList.module.scss";
 import {
   selectTeamLoading,
   selectTeamsData,
 } from "../../../../store/modules/team/team.selector";
+import styles from "./TeamList.module.scss";
 
 interface TeamListItemProps {
   teamId: number;

@@ -1,10 +1,9 @@
 import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import React from "react";
+import { Tabs } from "antd";
 import MainLayout from "../../layouts/MainLayout";
 import styles from "./Notification.module.scss";
-
-import { Tabs } from "antd";
 
 const { TabPane } = Tabs;
 
@@ -21,26 +20,26 @@ const Notification = () => {
         <div className={styles.rightBlog}>
           <div>
             <Button
-              type='primary'
-              shape='circle'
+              type="primary"
+              shape="circle"
               icon={<CheckCircleOutlined />}
             />
           </div>
           <div>
-            <Button type='primary' shape='circle' icon={<DeleteOutlined />} />
+            <Button type="primary" shape="circle" icon={<DeleteOutlined />} />
           </div>
           <div></div>
         </div>
       </div>
       <div className={styles.body}>
-        <Tabs defaultActiveKey='1' onChange={callback}>
-          <TabPane tab='Обновление' key='1'>
+        <Tabs defaultActiveKey="1" onChange={callback}>
+          <TabPane tab="Обновление" key="1">
             Content of Tab Pane 1
           </TabPane>
-          <TabPane tab='Социальное' key='2'>
+          <TabPane tab="Социальное" key="2">
             Content of Tab Pane 2
           </TabPane>
-          <TabPane tab='Важное' key='3'>
+          <TabPane tab="Важное" key="3">
             Content of Tab Pane 3
           </TabPane>
         </Tabs>

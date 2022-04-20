@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styles from "./SearchModal.module.scss";
 import { Modal, Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import styles from "./SearchModal.module.scss";
 import FoundBlock from "./components/FoundBlock";
 const { Search } = Input;
 
@@ -35,10 +35,10 @@ const SearchModal = () => {
         onCancel={handleCancel}
       >
         <Input
-          placeholder='Что ищем, семпай?'
+          placeholder="Что ищем, семпай?"
           value={value}
           className={styles.inputSearch}
-          size='large'
+          size="large"
           onChange={(e) => setValue(e.target.value)}
           prefix={<SearchOutlined />}
         />

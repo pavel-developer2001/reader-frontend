@@ -1,9 +1,9 @@
 import { Tag } from "antd";
-import styles from "./MangaDescriptions.module.scss";
 import React, { FC } from "react";
 import { ITag } from "../../../../store/modules/manga/types/ITag";
 import { IGenre } from "../../../../store/modules/manga/types/IGenre";
 import AuthorBlock from "../AuthorBlock";
+import styles from "./MangaDescriptions.module.scss";
 
 interface MangaDescriptionsProps {
   mangaDescription: string;
@@ -19,12 +19,12 @@ const MangaDescriptions: FC<MangaDescriptionsProps> = ({
     <div>
       <p className={styles.text}>{mangaDescription}</p>
       {genres?.map((genre) => (
-        <Tag color='purple' key={genre.id}>
+        <Tag color="purple" key={genre.id}>
           {genre.name}
         </Tag>
       ))}
       {tags?.map((tag) => (
-        <Tag color='purple' key={tag.id}>
+        <Tag color="purple" key={tag.id}>
           {tag.name}
         </Tag>
       ))}

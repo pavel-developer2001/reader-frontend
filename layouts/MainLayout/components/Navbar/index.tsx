@@ -37,11 +37,11 @@ const Navbar = () => {
   return (
     <Header className={styles.header}>
       <Desktop>
-        <div className='main-container'>
+        <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.leftHeader}>
               <div className={styles.logo}>
-                <Link href='/'>
+                <Link href="/">
                   <a>Reader</a>
                 </Link>
               </div>
@@ -59,7 +59,7 @@ const Navbar = () => {
               </div>
               {token && (
                 <div className={styles.menu}>
-                  <Link href='/notification'>
+                  <Link href="/notification">
                     <a>
                       <BellOutlined />
                     </a>
@@ -76,11 +76,11 @@ const Navbar = () => {
         </div>
       </Desktop>
       <Mobile>
-        <div className='main-container'>
+        <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.leftHeader}>
               <div className={styles.logo}>
-                <Link href='/'>
+                <Link href="/">
                   <a>Reader</a>
                 </Link>
               </div>
@@ -91,7 +91,7 @@ const Navbar = () => {
               </div>
               {token && (
                 <div className={styles.menu}>
-                  <Link href='/notification'>
+                  <Link href="/notification">
                     <a>
                       <BellOutlined />
                     </a>

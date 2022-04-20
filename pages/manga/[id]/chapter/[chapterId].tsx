@@ -6,11 +6,11 @@ import { useSelector } from "react-redux";
 import ChapterLayout from "../../../../layouts/ChapterLayout";
 import { wrapper } from "../../../../store";
 import { getImages } from "../../../../store/modules/chapter/chapter.slice";
-import styles from "./Chapter.module.scss";
 import {
   selectChapterImagesData,
   selectChapterLoading,
 } from "../../../../store/modules/chapter/chapter.selector";
+import styles from "./Chapter.module.scss";
 
 const Chapter = () => {
   const router = useRouter();
@@ -34,7 +34,7 @@ const Chapter = () => {
             className={styles.page}
             width={900}
             height={900}
-            alt='chapter page'
+            alt="chapter page"
             src={image.imageChapter}
           />
         ))}

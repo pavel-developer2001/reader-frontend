@@ -4,11 +4,11 @@ import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getChapters } from "../../../../store/modules/chapter/chapter.slice";
-import styles from "./ChapterList.module.scss";
 import {
   selectChapterLoading,
   selectChaptersData,
 } from "../../../../store/modules/chapter/chapter.selector";
+import styles from "./ChapterList.module.scss";
 
 interface ChapterListItemProps {
   chapterId: number;

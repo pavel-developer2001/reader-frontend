@@ -6,7 +6,7 @@ const { Footer, Sider } = Layout;
 const MyFooter = () => {
   return (
     <Footer style={{ textAlign: "center" }}>
-      <div className='main-container'>
+      <div className="main-container">
         {" "}
         Reader - Читать мангу онлайн на русском
       </div>

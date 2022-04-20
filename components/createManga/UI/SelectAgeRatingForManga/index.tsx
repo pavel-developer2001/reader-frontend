@@ -29,8 +29,8 @@ const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder='Возрастной рейтинг'
-        optionFilterProp='children'
+        placeholder="Возрастной рейтинг"
+        optionFilterProp="children"
         onChange={(value) => setAgeRatingManga(value)}
         onFocus={onFocus}
         onBlur={onBlur}

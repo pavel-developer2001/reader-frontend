@@ -31,8 +31,8 @@ const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder='Статус перевода'
-        optionFilterProp='children'
+        placeholder="Статус перевода"
+        optionFilterProp="children"
         onChange={(value) => setStatusManga(value)}
         onFocus={onFocus}
         onBlur={onBlur}

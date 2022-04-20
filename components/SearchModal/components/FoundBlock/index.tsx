@@ -8,7 +8,7 @@ const FoundBlockItem = () => {
     <div>
       <Link href={"/manga/1"}>
         <a className={styles.main}>
-          <Avatar size={30} src='https://joeschmoe.io/api/v1/random' />
+          <Avatar size={30} src="https://joeschmoe.io/api/v1/random" />
           <strong>Токийский гуль</strong>
         </a>
       </Link>

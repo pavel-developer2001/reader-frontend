@@ -105,10 +105,10 @@ const Filters = () => {
       <div>
         <strong>Фильтры</strong>
         <Button
-          type='text'
+          type="text"
           onClick={handleCleanCategories}
           icon={<CloseOutlined />}
-          size='large'
+          size="large"
         >
           Очистить
         </Button>
@@ -116,8 +116,8 @@ const Filters = () => {
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder='Типы'
-        optionFilterProp='children'
+        placeholder="Типы"
+        optionFilterProp="children"
         onChange={(value) => setTypes(value)}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -133,20 +133,20 @@ const Filters = () => {
         ))}
       </Select>
       <Select
-        mode='multiple'
+        mode="multiple"
         allowClear
         style={{ width: "100%" }}
-        placeholder='Жанры'
+        placeholder="Жанры"
         defaultValue={[]}
         onChange={(value) => setGenres(value)}
       >
         {childrenGenres}
       </Select>
       <Select
-        mode='multiple'
+        mode="multiple"
         allowClear
         style={{ width: "100%" }}
-        placeholder='Теги'
+        placeholder="Теги"
         defaultValue={[]}
         onChange={(value: string) => setTags(value)}
       >
@@ -155,8 +155,8 @@ const Filters = () => {
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder='Статус перевода'
-        optionFilterProp='children'
+        placeholder="Статус перевода"
+        optionFilterProp="children"
         onChange={(value) => setStatusTranslate(value)}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -174,8 +174,8 @@ const Filters = () => {
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder='Возрастной рейтинг'
-        optionFilterProp='children'
+        placeholder="Возрастной рейтинг"
+        optionFilterProp="children"
         onChange={(value) => setAgeRating(value)}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -196,8 +196,8 @@ const Filters = () => {
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder='Типы'
-        optionFilterProp='children'
+        placeholder="Типы"
+        optionFilterProp="children"
         onChange={(value) => setTypes(value)}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -213,20 +213,20 @@ const Filters = () => {
         ))}
       </Select>
       <Select
-        mode='multiple'
+        mode="multiple"
         allowClear
         style={{ width: "100%" }}
-        placeholder='Жанры'
+        placeholder="Жанры"
         defaultValue={[]}
         onChange={(value) => setGenres(value)}
       >
         {childrenGenres}
       </Select>
       <Select
-        mode='multiple'
+        mode="multiple"
         allowClear
         style={{ width: "100%" }}
-        placeholder='Теги'
+        placeholder="Теги"
         defaultValue={[]}
         onChange={(value) => setTags(value)}
       >

@@ -93,55 +93,55 @@ const CreateTeamModal = () => {
   return (
     <div>
       <Button
-        type='primary'
+        type="primary"
         icon={<PlusOutlined />}
         onClick={showModal}
-        size='large'
+        size="large"
       >
         Создать новую
       </Button>
       <Modal
-        title='Создать новую команду'
+        title="Создать новую команду"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
         <Upload
-          name='avatar'
-          listType='picture-card'
-          className='avatar-uploader'
+          name="avatar"
+          listType="picture-card"
+          className="avatar-uploader"
           showUploadList={false}
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >
           {imageUrl ? (
-            <img src={imageUrl} alt='avatar' style={{ width: "100%" }} />
+            <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
           ) : (
             uploadButton
           )}
         </Upload>
         <TextArea
-          placeholder='Название команды'
+          placeholder="Название команды"
           autoSize
           value={teamName}
           onChange={(e) => setTeamName(e.target.value)}
         />
         <div style={{ margin: "24px 0" }} />
         <TextArea
-          placeholder='Подзагаловок команды'
+          placeholder="Подзагаловок команды"
           autoSize
           value={teamSubtitle}
           onChange={(e) => setTeamSubtitle(e.target.value)}
         />
         <div style={{ margin: "24px 0" }} />
         <TextArea
-          placeholder='Описание'
+          placeholder="Описание"
           value={teamDescription}
           onChange={(e) => setTeamDescription(e.target.value)}
           autoSize={{ minRows: 3, maxRows: 5 }}
         />
         <div style={{ margin: "24px 0" }} />
-        <Button type='primary' size='large' onClick={handleAddTeam}>
+        <Button type="primary" size="large" onClick={handleAddTeam}>
           Создать команду
         </Button>
       </Modal>

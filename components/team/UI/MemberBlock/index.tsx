@@ -45,7 +45,7 @@ const MemberBlockItem: FC<MemberBlockItemProps> = ({
       </Link>
       <div>
         {role != "Глава" ? (
-          <Button type='primary' onClick={handleRemoveMember}>
+          <Button type="primary" onClick={handleRemoveMember}>
             Удалить
           </Button>
         ) : null}

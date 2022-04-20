@@ -1,16 +1,16 @@
 import React from "react";
-import MainLayout from "../../../layouts/MainLayout";
 import { Tabs } from "antd";
-import styles from "../Manga.module.scss";
 import dynamic from "next/dynamic";
+import { GetServerSideProps } from "next";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/dist/client/router";
+import MainLayout from "../../../layouts/MainLayout";
+import styles from "../Manga.module.scss";
 import MangaData from "../../../components/manga/UI/MangaData";
 import MangaDescriptions from "../../../components/manga/UI/MangaDescriptions";
 import MangaSettings from "../../../components/manga/UI/MangaSettings";
-import { GetServerSideProps } from "next";
 import { wrapper } from "../../../store";
 import { getManga } from "../../../store/modules/manga/manga.slice";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/dist/client/router";
 import { RootState } from "../../../store/reducer";
 
 const CommentsBlockList = dynamic(
@@ -61,8 +61,8 @@ const PageManga = () => {
                 />
                 <div className={styles.table}>
                   <div className={styles.mainBlock}>
-                    <Tabs defaultActiveKey='1' onChange={callback}>
-                      <TabPane tab='Описание' key='1'>
+                    <Tabs defaultActiveKey="1" onChange={callback}>
+                      <TabPane tab="Описание" key="1">
                         <MangaDescriptions
                           mangaDescription={manga?.mangaDescription}
                           tags={manga.tags}
@@ -70,10 +70,10 @@ const PageManga = () => {
                         />
                         <MangaAddition />
                       </TabPane>
-                      <TabPane tab='Главы' key='2'>
+                      <TabPane tab="Главы" key="2">
                         <ChapterList mangaId={router.query.id} />
                       </TabPane>
-                      <TabPane tab='Комментарии' key='3'>
+                      <TabPane tab="Комментарии" key="3">
                         <CommentsBlockList />
                       </TabPane>
                     </Tabs>

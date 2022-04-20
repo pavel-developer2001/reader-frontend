@@ -8,12 +8,12 @@ const { TabPane } = Tabs;
 const { Title } = Typography;
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import dynamic from "next/dynamic";
 import { CardManga } from "../../components/CardManga";
 import MainLayout from "../../layouts/MainLayout";
 import { wrapper } from "../../store";
 import { getBookMarks } from "../../store/modules/bookMark/bookMark.slice";
 import { getUserData } from "../../store/modules/user/user.slice";
-import styles from "./Users.module.scss";
 import {
   selectUserData,
   selectUserLoading,
@@ -23,7 +23,7 @@ import {
   selectBookMarkLoading,
   selectBookMarksData,
 } from "../../store/modules/bookMark/bookMark.selector";
-import dynamic from "next/dynamic";
+import styles from "./Users.module.scss";
 
 const CreateTeamModal = dynamic(
   () => import("../../components/user/UI/CreateTeamModal")
@@ -68,7 +68,7 @@ const User = () => {
               ) : (
                 <Avatar
                   size={156}
-                  src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+                  src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                 />
               )}
               <div className={styles.userData}>
@@ -86,10 +86,10 @@ const User = () => {
             </div>{" "}
             <div className={styles.body}>
               <Tabs tabPosition={tabPosition}>
-                <TabPane tab='Профиль' key='1'>
+                <TabPane tab="Профиль" key="1">
                   id: {user.id} Пол: Мужской
                 </TabPane>
-                <TabPane tab='Закладки' key='2'>
+                <TabPane tab="Закладки" key="2">
                   <div className={styles.markList}>
                     {" "}
                     {loadingMark ? (
@@ -103,7 +103,7 @@ const User = () => {
                     )}
                   </div>
                 </TabPane>
-                <TabPane tab='Команды' key='3'>
+                <TabPane tab="Команды" key="3">
                   <div>
                     <UserInTeamsBlock />
                     {token && (
@@ -113,7 +113,7 @@ const User = () => {
                     )}
                   </div>
                 </TabPane>
-                <TabPane tab='Сообщения' key='4'>
+                <TabPane tab="Сообщения" key="4">
                   <div>сообщения</div>
                 </TabPane>
               </Tabs>

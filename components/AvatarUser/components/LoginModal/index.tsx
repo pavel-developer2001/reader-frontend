@@ -4,7 +4,10 @@ import Modal from "antd/lib/modal";
 import { useRouter } from "next/dist/client/router";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUsers, registerUsers } from "../../../../store/modules/user/user.slice";
+import {
+  loginUsers,
+  registerUsers,
+} from "../../../../store/modules/user/user.slice";
 
 interface LoginModalProps {
   isModalVisible: boolean | undefined;
@@ -78,14 +81,14 @@ const LoginModal: FC<LoginModalProps> = ({
     >
       {register ? (
         <Form
-          name='basic'
+          name="basic"
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            label='Логин'
-            name='name'
+            label="Логин"
+            name="name"
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setName(e.target.value)
@@ -95,8 +98,8 @@ const LoginModal: FC<LoginModalProps> = ({
             <Input />
           </Form.Item>
           <Form.Item
-            name='email'
-            label='Email'
+            name="email"
+            label="Email"
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
@@ -112,8 +115,8 @@ const LoginModal: FC<LoginModalProps> = ({
             <Input />
           </Form.Item>
           <Form.Item
-            label='Пароль'
-            name='password'
+            label="Пароль"
+            name="password"
             value={password}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
@@ -123,8 +126,8 @@ const LoginModal: FC<LoginModalProps> = ({
             <Input.Password />
           </Form.Item>
           <Form.Item
-            label='Повторить пароль'
-            name='password2'
+            label="Повторить пароль"
+            name="password2"
             value={password2}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword2(e.target.value)
@@ -137,7 +140,7 @@ const LoginModal: FC<LoginModalProps> = ({
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button
               type={register ? "primary" : "link"}
-              htmlType='submit'
+              htmlType="submit"
               onClick={handleRegistration}
             >
               Зарегистрироваться
@@ -147,18 +150,18 @@ const LoginModal: FC<LoginModalProps> = ({
       ) : (
         <>
           <div>
-            <Button type='primary' icon={<GoogleOutlined />} size='large' />
-            <Button type='primary' icon={<TwitterOutlined />} size='large' />
+            <Button type="primary" icon={<GoogleOutlined />} size="large" />
+            <Button type="primary" icon={<TwitterOutlined />} size="large" />
           </div>
           <Form
-            name='basic'
+            name="basic"
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
           >
             <Form.Item
-              label='Email'
-              name='email'
+              label="Email"
+              name="email"
               value={email}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setEmail(e.target.value)
@@ -175,8 +178,8 @@ const LoginModal: FC<LoginModalProps> = ({
             </Form.Item>
 
             <Form.Item
-              label='Пароль'
-              name='password'
+              label="Пароль"
+              name="password"
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)
@@ -189,13 +192,13 @@ const LoginModal: FC<LoginModalProps> = ({
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Button type='primary' onClick={handleLogin} htmlType='submit'>
+              <Button type="primary" onClick={handleLogin} htmlType="submit">
                 Войти
               </Button>
               <Button
                 onClick={() => setRegister(true)}
-                type='link'
-                htmlType='submit'
+                type="link"
+                htmlType="submit"
               >
                 Зарегистрироваться
               </Button>

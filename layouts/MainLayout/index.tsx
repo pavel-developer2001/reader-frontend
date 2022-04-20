@@ -13,19 +13,19 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <Head>
         <title>{"Reader - читалка"}</title>
         <meta
-          name='description'
+          name="description"
           content={`Читай популярные комиксы, мангу, маньхуа, манхва и т.п.`}
         />
-        <meta name='robots' content='index, follow' />
+        <meta name="robots" content="index, follow" />
         <meta
-          name='keywords'
+          name="keywords"
           content={"Музыка, треки, артисты, общения, друзья, знакомства"}
         />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Navbar />
       <div className={styles.container}>
-        <div className='main-container'>{children}</div>
+        <div className="main-container">{children}</div>
       </div>
       <MyFooter />
     </div>

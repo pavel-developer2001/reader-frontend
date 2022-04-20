@@ -9,12 +9,12 @@ import {
   refucalToJoin,
 } from "../../../../store/modules/team/team.slice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
-import InvitationBtn from "./components/InvitationBtn";
-import styles from "./InvitationsInTeamsBlock.module.scss";
 import {
   selectTeamInvitationsData,
   selectTeamLoading,
 } from "../../../../store/modules/team/team.selector";
+import InvitationBtn from "./components/InvitationBtn";
+import styles from "./InvitationsInTeamsBlock.module.scss";
 
 interface InvitationsInTeamsBlockItemProps {
   invitationId: number;
@@ -67,7 +67,7 @@ const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = ({
         в качестве
         <span> "{rank}а"</span>?
         <div className={styles.answer}>
-          <Button type='primary' onClick={handleAgreetoJoin}>
+          <Button type="primary" onClick={handleAgreetoJoin}>
             Да
           </Button>
           <Button onClick={handleRefucalToJoin}>Нет</Button>

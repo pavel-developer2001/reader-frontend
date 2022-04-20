@@ -1,17 +1,17 @@
 import Title from "antd/lib/typography/Title";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Tabs } from "antd";
 import Filters from "../../components/catalog/UI/Filters";
 import MainLayout from "../../layouts/MainLayout";
 import { getMangas } from "../../store/modules/manga/manga.slice";
-import styles from "./Catalog.module.css";
-import { Tabs } from "antd";
 import TeamList from "../../components/catalog/UI/TeamList";
 import {
   selectMangaLoading,
   selectMangasData,
 } from "../../store/modules/manga/manga.selector";
 import { CardManga } from "../../components/CardManga";
+import styles from "./Catalog.module.css";
 const { TabPane } = Tabs;
 
 function callback(key: string) {
@@ -28,8 +28,8 @@ const Catalog = () => {
   return (
     <MainLayout>
       <Title level={2}>Каталог</Title>
-      <Tabs defaultActiveKey='1' onChange={callback}>
-        <TabPane tab='Тайтлы' key='1'>
+      <Tabs defaultActiveKey="1" onChange={callback}>
+        <TabPane tab="Тайтлы" key="1">
           <div className={styles.block}>
             <div className={styles.mangaList}>
               {loading ? (
@@ -45,7 +45,7 @@ const Catalog = () => {
             </div>
           </div>
         </TabPane>
-        <TabPane tab='Команды переводчиков' key='2'>
+        <TabPane tab="Команды переводчиков" key="2">
           <TeamList />
         </TabPane>
       </Tabs>

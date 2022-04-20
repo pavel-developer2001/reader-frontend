@@ -4,11 +4,11 @@ import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeamsForUser } from "../../../../store/modules/team/team.slice";
-import styles from "./UserInTeamsBlock.module.scss";
 import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../store/modules/team/team.selector";
+import styles from "./UserInTeamsBlock.module.scss";
 
 interface UserInTeamsBlockItemProps {
   cover: string;
@@ -24,8 +24,8 @@ const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = ({
     <Link href={"/team/" + teamId}>
       <a className={styles.main}>
         <Avatar
-          shape='square'
-          alt='avatar team'
+          shape="square"
+          alt="avatar team"
           size={72}
           src={
             cover

@@ -2,10 +2,10 @@ import { ExportOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons";
 import { Menu, message } from "antd";
 import React from "react";
 import Link from "next/link";
-import styles from "./MenuUser.module.css";
-import { setToken } from "../../../../store/modules/user/user.slice";
 import { useDispatch } from "react-redux";
+import { setToken } from "../../../../store/modules/user/user.slice";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
+import styles from "./MenuUser.module.css";
 
 const MenuUser = () => {
   const dispatch = useDispatch();
@@ -17,18 +17,18 @@ const MenuUser = () => {
   return (
     <div className={styles.block}>
       <Menu>
-        <Menu.Item key='profile' icon={<UserOutlined />}>
+        <Menu.Item key="profile" icon={<UserOutlined />}>
           <Link href={"/user/" + dataUser}>
             <a>Профиль пользователя</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key='create manga' icon={<PlusOutlined />}>
-          <Link href='/createManga'>
+        <Menu.Item key="create manga" icon={<PlusOutlined />}>
+          <Link href="/createManga">
             <a>Добавить мангу</a>
           </Link>
         </Menu.Item>
         <Menu.Item
-          key='exit'
+          key="exit"
           onClick={handleExitUser}
           icon={<ExportOutlined />}
         >

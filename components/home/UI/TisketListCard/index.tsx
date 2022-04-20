@@ -10,8 +10,8 @@ const TisketListCard = () => {
         {" "}
         <Image
           className={styles.img}
-          src='https://api.remanga.org//media/titles/tales_of_demons_and_gods/high_cover.jpg'
-          alt='img card'
+          src="https://api.remanga.org//media/titles/tales_of_demons_and_gods/high_cover.jpg"
+          alt="img card"
           width={60}
           height={90}
         />

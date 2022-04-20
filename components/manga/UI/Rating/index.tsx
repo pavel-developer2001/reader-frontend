@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Rating.module.scss";
 import { Modal, message } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +12,7 @@ import {
   selectRatingItemData,
   selectRatingLoading,
 } from "../../../../store/modules/rating/rating.selector";
+import styles from "./Rating.module.scss";
 
 const Rating = () => {
   const dispatch = useDispatch();
@@ -76,7 +76,7 @@ const Rating = () => {
       )}
 
       <Modal
-        title='Поставить оценку'
+        title="Поставить оценку"
         className={styles.modal}
         visible={isModalVisible}
         onOk={handleOk}

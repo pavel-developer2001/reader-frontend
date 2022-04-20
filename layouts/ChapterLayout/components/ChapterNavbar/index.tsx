@@ -40,11 +40,11 @@ const ChapterNavbar: FC<ChapterNavbarProps> = ({ title, page, id }) => {
   return (
     <Header className={styles.header}>
       <Desktop>
-        <div className='main-container'>
+        <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.left}>
               <div className={styles.logo}>
-                <Link href='/'>
+                <Link href="/">
                   <a>Reader</a>
                 </Link>
               </div>
@@ -67,11 +67,11 @@ const ChapterNavbar: FC<ChapterNavbarProps> = ({ title, page, id }) => {
         </div>
       </Desktop>
       <Mobile>
-        <div className='main-container'>
+        <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.left}>
               <div className={styles.logo}>
-                <Link href='/'>
+                <Link href="/">
                   <a>Reader</a>
                 </Link>
               </div>

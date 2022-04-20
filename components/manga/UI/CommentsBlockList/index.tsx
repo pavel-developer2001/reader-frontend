@@ -10,12 +10,11 @@ import {
   DeleteOutlined,
   CheckOutlined,
 } from "@ant-design/icons";
-import styles from "./CommentsBlockList.module.scss";
 import Link from "next/link";
-import AddCommentForManga from "../AddCommentForManga";
 import TextArea from "rc-textarea";
 import { useRouter } from "next/dist/client/router";
 import { useDispatch, useSelector } from "react-redux";
+import AddCommentForManga from "../AddCommentForManga";
 import {
   deleteComment,
   getComments,
@@ -26,6 +25,7 @@ import {
   selectCommentsData,
 } from "../../../../store/modules/comment/comment.selector";
 import { selectUserToken } from "../../../../store/modules/user/user.selector";
+import styles from "./CommentsBlockList.module.scss";
 
 interface CommentsBlockProps {
   commentId: number;
@@ -66,13 +66,13 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
   };
 
   const actions = [
-    <Tooltip key='comment-basic-like' title='Like'>
+    <Tooltip key="comment-basic-like" title="Like">
       <span onClick={like} className={styles.likeBtn}>
         {React.createElement(action === "liked" ? LikeFilled : LikeOutlined)}
         <span className={styles.like}>{likes}</span>
       </span>
     </Tooltip>,
-    <Tooltip key='comment-basic-dislike' title='Dislike'>
+    <Tooltip key="comment-basic-dislike" title="Dislike">
       <span onClick={dislike} className={styles.likeBtn}>
         {React.createElement(
           action === "disliked" ? DislikeFilled : DislikeOutlined
@@ -130,7 +130,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
             ) : (
               token && (
                 <div onClick={handleUpdateComment} className={styles.ready}>
-                  <Button shape='circle' icon={<CheckOutlined />} />
+                  <Button shape="circle" icon={<CheckOutlined />} />
                 </div>
               )
             )}
@@ -164,7 +164,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
                       onClick={handleRemoveComment}
                     >
                       {" "}
-                      <Button shape='circle' icon={<DeleteOutlined />} />
+                      <Button shape="circle" icon={<DeleteOutlined />} />
                     </div>
                     <div className={styles.spoiler}>
                       <Switch onChange={(checked) => setSpoiler(checked)} />{" "}

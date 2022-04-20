@@ -1,17 +1,17 @@
 import TextArea from "antd/lib/input/TextArea";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
-import MainLayout from "../../../../layouts/MainLayout";
 import { Upload, Modal, Button, Select, message } from "antd";
-import { dataUser } from "../../../../utils/getDataUserFromToken";
 import { useDispatch, useSelector } from "react-redux";
+import { dataUser } from "../../../../utils/getDataUserFromToken";
+import MainLayout from "../../../../layouts/MainLayout";
 import { addNewChapter } from "../../../../store/modules/chapter/chapter.slice";
-import styles from "./Upload.module.scss";
 import { getTeamsForUser } from "../../../../store/modules/team/team.slice";
 import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../store/modules/team/team.selector";
+import styles from "./Upload.module.scss";
 
 const { Option } = Select;
 
@@ -128,7 +128,7 @@ const AddNewChapter = () => {
           <div className={styles.select}>
             <span className={styles.text}>Топ манги</span>
             <TextArea
-              placeholder='Том'
+              placeholder="Том"
               autoSize
               value={volumeChapter}
               onChange={(e) => setVolumeChapter(e.target.value)}
@@ -137,7 +137,7 @@ const AddNewChapter = () => {
           <div className={styles.select}>
             <span className={styles.text}>Глава манги</span>
             <TextArea
-              placeholder='Глава'
+              placeholder="Глава"
               autoSize
               value={numberChapter}
               onChange={(e) => setNumberChapter(e.target.value)}
@@ -148,8 +148,8 @@ const AddNewChapter = () => {
             <Select
               showSearch
               style={{ width: 200 }}
-              placeholder='Язык'
-              optionFilterProp='children'
+              placeholder="Язык"
+              optionFilterProp="children"
               onChange={(value: string) => setLanguage(value)}
               onFocus={onFocus}
               onBlur={onBlur}
@@ -170,7 +170,7 @@ const AddNewChapter = () => {
           <div className={styles.selectSecondary}>
             <span className={styles.text}>Загаловок главы</span>
             <TextArea
-              placeholder='Загаловок'
+              placeholder="Загаловок"
               autoSize
               value={titleChapter}
               onChange={(e) => setTitleChapter(e.target.value)}
@@ -187,8 +187,8 @@ const AddNewChapter = () => {
                 <Select
                   showSearch
                   style={{ width: 200 }}
-                  placeholder='Выбрать команду'
-                  optionFilterProp='children'
+                  placeholder="Выбрать команду"
+                  optionFilterProp="children"
                   onChange={(value) => setTeamId(value)}
                   onFocus={onFocus}
                   onBlur={onBlur}
@@ -214,8 +214,8 @@ const AddNewChapter = () => {
         <div className={styles.pages}>
           <span className={styles.text}>Страницы главы</span>
           <Upload
-            action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-            listType='picture-card'
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            listType="picture-card"
             fileList={imagesList}
             onPreview={handlePreview}
             onChange={handleChange}
@@ -228,15 +228,11 @@ const AddNewChapter = () => {
             footer={null}
             onCancel={handleCancel}
           >
-            <img
-              alt='example'
-              style={{ width: "100%" }}
-              src={previewImage}
-            />
+            <img alt="example" style={{ width: "100%" }} src={previewImage} />
           </Modal>
         </div>
         <div className={styles.btnCreate}>
-          <Button type='primary' onClick={handleNewChapter}>
+          <Button type="primary" onClick={handleNewChapter}>
             Добавить главу
           </Button>
         </div>
