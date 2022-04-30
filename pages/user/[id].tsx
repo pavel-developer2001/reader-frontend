@@ -1,16 +1,11 @@
-import { Avatar, Empty } from "antd";
+import React, { useEffect, useState } from "react";
+import { Avatar, Empty, Spin } from "antd";
 import { Typography } from "antd";
 import { Tabs } from "antd";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
-
-const { TabPane } = Tabs;
-const { Title } = Typography;
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dynamic from "next/dynamic";
-import { CardManga } from "../../components/CardManga";
-import MainLayout from "../../layouts/MainLayout";
 import { wrapper } from "../../store";
 import { getBookMarks } from "../../store/modules/bookMark/bookMark.slice";
 import { getUserData } from "../../store/modules/user/user.slice";
@@ -26,14 +21,26 @@ import {
 import styles from "./Users.module.scss";
 
 const CreateTeamModal = dynamic(
-  () => import("../../components/user/UI/CreateTeamModal")
+  () => import("../../components/user/UI/CreateTeamModal"),
+  { loading: () => <Spin /> }
 );
 const InvitationsInTeamsBlock = dynamic(
-  () => import("../../components/user/UI/InvitationsInTeamsBlock")
+  () => import("../../components/user/UI/InvitationsInTeamsBlock"),
+  { loading: () => <Spin /> }
 );
 const UserInTeamsBlock = dynamic(
-  () => import("../../components/user/UI/UserInTeamsBlock")
+  () => import("../../components/user/UI/UserInTeamsBlock"),
+  { loading: () => <Spin /> }
 );
+const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
+  loading: () => <Spin />,
+});
+const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
+  loading: () => <Spin />,
+});
+
+const { TabPane } = Tabs;
+const { Title } = Typography;
 
 const User = () => {
   const dispatch = useDispatch();
@@ -55,7 +62,7 @@ const User = () => {
   ];
 
   return (
-    <MainLayout>
+    <DynamicMainLayout>
       <div className={styles.main}>
         {loading ? (
           <p>loading</p>
@@ -93,10 +100,10 @@ const User = () => {
                   <div className={styles.markList}>
                     {" "}
                     {loadingMark ? (
-                      <p>loading</p>
+                      <Spin />
                     ) : bookMarks.length > 0 ? (
                       bookMarks.map((mark, index) => (
-                        <CardManga key={mark.id} manga={mark.manga} />
+                        <DynamicCardManga key={mark.id} manga={mark.manga} />
                       ))
                     ) : (
                       <Empty description={<span>Пусто</span>} />
@@ -121,11 +128,15 @@ const User = () => {
           </>
         )}
       </div>
-    </MainLayout>
+    </DynamicMainLayout>
   );
 };
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async ({ params }) => {
+  wrapper.getServerSideProps((store) => async ({ params, res }) => {
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
     try {
       //@ts-ignore
       await store.dispatch(getUserData(params.id));

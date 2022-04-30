@@ -1,18 +1,20 @@
 import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import React from "react";
 import { Tabs } from "antd";
-import MainLayout from "../../layouts/MainLayout";
 import styles from "./Notification.module.scss";
-
+import { GetServerSideProps } from "next";
+import { wrapper } from "../../store";
+import dynamic from "next/dynamic";
 const { TabPane } = Tabs;
 
-function callback(key: string) {
-  console.log(key);
-}
+const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
+  loading: () => <Spin size="large" />,
+});
+
 const Notification = () => {
   return (
-    <MainLayout>
+    <DynamicMainLayout>
       <div className={styles.header}>
         <div className={styles.leftBlog}>
           <h2> Уведомления</h2>
@@ -32,7 +34,7 @@ const Notification = () => {
         </div>
       </div>
       <div className={styles.body}>
-        <Tabs defaultActiveKey="1" onChange={callback}>
+        <Tabs defaultActiveKey="1">
           <TabPane tab="Обновление" key="1">
             Content of Tab Pane 1
           </TabPane>
@@ -44,8 +46,26 @@ const Notification = () => {
           </TabPane>
         </Tabs>
       </div>
-    </MainLayout>
+    </DynamicMainLayout>
   );
 };
-
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    ctx.res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
+    try {
+      //@ts-ignore
+      await store.dispatch(getMangas());
+      return {
+        props: {},
+      };
+    } catch (error) {
+      console.log("ERROR!");
+      return {
+        props: {},
+      };
+    }
+  });
 export default Notification;

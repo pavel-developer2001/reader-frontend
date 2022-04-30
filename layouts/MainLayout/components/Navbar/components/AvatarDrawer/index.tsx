@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import styles from "./AvatarDrawer.module.scss";
-import { Drawer } from "antd";
+import { Drawer, Spin } from "antd";
 import {
   ExportOutlined,
   FormatPainterOutlined,
@@ -13,8 +13,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { message } from "antd";
 import { setToken } from "../../../../../../store/modules/user/user.slice";
 import { selectUserToken } from "../../../../../../store/modules/user/user.selector";
-import AuthModal from "../../../../../../components/AuthModal";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
+import dynamic from "next/dynamic";
+
+const DynamicAuthModal = dynamic(
+  () => import("../../../../../../components/AuthModal"),
+  {
+    loading: () => <Spin />,
+  }
+);
 
 const AvatarHeader = ({ token }: any) => {
   return (
@@ -37,7 +44,7 @@ const AvatarHeader = ({ token }: any) => {
           <div>Пополнить Баланс</div>
         </>
       ) : (
-        <AuthModal />
+        <DynamicAuthModal />
       )}
     </div>
   );

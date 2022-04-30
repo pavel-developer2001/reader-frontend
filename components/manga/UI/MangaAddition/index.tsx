@@ -8,6 +8,7 @@ import {
   selectTeamsMangaData,
 } from "../../../../store/modules/team/team.selector";
 import styles from "./MangaAddition.module.scss";
+import { Spin } from "antd";
 
 const MangaAddition = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const MangaAddition = () => {
       <div className={styles.title}>Переводчики</div>
       <div className={styles.teamList}>
         {loading ? (
-          <p>loading</p>
+          <Spin />
         ) : teams.length > 0 ? (
           teams.map((team) => (
             <CardTeam

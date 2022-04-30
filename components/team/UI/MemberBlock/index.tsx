@@ -1,6 +1,6 @@
 import { Avatar, Button } from "antd";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { useDispatch } from "react-redux";
 import { IMember } from "../../../../store/modules/team/types/IMember";
 import { removeMember } from "../../../../store/modules/team/team.slice";
@@ -13,46 +13,42 @@ interface MemberBlockItemProps {
   name: string;
   avatar: string;
 }
-const MemberBlockItem: FC<MemberBlockItemProps> = ({
-  id,
-  role,
-  userId,
-  name,
-  avatar,
-}) => {
-  const dispatch = useDispatch();
-  const handleRemoveMember = async () => {
-    await dispatch(removeMember(id));
-  };
-  return (
-    <div>
-      {" "}
-      <Link href={"/user/" + userId}>
-        <a className={styles.main}>
-          <Avatar
-            size={54}
-            src={
-              avatar
-                ? avatar
-                : "https://api.remanga.org//media/users/2814/avatar.jpg"
-            }
-          />
-          <div className={styles.data}>
-            <strong>{name}</strong>
-            <p>{role}</p>
-          </div>
-        </a>
-      </Link>
+const MemberBlockItem: FC<MemberBlockItemProps> = memo(
+  ({ id, role, userId, name, avatar }) => {
+    const dispatch = useDispatch();
+    const handleRemoveMember = async () => {
+      await dispatch(removeMember(id));
+    };
+    return (
       <div>
-        {role != "Глава" ? (
-          <Button type="primary" onClick={handleRemoveMember}>
-            Удалить
-          </Button>
-        ) : null}
+        {" "}
+        <Link href={"/user/" + userId}>
+          <a className={styles.main}>
+            <Avatar
+              size={54}
+              src={
+                avatar
+                  ? avatar
+                  : "https://api.remanga.org//media/users/2814/avatar.jpg"
+              }
+            />
+            <div className={styles.data}>
+              <strong>{name}</strong>
+              <p>{role}</p>
+            </div>
+          </a>
+        </Link>
+        <div>
+          {role != "Глава" ? (
+            <Button type="primary" onClick={handleRemoveMember}>
+              Удалить
+            </Button>
+          ) : null}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
 interface MemberBlockProps {
   members: IMember[];
 }

@@ -1,4 +1,4 @@
-import { Avatar } from "antd";
+import { Avatar, Spin } from "antd";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,7 +50,7 @@ const TeamList = () => {
   return (
     <div className={styles.mainList}>
       {loading ? (
-        <p>loading</p>
+        <Spin />
       ) : teams.length > 0 ? (
         teams.map((team) => (
           <TeamListItem

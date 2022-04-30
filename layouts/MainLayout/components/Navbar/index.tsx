@@ -1,19 +1,36 @@
 import React from "react";
-import { Layout } from "antd";
+import { Layout, Spin } from "antd";
 const { Header } = Layout;
 import { BellOutlined, FormatPainterOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import { Theme } from "../../../../context/ThemeContext";
 import { useTheme } from "../../../../hooks/useTheme";
-import AvatarUser from "../../../../components/AvatarUser";
-import SearchModal from "../../../../components/SearchModal";
-import { Desktop } from "../../../../devices/Desktop";
-import { Mobile } from "../../../../devices/Mobile";
-import AvatarDrawer from "./components/AvatarDrawer";
 import { selectUserToken } from "../../../../store/modules/user/user.selector";
 import { useSelector } from "react-redux";
+import dynamic from "next/dynamic";
 
+const DynamicDesktop = dynamic(() => import("../../../../devices/Desktop"), {
+  loading: () => <Spin />,
+});
+const DynamicMobile = dynamic(() => import("../../../../devices/Mobile"), {
+  loading: () => <Spin />,
+});
+const DynamicAvatarDrawer = dynamic(() => import("./components/AvatarDrawer"), {
+  loading: () => <Spin />,
+});
+const DynamicSearchModal = dynamic(
+  () => import("../../../../components/SearchModal"),
+  {
+    loading: () => <Spin />,
+  }
+);
+const DynamicAvatarUser = dynamic(
+  () => import("../../../../components/AvatarUser"),
+  {
+    loading: () => <Spin />,
+  }
+);
 const Navbar = () => {
   const theme = useTheme();
   const token = useSelector(selectUserToken);
@@ -36,7 +53,7 @@ const Navbar = () => {
   };
   return (
     <Header className={styles.header}>
-      <Desktop>
+      <DynamicDesktop>
         <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.leftHeader}>
@@ -55,7 +72,7 @@ const Navbar = () => {
             </div>
             <div className={styles.rightHeader}>
               <div className={styles.menu}>
-                <SearchModal />
+                <DynamicSearchModal />
               </div>
               {token && (
                 <div className={styles.menu}>
@@ -70,12 +87,12 @@ const Navbar = () => {
               <div className={styles.menu}>
                 <FormatPainterOutlined onClick={changeTheme} />
               </div>
-              <AvatarUser />
+              <DynamicAvatarUser />
             </div>
           </div>
         </div>
-      </Desktop>
-      <Mobile>
+      </DynamicDesktop>
+      <DynamicMobile>
         <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.leftHeader}>
@@ -87,7 +104,7 @@ const Navbar = () => {
             </div>
             <div className={styles.rightHeader}>
               <div className={styles.menu}>
-                <SearchModal />
+                <DynamicSearchModal />
               </div>
               {token && (
                 <div className={styles.menu}>
@@ -99,11 +116,14 @@ const Navbar = () => {
                 </div>
               )}
 
-              <AvatarDrawer changeTheme={changeTheme} menuArrays={menuArrays} />
+              <DynamicAvatarDrawer
+                changeTheme={changeTheme}
+                menuArrays={menuArrays}
+              />
             </div>
           </div>
         </div>
-      </Mobile>
+      </DynamicMobile>
     </Header>
   );
 };

@@ -44,7 +44,7 @@ const ChapterListItem: FC<ChapterListItemProps> = memo(
 interface ChapterListProps {
   mangaId: string | string[] | undefined;
 }
-const ChapterList: FC<ChapterListProps> = ({ mangaId }) => {
+const ChapterList: FC<ChapterListProps> = memo(({ mangaId }) => {
   const chapters = useSelector(selectChaptersData);
   const loading = useSelector(selectChapterLoading);
   const dispatch = useDispatch();
@@ -73,6 +73,6 @@ const ChapterList: FC<ChapterListProps> = ({ mangaId }) => {
       )}
     </div>
   );
-};
+});
 
 export default ChapterList;

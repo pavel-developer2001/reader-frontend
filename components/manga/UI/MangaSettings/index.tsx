@@ -1,5 +1,5 @@
 import { EditOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons";
-import { Button, message, Tooltip } from "antd";
+import { Button, message, Spin, Tooltip } from "antd";
 import Image from "next/image";
 import { Select } from "antd";
 import { useRouter } from "next/dist/client/router";
@@ -16,9 +16,15 @@ import {
   selectBookMarkLoading,
 } from "../../../../store/modules/bookMark/bookMark.selector";
 import { selectUserToken } from "../../../../store/modules/user/user.selector";
-import AddMangaForTeam from "./components/AddMangaForTeam";
 import styles from "./MangaSettings.module.scss";
+import dynamic from "next/dynamic";
 
+const DynamicAddMangaForTeam = dynamic(
+  () => import("./components/AddMangaForTeam"),
+  {
+    loading: () => <Spin />,
+  }
+);
 interface MangaSettingsProps {
   cover: string;
   id: number;
@@ -95,7 +101,7 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
                 </Link>
               </div>
               <div className={styles.feature}>
-                <AddMangaForTeam />
+                <DynamicAddMangaForTeam />
               </div>
               <div className={styles.feature}>
                 <Tooltip title="Сообщение модератору">
@@ -119,7 +125,7 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
             <div className={styles.item}>
               {" "}
               {loading ? (
-                <p>loading</p>
+                <Spin />
               ) : (
                 <Select
                   showSearch

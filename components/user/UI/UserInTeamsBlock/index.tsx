@@ -1,7 +1,7 @@
-import { Avatar } from "antd";
+import { Avatar, Spin } from "antd";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import React, { FC, useEffect } from "react";
+import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeamsForUser } from "../../../../store/modules/team/team.slice";
 import {
@@ -15,7 +15,7 @@ interface UserInTeamsBlockItemProps {
   name: string;
   teamId: number;
 }
-const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = ({
+const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = memo(({
   cover,
   name,
   teamId,
@@ -37,7 +37,7 @@ const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = ({
       </a>
     </Link>
   );
-};
+});
 const UserInTeamsBlock = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const UserInTeamsBlock = () => {
       <div className={styles.title}>В составе</div>
       <div className={styles.mainList}>
         {loading ? (
-          <p>loading</p>
+          <Spin />
         ) : teams.length > 0 ? (
           teams.map((team) => (
             <UserInTeamsBlockItem

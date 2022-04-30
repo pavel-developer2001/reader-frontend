@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { IManga } from "../../store/modules/manga/types/IManga";
 import styles from "./CardManga.module.scss";
 
@@ -8,7 +8,7 @@ interface CardMangaProps {
   manga: IManga;
 }
 
-export const CardManga: FC<CardMangaProps> = ({ manga }) => {
+const CardManga: FC<CardMangaProps> = memo(({ manga }) => {
   return (
     <Link href={"/manga/" + manga.id}>
       <a>
@@ -26,4 +26,5 @@ export const CardManga: FC<CardMangaProps> = ({ manga }) => {
       </a>
     </Link>
   );
-};
+});
+export default CardManga;

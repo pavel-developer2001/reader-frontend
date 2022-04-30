@@ -1,6 +1,6 @@
 import moment from "moment";
 import Link from "next/link";
-import React, { FC, useEffect } from "react";
+import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { getUpdateChapters } from "../../../../store/modules/chapter/chapter.slice";
@@ -9,6 +9,7 @@ import {
   selectUpdateChapterData,
 } from "../../../../store/modules/chapter/chapter.selector";
 import styles from "./UpdateList.module.scss";
+import { Spin } from "antd";
 
 interface UpdateListItemProps {
   chapterId: number;
@@ -19,7 +20,7 @@ interface UpdateListItemProps {
   titleManga: string;
   date: string;
 }
-export const UpdateListItem: FC<UpdateListItemProps> = ({
+export const UpdateListItem: FC<UpdateListItemProps> = memo(({
   chapterId,
   volumeChapter,
   numberChapter,
@@ -51,7 +52,7 @@ export const UpdateListItem: FC<UpdateListItemProps> = ({
       </div>
     </div>
   );
-};
+});
 
 const UpdateList = () => {
   const dispatch = useDispatch();
@@ -63,7 +64,7 @@ const UpdateList = () => {
   return (
     <div className={styles.list}>
       {loading ? (
-        <p>Loading</p>
+        <Spin /> 
       ) : updateChapter.length > 0 ? (
         updateChapter.map((lateChapter) => (
           <UpdateListItem

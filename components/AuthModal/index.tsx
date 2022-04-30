@@ -1,6 +1,12 @@
+import { Spin } from "antd";
+import dynamic from "next/dynamic";
 import React from "react";
-import LoginModal from "../AvatarUser/components/LoginModal";
 import styles from "./AuthModal.module.scss";
+
+const DynamicLoginModal = dynamic(
+  () => import("../AvatarUser/components/LoginModal"),
+  { loading: () => <Spin /> }
+);
 
 const AuthModal = () => {
   const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false);
@@ -21,7 +27,7 @@ const AuthModal = () => {
       <div className={styles.menu} onClick={showModal}>
         Войти
       </div>
-      <LoginModal
+      <DynamicLoginModal
         isModalVisible={isModalVisible}
         handleOk={handleOk}
         setIsModalVisible={setIsModalVisible}

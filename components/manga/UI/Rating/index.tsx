@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, message } from "antd";
+import { Modal, message, Spin } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
@@ -67,7 +67,7 @@ const Rating = () => {
   return (
     <div>
       {loading ? (
-        <p>loading </p>
+        <Spin />
       ) : (
         <div onClick={showModal} className={styles.star}>
           <StarFilled className={styles.starIcon} />

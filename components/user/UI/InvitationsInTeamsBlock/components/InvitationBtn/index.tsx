@@ -11,7 +11,7 @@ import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../../../store/modules/team/team.selector";
-import styles from "./InvitationBtn.module.scss";
+
 const { Option } = Select;
 
 const InvitationBtn = () => {

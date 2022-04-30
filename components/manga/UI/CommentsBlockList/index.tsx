@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Comment, Tooltip, Avatar, Switch, Button, message } from "antd";
+import { Comment, Tooltip, Avatar, Switch, Button, message, Spin } from "antd";
 import moment from "moment";
 import {
   DislikeOutlined,
@@ -205,7 +205,7 @@ const CommentBlockList = () => {
   return (
     <div className={styles.list}>
       {loading ? (
-        <p>Loading</p>
+        <Spin />
       ) : (
         <>
           <div className={styles.title}>Комментарии {comments.length}</div>

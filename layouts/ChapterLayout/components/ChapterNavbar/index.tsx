@@ -1,3 +1,4 @@
+import React, { FC, memo } from "react";
 import {
   CaretLeftOutlined,
   CaretRightOutlined,
@@ -5,14 +6,30 @@ import {
 } from "@ant-design/icons";
 import { Header } from "antd/lib/layout/layout";
 import Link from "next/link";
-import React, { FC, memo } from "react";
+import dynamic from "next/dynamic";
 import styles from "./ChapterNavbar.module.scss";
 import { Theme } from "../../../../context/ThemeContext";
 import { useTheme } from "../../../../hooks/useTheme";
-import AvatarUser from "../../../../components/AvatarUser";
-import { Desktop } from "../../../../devices/Desktop";
-import { Mobile } from "../../../../devices/Mobile";
-import AvatarDrawer from "../../../MainLayout/components/Navbar/components/AvatarDrawer";
+import { Spin } from "antd";
+
+const DynamicMobile = dynamic(() => import("../../../../devices/Mobile"), {
+  loading: () => <Spin />,
+});
+const DynamicDesktop = dynamic(() => import("../../../../devices/Desktop"), {
+  loading: () => <Spin />,
+});
+const DynamicAvatarDrawer = dynamic(
+  () => import("../../../MainLayout/components/Navbar/components/AvatarDrawer"),
+  {
+    loading: () => <Spin />,
+  }
+);
+const DynamicAvatarUser = dynamic(
+  () => import("../../../../components/AvatarUser"),
+  {
+    loading: () => <Spin />,
+  }
+);
 
 interface ChapterNavbarProps {
   title: string;
@@ -39,7 +56,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
   };
   return (
     <Header className={styles.header}>
-      <Desktop>
+      <DynamicDesktop>
         <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.left}>
@@ -61,12 +78,12 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
               <div className={styles.menu}>
                 <FormatPainterOutlined onClick={changeTheme} />
               </div>
-              <AvatarUser />
+              <DynamicAvatarUser />
             </div>
           </div>
         </div>
-      </Desktop>
-      <Mobile>
+      </DynamicDesktop>
+      <DynamicMobile>
         <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.left}>
@@ -85,11 +102,14 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
               <CaretRightOutlined />
             </div>
             <div className={styles.right}>
-              <AvatarDrawer changeTheme={changeTheme} menuArrays={menuArrays} />
+              <DynamicAvatarDrawer
+                changeTheme={changeTheme}
+                menuArrays={menuArrays}
+              />
             </div>
           </div>
         </div>
-      </Mobile>
+      </DynamicMobile>
     </Header>
   );
 });

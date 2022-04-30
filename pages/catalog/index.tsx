@@ -7,13 +7,15 @@ import {
   selectMangaLoading,
   selectMangasData,
 } from "../../store/modules/manga/manga.selector";
-import { CardManga } from "../../components/CardManga";
 import styles from "./Catalog.module.css";
 import dynamic from "next/dynamic";
 import { GetServerSideProps } from "next";
 import { wrapper } from "../../store";
 const { TabPane } = Tabs;
 
+const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
+  loading: () => <Spin />,
+});
 const DynamicTeamList = dynamic(
   () => import("../../components/catalog/UI/TeamList"),
   { loading: () => <Spin /> }
@@ -41,7 +43,7 @@ const Catalog = () => {
                 <Spin />
               ) : (
                 mangas?.map((manga) => (
-                  <CardManga key={manga.id} manga={manga} />
+                  <DynamicCardManga key={manga.id} manga={manga} />
                 ))
               )}
             </div>

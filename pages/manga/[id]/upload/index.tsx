@@ -12,6 +12,8 @@ import {
   selectTeamsUserData,
 } from "../../../../store/modules/team/team.selector";
 import styles from "./Upload.module.scss";
+import { GetServerSideProps } from "next";
+import { wrapper } from "../../../../store";
 
 const { Option } = Select;
 
@@ -240,5 +242,15 @@ const AddNewChapter = () => {
     </MainLayout>
   );
 };
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    ctx.res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
+    return {
+      props: {},
+    };
+  });
 
 export default AddNewChapter;

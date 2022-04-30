@@ -12,6 +12,8 @@ import SelectTagsForManga from "../../components/createManga/UI/SelectTagsForMan
 import SelectStatusTranslateForManga from "../../components/createManga/UI/SelectStatusTranslateForManga";
 import SelectGenresForManga from "../../components/createManga/UI/SelectGenresForManga";
 import styles from "./CreateManga.module.scss";
+import { GetServerSideProps } from "next";
+import { wrapper } from "../../store";
 
 const CreateManga = () => {
   const [typeManga, setTypeManga] = useState<any>("");
@@ -202,5 +204,15 @@ const CreateManga = () => {
     </MainLayout>
   );
 };
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    ctx.res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
+    return {
+      props: {},
+    };
+  });
 
 export default CreateManga;

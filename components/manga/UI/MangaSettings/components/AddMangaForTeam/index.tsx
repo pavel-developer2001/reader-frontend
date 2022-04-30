@@ -1,4 +1,4 @@
-import { Button, message, Modal, Tooltip } from "antd";
+import { Button, message, Modal, Spin, Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import { Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -106,7 +106,7 @@ const AddMangaForTeam = () => {
       </Modal>
     </div>
   ) : (
-    <p>loading</p>
+    <Spin />
   );
 };
 
