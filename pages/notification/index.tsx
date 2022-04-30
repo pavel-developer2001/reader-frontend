@@ -9,7 +9,11 @@ import dynamic from "next/dynamic";
 const { TabPane } = Tabs;
 
 const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
-  loading: () => <Spin size="large" />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
 });
 
 const Notification = () => {

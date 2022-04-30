@@ -22,21 +22,47 @@ import styles from "./Users.module.scss";
 
 const CreateTeamModal = dynamic(
   () => import("../../components/user/UI/CreateTeamModal"),
-  { loading: () => <Spin /> }
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const InvitationsInTeamsBlock = dynamic(
   () => import("../../components/user/UI/InvitationsInTeamsBlock"),
-  { loading: () => <Spin /> }
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const UserInTeamsBlock = dynamic(
   () => import("../../components/user/UI/UserInTeamsBlock"),
-  { loading: () => <Spin /> }
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
-  loading: () => <Spin />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
 });
 const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
-  loading: () => <Spin />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
 });
 
 const { TabPane } = Tabs;

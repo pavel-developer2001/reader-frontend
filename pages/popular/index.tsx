@@ -5,7 +5,11 @@ import React from "react";
 import { wrapper } from "../../store";
 
 const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
-  loading: () => <Spin size="large" />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
 });
 
 const Popular = () => {

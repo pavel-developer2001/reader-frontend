@@ -16,7 +16,11 @@ import dynamic from "next/dynamic";
 const DynamicChapterLayout = dynamic(
   () => import("../../../../layouts/ChapterLayout"),
   {
-    loading: () => <Spin size="large" />,
+    loading: () => (
+      <div className="loader-block">
+        <Spin size="large" />
+      </div>
+    ),
   }
 );
 const Chapter = () => {

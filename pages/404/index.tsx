@@ -3,7 +3,11 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
-  loading: () => <Spin size="large" />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
 });
 
 const Custom404 = () => {

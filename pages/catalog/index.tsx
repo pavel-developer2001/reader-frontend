@@ -14,18 +14,38 @@ import { wrapper } from "../../store";
 const { TabPane } = Tabs;
 
 const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
-  loading: () => <Spin />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
 });
 const DynamicTeamList = dynamic(
   () => import("../../components/catalog/UI/TeamList"),
-  { loading: () => <Spin /> }
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const DynamicFilters = dynamic(
   () => import("../../components/catalog/UI/Filters"),
-  { loading: () => <Spin /> }
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
-  loading: () => <Spin size="large" />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
 });
 
 const Catalog = () => {

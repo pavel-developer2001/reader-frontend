@@ -11,35 +11,69 @@ import { RootState } from "../../../store/reducer";
 
 const CommentsBlockList = dynamic(
   () => import("../../../components/manga/UI/CommentsBlockList"),
-  { loading: () => <Spin /> }
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const ChapterList = dynamic(
   () => import("../../../components/manga/UI/ChapterList"),
-  { loading: () => <Spin /> }
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const MangaAddition = dynamic(
   () => import("../../../components/manga/UI/MangaAddition"),
-  { loading: () => <Spin /> }
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const DynamicMainLayout = dynamic(() => import("../../../layouts/MainLayout"), {
-  loading: () => <Spin size="large" />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
 });
 const DynamicMangaData = dynamic(
   () => import("../../../components/manga/UI/MangaData"),
   {
-    loading: () => <Spin size="large" />,
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
   }
 );
 const DynamicMangaDescriptions = dynamic(
   () => import("../../../components/manga/UI/MangaDescriptions"),
   {
-    loading: () => <Spin />,
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
   }
 );
 const DynamicMangaSettings = dynamic(
   () => import("../../../components/manga/UI/MangaSettings"),
   {
-    loading: () => <Spin />,
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
   }
 );
 

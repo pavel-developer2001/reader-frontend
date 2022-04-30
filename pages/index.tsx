@@ -8,16 +8,32 @@ import { Spin } from "antd";
 import { wrapper } from "../store";
 
 const MainLayout = dynamic(() => import("../layouts/MainLayout"), {
-  loading: () => <Spin />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
 });
 const PopularList = dynamic(() => import("../components/home/UI/PopularList"), {
-  loading: () => <Spin />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
 });
 const TisketList = dynamic(() => import("../components/home/UI/TisketList"), {
-  loading: () => <Spin />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
 });
 const UpdateList = dynamic(() => import("../components/home/UI/UpdateList"), {
-  loading: () => <Spin />,
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
 });
 
 const Home: NextPage = () => {
