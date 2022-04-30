@@ -1,16 +1,24 @@
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { GetServerSideProps } from "next";
-import MainLayout from "../layouts/MainLayout";
 import styles from "../styles/Home.module.css";
+import { getMangas } from "../store/modules/manga/manga.slice";
+import { Spin } from "antd";
 
 import { wrapper } from "../store";
 
-import PopularList from "../components/home/UI/PopularList";
-const TisketList = dynamic(() => import("../components/home/UI/TisketList"));
-const UpdateList = dynamic(() => import("../components/home/UI/UpdateList"));
-
-import { getMangas } from "../store/modules/manga/manga.slice";
+const MainLayout = dynamic(() => import("../layouts/MainLayout"), {
+  loading: () => <Spin />,
+});
+const PopularList = dynamic(() => import("../components/home/UI/PopularList"), {
+  loading: () => <Spin />,
+});
+const TisketList = dynamic(() => import("../components/home/UI/TisketList"), {
+  loading: () => <Spin />,
+});
+const UpdateList = dynamic(() => import("../components/home/UI/UpdateList"), {
+  loading: () => <Spin />,
+});
 
 const Home: NextPage = () => {
   return (
@@ -27,6 +35,10 @@ const Home: NextPage = () => {
 };
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async (ctx) => {
+    ctx.res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
     try {
       //@ts-ignore
       await store.dispatch(getMangas());

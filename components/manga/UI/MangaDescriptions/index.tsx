@@ -1,5 +1,5 @@
 import { Tag } from "antd";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { ITag } from "../../../../store/modules/manga/types/ITag";
 import { IGenre } from "../../../../store/modules/manga/types/IGenre";
 import AuthorBlock from "../AuthorBlock";
@@ -10,7 +10,7 @@ interface MangaDescriptionsProps {
   tags: ITag[];
   genres: IGenre[];
 }
-const MangaDescriptions: FC<MangaDescriptionsProps> = ({
+const MangaDescriptions: FC<MangaDescriptionsProps> = memo(({
   mangaDescription,
   tags,
   genres,
@@ -37,6 +37,6 @@ const MangaDescriptions: FC<MangaDescriptionsProps> = ({
       </div>
     </div>
   );
-};
+});
 
 export default MangaDescriptions;

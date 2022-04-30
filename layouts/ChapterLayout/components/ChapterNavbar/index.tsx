@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons";
 import { Header } from "antd/lib/layout/layout";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import styles from "./ChapterNavbar.module.scss";
 import { Theme } from "../../../../context/ThemeContext";
 import { useTheme } from "../../../../hooks/useTheme";
@@ -19,7 +19,7 @@ interface ChapterNavbarProps {
   page: string;
   id: string | string[] | undefined;
 }
-const ChapterNavbar: FC<ChapterNavbarProps> = ({ title, page, id }) => {
+const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
   const theme = useTheme();
   function changeTheme() {
     theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
@@ -92,6 +92,6 @@ const ChapterNavbar: FC<ChapterNavbarProps> = ({ title, page, id }) => {
       </Mobile>
     </Header>
   );
-};
+});
 
 export default ChapterNavbar;
