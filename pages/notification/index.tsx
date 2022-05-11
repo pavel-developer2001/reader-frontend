@@ -2,10 +2,10 @@ import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Spin } from "antd";
 import React from "react";
 import { Tabs } from "antd";
-import styles from "./Notification.module.scss";
 import { GetServerSideProps } from "next";
-import { wrapper } from "../../store";
 import dynamic from "next/dynamic";
+import { wrapper } from "../../store";
+import styles from "./Notification.module.scss";
 const { TabPane } = Tabs;
 
 const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {

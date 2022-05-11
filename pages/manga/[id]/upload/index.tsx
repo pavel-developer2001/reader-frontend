@@ -3,6 +3,7 @@ import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
 import { Upload, Modal, Button, Select, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { GetServerSideProps } from "next";
 import { dataUser } from "../../../../utils/getDataUserFromToken";
 import MainLayout from "../../../../layouts/MainLayout";
 import { addNewChapter } from "../../../../store/modules/chapter/chapter.slice";
@@ -11,9 +12,8 @@ import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../store/modules/team/team.selector";
-import styles from "./Upload.module.scss";
-import { GetServerSideProps } from "next";
 import { wrapper } from "../../../../store";
+import styles from "./Upload.module.scss";
 
 const { Option } = Select;
 
@@ -104,6 +104,7 @@ const AddNewChapter = () => {
       for (let i = 0; i < imagesList.length; i++) {
         formData.append("imagesList[]", imagesList[i].originFileObj);
       }
+      //@ts-ignore
       dispatch(addNewChapter(formData));
       message.success("Глава была успешно добавлена");
       router.push("/manga/" + mangaId);

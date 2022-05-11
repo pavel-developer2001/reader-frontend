@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Input, Spin } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import styles from "./SearchModal.module.scss";
 import dynamic from "next/dynamic";
+import styles from "./SearchModal.module.scss";
 const { Search } = Input;
 
 const DynamicFoundBlock = dynamic(() => import("./components/FoundBlock"), {

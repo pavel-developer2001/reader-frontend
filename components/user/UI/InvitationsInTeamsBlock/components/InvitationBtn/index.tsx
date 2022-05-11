@@ -39,6 +39,7 @@ const InvitationBtn = () => {
   ) => {
     e.preventDefault();
     try {
+      //@ts-ignore
       const payload: {
         rank: string;
         teamId: number;

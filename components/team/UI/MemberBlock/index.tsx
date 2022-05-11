@@ -17,6 +17,7 @@ const MemberBlockItem: FC<MemberBlockItemProps> = memo(
   ({ id, role, userId, name, avatar }) => {
     const dispatch = useDispatch();
     const handleRemoveMember = async () => {
+      //@ts-ignore
       await dispatch(removeMember(id));
     };
     return (

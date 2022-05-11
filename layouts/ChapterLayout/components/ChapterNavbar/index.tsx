@@ -70,7 +70,10 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
               </Link>
             </div>
             <div className={styles.center}>
-              {id <= 0 ? null : <CaretLeftOutlined />}
+              {
+                //@ts-ignore
+                id <= 0 ? null : <CaretLeftOutlined />
+              }
               <span># {page}</span>
               <CaretRightOutlined />
             </div>
@@ -97,7 +100,10 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
               </Link>
             </div>
             <div className={styles.center}>
-              {id <= 0 ? null : <CaretLeftOutlined />}
+              {
+                //@ts-ignore
+                id <= 0 ? null : <CaretLeftOutlined />
+              }
               <span># {page}</span>
               <CaretRightOutlined />
             </div>

@@ -89,6 +89,7 @@ const LoginModal: FC<LoginModalProps> = ({
           <Form.Item
             label="Логин"
             name="name"
+            //@ts-ignore
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setName(e.target.value)
@@ -100,6 +101,7 @@ const LoginModal: FC<LoginModalProps> = ({
           <Form.Item
             name="email"
             label="Email"
+            //@ts-ignore
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
@@ -117,6 +119,7 @@ const LoginModal: FC<LoginModalProps> = ({
           <Form.Item
             label="Пароль"
             name="password"
+            //@ts-ignore
             value={password}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
@@ -128,6 +131,7 @@ const LoginModal: FC<LoginModalProps> = ({
           <Form.Item
             label="Повторить пароль"
             name="password2"
+            //@ts-ignore
             value={password2}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword2(e.target.value)
@@ -162,6 +166,7 @@ const LoginModal: FC<LoginModalProps> = ({
             <Form.Item
               label="Email"
               name="email"
+              //@ts-ignore
               value={email}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setEmail(e.target.value)
@@ -180,6 +185,7 @@ const LoginModal: FC<LoginModalProps> = ({
             <Form.Item
               label="Пароль"
               name="password"
+              //@ts-ignore
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)

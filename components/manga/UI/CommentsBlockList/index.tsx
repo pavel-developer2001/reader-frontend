@@ -129,6 +129,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
               </div>
             ) : (
               token && (
+                //@ts-ignore
                 <div onClick={handleUpdateComment} className={styles.ready}>
                   <Button shape="circle" icon={<CheckOutlined />} />
                 </div>
@@ -148,6 +149,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
             ) : (
               <div className={styles.editBlock}>
                 <TextArea
+                //@ts-ignore
                   showCount
                   value={commentText}
                   onChange={(e) => setCommentText(e.target.value)}

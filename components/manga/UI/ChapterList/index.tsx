@@ -3,13 +3,13 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Spin } from "antd";
 import { getChapters } from "../../../../store/modules/chapter/chapter.slice";
 import {
   selectChapterLoading,
   selectChaptersData,
 } from "../../../../store/modules/chapter/chapter.selector";
 import styles from "./ChapterList.module.scss";
-import { Spin } from "antd";
 
 interface ChapterListItemProps {
   chapterId: number;

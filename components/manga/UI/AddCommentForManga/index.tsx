@@ -22,6 +22,7 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
         mangaId: string | string[] | undefined;
         spoiler: boolean;
       } = { commentText, spoiler, mangaId };
+      //@ts-ignore
       await dispatch(addComment(payload));
       message.success("Комментарий был создан");
       setCommentText("");

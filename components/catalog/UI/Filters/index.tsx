@@ -147,6 +147,7 @@ const Filters = () => {
         allowClear
         style={{ width: "100%" }}
         placeholder="Теги"
+        //@ts-ignore
         defaultValue={[]}
         onChange={(value: string) => setTags(value)}
       >

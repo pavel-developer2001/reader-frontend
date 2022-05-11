@@ -3,6 +3,7 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import dynamic from "next/dynamic";
 import {
   agreeToJoin,
   getInvitationsForUser,
@@ -13,7 +14,6 @@ import {
   selectTeamLoading,
 } from "../../../../store/modules/team/team.selector";
 import styles from "./InvitationsInTeamsBlock.module.scss";
-import dynamic from "next/dynamic";
 
 const DynamicInvitationBtn = dynamic(
   () => import("./components/InvitationBtn"),
@@ -43,6 +43,7 @@ const InvitationsInTeamsBlockItem: FC<InvitationsInTeamsBlockItemProps> = memo(
           teamId,
           userId,
         };
+        //@ts-ignore
         await dispatch(agreeToJoin(payload));
         message.success("Вы были успешно приняты в команду");
       } catch (error: any) {

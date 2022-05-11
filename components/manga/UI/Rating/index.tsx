@@ -71,7 +71,11 @@ const Rating = () => {
       ) : (
         <div onClick={showModal} className={styles.star}>
           <StarFilled className={styles.starIcon} />
-          {rating == null ? "Оценить тайтл" : rating.rating} (голосов: 610)
+          {rating == null
+            ? "Оценить тайтл"
+            : //@ts-ignore
+              rating.rating}
+          (голосов: 610)
         </div>
       )}
 

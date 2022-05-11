@@ -45,6 +45,7 @@ const UserInTeamsBlock = () => {
   const loading = useSelector(selectTeamLoading);
 
   useEffect(() => {
+    //@ts-ignore
     dispatch(getTeamsForUser(router.query.id));
   }, [router.query.id]);
   return (

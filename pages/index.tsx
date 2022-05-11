@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { GetServerSideProps } from "next";
+import { Spin } from "antd";
 import styles from "../styles/Home.module.css";
 import { getMangas } from "../store/modules/manga/manga.slice";
-import { Spin } from "antd";
 
 import { wrapper } from "../store";
 

@@ -3,13 +3,13 @@ import Link from "next/link";
 import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
+import { Spin } from "antd";
 import { getUpdateChapters } from "../../../../store/modules/chapter/chapter.slice";
 import {
   selectChapterLoading,
   selectUpdateChapterData,
 } from "../../../../store/modules/chapter/chapter.selector";
 import styles from "./UpdateList.module.scss";
-import { Spin } from "antd";
 
 interface UpdateListItemProps {
   chapterId: number;

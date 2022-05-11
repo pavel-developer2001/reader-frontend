@@ -95,18 +95,24 @@ const User = () => {
         ) : (
           <>
             <div className={styles.header}>
-              {" "}
-              {user.avatar ? (
-                <Avatar size={156} src={user.avatar} />
-              ) : (
-                <Avatar
-                  size={156}
-                  src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                />
-              )}
+              {
+                //@ts-ignore
+                user.avatar ? (
+                  //@ts-ignore
+                  <Avatar size={156} src={user.avatar} />
+                ) : (
+                  <Avatar
+                    size={156}
+                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                  />
+                )
+              }
               <div className={styles.userData}>
                 <Title level={3} className={styles.name}>
-                  {user.name}
+                  {
+                    //@ts-ignore
+                    user.name
+                  }
                 </Title>
                 <div className={styles.count}>
                   {info.map((obj, index) => (
@@ -118,9 +124,16 @@ const User = () => {
               </div>
             </div>{" "}
             <div className={styles.body}>
-              <Tabs tabPosition={tabPosition}>
+              <Tabs //@ts-ignore
+                tabPosition={tabPosition}
+              >
                 <TabPane tab="Профиль" key="1">
-                  id: {user.id} Пол: Мужской
+                  id:{" "}
+                  {
+                    //@ts-ignore
+                    user.id
+                  }{" "}
+                  Пол: Мужской
                 </TabPane>
                 <TabPane tab="Закладки" key="2">
                   <div className={styles.markList}>
@@ -129,7 +142,13 @@ const User = () => {
                       <Spin />
                     ) : bookMarks.length > 0 ? (
                       bookMarks.map((mark, index) => (
-                        <DynamicCardManga key={mark.id} manga={mark.manga} />
+                        <DynamicCardManga
+                          key={mark.id}
+                          manga={
+                            //@ts-ignore
+                            mark.manga
+                          }
+                        />
                       ))
                     ) : (
                       <Empty description={<span>Пусто</span>} />

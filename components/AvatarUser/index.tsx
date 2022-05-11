@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Avatar, Popover, Spin } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import dynamic from "next/dynamic";
 import { selectUserToken } from "../../store/modules/user/user.selector";
 import styles from "./AvatarUser.module.scss";
-import dynamic from "next/dynamic";
 
 const DynamicMenuUser = dynamic(() => import("./components/MenuUser"), {
   loading: () => <Spin />,

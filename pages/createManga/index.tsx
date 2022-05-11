@@ -3,6 +3,7 @@ import { message, Button } from "antd";
 import TextArea from "rc-textarea";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/dist/client/router";
+import { GetServerSideProps } from "next";
 import { addNewManga } from "../../store/modules/manga/manga.slice";
 import MainLayout from "../../layouts/MainLayout";
 import UploadImageForManga from "../../components/createManga/UI/UploadImageForManga";
@@ -11,9 +12,8 @@ import SelectAgeRatingForManga from "../../components/createManga/UI/SelectAgeRa
 import SelectTagsForManga from "../../components/createManga/UI/SelectTagsForManga";
 import SelectStatusTranslateForManga from "../../components/createManga/UI/SelectStatusTranslateForManga";
 import SelectGenresForManga from "../../components/createManga/UI/SelectGenresForManga";
-import styles from "./CreateManga.module.scss";
-import { GetServerSideProps } from "next";
 import { wrapper } from "../../store";
+import styles from "./CreateManga.module.scss";
 
 const CreateManga = () => {
   const [typeManga, setTypeManga] = useState<any>("");
@@ -73,6 +73,7 @@ const CreateManga = () => {
       formData.append("ageRatingManga", ageRatingManga);
       formData.append("yearOfIssue", yearOfIssue);
       formData.append("mangaCover", mangaCover);
+      //@ts-ignore
       dispatch(addNewManga(formData));
       message.success("Тайтл был успешно добавлен на сайт");
       setTitle("");

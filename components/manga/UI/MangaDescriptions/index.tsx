@@ -1,9 +1,9 @@
 import { Spin, Tag } from "antd";
 import React, { FC, memo } from "react";
+import dynamic from "next/dynamic";
 import { ITag } from "../../../../store/modules/manga/types/ITag";
 import { IGenre } from "../../../../store/modules/manga/types/IGenre";
 import styles from "./MangaDescriptions.module.scss";
-import dynamic from "next/dynamic";
 
 const DynamicAuthorBlock = dynamic(() => import("../AuthorBlock"), {
   loading: () => <Spin />,

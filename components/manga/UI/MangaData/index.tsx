@@ -43,7 +43,12 @@ const MangaData: FC<MangaDataProps> = memo(
         </div>
         <div className={styles.static}>
           <div className={styles.rating}>
-            {token ? <Rating /> : rating.rating}
+            {token ? (
+              <Rating />
+            ) : (
+              //@ts-ignore
+              rating.rating
+            )}
           </div>
           <div className={styles.likes}>
             <HeartFilled /> 17.2K{" "}

@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
 import { useSelector } from "react-redux";
+import { Spin } from "antd";
+import dynamic from "next/dynamic";
 import { wrapper } from "../../../../store";
 import { getImages } from "../../../../store/modules/chapter/chapter.slice";
 import {
@@ -10,8 +12,6 @@ import {
   selectChapterLoading,
 } from "../../../../store/modules/chapter/chapter.selector";
 import styles from "./Chapter.module.scss";
-import { Spin } from "antd";
-import dynamic from "next/dynamic";
 
 const DynamicChapterLayout = dynamic(
   () => import("../../../../layouts/ChapterLayout"),

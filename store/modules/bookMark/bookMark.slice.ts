@@ -43,10 +43,12 @@ const bookMarkSlice = createSlice({
   name: "bookMark",
   initialState,
   reducers: {
+    //@ts-ignore
     setBookMarks(state, action) {
       state.bookMarks = action.payload;
       state.loading = false;
     },
+    //@ts-ignore
     setBookMarkForManga(state, action) {
       state.bookMark = action.payload;
       state.loading = false;
@@ -54,6 +56,7 @@ const bookMarkSlice = createSlice({
   },
 
   extraReducers: (builder) =>
+  //@ts-ignore
     builder
       .addCase(HYDRATE, (state, action: any) => {
         state.bookMarks = action.payload.bookMark.bookMarks;

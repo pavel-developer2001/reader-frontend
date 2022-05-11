@@ -37,6 +37,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    //@ts-ignore
     setToken(state, action) {
       state.token = action.payload;
     },
@@ -45,6 +46,7 @@ const userSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(HYDRATE, (state, action) => {
+        //@ts-ignore
         state.user = action.payload.user.user;
         state.loading = false;
       })

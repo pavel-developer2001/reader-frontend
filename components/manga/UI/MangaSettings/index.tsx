@@ -6,6 +6,7 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import dynamic from "next/dynamic";
 import {
   addBookMark,
   getBookMarkToManga,
@@ -17,7 +18,6 @@ import {
 } from "../../../../store/modules/bookMark/bookMark.selector";
 import { selectUserToken } from "../../../../store/modules/user/user.selector";
 import styles from "./MangaSettings.module.scss";
-import dynamic from "next/dynamic";
 
 const DynamicAddMangaForTeam = dynamic(
   () => import("./components/AddMangaForTeam"),

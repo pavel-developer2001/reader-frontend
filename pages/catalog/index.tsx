@@ -2,15 +2,15 @@ import Title from "antd/lib/typography/Title";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Spin, Tabs } from "antd";
+import dynamic from "next/dynamic";
+import { GetServerSideProps } from "next";
 import { getMangas } from "../../store/modules/manga/manga.slice";
 import {
   selectMangaLoading,
   selectMangasData,
 } from "../../store/modules/manga/manga.selector";
-import styles from "./Catalog.module.css";
-import dynamic from "next/dynamic";
-import { GetServerSideProps } from "next";
 import { wrapper } from "../../store";
+import styles from "./Catalog.module.css";
 const { TabPane } = Tabs;
 
 const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
