@@ -36,7 +36,7 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
         showCount
         value={commentText}
         onChange={(e) => setCommentText(e.target.value)}
-        placeholder='Оставить комментарий'
+        placeholder="Оставить комментарий"
         autoSize={{ minRows: 2, maxRows: 3 }}
         maxLength={500}
       />
@@ -46,11 +46,11 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
         </div>
         <div className={styles.btn}>
           <Button
-            type='default'
-            shape='circle'
+            type="default"
+            shape="circle"
             onClick={handleAddComment}
             icon={<SendOutlined />}
-            size='large'
+            size="large"
           />
         </div>
       </div>

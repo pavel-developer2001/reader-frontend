@@ -1,12 +1,21 @@
+import { Spin } from "antd";
+import dynamic from "next/dynamic";
 import React from "react";
-import MainLayout from "../../layouts/MainLayout";
+
+const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
+});
 
 const Custom404 = () => {
   return (
-    <MainLayout>
+    <DynamicMainLayout>
       Произошла ошибка на стороне админов. Извиняемся за неудобства, наши
       специалисты уже разбираются.
-    </MainLayout>
+    </DynamicMainLayout>
   );
 };
 

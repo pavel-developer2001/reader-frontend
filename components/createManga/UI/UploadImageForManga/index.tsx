@@ -55,14 +55,14 @@ const UploadImageForManga: FC<UploadImageForMangaProps> = ({
     <div className={styles.upload}>
       <Upload
         className={styles.customUpload}
-        name='file'
-        listType='picture-card'
+        name="file"
+        listType="picture-card"
         showUploadList={false}
         beforeUpload={beforeUpload}
         onChange={handleChange}
       >
         {imageUrl ? (
-          <img src={imageUrl} alt='avatar' style={{ width: "100%" }} />
+          <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
         ) : (
           uploadButton
         )}

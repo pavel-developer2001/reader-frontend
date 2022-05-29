@@ -3,15 +3,26 @@ import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
 import { useSelector } from "react-redux";
-import ChapterLayout from "../../../../layouts/ChapterLayout";
 import { wrapper } from "../../../../store";
 import { getImages } from "../../../../store/modules/chapter/chapter.slice";
-import styles from "./Chapter.module.scss";
 import {
   selectChapterImagesData,
   selectChapterLoading,
 } from "../../../../store/modules/chapter/chapter.selector";
+import styles from "./Chapter.module.scss";
+import { Spin } from "antd";
+import dynamic from "next/dynamic";
 
+const DynamicChapterLayout = dynamic(
+  () => import("../../../../layouts/ChapterLayout"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin size="large" />
+      </div>
+    ),
+  }
+);
 const Chapter = () => {
   const router = useRouter();
   const mangaId = router.query?.id;
@@ -20,9 +31,9 @@ const Chapter = () => {
   const loading = useSelector(selectChapterLoading);
 
   return loading ? (
-    <p>loading</p>
+    <Spin />
   ) : (
-    <ChapterLayout
+    <DynamicChapterLayout
       title={images[0]?.manga?.title}
       id={mangaId}
       page={images[0]?.chapter?.numberChapter}
@@ -34,16 +45,20 @@ const Chapter = () => {
             className={styles.page}
             width={900}
             height={900}
-            alt='chapter page'
+            alt="chapter page"
             src={image.imageChapter}
           />
         ))}
       </div>
-    </ChapterLayout>
+    </DynamicChapterLayout>
   );
 };
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async ({ params }) => {
+  wrapper.getServerSideProps((store) => async ({ params, res }) => {
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
     try {
       //@ts-ignore
       await store.dispatch(getImages(params.chapterId));

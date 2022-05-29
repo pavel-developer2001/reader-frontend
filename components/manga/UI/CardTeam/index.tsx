@@ -1,6 +1,6 @@
 import { Avatar } from "antd";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import styles from "./CardTeam.module.scss";
 
 interface CardTeamProps {
@@ -9,14 +9,14 @@ interface CardTeamProps {
   subtitle: string;
   cover: string;
 }
-const CardTeam: FC<CardTeamProps> = ({ teamId, name, subtitle, cover }) => {
+const CardTeam: FC<CardTeamProps> = memo(({ teamId, name, subtitle, cover }) => {
   return (
     <Link href={"/team/" + teamId}>
       <a className={styles.main}>
         {" "}
         <div className={styles.left}>
           <Avatar
-            shape='square'
+            shape="square"
             className={styles.avatar}
             size={56}
             src={
@@ -33,6 +33,6 @@ const CardTeam: FC<CardTeamProps> = ({ teamId, name, subtitle, cover }) => {
       </a>
     </Link>
   );
-};
+});
 
 export default CardTeam;

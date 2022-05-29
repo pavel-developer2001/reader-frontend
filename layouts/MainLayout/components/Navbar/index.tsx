@@ -1,19 +1,39 @@
 import React from "react";
-import { Layout } from "antd";
+import { Layout, Spin } from "antd";
 const { Header } = Layout;
 import { BellOutlined, FormatPainterOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import { Theme } from "../../../../context/ThemeContext";
 import { useTheme } from "../../../../hooks/useTheme";
-import AvatarUser from "../../../../components/AvatarUser";
-import SearchModal from "../../../../components/SearchModal";
-import { Desktop } from "../../../../devices/Desktop";
-import { Mobile } from "../../../../devices/Mobile";
-import AvatarDrawer from "./components/AvatarDrawer";
+import { selectUserToken } from "../../../../store/modules/user/user.selector";
+import { useSelector } from "react-redux";
+import dynamic from "next/dynamic";
 
+const DynamicDesktop = dynamic(() => import("../../../../devices/Desktop"), {
+  loading: () => <Spin />,
+});
+const DynamicMobile = dynamic(() => import("../../../../devices/Mobile"), {
+  loading: () => <Spin />,
+});
+const DynamicAvatarDrawer = dynamic(() => import("./components/AvatarDrawer"), {
+  loading: () => <Spin />,
+});
+const DynamicSearchModal = dynamic(
+  () => import("../../../../components/SearchModal"),
+  {
+    loading: () => <Spin />,
+  }
+);
+const DynamicAvatarUser = dynamic(
+  () => import("../../../../components/AvatarUser"),
+  {
+    loading: () => <Spin />,
+  }
+);
 const Navbar = () => {
   const theme = useTheme();
+  const token = useSelector(selectUserToken);
 
   function changeTheme() {
     theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
@@ -33,12 +53,12 @@ const Navbar = () => {
   };
   return (
     <Header className={styles.header}>
-      <Desktop>
-        <div className='main-container'>
+      <DynamicDesktop>
+        <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.leftHeader}>
               <div className={styles.logo}>
-                <Link href='/'>
+                <Link href="/">
                   <a>Reader</a>
                 </Link>
               </div>
@@ -52,49 +72,58 @@ const Navbar = () => {
             </div>
             <div className={styles.rightHeader}>
               <div className={styles.menu}>
-                <SearchModal />
+                <DynamicSearchModal />
               </div>
-              <div className={styles.menu}>
-                <Link href='/notification'>
-                  <a>
-                    <BellOutlined />
-                  </a>
-                </Link>
-              </div>
+              {token && (
+                <div className={styles.menu}>
+                  <Link href="/notification">
+                    <a>
+                      <BellOutlined />
+                    </a>
+                  </Link>
+                </div>
+              )}
+
               <div className={styles.menu}>
                 <FormatPainterOutlined onClick={changeTheme} />
               </div>
-              <AvatarUser />
+              <DynamicAvatarUser />
             </div>
           </div>
         </div>
-      </Desktop>
-      <Mobile>
-        <div className='main-container'>
+      </DynamicDesktop>
+      <DynamicMobile>
+        <div className="main-container">
           <div className={styles.wrapper}>
             <div className={styles.leftHeader}>
               <div className={styles.logo}>
-                <Link href='/'>
+                <Link href="/">
                   <a>Reader</a>
                 </Link>
               </div>
             </div>
             <div className={styles.rightHeader}>
               <div className={styles.menu}>
-                <SearchModal />
+                <DynamicSearchModal />
               </div>
-              <div className={styles.menu}>
-                <Link href='/notification'>
-                  <a>
-                    <BellOutlined />
-                  </a>
-                </Link>
-              </div>
-              <AvatarDrawer changeTheme={changeTheme} menuArrays={menuArrays} />
+              {token && (
+                <div className={styles.menu}>
+                  <Link href="/notification">
+                    <a>
+                      <BellOutlined />
+                    </a>
+                  </Link>
+                </div>
+              )}
+
+              <DynamicAvatarDrawer
+                changeTheme={changeTheme}
+                menuArrays={menuArrays}
+              />
             </div>
           </div>
         </div>
-      </Mobile>
+      </DynamicMobile>
     </Header>
   );
 };

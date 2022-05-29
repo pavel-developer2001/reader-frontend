@@ -1,24 +1,43 @@
-import { Avatar, Typography } from "antd";
+import { Avatar, Spin, Typography } from "antd";
 const { Title, Paragraph, Text } = Typography;
 import React from "react";
-import MainLayout from "../../layouts/MainLayout";
-import styles from "./Team.module.css";
 import { Tabs } from "antd";
 import { useSelector } from "react-redux";
+import { GetServerSideProps } from "next";
+import dynamic from "next/dynamic";
 import { getTeam } from "../../store/modules/team/team.slice";
-import { CardManga } from "../../components/CardManga";
 import { UpdateListItem } from "../../components/home/UI/UpdateList";
 import { wrapper } from "../../store";
-import { GetServerSideProps } from "next";
 import {
   selectTeamItemData,
   selectTeamLoading,
 } from "../../store/modules/team/team.selector";
-import dynamic from "next/dynamic";
+import styles from "./Team.module.css";
 
 const MemberBlock = dynamic(
-  () => import("../../components/team/UI/MemberBlock")
+  () => import("../../components/team/UI/MemberBlock"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
+const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
+});
+const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
+});
 
 const { TabPane } = Tabs;
 
@@ -30,16 +49,16 @@ const Team = () => {
   const team = useSelector(selectTeamItemData);
   const loading = useSelector(selectTeamLoading);
   return (
-    <MainLayout>
+    <DynamicMainLayout>
       {loading ? (
-        <p>loading</p>
+        <Spin />
       ) : (
         <>
           {" "}
           <div className={styles.header}>
             <div className={styles.avatar}>
               <Avatar
-                shape='square'
+                shape="square"
                 size={150}
                 src={
                   team?.team?.teamCover
@@ -57,19 +76,19 @@ const Team = () => {
           </div>
           <div>
             {" "}
-            <Tabs defaultActiveKey='1' onChange={callback}>
-              <TabPane tab='Профиль' key='1'>
+            <Tabs defaultActiveKey="1" onChange={callback}>
+              <TabPane tab="Профиль" key="1">
                 <Paragraph>{team?.team?.teamDescription}</Paragraph>
                 <MemberBlock members={team?.members} />
               </TabPane>
-              <TabPane tab='Тайтлы' key='2'>
+              <TabPane tab="Тайтлы" key="2">
                 <div className={styles.mangaList}>
                   {team?.mangas?.map((manga: any) => (
-                    <CardManga key={manga.id} manga={manga.manga} />
+                    <DynamicCardManga key={manga.id} manga={manga.manga} />
                   ))}
                 </div>
               </TabPane>
-              <TabPane tab='Лента' key='3'>
+              <TabPane tab="Лента" key="3">
                 <div className={styles.update}>
                   {team?.chapters?.length > 0 ? (
                     team?.chapters?.map((chapter: any) => (
@@ -93,12 +112,16 @@ const Team = () => {
           </div>
         </>
       )}
-    </MainLayout>
+    </DynamicMainLayout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async ({ params }) => {
+  wrapper.getServerSideProps((store) => async ({ params, res }) => {
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
     try {
       //@ts-ignore
       await store.dispatch(getTeam(params.id));

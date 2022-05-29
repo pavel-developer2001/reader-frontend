@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Comment, Tooltip, Avatar, Switch, Button, message } from "antd";
+import { Comment, Tooltip, Avatar, Switch, Button, message, Spin } from "antd";
 import moment from "moment";
 import {
   DislikeOutlined,
@@ -10,12 +10,11 @@ import {
   DeleteOutlined,
   CheckOutlined,
 } from "@ant-design/icons";
-import styles from "./CommentsBlockList.module.scss";
 import Link from "next/link";
-import AddCommentForManga from "../AddCommentForManga";
 import TextArea from "rc-textarea";
 import { useRouter } from "next/dist/client/router";
 import { useDispatch, useSelector } from "react-redux";
+import AddCommentForManga from "../AddCommentForManga";
 import {
   deleteComment,
   getComments,
@@ -25,6 +24,8 @@ import {
   selectCommentLoading,
   selectCommentsData,
 } from "../../../../store/modules/comment/comment.selector";
+import { selectUserToken } from "../../../../store/modules/user/user.selector";
+import styles from "./CommentsBlockList.module.scss";
 
 interface CommentsBlockProps {
   commentId: number;
@@ -35,6 +36,7 @@ interface CommentsBlockProps {
   userAvatar: string;
   userName: string;
   userId: number;
+  token: string;
 }
 const CommentsBlock: FC<CommentsBlockProps> = ({
   commentId,
@@ -45,6 +47,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
   userAvatar,
   userName,
   userId,
+  token,
 }) => {
   const dispatch = useDispatch();
   const [likes, setLikes] = useState(commentLikes);
@@ -63,13 +66,13 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
   };
 
   const actions = [
-    <Tooltip key='comment-basic-like' title='Like'>
+    <Tooltip key="comment-basic-like" title="Like">
       <span onClick={like} className={styles.likeBtn}>
         {React.createElement(action === "liked" ? LikeFilled : LikeOutlined)}
         <span className={styles.like}>{likes}</span>
       </span>
     </Tooltip>,
-    <Tooltip key='comment-basic-dislike' title='Dislike'>
+    <Tooltip key="comment-basic-dislike" title="Dislike">
       <span onClick={dislike} className={styles.likeBtn}>
         {React.createElement(
           action === "disliked" ? DislikeFilled : DislikeOutlined
@@ -122,12 +125,14 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
           <div className={styles.content}>
             {!edit ? (
               <div className={styles.edit} onClick={() => setEdit(true)}>
-                <EditOutlined size={30} />
+                {token && <EditOutlined size={30} />}
               </div>
             ) : (
-              <div onClick={handleUpdateComment} className={styles.ready}>
-                <Button shape='circle' icon={<CheckOutlined />} />
-              </div>
+              token && (
+                <div onClick={handleUpdateComment} className={styles.ready}>
+                  <Button shape="circle" icon={<CheckOutlined />} />
+                </div>
+              )
             )}
             {!edit ? (
               spoiler ? (
@@ -159,7 +164,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
                       onClick={handleRemoveComment}
                     >
                       {" "}
-                      <Button shape='circle' icon={<DeleteOutlined />} />
+                      <Button shape="circle" icon={<DeleteOutlined />} />
                     </div>
                     <div className={styles.spoiler}>
                       <Switch onChange={(checked) => setSpoiler(checked)} />{" "}
@@ -186,6 +191,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
   );
 };
 const CommentBlockList = () => {
+  const token = useSelector(selectUserToken);
   const router = useRouter();
   const dispatch = useDispatch();
   const mangaId = router.query.id;
@@ -199,14 +205,16 @@ const CommentBlockList = () => {
   return (
     <div className={styles.list}>
       {loading ? (
-        <p>Loading</p>
+        <Spin />
       ) : (
         <>
           <div className={styles.title}>Комментарии {comments.length}</div>
-          <AddCommentForManga mangaId={mangaId} />
+          {token && <AddCommentForManga mangaId={mangaId} />}
+
           {comments.length > 0 ? (
             comments.map((comment) => (
               <CommentsBlock
+                token={token}
                 key={comment.id}
                 commentId={comment.id}
                 text={comment.commentText}

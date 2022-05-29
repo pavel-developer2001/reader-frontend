@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import styles from "./AvatarDrawer.module.scss";
-import { Drawer } from "antd";
+import { Drawer, Spin } from "antd";
 import {
   ExportOutlined,
   FormatPainterOutlined,
@@ -13,8 +13,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { message } from "antd";
 import { setToken } from "../../../../../../store/modules/user/user.slice";
 import { selectUserToken } from "../../../../../../store/modules/user/user.selector";
-import AuthModal from "../../../../../../components/AuthModal";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
+import dynamic from "next/dynamic";
+
+const DynamicAuthModal = dynamic(
+  () => import("../../../../../../components/AuthModal"),
+  {
+    loading: () => <Spin />,
+  }
+);
 
 const AvatarHeader = ({ token }: any) => {
   return (
@@ -23,7 +30,7 @@ const AvatarHeader = ({ token }: any) => {
         <>
           <div className={styles.headerUser}>
             <Link href={"/user/" + dataUser}>
-              <Avatar size='large' icon={<UserOutlined />} />
+              <Avatar size="large" icon={<UserOutlined />} />
             </Link>
 
             <div className={styles.headerData}>
@@ -37,7 +44,7 @@ const AvatarHeader = ({ token }: any) => {
           <div>Пополнить Баланс</div>
         </>
       ) : (
-        <AuthModal />
+        <DynamicAuthModal />
       )}
     </div>
   );
@@ -65,7 +72,7 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
   };
   return (
     <div className={styles.main}>
-      <Avatar size='large' icon={<UserOutlined />} onClick={showDrawer} />
+      <Avatar size="large" icon={<UserOutlined />} onClick={showDrawer} />
       <Drawer
         title={<AvatarHeader token={token} />}
         placement={"right"}
@@ -81,14 +88,17 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
             </Link>
           </p>
         ))}
-        <p>
-          <Link href='/createManga'>
-            <a>
-              <PlusOutlined />
-              Добавить мангу
-            </a>
-          </Link>
-        </p>
+        {token && (
+          <p>
+            <Link href="/createManga">
+              <a>
+                <PlusOutlined />
+                Добавить мангу
+              </a>
+            </Link>
+          </p>
+        )}
+
         <p>
           <div className={styles.menu} onClick={changeTheme}>
             <FormatPainterOutlined /> Сменить цвет

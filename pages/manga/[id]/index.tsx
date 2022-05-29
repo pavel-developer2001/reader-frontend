@@ -1,26 +1,80 @@
 import React from "react";
-import MainLayout from "../../../layouts/MainLayout";
-import { Tabs } from "antd";
-import styles from "../Manga.module.scss";
+import { Spin, Tabs } from "antd";
 import dynamic from "next/dynamic";
-import MangaData from "../../../components/manga/UI/MangaData";
-import MangaDescriptions from "../../../components/manga/UI/MangaDescriptions";
-import MangaSettings from "../../../components/manga/UI/MangaSettings";
 import { GetServerSideProps } from "next";
-import { wrapper } from "../../../store";
-import { getManga } from "../../../store/modules/manga/manga.slice";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
+import styles from "../Manga.module.scss";
+import { wrapper } from "../../../store";
+import { getManga } from "../../../store/modules/manga/manga.slice";
 import { RootState } from "../../../store/reducer";
 
 const CommentsBlockList = dynamic(
-  () => import("../../../components/manga/UI/CommentsBlockList")
+  () => import("../../../components/manga/UI/CommentsBlockList"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const ChapterList = dynamic(
-  () => import("../../../components/manga/UI/ChapterList")
+  () => import("../../../components/manga/UI/ChapterList"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const MangaAddition = dynamic(
-  () => import("../../../components/manga/UI/MangaAddition")
+  () => import("../../../components/manga/UI/MangaAddition"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
+);
+const DynamicMainLayout = dynamic(() => import("../../../layouts/MainLayout"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
+});
+const DynamicMangaData = dynamic(
+  () => import("../../../components/manga/UI/MangaData"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
+);
+const DynamicMangaDescriptions = dynamic(
+  () => import("../../../components/manga/UI/MangaDescriptions"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
+);
+const DynamicMangaSettings = dynamic(
+  () => import("../../../components/manga/UI/MangaSettings"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 
 import {
@@ -34,22 +88,17 @@ const PageManga = () => {
   const manga = useSelector<RootState, any>(selectMangaItem);
   const loading = useSelector(selectMangaLoading);
   const router = useRouter();
-
-  function callback(key: string) {
-    console.log(key);
-  }
   return (
-    <MainLayout>
+    <DynamicMainLayout>
       <div className={styles.wrapper}>
         <>
           {loading ? (
-            <p>loading</p>
+            <Spin />
           ) : (
             <>
-              {" "}
-              <MangaSettings cover={manga?.mangaCover} id={manga?.id} />
+              <DynamicMangaSettings cover={manga?.mangaCover} id={manga?.id} />
               <div className={styles.main}>
-                <MangaData
+                <DynamicMangaData
                   title={manga?.title}
                   englishTitle={manga?.englishTitle}
                   originalTitle={manga?.originalTitle}
@@ -61,19 +110,19 @@ const PageManga = () => {
                 />
                 <div className={styles.table}>
                   <div className={styles.mainBlock}>
-                    <Tabs defaultActiveKey='1' onChange={callback}>
-                      <TabPane tab='Описание' key='1'>
-                        <MangaDescriptions
+                    <Tabs defaultActiveKey="1">
+                      <TabPane tab="Описание" key="1">
+                        <DynamicMangaDescriptions
                           mangaDescription={manga?.mangaDescription}
                           tags={manga.tags}
                           genres={manga.genres}
                         />
                         <MangaAddition />
                       </TabPane>
-                      <TabPane tab='Главы' key='2'>
+                      <TabPane tab="Главы" key="2">
                         <ChapterList mangaId={router.query.id} />
                       </TabPane>
-                      <TabPane tab='Комментарии' key='3'>
+                      <TabPane tab="Комментарии" key="3">
                         <CommentsBlockList />
                       </TabPane>
                     </Tabs>
@@ -84,11 +133,15 @@ const PageManga = () => {
           )}
         </>
       </div>
-    </MainLayout>
+    </DynamicMainLayout>
   );
 };
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async ({ params }) => {
+  wrapper.getServerSideProps((store) => async ({ params, res }) => {
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
     try {
       //@ts-ignore
       await store.dispatch(getManga(params.id));

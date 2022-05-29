@@ -35,10 +35,10 @@ const SelectGenresForManga: FC<SelectGenresForMangaProps> = ({ setGenres }) => {
     <>
       <span className={styles.text}>Жанры</span>
       <Select
-        mode='multiple'
+        mode="multiple"
         allowClear
         style={{ width: "100%" }}
-        placeholder='Жанры'
+        placeholder="Жанры"
         defaultValue={[]}
         onChange={(value) => setGenres(value)}
       >

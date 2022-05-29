@@ -1,14 +1,15 @@
 import moment from "moment";
 import Link from "next/link";
-import React, { FC, useEffect } from "react";
+import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUpdateChapters } from "../../../../store/modules/chapter/chapter.slice";
-import styles from "./UpdateList.module.scss";
 import Image from "next/image";
+import { getUpdateChapters } from "../../../../store/modules/chapter/chapter.slice";
 import {
   selectChapterLoading,
   selectUpdateChapterData,
 } from "../../../../store/modules/chapter/chapter.selector";
+import styles from "./UpdateList.module.scss";
+import { Spin } from "antd";
 
 interface UpdateListItemProps {
   chapterId: number;
@@ -19,7 +20,7 @@ interface UpdateListItemProps {
   titleManga: string;
   date: string;
 }
-export const UpdateListItem: FC<UpdateListItemProps> = ({
+export const UpdateListItem: FC<UpdateListItemProps> = memo(({
   chapterId,
   volumeChapter,
   numberChapter,
@@ -32,7 +33,7 @@ export const UpdateListItem: FC<UpdateListItemProps> = ({
     <div className={styles.item}>
       <Link href={"/manga/" + mangaId}>
         <a className={styles.leftBlock}>
-          <Image width={64} height={96} src={cover} alt='manga cover' />
+          <Image width={64} height={96} src={cover} alt="manga cover" />
         </a>
       </Link>
 
@@ -51,7 +52,7 @@ export const UpdateListItem: FC<UpdateListItemProps> = ({
       </div>
     </div>
   );
-};
+});
 
 const UpdateList = () => {
   const dispatch = useDispatch();
@@ -63,7 +64,11 @@ const UpdateList = () => {
   return (
     <div className={styles.list} >
       {loading ? (
+<<<<<<< HEAD
         <p data-testid='loading'> Loading</p>
+=======
+        <Spin /> 
+>>>>>>> main
       ) : updateChapter.length > 0 ? (
         updateChapter.map((lateChapter) => (
           <UpdateListItem

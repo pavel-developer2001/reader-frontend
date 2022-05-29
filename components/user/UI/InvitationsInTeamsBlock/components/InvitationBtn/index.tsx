@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styles from "./InvitationBtn.module.scss";
 import { Modal, Button, Select, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/dist/client/router";
 import {
   addInvitation,
   getTeamsForUser,
@@ -11,7 +11,7 @@ import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../../../store/modules/team/team.selector";
-import { useRouter } from "next/dist/client/router";
+
 const { Option } = Select;
 
 const InvitationBtn = () => {
@@ -83,11 +83,11 @@ const InvitationBtn = () => {
   return (
     <div>
       {" "}
-      <Button type='primary' onClick={showModal}>
+      <Button type="primary" onClick={showModal}>
         Пригласить в команду
       </Button>
       <Modal
-        title='Приглашение в команду'
+        title="Приглашение в команду"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -96,8 +96,8 @@ const InvitationBtn = () => {
         <Select
           showSearch
           style={{ width: 200 }}
-          placeholder='Выбрать команду'
-          optionFilterProp='children'
+          placeholder="Выбрать команду"
+          optionFilterProp="children"
           onChange={(value: string) => setTeamId(value)}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -118,8 +118,8 @@ const InvitationBtn = () => {
         <Select
           showSearch
           style={{ width: 200 }}
-          placeholder='Должность'
-          optionFilterProp='children'
+          placeholder="Должность"
+          optionFilterProp="children"
           onChange={(value: string) => setRank(value)}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -135,7 +135,7 @@ const InvitationBtn = () => {
           ))}
         </Select>
         <div>
-          <Button type='primary' onClick={handleAddInvitation}>
+          <Button type="primary" onClick={handleAddInvitation}>
             Приглаcить
           </Button>
         </div>

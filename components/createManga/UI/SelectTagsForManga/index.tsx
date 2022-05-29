@@ -38,10 +38,10 @@ const SelectTagsForManga: FC<SelectTagsForMangaProps> = ({ setTags }) => {
       {" "}
       <span className={styles.text}>Категории</span>
       <Select
-        mode='multiple'
+        mode="multiple"
         allowClear
         style={{ width: "100%" }}
-        placeholder='Теги'
+        placeholder="Теги"
         defaultValue={[]}
         onChange={(value) => setTags(value)}
       >

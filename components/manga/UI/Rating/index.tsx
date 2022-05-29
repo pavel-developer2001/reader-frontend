@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Rating.module.scss";
-import { Modal, message } from "antd";
+import { Modal, message, Spin } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
@@ -13,6 +12,7 @@ import {
   selectRatingItemData,
   selectRatingLoading,
 } from "../../../../store/modules/rating/rating.selector";
+import styles from "./Rating.module.scss";
 
 const Rating = () => {
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ const Rating = () => {
   return (
     <div>
       {loading ? (
-        <p>loading </p>
+        <Spin />
       ) : (
         <div onClick={showModal} className={styles.star}>
           <StarFilled className={styles.starIcon} />
@@ -76,7 +76,7 @@ const Rating = () => {
       )}
 
       <Modal
-        title='Поставить оценку'
+        title="Поставить оценку"
         className={styles.modal}
         visible={isModalVisible}
         onOk={handleOk}

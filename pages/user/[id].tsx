@@ -1,42 +1,77 @@
-import { Avatar, Empty } from "antd";
+import React, { useEffect, useState } from "react";
+import { Avatar, Empty, Spin } from "antd";
 import { Typography } from "antd";
 import { Tabs } from "antd";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
-
-const { TabPane } = Tabs;
-const { Title } = Typography;
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CardManga } from "../../components/CardManga";
-import MainLayout from "../../layouts/MainLayout";
+import dynamic from "next/dynamic";
 import { wrapper } from "../../store";
 import { getBookMarks } from "../../store/modules/bookMark/bookMark.slice";
 import { getUserData } from "../../store/modules/user/user.slice";
-import styles from "./Users.module.scss";
 import {
   selectUserData,
   selectUserLoading,
+  selectUserToken,
 } from "../../store/modules/user/user.selector";
 import {
   selectBookMarkLoading,
   selectBookMarksData,
 } from "../../store/modules/bookMark/bookMark.selector";
-import dynamic from "next/dynamic";
+import styles from "./Users.module.scss";
 
 const CreateTeamModal = dynamic(
-  () => import("../../components/user/UI/CreateTeamModal")
+  () => import("../../components/user/UI/CreateTeamModal"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const InvitationsInTeamsBlock = dynamic(
-  () => import("../../components/user/UI/InvitationsInTeamsBlock")
+  () => import("../../components/user/UI/InvitationsInTeamsBlock"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
 const UserInTeamsBlock = dynamic(
-  () => import("../../components/user/UI/UserInTeamsBlock")
+  () => import("../../components/user/UI/UserInTeamsBlock"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
 );
+const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
+});
+const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
+});
+
+const { TabPane } = Tabs;
+const { Title } = Typography;
 
 const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const token = useSelector(selectUserToken);
   const user = useSelector(selectUserData);
   const loading = useSelector(selectUserLoading);
   const bookMarks = useSelector(selectBookMarksData);
@@ -53,7 +88,7 @@ const User = () => {
   ];
 
   return (
-    <MainLayout>
+    <DynamicMainLayout>
       <div className={styles.main}>
         {loading ? (
           <p>loading</p>
@@ -66,7 +101,7 @@ const User = () => {
               ) : (
                 <Avatar
                   size={156}
-                  src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+                  src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                 />
               )}
               <div className={styles.userData}>
@@ -84,31 +119,34 @@ const User = () => {
             </div>{" "}
             <div className={styles.body}>
               <Tabs tabPosition={tabPosition}>
-                <TabPane tab='Профиль' key='1'>
+                <TabPane tab="Профиль" key="1">
                   id: {user.id} Пол: Мужской
                 </TabPane>
-                <TabPane tab='Закладки' key='2'>
+                <TabPane tab="Закладки" key="2">
                   <div className={styles.markList}>
                     {" "}
                     {loadingMark ? (
-                      <p>loading</p>
+                      <Spin />
                     ) : bookMarks.length > 0 ? (
                       bookMarks.map((mark, index) => (
-                        <CardManga key={mark.id} manga={mark.manga} />
+                        <DynamicCardManga key={mark.id} manga={mark.manga} />
                       ))
                     ) : (
                       <Empty description={<span>Пусто</span>} />
                     )}
                   </div>
                 </TabPane>
-                <TabPane tab='Команды' key='3'>
+                <TabPane tab="Команды" key="3">
                   <div>
                     <UserInTeamsBlock />
-                    <InvitationsInTeamsBlock />
-                    <CreateTeamModal />
+                    {token && (
+                      <>
+                        <InvitationsInTeamsBlock /> <CreateTeamModal />
+                      </>
+                    )}
                   </div>
                 </TabPane>
-                <TabPane tab='Сообщения' key='4'>
+                <TabPane tab="Сообщения" key="4">
                   <div>сообщения</div>
                 </TabPane>
               </Tabs>
@@ -116,11 +154,15 @@ const User = () => {
           </>
         )}
       </div>
-    </MainLayout>
+    </DynamicMainLayout>
   );
 };
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async ({ params }) => {
+  wrapper.getServerSideProps((store) => async ({ params, res }) => {
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
     try {
       //@ts-ignore
       await store.dispatch(getUserData(params.id));

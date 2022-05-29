@@ -13,3 +13,11 @@ a {
   margin: 0 auto !important;
   max-width: calc(1440px + (100vw / 72 * 2) * 2) !important;
 }
+.loader-block {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}

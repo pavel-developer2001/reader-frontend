@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import MainLayout from "../../layouts/MainLayout";
-import styles from "./CreateManga.module.scss";
 import { message, Button } from "antd";
 import TextArea from "rc-textarea";
 import { useDispatch } from "react-redux";
-import { addNewManga } from "../../store/modules/manga/manga.slice";
 import { useRouter } from "next/dist/client/router";
+import { addNewManga } from "../../store/modules/manga/manga.slice";
+import MainLayout from "../../layouts/MainLayout";
 import UploadImageForManga from "../../components/createManga/UI/UploadImageForManga";
 import SelectTypesForManga from "../../components/createManga/UI/SelectTypesForManga";
 import SelectAgeRatingForManga from "../../components/createManga/UI/SelectAgeRatingForManga";
 import SelectTagsForManga from "../../components/createManga/UI/SelectTagsForManga";
 import SelectStatusTranslateForManga from "../../components/createManga/UI/SelectStatusTranslateForManga";
 import SelectGenresForManga from "../../components/createManga/UI/SelectGenresForManga";
+import styles from "./CreateManga.module.scss";
+import { GetServerSideProps } from "next";
+import { wrapper } from "../../store";
 
 const CreateManga = () => {
   const [typeManga, setTypeManga] = useState<any>("");
@@ -101,7 +103,7 @@ const CreateManga = () => {
             <div className={styles.block}>
               <span className={styles.text}>Русское название</span>
               <TextArea
-                placeholder='название'
+                placeholder="название"
                 value={title}
                 className={styles.input}
                 onChange={(e) => setTitle(e.target.value)}
@@ -111,7 +113,7 @@ const CreateManga = () => {
             <div className={styles.block}>
               <span className={styles.text}>Английское названия</span>
               <TextArea
-                placeholder='Англиское название'
+                placeholder="Англиское название"
                 value={englishTitle}
                 className={styles.input}
                 onChange={(e) => setEnglishTitle(e.target.value)}
@@ -121,7 +123,7 @@ const CreateManga = () => {
             <div className={styles.block}>
               <span className={styles.text}>Оригинальное названия</span>
               <TextArea
-                placeholder='Оригинальное название '
+                placeholder="Оригинальное название "
                 value={originalTitle}
                 className={styles.input}
                 onChange={(e) => setOriginalTitle(e.target.value)}
@@ -136,7 +138,7 @@ const CreateManga = () => {
             value={mangaDescription}
             className={styles.input}
             onChange={(e) => setMangaDescription(e.target.value)}
-            placeholder='Описание'
+            placeholder="Описание"
             autoSize={{ minRows: 3, maxRows: 5 }}
           />
         </div>
@@ -180,7 +182,7 @@ const CreateManga = () => {
                 <span className={styles.text}>Год выпуска</span>
                 <TextArea
                   className={styles.input}
-                  placeholder='Год'
+                  placeholder="Год"
                   autoSize
                   value={yearOfIssue}
                   onChange={(e) => setYearOfIssue(e.target.value)}
@@ -195,12 +197,22 @@ const CreateManga = () => {
           </div>
         </div>
 
-        <Button type='primary' onClick={handleCreateNewManga}>
+        <Button type="primary" onClick={handleCreateNewManga}>
           Создать
         </Button>
       </div>
     </MainLayout>
   );
 };
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    ctx.res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
+    return {
+      props: {},
+    };
+  });
 
 export default CreateManga;

@@ -1,19 +1,24 @@
 import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import React from "react";
-import MainLayout from "../../layouts/MainLayout";
-import styles from "./Notification.module.scss";
-
 import { Tabs } from "antd";
-
+import styles from "./Notification.module.scss";
+import { GetServerSideProps } from "next";
+import { wrapper } from "../../store";
+import dynamic from "next/dynamic";
 const { TabPane } = Tabs;
 
-function callback(key: string) {
-  console.log(key);
-}
+const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
+});
+
 const Notification = () => {
   return (
-    <MainLayout>
+    <DynamicMainLayout>
       <div className={styles.header}>
         <div className={styles.leftBlog}>
           <h2> Уведомления</h2>
@@ -21,32 +26,50 @@ const Notification = () => {
         <div className={styles.rightBlog}>
           <div>
             <Button
-              type='primary'
-              shape='circle'
+              type="primary"
+              shape="circle"
               icon={<CheckCircleOutlined />}
             />
           </div>
           <div>
-            <Button type='primary' shape='circle' icon={<DeleteOutlined />} />
+            <Button type="primary" shape="circle" icon={<DeleteOutlined />} />
           </div>
           <div></div>
         </div>
       </div>
       <div className={styles.body}>
-        <Tabs defaultActiveKey='1' onChange={callback}>
-          <TabPane tab='Обновление' key='1'>
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Обновление" key="1">
             Content of Tab Pane 1
           </TabPane>
-          <TabPane tab='Социальное' key='2'>
+          <TabPane tab="Социальное" key="2">
             Content of Tab Pane 2
           </TabPane>
-          <TabPane tab='Важное' key='3'>
+          <TabPane tab="Важное" key="3">
             Content of Tab Pane 3
           </TabPane>
         </Tabs>
       </div>
-    </MainLayout>
+    </DynamicMainLayout>
   );
 };
-
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    ctx.res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
+    try {
+      //@ts-ignore
+      await store.dispatch(getMangas());
+      return {
+        props: {},
+      };
+    } catch (error) {
+      console.log("ERROR!");
+      return {
+        props: {},
+      };
+    }
+  });
 export default Notification;

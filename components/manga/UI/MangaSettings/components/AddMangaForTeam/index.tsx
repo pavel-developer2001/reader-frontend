@@ -1,19 +1,19 @@
-import { Button, message, Modal, Tooltip } from "antd";
+import { Button, message, Modal, Spin, Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
-import styles from "./AddMangaForTeam.module.scss";
 import { Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/dist/client/router";
+import { UsergroupAddOutlined } from "@ant-design/icons";
 import {
   connectMangaForTeam,
   getTeamsForUser,
 } from "../../../../../../store/modules/team/team.slice";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
-import { useRouter } from "next/dist/client/router";
 import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../../../store/modules/team/team.selector";
-import { UsergroupAddOutlined } from "@ant-design/icons";
+import styles from "./AddMangaForTeam.module.scss";
 
 const { Option } = Select;
 
@@ -65,16 +65,16 @@ const AddMangaForTeam = () => {
   };
   return !loading ? (
     <div>
-      <Tooltip title='Добавить эту мангу для команды'>
+      <Tooltip title="Добавить эту мангу для команды">
         <Button
           onClick={showModal}
-          type='primary'
-          shape='circle'
+          type="primary"
+          shape="circle"
           icon={<UsergroupAddOutlined />}
         />
       </Tooltip>
       <Modal
-        title='Добавить эту мангу для команды'
+        title="Добавить эту мангу для команды"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -82,8 +82,8 @@ const AddMangaForTeam = () => {
         <Select
           showSearch
           style={{ width: 200 }}
-          placeholder='Выбрать команду'
-          optionFilterProp='children'
+          placeholder="Выбрать команду"
+          optionFilterProp="children"
           onChange={(value: string) => setTeamId(value)}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -106,7 +106,7 @@ const AddMangaForTeam = () => {
       </Modal>
     </div>
   ) : (
-    <p>loading</p>
+    <Spin />
   );
 };
 

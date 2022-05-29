@@ -1,25 +1,49 @@
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
-import MainLayout from "../layouts/MainLayout";
+import { GetServerSideProps } from "next";
 import styles from "../styles/Home.module.css";
+import { getMangas } from "../store/modules/manga/manga.slice";
+import { Spin } from "antd";
 
 import { wrapper } from "../store";
-import { GetServerSideProps } from "next";
 
-import PopularList from "../components/home/UI/PopularList";
-const TisketList = dynamic(() => import("../components/home/UI/TisketList"));
-const UpdateList = dynamic(() => import("../components/home/UI/UpdateList"));
-
-import { getMangas } from "../store/modules/manga/manga.slice";
+const MainLayout = dynamic(() => import("../layouts/MainLayout"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin size="large" />
+    </div>
+  ),
+});
+const PopularList = dynamic(() => import("../components/home/UI/PopularList"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
+});
+const TisketList = dynamic(() => import("../components/home/UI/TisketList"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
+});
+const UpdateList = dynamic(() => import("../components/home/UI/UpdateList"), {
+  loading: () => (
+    <div className="loader-block">
+      <Spin />
+    </div>
+  ),
+});
 
 const Home: NextPage = () => {
   return (
     <MainLayout>
       <PopularList />
       <div className={styles.tisket}>
-        <TisketList popularTitle='Рекомендации' />
-        <TisketList popularTitle='Топ дня' />
-        <TisketList popularTitle='Топ месяца' />
+        <TisketList popularTitle="Рекомендации" />
+        <TisketList popularTitle="Топ дня" />
+        <TisketList popularTitle="Топ месяца" />
       </div>
       <UpdateList />
     </MainLayout>
@@ -27,6 +51,10 @@ const Home: NextPage = () => {
 };
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async (ctx) => {
+    ctx.res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
     try {
       //@ts-ignore
       await store.dispatch(getMangas());
