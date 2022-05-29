@@ -64,11 +64,7 @@ const UpdateList = () => {
   return (
     <div className={styles.list} >
       {loading ? (
-<<<<<<< HEAD
         <p data-testid='loading'> Loading</p>
-=======
-        <Spin /> 
->>>>>>> main
       ) : updateChapter.length > 0 ? (
         updateChapter.map((lateChapter) => (
           <UpdateListItem

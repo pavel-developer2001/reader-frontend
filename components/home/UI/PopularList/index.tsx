@@ -18,11 +18,7 @@ const PopularList = () => {
   return (
     <div className={styles.list}>
       {loading ? (
-<<<<<<< HEAD
         <p data-testid='loading'>loading</p>
-=======
-        <Spin />
->>>>>>> main
       ) : (
         mangas?.map((manga) => (
           <DynamicCardManga key={manga?.id} manga={manga} />
