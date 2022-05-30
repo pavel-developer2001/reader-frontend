@@ -190,7 +190,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
     </div>
   );
 };
-const CommentBlockList = () => {
+export const CommentBlockList = () => {
   const token = useSelector(selectUserToken);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -203,9 +203,9 @@ const CommentBlockList = () => {
     }
   }, [mangaId]);
   return (
-    <div className={styles.list}>
+    <div className={styles.list} data-testid='div'>
       {loading ? (
-        <Spin />
+        <Spin data-testid="loading" />
       ) : (
         <>
           <div className={styles.title}>Комментарии {comments.length}</div>
@@ -214,6 +214,7 @@ const CommentBlockList = () => {
           {comments.length > 0 ? (
             comments.map((comment) => (
               <CommentsBlock
+                data-testid="comment-item"
                 token={token}
                 key={comment.id}
                 commentId={comment.id}
