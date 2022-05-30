@@ -38,7 +38,7 @@ interface CommentsBlockProps {
   userId: number;
   token: string;
 }
-const CommentsBlock: FC<CommentsBlockProps> = ({
+export const CommentsBlock: FC<CommentsBlockProps> = ({
   commentId,
   text,
   commentSpoiler,
@@ -102,7 +102,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
     }
   };
   return (
-    <div>
+    <div data-testid="comment-item">
       <Comment
         actions={!edit ? actions : undefined}
         author={
@@ -190,7 +190,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
     </div>
   );
 };
-export const CommentBlockList = () => {
+const CommentBlockList = () => {
   const token = useSelector(selectUserToken);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -203,7 +203,7 @@ export const CommentBlockList = () => {
     }
   }, [mangaId]);
   return (
-    <div className={styles.list} data-testid='div'>
+    <div className={styles.list} data-testid="div">
       {loading ? (
         <Spin data-testid="loading" />
       ) : (
