@@ -40,17 +40,6 @@ const AddMangaForTeam = () => {
   useEffect(() => {
     dispatch(getTeamsForUser(dataUser));
   }, []);
-  function onBlur() {
-    console.log("blur");
-  }
-
-  function onFocus() {
-    console.log("focus");
-  }
-
-  function onSearch(val: string) {
-    console.log("search:", val);
-  }
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -98,9 +87,6 @@ const AddMangaForTeam = () => {
                 style={{ width: 200 }}
                 placeholder="Выбрать команду"
                 optionFilterProp="children"
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
                 filterOption={(input, option: any) =>
                   option.children.toLowerCase().indexOf(input.toLowerCase()) >=
                   0

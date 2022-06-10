@@ -48,17 +48,6 @@ const AddNewChapter = () => {
   } = useForm({
     resolver: yupResolver(AddNewChapterFormSchema),
   });
-  function onBlur() {
-    console.log("blur");
-  }
-
-  function onFocus() {
-    console.log("focus");
-  }
-
-  function onSearch(val: string) {
-    console.log("search:", val);
-  }
   const router = useRouter();
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -178,9 +167,6 @@ const AddNewChapter = () => {
                     style={{ width: 200 }}
                     placeholder="Язык"
                     optionFilterProp="children"
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onSearch={onSearch}
                     filterOption={(input, option: any) =>
                       option.children
                         .toLowerCase()
@@ -232,9 +218,6 @@ const AddNewChapter = () => {
                     placeholder="Выбрать команду"
                     optionFilterProp="children"
                     onChange={(value) => setTeamId(value)}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onSearch={onSearch}
                     filterOption={(input, option: any) =>
                       option.children
                         .toLowerCase()

@@ -44,17 +44,6 @@ const CreateManga = () => {
     resolver: yupResolver(CreateMangaFormSchema),
   });
 
-  function onBlur() {
-    console.log("blur");
-  }
-
-  function onFocus() {
-    console.log("focus");
-  }
-
-  function onSearch(val: string) {
-    console.log("search:", val);
-  }
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -191,9 +180,6 @@ const CreateManga = () => {
                     render={({ field }) => (
                       <SelectTypesForManga
                         field={field}
-                        onBlur={onBlur}
-                        onFocus={onFocus}
-                        onSearch={onSearch}
                       />
                     )}
                     name="typeManga"
@@ -208,9 +194,6 @@ const CreateManga = () => {
                   <Controller
                     render={({ field }) => (
                       <SelectStatusTranslateForManga
-                        onBlur={onBlur}
-                        onFocus={onFocus}
-                        onSearch={onSearch}
                         field={field}
                       />
                     )}
@@ -246,9 +229,6 @@ const CreateManga = () => {
                     render={({ field }) => (
                       <SelectAgeRatingForManga
                         field={field}
-                        onBlur={onBlur}
-                        onFocus={onFocus}
-                        onSearch={onSearch}
                       />
                     )}
                     name="ageRatingManga"

@@ -5,16 +5,10 @@ import styles from "./SelectAgeRatingForManga.module.scss";
 const { Option } = Select;
 
 interface SelectAgeRatingForMangaProps {
-  onBlur: () => void;
-  onFocus: () => void;
-  onSearch: (val: string) => void;
   field: any;
 }
 
 const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({
-  onBlur,
-  onFocus,
-  onSearch,
   field,
 }) => {
   const ageRatingArray = [
@@ -32,9 +26,6 @@ const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({
         style={{ width: 200 }}
         placeholder="Возрастной рейтинг"
         optionFilterProp="children"
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onSearch={onSearch}
         filterOption={(input, option: any) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }

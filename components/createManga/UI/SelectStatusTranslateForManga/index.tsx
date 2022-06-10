@@ -5,16 +5,10 @@ import styles from "./SelectStatusTranslateForManga.module.scss";
 const { Option } = Select;
 
 interface SelectStatusTranslateForMangaProps {
-  onBlur: () => void;
-  onFocus: () => void;
-  onSearch: (val: string) => void;
   field: any;
 }
 
 const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
-  onBlur,
-  onFocus,
-  onSearch,
   field,
 }) => {
   const statusTranslateArray = [
@@ -33,9 +27,6 @@ const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
         style={{ width: 200 }}
         placeholder="Статус перевода"
         optionFilterProp="children"
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onSearch={onSearch}
         filterOption={(input, option: any) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }

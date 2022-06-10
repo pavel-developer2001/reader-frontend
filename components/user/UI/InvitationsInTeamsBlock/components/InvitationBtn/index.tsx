@@ -11,13 +11,27 @@ import {
   selectTeamLoading,
   selectTeamsUserData,
 } from "../../../../../../store/modules/team/team.selector";
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const { Option } = Select;
 
+const InvitationBtnFormSchema = yup.object().shape({
+  teamId: yup.string().required("Выберите команду"),
+  rank: yup.string().required("Выберите Должность"),
+});
+
 const InvitationBtn = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(InvitationBtnFormSchema),
+  });
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [teamId, setTeamId] = useState<string | undefined>("");
-  const [rank, setRank] = useState("");
   const router = useRouter();
   const rankArray = [
     { role: "Переводчик" },
@@ -34,55 +48,36 @@ const InvitationBtn = () => {
       dispatch(getTeamsForUser(dataUser));
     }
   }, []);
-  const handleAddInvitation = async (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
+  const handleAddInvitation = async (data: any) => {
     try {
       const payload: {
         rank: string;
         teamId: number;
         userId: any;
       } = await {
-        rank,
-        teamId,
+        rank: data.rank,
+        teamId: data.teamId,
         userId: router.query.id,
       };
       dispatch(addInvitation(payload));
       message.success("Приглашение было создано");
       setIsModalVisible(false);
-      setRank("");
-      setTeamId("");
+      reset();
     } catch (error: any) {
       message.error("Произошла ошибка", error);
     }
   };
-  function onBlur() {
-    console.log("blur");
-  }
-
-  function onFocus() {
-    console.log("focus");
-  }
-
-  function onSearch(val: string) {
-    console.log("search:", val);
-  }
-
   const showModal = () => {
     setIsModalVisible(true);
   };
-
   const handleOk = () => {
     setIsModalVisible(false);
   };
-
   const handleCancel = () => {
     setIsModalVisible(false);
   };
   return (
     <div>
-      {" "}
       <Button type="primary" onClick={showModal}>
         Пригласить в команду
       </Button>
@@ -92,53 +87,73 @@ const InvitationBtn = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <div>Команда:</div>
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder="Выбрать команду"
-          optionFilterProp="children"
-          onChange={(value: string) => setTeamId(value)}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          filterOption={(input, option: any) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          {teams
-            .filter((item) => item.roleInTeam == "Глава")
-            .map((team) => (
-              <Option key={team.id} value={team.team.id}>
-                {team.team.teamName}
-              </Option>
-            ))}
-        </Select>
-        <div>В качестве: </div>
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder="Должность"
-          optionFilterProp="children"
-          onChange={(value: string) => setRank(value)}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          filterOption={(input, option: any) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          {rankArray.map((rank, index) => (
-            <Option key={index} value={rank.role}>
-              {rank.role}
-            </Option>
-          ))}
-        </Select>
-        <div>
-          <Button type="primary" onClick={handleAddInvitation}>
-            Приглаcить
-          </Button>
-        </div>
+        <form onSubmit={handleSubmit(handleAddInvitation)}>
+          <div>Команда:</div>
+          <Controller
+            render={({ field }) => (
+              <Select
+                {...field}
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Выбрать команду"
+                optionFilterProp="children"
+                filterOption={(input, option: any) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+              >
+                {teams
+                  .filter((item) => item.roleInTeam == "Глава")
+                  .map((team) => (
+                    <Option key={team.id} value={team.team.id}>
+                      {team.team.teamName}
+                    </Option>
+                  ))}
+              </Select>
+            )}
+            name="teamId"
+            control={control}
+            defaultValue=""
+          />
+          {!!errors?.teamId && (
+            <p className="error-field">{errors?.teamId?.message}</p>
+          )}
+
+          <div>В качестве: </div>
+          <Controller
+            render={({ field }) => (
+              <Select
+                {...field}
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Должность"
+                optionFilterProp="children"
+                filterOption={(input, option: any) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+              >
+                {rankArray.map((rank, index) => (
+                  <Option key={index} value={rank.role}>
+                    {rank.role}
+                  </Option>
+                ))}
+              </Select>
+            )}
+            name="rank"
+            control={control}
+            defaultValue=""
+          />
+          {!!errors?.rank && (
+            <p className="error-field">{errors?.rank?.message}</p>
+          )}
+
+          <div>
+            <Button type="primary" htmlType="submit">
+              Приглаcить
+            </Button>
+          </div>
+        </form>
       </Modal>
     </div>
   );
