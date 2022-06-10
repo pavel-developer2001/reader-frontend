@@ -8,14 +8,14 @@ interface SelectStatusTranslateForMangaProps {
   onBlur: () => void;
   onFocus: () => void;
   onSearch: (val: string) => void;
-  setStatusManga: (arg: any) => void;
+  field: any;
 }
 
 const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
   onBlur,
   onFocus,
   onSearch,
-  setStatusManga,
+  field,
 }) => {
   const statusTranslateArray = [
     { value: "Закончен", title: "Закончен" },
@@ -26,14 +26,13 @@ const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
   ];
   return (
     <>
-      {" "}
       <span className={styles.text}>Статус перевода</span>
       <Select
+        {...field}
         showSearch
         style={{ width: 200 }}
         placeholder="Статус перевода"
         optionFilterProp="children"
-        onChange={(value) => setStatusManga(value)}
         onFocus={onFocus}
         onBlur={onBlur}
         onSearch={onSearch}

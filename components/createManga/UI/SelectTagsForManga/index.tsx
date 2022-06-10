@@ -4,10 +4,10 @@ import styles from "./SelectTagsForManga.module.scss";
 const { Option } = Select;
 
 interface SelectTagsForMangaProps {
-  setTags: (arg: never[]) => void;
+  field: any;
 }
 
-const SelectTagsForManga: FC<SelectTagsForMangaProps> = ({ setTags }) => {
+const SelectTagsForManga: FC<SelectTagsForMangaProps> = ({ field }) => {
   const tagsArray = [
     { value: "Алхимия", title: "Алхимия" },
     { value: "Ангелы", title: "Ангелы" },
@@ -35,15 +35,14 @@ const SelectTagsForManga: FC<SelectTagsForMangaProps> = ({ setTags }) => {
   );
   return (
     <>
-      {" "}
       <span className={styles.text}>Категории</span>
       <Select
+        {...field}
         mode="multiple"
         allowClear
         style={{ width: "100%" }}
         placeholder="Теги"
         defaultValue={[]}
-        onChange={(value) => setTags(value)}
       >
         {childrenTags}
       </Select>

@@ -5,10 +5,10 @@ import styles from "./SelectGenresForManga.module.scss";
 const { Option } = Select;
 
 interface SelectGenresForMangaProps {
-  setGenres: (arg: never[]) => void;
+  field: any;
 }
 
-const SelectGenresForManga: FC<SelectGenresForMangaProps> = ({ setGenres }) => {
+const SelectGenresForManga: FC<SelectGenresForMangaProps> = ({ field }) => {
   const genresArray = [
     { value: "Боевик", title: "Боевик" },
     { value: "Боевые искусства", title: "Боевые искусства" },
@@ -31,16 +31,17 @@ const SelectGenresForManga: FC<SelectGenresForMangaProps> = ({ setGenres }) => {
       </Option>
     ))
   );
+  console.log(field);
   return (
     <>
       <span className={styles.text}>Жанры</span>
       <Select
+        {...field}
         mode="multiple"
         allowClear
         style={{ width: "100%" }}
         placeholder="Жанры"
         defaultValue={[]}
-        onChange={(value) => setGenres(value)}
       >
         {childrenGenres}
       </Select>

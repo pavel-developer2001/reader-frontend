@@ -8,14 +8,14 @@ interface SelectTypesForMangaProps {
   onBlur: () => void;
   onFocus: () => void;
   onSearch: (val: string) => void;
-  setTypeManga: (arg: any) => void;
+  field: any;
 }
 
 const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({
   onBlur,
   onFocus,
   onSearch,
-  setTypeManga,
+  field,
 }) => {
   const typesArray = [
     { value: "Манга", title: "Манга" },
@@ -28,11 +28,11 @@ const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({
     <>
       <span className={styles.text}>Тип</span>
       <Select
+        {...field}
         showSearch
         style={{ width: 200 }}
         placeholder="Типы"
         optionFilterProp="children"
-        onChange={(value) => setTypeManga(value)}
         onFocus={onFocus}
         onBlur={onBlur}
         onSearch={onSearch}
