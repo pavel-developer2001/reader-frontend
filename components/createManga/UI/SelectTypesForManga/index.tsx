@@ -5,18 +5,10 @@ import styles from "./SelectTypesForManga.module.scss";
 const { Option } = Select;
 
 interface SelectTypesForMangaProps {
-  onBlur: () => void;
-  onFocus: () => void;
-  onSearch: (val: string) => void;
-  setTypeManga: (arg: any) => void;
+  field: any;
 }
 
-const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({
-  onBlur,
-  onFocus,
-  onSearch,
-  setTypeManga,
-}) => {
+const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({ field }) => {
   const typesArray = [
     { value: "Манга", title: "Манга" },
     { value: "Манхва", title: "Манхва" },
@@ -28,14 +20,11 @@ const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({
     <>
       <span className={styles.text}>Тип</span>
       <Select
+        {...field}
         showSearch
         style={{ width: 200 }}
         placeholder="Типы"
         optionFilterProp="children"
-        onChange={(value) => setTypeManga(value)}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onSearch={onSearch}
         filterOption={(input, option: any) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }

@@ -4,10 +4,26 @@ import TextArea from "antd/lib/input/TextArea";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNewTeam } from "../../../../store/modules/team/team.slice";
-import { dataUser } from "../../../../utils/getDataUserFromToken";
 import styles from "./CreateTeamModal.module.scss";
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const CreateTeamModalFormSchema = yup.object().shape({
+  teamName: yup.string().required("Введите название команды"),
+  teamSubtitle: yup.string().required("Введите подзагаловок команды"),
+  teamDescription: yup.string().required("Введите описание команды"),
+});
 
 const CreateTeamModal = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(CreateTeamModalFormSchema),
+  });
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const dispatch = useDispatch();
   const showModal = () => {
@@ -26,27 +42,19 @@ const CreateTeamModal = () => {
 
   /////////////////////////////////////////////
   const [teamCover, setTeamCover] = useState("");
-  const [teamName, setTeamName] = useState("");
-  const [teamSubtitle, setTeamSubtitle] = useState("");
-  const [teamDescription, setTeamDescription] = useState("");
 
-  const handleAddTeam = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleAddTeam = async (data: any) => {
     try {
-      if (teamName === "") {
-        return alert("Напишите название комнаты");
-      }
       const formData = new FormData();
-      formData.append("teamName", teamName);
-      formData.append("teamSubtitle", teamSubtitle);
-      formData.append("teamDescription", teamDescription);
+      formData.append("teamName", data.teamName);
+      formData.append("teamSubtitle", data.teamSubtitle);
+      formData.append("teamDescription", data.teamDescription);
       formData.append("teamCover", teamCover);
+      //@ts-ignore
       dispatch(addNewTeam(formData));
       message.success("Команда была создана");
-      setTeamName("");
-      setTeamSubtitle("");
+      reset();
       setIsModalVisible(false);
-      setTeamDescription("");
       setTeamCover("");
       setImageUrl("");
     } catch (error: any) {
@@ -106,44 +114,72 @@ const CreateTeamModal = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Upload
-          name="avatar"
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-        >
-          {imageUrl ? (
-            <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
-          ) : (
-            uploadButton
+        <form onSubmit={handleSubmit(handleAddTeam)}>
+          <Upload
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+          >
+            {imageUrl ? (
+              <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+          <Controller
+            render={({ field }) => (
+              <TextArea {...field} placeholder="Название команды" autoSize />
+            )}
+            name="teamName"
+            control={control}
+            defaultValue=""
+          />
+          {!!errors?.teamName && (
+            <p className="error-field">{errors?.teamName?.message}</p>
           )}
-        </Upload>
-        <TextArea
-          placeholder="Название команды"
-          autoSize
-          value={teamName}
-          onChange={(e) => setTeamName(e.target.value)}
-        />
-        <div style={{ margin: "24px 0" }} />
-        <TextArea
-          placeholder="Подзагаловок команды"
-          autoSize
-          value={teamSubtitle}
-          onChange={(e) => setTeamSubtitle(e.target.value)}
-        />
-        <div style={{ margin: "24px 0" }} />
-        <TextArea
-          placeholder="Описание"
-          value={teamDescription}
-          onChange={(e) => setTeamDescription(e.target.value)}
-          autoSize={{ minRows: 3, maxRows: 5 }}
-        />
-        <div style={{ margin: "24px 0" }} />
-        <Button type="primary" size="large" onClick={handleAddTeam}>
-          Создать команду
-        </Button>
+
+          <div style={{ margin: "24px 0" }} />
+          <Controller
+            render={({ field }) => (
+              <TextArea
+                {...field}
+                placeholder="Подзагаловок команды"
+                autoSize
+              />
+            )}
+            name="teamSubtitle"
+            control={control}
+            defaultValue=""
+          />
+          {!!errors?.teamSubtitle && (
+            <p className="error-field">{errors?.teamSubtitle?.message}</p>
+          )}
+
+          <div style={{ margin: "24px 0" }} />
+          <Controller
+            render={({ field }) => (
+              <TextArea
+                {...field}
+                placeholder="Описание"
+                autoSize={{ minRows: 3, maxRows: 5 }}
+              />
+            )}
+            name="teamDescription"
+            control={control}
+            defaultValue=""
+          />
+          {!!errors?.teamDescription && (
+            <p className="error-field">{errors?.teamDescription?.message}</p>
+          )}
+
+          <div style={{ margin: "24px 0" }} />
+          <Button type="primary" size="large" htmlType="submit">
+            Создать команду
+          </Button>
+        </form>
       </Modal>
     </div>
   );
