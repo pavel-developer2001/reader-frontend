@@ -31,7 +31,6 @@ const SelectGenresForManga: FC<SelectGenresForMangaProps> = ({ field }) => {
       </Option>
     ))
   );
-  console.log(field);
   return (
     <>
       <span className={styles.text}>Жанры</span>

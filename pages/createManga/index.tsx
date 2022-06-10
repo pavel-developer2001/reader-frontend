@@ -19,20 +19,20 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const CreateMangaFormSchema = yup.object().shape({
-  title: yup.string().required("Введите почту"),
-  englishTitle: yup.string().required("Введите почту"),
-  originalTitle: yup.string().required("Введите почту"),
-  mangaDescription: yup.string().required("Введите почту"),
+  title: yup.string().required("Введите название"),
+  englishTitle: yup.string().required("Введите английское название"),
+  originalTitle: yup.string().required("Введите оригинальное название"),
+  mangaDescription: yup.string().required("Введите описание"),
   yearOfIssue: yup
     .number()
-    .typeError("Введите число")
+    .typeError("Введите год числом")
     .min(4, "Минимальная длина года 4 символа")
-    .required("Введите почту"),
-  typeManga: yup.string().required("Введите почту"),
-  genres: yup.array().typeError("Введите число").required("Введите почту"),
-  statusManga: yup.string().required("Введите почту"),
-  tags: yup.array().typeError("Введите число").required("Введите почту"),
-  ageRatingManga: yup.string().required("Введите почту"),
+    .required("Введите год"),
+  typeManga: yup.string().required("Выберите тип"),
+  genres: yup.array().typeError("Введите число").required("Выберите жанры"),
+  statusManga: yup.string().required("Выберите статус"),
+  tags: yup.array().typeError("Введите число").required("Выберите теги"),
+  ageRatingManga: yup.string().required("Выберите возрастной статус"),
 });
 const CreateManga = () => {
   const {
@@ -60,10 +60,7 @@ const CreateManga = () => {
   const router = useRouter();
   const [mangaCover, setMangaCover] = useState("");
 
-  console.log("error", errors);
   const handleCreateNewManga = async (data: any) => {
-    console.log("Data", data);
-
     try {
       const formData = new FormData();
       formData.append("title", data.title);

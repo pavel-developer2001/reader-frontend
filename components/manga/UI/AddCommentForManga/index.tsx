@@ -45,13 +45,15 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
           <Switch onChange={(checked) => setSpoiler(checked)} /> Спойлер
         </div>
         <div className={styles.btn}>
-          <Button
-            type="default"
-            shape="circle"
-            onClick={handleAddComment}
-            icon={<SendOutlined />}
-            size="large"
-          />
+          {commentText.length > 3 && (
+            <Button
+              type="default"
+              shape="circle"
+              onClick={handleAddComment}
+              icon={<SendOutlined />}
+              size="large"
+            />
+          )}
         </div>
       </div>
     </div>
