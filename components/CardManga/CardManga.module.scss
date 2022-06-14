@@ -1,5 +1,6 @@
 .main {
   display: flex;
+  flex: 1 0 auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -7,6 +8,9 @@
   .img {
     border-radius: 8px;
   }
+}
+.data {
+  display: grid;
   strong {
     font-size: 16px;
     font-weight: 500;

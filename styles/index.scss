@@ -2,6 +2,7 @@
 @import "./variables.scss";
 @import "./customizable-ui.scss";
 @import "./reset.scss";
+@import "./scroll.scss";
 
 body {
   background-color: var(#{--body-background-default}) !important;

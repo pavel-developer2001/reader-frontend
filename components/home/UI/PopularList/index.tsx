@@ -6,7 +6,7 @@ import {
   selectMangaLoading,
   selectMangasData,
 } from "../../../../store/modules/manga/manga.selector";
-import styles from "./PopularList.module.css";
+import styles from "./PopularList.module.scss";
 
 const DynamicCardManga = dynamic(() => import("../../../CardManga"), {
   loading: () => <Spin />,

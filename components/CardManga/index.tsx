@@ -10,9 +10,9 @@ interface CardMangaProps {
 
 const CardManga: FC<CardMangaProps> = memo(({ manga }) => {
   return (
-    <Link href={"/manga/" + manga.id}>
-      <a>
-        <div className={styles.main}>
+    <div className={styles.main}>
+      <Link href={"/manga/" + manga.id}>
+        <a>
           <Image
             src={manga && manga.mangaCover}
             alt="MangaCover"
@@ -20,11 +20,13 @@ const CardManga: FC<CardMangaProps> = memo(({ manga }) => {
             height={216}
             className={styles.img}
           />
-          <strong>{manga.title}</strong>
-          <span>{manga.typeManga}</span>
-        </div>
-      </a>
-    </Link>
+          <div className={styles.data}>
+            <strong>{manga.title}</strong>
+            <span>{manga.typeManga}</span>
+          </div>
+        </a>
+      </Link>
+    </div>
   );
 });
 export default CardManga;

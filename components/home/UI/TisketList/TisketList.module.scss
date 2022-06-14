@@ -3,6 +3,8 @@
   margin-left: 15px;
   border-radius: 16px;
   background-color: var(#{--components-background-default});
+  flex: 1 0 auto;
+  margin-top: 1rem;
 }
 .popularCategory {
   color: var(#{--text-secondary-color-default}) !important;
