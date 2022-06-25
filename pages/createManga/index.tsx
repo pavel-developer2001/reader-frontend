@@ -29,9 +29,9 @@ const CreateMangaFormSchema = yup.object().shape({
     .min(4, "Минимальная длина года 4 символа")
     .required("Введите год"),
   typeManga: yup.string().required("Выберите тип"),
-  genres: yup.array().typeError("Введите число").required("Выберите жанры"),
+  genres: yup.array().typeError("Выберите жанры").required("Выберите жанры"),
   statusManga: yup.string().required("Выберите статус"),
-  tags: yup.array().typeError("Введите число").required("Выберите теги"),
+  tags: yup.array().typeError("Выберите теги").required("Выберите теги"),
   ageRatingManga: yup.string().required("Выберите возрастной статус"),
 });
 const CreateManga = () => {
@@ -43,7 +43,6 @@ const CreateManga = () => {
   } = useForm({
     resolver: yupResolver(CreateMangaFormSchema),
   });
-
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -178,9 +177,7 @@ const CreateManga = () => {
                 <div className={styles.select}>
                   <Controller
                     render={({ field }) => (
-                      <SelectTypesForManga
-                        field={field}
-                      />
+                      <SelectTypesForManga field={field} />
                     )}
                     name="typeManga"
                     control={control}
@@ -193,9 +190,7 @@ const CreateManga = () => {
                 <div className={styles.select}>
                   <Controller
                     render={({ field }) => (
-                      <SelectStatusTranslateForManga
-                        field={field}
-                      />
+                      <SelectStatusTranslateForManga field={field} />
                     )}
                     name="statusManga"
                     control={control}
@@ -227,9 +222,7 @@ const CreateManga = () => {
                 <div className={styles.select}>
                   <Controller
                     render={({ field }) => (
-                      <SelectAgeRatingForManga
-                        field={field}
-                      />
+                      <SelectAgeRatingForManga field={field} />
                     )}
                     name="ageRatingManga"
                     control={control}
