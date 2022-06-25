@@ -3,11 +3,10 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { selectTeamLoading, selectTeamsUserData } from "../../../../store/modules/team/team.selector";
 import { getTeamsForUser } from "../../../../store/modules/team/team.slice";
-import {
-  selectTeamLoading,
-  selectTeamsUserData,
-} from "../../../../store/modules/team/team.selector";
+
+
 import styles from "./UserInTeamsBlock.module.scss";
 
 interface UserInTeamsBlockItemProps {

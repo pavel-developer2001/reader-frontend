@@ -3,8 +3,8 @@ import { Menu, message } from "antd";
 import React from "react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { setToken } from "../../../../store/modules/user/user.slice";
-import { dataUser } from "../../../../utils/getDataUserFromToken";
+import { setToken } from "../../../../../store/modules/user/user.slice";
+import { dataUser } from "../../../../../utils/getDataUserFromToken";
 import styles from "./MenuUser.module.css";
 
 const MenuUser = () => {

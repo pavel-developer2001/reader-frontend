@@ -8,7 +8,7 @@ import {
 } from "../../../../store/modules/manga/manga.selector";
 import styles from "./PopularList.module.scss";
 
-const DynamicCardManga = dynamic(() => import("../../../CardManga"), {
+const DynamicCardManga = dynamic(() => import("../../../UI/CardManga"), {
   loading: () => <Spin />,
 });
 

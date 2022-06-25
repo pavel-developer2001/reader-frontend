@@ -13,7 +13,7 @@ import { GetServerSideProps } from "next";
 import { wrapper } from "../../store";
 const { TabPane } = Tabs;
 
-const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
+const DynamicCardManga = dynamic(() => import("../../components/UI/CardManga"), {
   loading: () => (
     <div className="loader-block">
       <Spin />
@@ -21,7 +21,7 @@ const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
   ),
 });
 const DynamicTeamList = dynamic(
-  () => import("../../components/catalog/UI/TeamList"),
+  () => import("../../components/pages/catalog/TeamList"),
   {
     loading: () => (
       <div className="loader-block">
@@ -31,7 +31,7 @@ const DynamicTeamList = dynamic(
   }
 );
 const DynamicFilters = dynamic(
-  () => import("../../components/catalog/UI/Filters"),
+  () => import("../../components/pages/catalog/Filters"),
   {
     loading: () => (
       <div className="loader-block">

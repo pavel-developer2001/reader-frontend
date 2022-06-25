@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginUsers } from "../../../../../store/modules/user/user.slice";
+import { loginUsers } from "../../../../../../store/modules/user/user.slice";
 import { useDispatch } from "react-redux";
 
 interface LoginProps {

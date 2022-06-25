@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Layout } from "antd";
-const { Footer, Sider } = Layout;
+const { Footer } = Layout;
 
 const MyFooter = () => {
   return (

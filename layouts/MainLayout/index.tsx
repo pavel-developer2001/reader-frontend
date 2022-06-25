@@ -2,11 +2,11 @@ import { Spin } from "antd";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import React, { ReactNode } from "react";
-import MyFooter from "../../components/MyFooter";
+import MyFooter from "../../components/UI/MyFooter";
 import Navbar from "./components/Navbar";
 import styles from "./MainLayout.module.css";
 
-const DynamicMyFooter = dynamic(() => import("../../components/MyFooter"), {
+const DynamicMyFooter = dynamic(() => import("../../components/UI/MyFooter"), {
   loading: () => <Spin />,
 });
 interface MainLayoutProps {

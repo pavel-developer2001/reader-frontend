@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import {
   selectSearchListManga,
   selectSearchLoading,
-} from "../../../../store/modules/manga/manga.selector";
-import { IManga } from "../../../../store/modules/manga/types/IManga";
+} from "../../../../../store/modules/manga/manga.selector";
+import { IManga } from "../../../../../store/modules/manga/types/IManga";
 import styles from "./FoundBlock.module.scss";
 
 const FoundBlockItem: FC<{ manga: IManga }> = ({ manga }) => {

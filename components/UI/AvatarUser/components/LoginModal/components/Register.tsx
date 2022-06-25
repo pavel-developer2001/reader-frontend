@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { Button, Form, Input, message } from "antd";
-import { registerUsers } from "../../../../../store/modules/user/user.slice";
+import { registerUsers } from "../../../../../../store/modules/user/user.slice";
 
 interface RegisterComponent {
   register: boolean;

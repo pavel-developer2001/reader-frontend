@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { FC, memo } from "react";
-import { IManga } from "../../store/modules/manga/types/IManga";
+import { IManga } from "../../../store/modules/manga/types/IManga";
 import styles from "./CardManga.module.scss";
 
 interface CardMangaProps {

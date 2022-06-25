@@ -3,9 +3,9 @@ import { Modal, Input, Spin } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import styles from "./SearchModal.module.scss";
 import dynamic from "next/dynamic";
-import { useDebounce } from "../../hooks/useDebounce";
+import { useDebounce } from "../../../hooks/useDebounce";
 import { useDispatch } from "react-redux";
-import { searchManga } from "../../store/modules/manga/manga.slice";
+import { searchManga } from "../../../store/modules/manga/manga.slice";
 
 const DynamicFoundBlock = dynamic(() => import("./components/FoundBlock"), {
   loading: () => <Spin />,

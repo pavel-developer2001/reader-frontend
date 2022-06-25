@@ -17,7 +17,7 @@ import { dataUser } from "../../../../../../utils/getDataUserFromToken";
 import dynamic from "next/dynamic";
 
 const DynamicAuthModal = dynamic(
-  () => import("../../../../../../components/AuthModal"),
+  () => import("../../../../../../components/UI/AuthModal"),
   {
     loading: () => <Spin />,
   }

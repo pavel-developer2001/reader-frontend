@@ -10,7 +10,7 @@ import { getManga } from "../../../store/modules/manga/manga.slice";
 import { RootState } from "../../../store/reducer";
 
 const CommentsBlockList = dynamic(
-  () => import("../../../components/manga/UI/CommentsBlockList"),
+  () => import("../../../components/pages/manga/CommentsBlockList"),
   {
     loading: () => (
       <div className="loader-block">
@@ -20,7 +20,7 @@ const CommentsBlockList = dynamic(
   }
 );
 const ChapterList = dynamic(
-  () => import("../../../components/manga/UI/ChapterList"),
+  () => import("../../../components/pages/manga/ChapterList"),
   {
     loading: () => (
       <div className="loader-block">
@@ -30,7 +30,7 @@ const ChapterList = dynamic(
   }
 );
 const MangaAddition = dynamic(
-  () => import("../../../components/manga/UI/MangaAddition"),
+  () => import("../../../components/pages/manga/MangaAddition"),
   {
     loading: () => (
       <div className="loader-block">
@@ -47,7 +47,7 @@ const DynamicMainLayout = dynamic(() => import("../../../layouts/MainLayout"), {
   ),
 });
 const DynamicMangaData = dynamic(
-  () => import("../../../components/manga/UI/MangaData"),
+  () => import("../../../components/pages/manga/MangaData"),
   {
     loading: () => (
       <div className="loader-block">
@@ -57,7 +57,7 @@ const DynamicMangaData = dynamic(
   }
 );
 const DynamicMangaDescriptions = dynamic(
-  () => import("../../../components/manga/UI/MangaDescriptions"),
+  () => import("../../../components/pages/manga/MangaDescriptions"),
   {
     loading: () => (
       <div className="loader-block">
@@ -67,7 +67,7 @@ const DynamicMangaDescriptions = dynamic(
   }
 );
 const DynamicMangaSettings = dynamic(
-  () => import("../../../components/manga/UI/MangaSettings"),
+  () => import("../../../components/pages/manga/MangaSettings"),
   {
     loading: () => (
       <div className="loader-block">

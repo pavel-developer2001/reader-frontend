@@ -14,21 +14,21 @@ const MainLayout = dynamic(() => import("../layouts/MainLayout"), {
     </div>
   ),
 });
-const PopularList = dynamic(() => import("../components/home/UI/PopularList"), {
+const PopularList = dynamic(() => import("../components/pages/home/PopularList"), {
   loading: () => (
     <div className="loader-block">
       <Spin />
     </div>
   ),
 });
-const TisketList = dynamic(() => import("../components/home/UI/TisketList"), {
+const TisketList = dynamic(() => import("../components/pages/home/TisketList"), {
   loading: () => (
     <div className="loader-block">
       <Spin />
     </div>
   ),
 });
-const UpdateList = dynamic(() => import("../components/home/UI/UpdateList"), {
+const UpdateList = dynamic(() => import("../components/pages/home/UpdateList"), {
   loading: () => (
     <div className="loader-block">
       <Spin />
