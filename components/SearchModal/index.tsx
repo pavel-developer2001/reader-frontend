@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { Modal, Button, Input, Spin } from "antd";
+import React, { useEffect, useState } from "react";
+import { Modal, Input, Spin } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import styles from "./SearchModal.module.scss";
 import dynamic from "next/dynamic";
-const { Search } = Input;
+import { useDebounce } from "../../hooks/useDebounce";
+import { useDispatch } from "react-redux";
+import { searchManga } from "../../store/modules/manga/manga.slice";
 
 const DynamicFoundBlock = dynamic(() => import("./components/FoundBlock"), {
   loading: () => <Spin />,
@@ -12,7 +14,16 @@ const DynamicFoundBlock = dynamic(() => import("./components/FoundBlock"), {
 const SearchModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [value, setValue] = useState("");
-  console.log("value", value);
+  const dispatch = useDispatch();
+  const debouncedSearchTerm = useDebounce(value, 500);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      const params = { title: value };
+      //@ts-ignore
+      dispatch(searchManga(params));
+    }
+  }, [debouncedSearchTerm]);
 
   const showModal = () => {
     setIsModalVisible(true);
