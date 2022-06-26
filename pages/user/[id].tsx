@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { Avatar, Empty, Spin } from "antd";
 import { Typography } from "antd";
 import { Tabs } from "antd";
@@ -79,7 +79,6 @@ const User = () => {
   const loading = useSelector(selectUserLoading);
   const bookMarks = useSelector(selectBookMarksData);
   const loadingMark = useSelector(selectBookMarkLoading);
-  const [tabPosition, setTabPosition] = useState("left");
 
   useEffect(() => {
     dispatch(getBookMarks(router.query.id));
@@ -121,7 +120,7 @@ const User = () => {
               </div>
             </div>{" "}
             <div className={styles.body}>
-              <Tabs tabPosition={tabPosition}>
+              <Tabs tabPosition={"left"}>
                 <TabPane tab="Профиль" key="1">
                   id: {user.id} Пол: Мужской
                 </TabPane>

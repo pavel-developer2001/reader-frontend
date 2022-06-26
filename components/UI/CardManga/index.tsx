@@ -16,6 +16,7 @@ const CardManga: FC<CardMangaProps> = memo(({ manga }) => {
           <Image
             src={manga && manga.mangaCover}
             alt="MangaCover"
+            priority
             width={144}
             height={216}
             className={styles.img}
