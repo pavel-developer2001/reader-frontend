@@ -1,10 +1,11 @@
-import { CopyFilled, EyeFilled, HeartFilled } from "@ant-design/icons";
+import { EyeFilled, HeartFilled } from "@ant-design/icons";
 import Title from "antd/lib/typography/Title";
 import React, { FC, memo } from "react";
 import { useSelector } from "react-redux";
 import { selectRatingItemData } from "../../../../store/modules/rating/rating.selector";
 import { selectUserToken } from "../../../../store/modules/user/user.selector";
 import Rating from "../Rating";
+import CountMarks from "./components/CountMarks";
 import styles from "./MangaData.module.scss";
 
 interface MangaDataProps {
@@ -30,6 +31,7 @@ const MangaData: FC<MangaDataProps> = memo(
   }) => {
     const rating = useSelector(selectRatingItemData);
     const token = useSelector(selectUserToken);
+
     return (
       <div>
         <div>
@@ -51,9 +53,7 @@ const MangaData: FC<MangaDataProps> = memo(
           <div className={styles.watch}>
             <EyeFilled /> {watchCount}
           </div>
-          <div className={styles.bookmarks}>
-            <CopyFilled /> 13.8K
-          </div>
+          <CountMarks />
           <div className={styles.ageRating}>{ageRating}</div>
           <div className={styles.type}>{typeManga}</div>
           <div className={styles.date}>{yearOfIssue}</div>

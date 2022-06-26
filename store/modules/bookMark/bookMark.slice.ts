@@ -27,33 +27,36 @@ export const getBookMarkToManga = createAsyncThunk(
     return await BookMarksApi.getBookMarkForManga(dataManga.mangaId);
   }
 );
+export const getBookMarkCountToManga = createAsyncThunk(
+  "bookMark/getBookMarkCountToManga",
+  async (id: string | string[] | undefined) => {
+    return await BookMarksApi.getBookMarkCountForManga(id);
+  }
+);
+
 interface BookMarkState {
   bookMarks: IBookMark[];
   bookMark: null;
   status: null | string;
   loading: boolean;
+  count: number;
+  isLoadingForCount: boolean;
 }
 const initialState: BookMarkState = {
   bookMarks: [],
   bookMark: null,
+  count: 0,
+  isLoadingForCount: true,
   status: null,
   loading: true,
 };
 const bookMarkSlice = createSlice({
   name: "bookMark",
   initialState,
-  reducers: {
-    setBookMarks(state, action) {
-      state.bookMarks = action.payload;
-      state.loading = false;
-    },
-    setBookMarkForManga(state, action) {
-      state.bookMark = action.payload;
-      state.loading = false;
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) =>
+    //@ts-ignore
     builder
       .addCase(HYDRATE, (state, action: any) => {
         state.bookMarks = action.payload.bookMark.bookMarks;
@@ -80,8 +83,11 @@ const bookMarkSlice = createSlice({
       .addCase(getBookMarkToManga.fulfilled, (state, action) => {
         state.bookMark = action.payload.data;
         state.loading = false;
+      })
+      .addCase(getBookMarkCountToManga.fulfilled, (state, action) => {
+        state.count = action.payload.data;
+        state.isLoadingForCount = false;
       }),
 });
 
 export default bookMarkSlice.reducer;
-export const { setBookMarks, setBookMarkForManga } = bookMarkSlice.actions;
