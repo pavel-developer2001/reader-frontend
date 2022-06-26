@@ -13,6 +13,7 @@ import {
   selectRatingLoading,
 } from "../../../../store/modules/rating/rating.selector";
 import styles from "./Rating.module.scss";
+import RatingCount from "./components/RatingCount";
 
 const Rating = () => {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const Rating = () => {
       ) : (
         <div onClick={showModal} className={styles.star}>
           <StarFilled className={styles.starIcon} />
-          {rating == null ? "Оценить тайтл" : rating.rating} (голосов: 610)
+          {rating == null ? "Оценить тайтл" : rating.rating} <RatingCount />
         </div>
       )}
 
