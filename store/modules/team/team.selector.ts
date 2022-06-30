@@ -26,3 +26,10 @@ export const selectTeamInvitationsData = (
 
 export const selectTeamItemData = (state: RootState): any =>
   selectTeam(state).team;
+
+export const selectTeamsForInvitationsData = (
+  state: RootState
+): ITeamsForUser[] => selectTeam(state).teamsForInvitations;
+
+export const selectTeamForInvitationsLoading = (state: RootState): boolean =>
+  selectTeam(state).isLoadingForTeamInvitations;

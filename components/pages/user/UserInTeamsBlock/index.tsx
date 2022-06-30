@@ -3,9 +3,11 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTeamLoading, selectTeamsUserData } from "../../../../store/modules/team/team.selector";
+import {
+  selectTeamLoading,
+  selectTeamsUserData,
+} from "../../../../store/modules/team/team.selector";
 import { getTeamsForUser } from "../../../../store/modules/team/team.slice";
-
 
 import styles from "./UserInTeamsBlock.module.scss";
 
@@ -14,29 +16,27 @@ interface UserInTeamsBlockItemProps {
   name: string;
   teamId: number;
 }
-const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = memo(({
-  cover,
-  name,
-  teamId,
-}) => {
-  return (
-    <Link href={"/team/" + teamId}>
-      <a className={styles.main}>
-        <Avatar
-          shape="square"
-          alt="avatar team"
-          size={72}
-          src={
-            cover
-              ? cover
-              : "https://api.remanga.org//static/images/publishers/no-image.jpg"
-          }
-        />
-        <strong>{name}</strong>
-      </a>
-    </Link>
-  );
-});
+const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = memo(
+  ({ cover, name, teamId }) => {
+    return (
+      <Link href={"/team/" + teamId}>
+        <a className={styles.main}>
+          <Avatar
+            shape="square"
+            alt="avatar team"
+            size={72}
+            src={
+              cover
+                ? cover
+                : "https://api.remanga.org//static/images/publishers/no-image.jpg"
+            }
+          />
+          <strong>{name}</strong>
+        </a>
+      </Link>
+    );
+  }
+);
 const UserInTeamsBlock = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -44,8 +44,9 @@ const UserInTeamsBlock = () => {
   const loading = useSelector(selectTeamLoading);
 
   useEffect(() => {
-    dispatch(getTeamsForUser(router.query.id));
-  }, [router.query.id]);
+    if (router.query.id) dispatch(getTeamsForUser(router.query.id));
+  }, [router.query]);
+
   return (
     <div className={styles.block}>
       <div className={styles.title}>В составе</div>

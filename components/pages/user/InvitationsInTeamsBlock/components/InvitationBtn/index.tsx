@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/dist/client/router";
 import {
   addInvitation,
-  getTeamsForUser,
+  getTeamsForInvitations,
 } from "../../../../../../store/modules/team/team.slice";
 import { dataUser } from "../../../../../../utils/getDataUserFromToken";
 import {
-  selectTeamLoading,
-  selectTeamsUserData,
+  selectTeamForInvitationsLoading,
+  selectTeamsForInvitationsData,
 } from "../../../../../../store/modules/team/team.selector";
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
@@ -41,12 +41,10 @@ const InvitationBtn = () => {
     { role: "Редактор" },
   ];
   const dispatch = useDispatch();
-  const teams = useSelector(selectTeamsUserData);
-  const loading = useSelector(selectTeamLoading);
+  const teams = useSelector(selectTeamsForInvitationsData);
+  const loading = useSelector(selectTeamForInvitationsLoading);
   useEffect(() => {
-    if (dataUser) {
-      dispatch(getTeamsForUser(dataUser));
-    }
+    if (dataUser) dispatch(getTeamsForInvitations(dataUser));
   }, []);
   const handleAddInvitation = async (data: any) => {
     try {
