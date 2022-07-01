@@ -16,4 +16,7 @@ export default class BookMarksApi {
   static async getBookMarkForManga(id: string | string[] | undefined) {
     return ReaderApi.get("/marks/manga/" + id);
   }
+  static async getBookMarkCountForManga(id: string | string[] | undefined) {
+    return ReaderApi.get("/marks/count/" + id);
+  }
 }

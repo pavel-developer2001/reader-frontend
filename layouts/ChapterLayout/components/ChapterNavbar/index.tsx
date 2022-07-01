@@ -25,7 +25,7 @@ const DynamicAvatarDrawer = dynamic(
   }
 );
 const DynamicAvatarUser = dynamic(
-  () => import("../../../../components/AvatarUser"),
+  () => import("../../../../components/UI/AvatarUser"),
   {
     loading: () => <Spin />,
   }

@@ -27,17 +27,27 @@ export const getRating = createAsyncThunk(
     return await RatingApi.getRatingForManga(dataManga.id);
   }
 );
+export const getRatingCount = createAsyncThunk(
+  "rating/getRatingCount",
+  async (id: string | string[] | undefined) => {
+    return await RatingApi.getRatingCountForManga(id);
+  }
+);
 interface RatingState {
   rating: IRating[];
   ratings: IRating[];
   status: null;
   loading: boolean;
+  count: number;
+  isLoadingForRating: boolean;
 }
 const initialState: RatingState = {
   rating: [],
   ratings: [],
   status: null,
   loading: true,
+  count: 0,
+  isLoadingForRating: true,
 };
 const ratingSlice = createSlice({
   name: "rating",
@@ -58,8 +68,11 @@ const ratingSlice = createSlice({
       .addCase(getRating.fulfilled, (state, action) => {
         state.rating = action.payload.data;
         state.loading = false;
+      })
+      .addCase(getRatingCount.fulfilled, (state, action) => {
+        state.count = action.payload.data;
+        state.isLoadingForRating = false;
       }),
 });
 
 export default ratingSlice.reducer;
-// export const {} = ratingSlice.actions;

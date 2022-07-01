@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
 import { getTeam } from "../../store/modules/team/team.slice";
-import { UpdateListItem } from "../../components/home/UI/UpdateList";
+import { UpdateListItem } from "../../components/pages/home/UpdateList";
 import { wrapper } from "../../store";
 import {
   selectTeamItemData,
@@ -15,7 +15,7 @@ import {
 import styles from "./Team.module.css";
 
 const MemberBlock = dynamic(
-  () => import("../../components/team/UI/MemberBlock"),
+  () => import("../../components/pages/team/MemberBlock"),
   {
     loading: () => (
       <div className="loader-block">
@@ -31,7 +31,7 @@ const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
     </div>
   ),
 });
-const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
+const DynamicCardManga = dynamic(() => import("../../components/UI/CardManga"), {
   loading: () => (
     <div className="loader-block">
       <Spin />

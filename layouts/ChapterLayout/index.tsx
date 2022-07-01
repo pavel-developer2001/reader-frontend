@@ -8,7 +8,7 @@ const DynamicSettingPage = dynamic(() => import("./components/SettingsPage"), {
   loading: () => <Spin />,
   ssr: false,
 });
-const DynamicMyFooter = dynamic(() => import("../../components/MyFooter"), {
+const DynamicMyFooter = dynamic(() => import("../../components/UI/MyFooter"), {
   loading: () => <Spin />,
   ssr: false,
 });

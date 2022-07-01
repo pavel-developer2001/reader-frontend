@@ -20,13 +20,13 @@ const DynamicAvatarDrawer = dynamic(() => import("./components/AvatarDrawer"), {
   loading: () => <Spin />,
 });
 const DynamicSearchModal = dynamic(
-  () => import("../../../../components/SearchModal"),
+  () => import("../../../../components/UI/SearchModal"),
   {
     loading: () => <Spin />,
   }
 );
 const DynamicAvatarUser = dynamic(
-  () => import("../../../../components/AvatarUser"),
+  () => import("../../../../components/UI/AvatarUser"),
   {
     loading: () => <Spin />,
   }

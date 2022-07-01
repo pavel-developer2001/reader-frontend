@@ -12,3 +12,9 @@ export const selectMangaLoading = (state: RootState): boolean =>
   selectManga(state).loading;
 
 export const selectMangaItem = (state: RootState) => selectManga(state).manga;
+
+export const selectSearchListManga = (state: RootState) =>
+  selectManga(state).searchMangas;
+
+export const selectSearchLoading = (state: RootState): boolean =>
+  selectManga(state).isSearchLoading;

@@ -6,81 +6,70 @@ import { useRouter } from "next/dist/client/router";
 import { GetServerSideProps } from "next";
 import { addNewManga } from "../../store/modules/manga/manga.slice";
 import MainLayout from "../../layouts/MainLayout";
-import UploadImageForManga from "../../components/createManga/UI/UploadImageForManga";
-import SelectTypesForManga from "../../components/createManga/UI/SelectTypesForManga";
-import SelectAgeRatingForManga from "../../components/createManga/UI/SelectAgeRatingForManga";
-import SelectTagsForManga from "../../components/createManga/UI/SelectTagsForManga";
-import SelectStatusTranslateForManga from "../../components/createManga/UI/SelectStatusTranslateForManga";
-import SelectGenresForManga from "../../components/createManga/UI/SelectGenresForManga";
-import { wrapper } from "../../store";
+import UploadImageForManga from "../../components/pages/createManga/UploadImageForManga";
+import SelectTypesForManga from "../../components/pages/createManga/SelectTypesForManga";
+import SelectAgeRatingForManga from "../../components/pages/createManga/SelectAgeRatingForManga";
+import SelectTagsForManga from "../../components/pages/createManga/SelectTagsForManga";
+import SelectStatusTranslateForManga from "../../components/pages/createManga/SelectStatusTranslateForManga";
+import SelectGenresForManga from "../../components/pages/createManga/SelectGenresForManga";
 import styles from "./CreateManga.module.scss";
+import { wrapper } from "../../store";
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+const CreateMangaFormSchema = yup.object().shape({
+  title: yup.string().required("Введите название"),
+  englishTitle: yup.string().required("Введите английское название"),
+  originalTitle: yup.string().required("Введите оригинальное название"),
+  mangaDescription: yup.string().required("Введите описание"),
+  yearOfIssue: yup
+    .number()
+    .typeError("Введите год числом")
+    .min(4, "Минимальная длина года 4 символа")
+    .required("Введите год"),
+  typeManga: yup.string().required("Выберите тип"),
+  genres: yup.array().typeError("Выберите жанры").required("Выберите жанры"),
+  statusManga: yup.string().required("Выберите статус"),
+  tags: yup.array().typeError("Выберите теги").required("Выберите теги"),
+  ageRatingManga: yup.string().required("Выберите возрастной статус"),
+});
 const CreateManga = () => {
-  const [typeManga, setTypeManga] = useState<any>("");
-  const [genres, setGenres] = useState<any>([""]);
-  const [tags, setTags] = useState<any>([""]);
-  const [statusManga, setStatusManga] = useState<any>("");
-  const [ageRatingManga, setAgeRatingManga] = useState<any>("");
-  const handleCleanCategories = () => {
-    setTypeManga("");
-    setGenres("");
-    setTags("");
-    setStatusManga("");
-    setAgeRatingManga("");
-  };
-  function onBlur() {
-    console.log("blur");
-  }
-
-  function onFocus() {
-    console.log("focus");
-  }
-
-  function onSearch(val: string) {
-    console.log("search:", val);
-  }
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(CreateMangaFormSchema),
+  });
 
   const dispatch = useDispatch();
   const router = useRouter();
-  const [title, setTitle] = useState("");
-  const [englishTitle, setEnglishTitle] = useState("");
-  const [originalTitle, setOriginalTitle] = useState("");
-  const [mangaDescription, setMangaDescription] = useState("");
-  const [yearOfIssue, setYearOfIssue] = useState("");
   const [mangaCover, setMangaCover] = useState("");
 
-  const handleCreateNewManga = async (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
+  const handleCreateNewManga = async (data: any) => {
     try {
-      if (title === "") {
-        return alert("Напишите название комнаты");
-      }
       const formData = new FormData();
-      formData.append("title", title);
-      formData.append("englishTitle", englishTitle);
-      formData.append("originalTitle", originalTitle);
-      formData.append("mangaDescription", mangaDescription);
-      formData.append("typeManga", typeManga);
-      for (let i = 0; i < genres.length; i++) {
-        formData.append("genres", genres[i]);
+      formData.append("title", data.title);
+      formData.append("englishTitle", data.englishTitle);
+      formData.append("originalTitle", data.originalTitle);
+      formData.append("mangaDescription", data.mangaDescription);
+      formData.append("typeManga", data.typeManga);
+      for (let i = 0; i < data.genres.length; i++) {
+        formData.append("genres", data.genres[i]);
       }
-      for (let j = 0; j < tags.length; j++) {
-        formData.append("tags", tags[j]);
+      for (let j = 0; j < data.tags.length; j++) {
+        formData.append("tags", data.tags[j]);
       }
-      formData.append("statusManga", statusManga);
-      formData.append("ageRatingManga", ageRatingManga);
-      formData.append("yearOfIssue", yearOfIssue);
+      formData.append("statusManga", data.statusManga);
+      formData.append("ageRatingManga", data.ageRatingManga);
+      formData.append("yearOfIssue", data.yearOfIssue);
       formData.append("mangaCover", mangaCover);
       //@ts-ignore
       dispatch(addNewManga(formData));
       message.success("Тайтл был успешно добавлен на сайт");
-      setTitle("");
-      setEnglishTitle("");
-      setOriginalTitle("");
-      setMangaDescription("");
-      setYearOfIssue("");
+      reset();
       setImageUrl("");
       router.push("/");
     } catch (error: any) {
@@ -92,116 +81,204 @@ const CreateManga = () => {
 
   return (
     <MainLayout>
-      <div className={styles.content}>
-        <h2 className={styles.title}>Добавить тайтл на сайт</h2>
-        <div className={styles.topBlock}>
-          <UploadImageForManga
-            imageUrl={imageUrl}
-            setImageUrl={setImageUrl}
-            setMangaCover={setMangaCover}
-          />
-          <div className={styles.info}>
-            <div className={styles.block}>
-              <span className={styles.text}>Русское название</span>
-              <TextArea
-                placeholder="название"
-                value={title}
-                className={styles.input}
-                onChange={(e) => setTitle(e.target.value)}
-                autoSize
-              />
-            </div>
-            <div className={styles.block}>
-              <span className={styles.text}>Английское названия</span>
-              <TextArea
-                placeholder="Англиское название"
-                value={englishTitle}
-                className={styles.input}
-                onChange={(e) => setEnglishTitle(e.target.value)}
-                autoSize
-              />
-            </div>
-            <div className={styles.block}>
-              <span className={styles.text}>Оригинальное названия</span>
-              <TextArea
-                placeholder="Оригинальное название "
-                value={originalTitle}
-                className={styles.input}
-                onChange={(e) => setOriginalTitle(e.target.value)}
-                autoSize
-              />
-            </div>
-          </div>
-        </div>
-        <div className={styles.body}>
-          <span className={styles.text}>Описание</span>
-          <TextArea
-            value={mangaDescription}
-            className={styles.input}
-            onChange={(e) => setMangaDescription(e.target.value)}
-            placeholder="Описание"
-            autoSize={{ minRows: 3, maxRows: 5 }}
-          />
-        </div>
-        <div className={styles.bottomBlock}>
-          <div className={styles.left}>
-            <div className={styles.top}>
-              <div className={styles.select}>
-                <SelectTypesForManga
-                  onBlur={onBlur}
-                  onFocus={onFocus}
-                  onSearch={onSearch}
-                  setTypeManga={setTypeManga}
+      <form onSubmit={handleSubmit(handleCreateNewManga)}>
+        <div className={styles.content}>
+          <h2 className={styles.title}>Добавить тайтл на сайт</h2>
+          <div className={styles.topBlock}>
+            <UploadImageForManga
+              imageUrl={imageUrl}
+              setImageUrl={setImageUrl}
+              setMangaCover={setMangaCover}
+            />
+            <div className={styles.info}>
+              <div className={styles.block}>
+                <span className={styles.text}>Русское название</span>
+                <Controller
+                  render={({ field }) => (
+                    <TextArea
+                      {...field}
+                      placeholder="название"
+                      className={styles.input}
+                      autoSize
+                    />
+                  )}
+                  name="title"
+                  control={control}
+                  defaultValue=""
                 />
+                {!!errors?.title && (
+                  <p className="error-field">{errors?.title?.message}</p>
+                )}
               </div>
-              <div className={styles.select}>
-                <SelectStatusTranslateForManga
-                  onBlur={onBlur}
-                  onFocus={onFocus}
-                  onSearch={onSearch}
-                  setStatusManga={setStatusManga}
+              <div className={styles.block}>
+                <span className={styles.text}>Английское названия</span>
+                <Controller
+                  render={({ field }) => (
+                    <TextArea
+                      {...field}
+                      placeholder="Англиское название"
+                      className={styles.input}
+                      autoSize
+                    />
+                  )}
+                  name="englishTitle"
+                  control={control}
+                  defaultValue=""
                 />
+                {!!errors?.englishTitle && (
+                  <p className="error-field">{errors?.englishTitle?.message}</p>
+                )}
               </div>
-            </div>
-            <div className={styles.bottom}>
-              <div className={styles.mainSelect}>
-                <SelectTagsForManga setTags={setTags} />
+              <div className={styles.block}>
+                <span className={styles.text}>Оригинальное названия</span>
+                <Controller
+                  render={({ field }) => (
+                    <TextArea
+                      {...field}
+                      placeholder="Оригинальное название "
+                      className={styles.input}
+                      autoSize
+                    />
+                  )}
+                  name="originalTitle"
+                  control={control}
+                  defaultValue=""
+                />
+                {!!errors?.originalTitle && (
+                  <p className="error-field">
+                    {errors?.originalTitle?.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
-          <div className={styles.right}>
-            <div className={styles.top}>
-              <div className={styles.select}>
-                <SelectAgeRatingForManga
-                  onBlur={onBlur}
-                  onFocus={onFocus}
-                  onSearch={onSearch}
-                  setAgeRatingManga={setAgeRatingManga}
-                />
-              </div>
-              <div className={styles.select}>
-                <span className={styles.text}>Год выпуска</span>
+          <div className={styles.body}>
+            <span className={styles.text}>Описание</span>
+            <Controller
+              render={({ field }) => (
                 <TextArea
+                  {...field}
                   className={styles.input}
-                  placeholder="Год"
-                  autoSize
-                  value={yearOfIssue}
-                  onChange={(e) => setYearOfIssue(e.target.value)}
+                  placeholder="Описание"
+                  autoSize={{ minRows: 3, maxRows: 5 }}
                 />
+              )}
+              name="mangaDescription"
+              control={control}
+              defaultValue=""
+            />
+            {!!errors?.mangaDescription && (
+              <p className="error-field">{errors?.mangaDescription?.message}</p>
+            )}
+          </div>
+          <div className={styles.bottomBlock}>
+            <div className={styles.left}>
+              <div className={styles.top}>
+                <div className={styles.select}>
+                  <Controller
+                    render={({ field }) => (
+                      <SelectTypesForManga field={field} />
+                    )}
+                    name="typeManga"
+                    control={control}
+                    defaultValue=""
+                  />
+                  {!!errors?.typeManga && (
+                    <p className="error-field">{errors?.typeManga?.message}</p>
+                  )}
+                </div>
+                <div className={styles.select}>
+                  <Controller
+                    render={({ field }) => (
+                      <SelectStatusTranslateForManga field={field} />
+                    )}
+                    name="statusManga"
+                    control={control}
+                    defaultValue=""
+                  />
+                  {!!errors?.statusManga && (
+                    <p className="error-field">
+                      {errors?.statusManga?.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className={styles.bottom}>
+                <div className={styles.mainSelect}>
+                  <Controller
+                    render={({ field }) => <SelectTagsForManga field={field} />}
+                    name="tags"
+                    control={control}
+                    defaultValue=""
+                  />
+                  {!!errors?.tags && (
+                    <p className="error-field">{errors?.tags?.message}</p>
+                  )}
+                </div>
               </div>
             </div>
-            <div className={styles.bottom}>
-              <div className={styles.mainSelect}>
-                <SelectGenresForManga setGenres={setGenres} />
+            <div className={styles.right}>
+              <div className={styles.top}>
+                <div className={styles.select}>
+                  <Controller
+                    render={({ field }) => (
+                      <SelectAgeRatingForManga field={field} />
+                    )}
+                    name="ageRatingManga"
+                    control={control}
+                    defaultValue=""
+                  />
+                  {!!errors?.ageRatingManga && (
+                    <p className="error-field">
+                      {errors?.ageRatingManga?.message}
+                    </p>
+                  )}
+                </div>
+                <div className={styles.select}>
+                  <span className={styles.text}>Год выпуска</span>
+                  <Controller
+                    render={({ field }) => (
+                      <TextArea
+                        {...field}
+                        className={styles.input}
+                        placeholder="Год"
+                        autoSize
+                      />
+                    )}
+                    name="yearOfIssue"
+                    control={control}
+                    defaultValue=""
+                  />
+                  {!!errors?.yearOfIssue && (
+                    <p className="error-field">
+                      {errors?.yearOfIssue?.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className={styles.bottom}>
+                <div className={styles.mainSelect}>
+                  <Controller
+                    render={({ field }) => (
+                      <SelectGenresForManga field={field} />
+                    )}
+                    name="genres"
+                    control={control}
+                    defaultValue=""
+                  />
+                  {!!errors?.genres && (
+                    <p className="error-field">{errors?.genres?.message}</p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <Button type="primary" onClick={handleCreateNewManga}>
-          Создать
-        </Button>
-      </div>
+          <Button type="primary" htmlType="submit">
+            Создать
+          </Button>
+        </div>
+      </form>
     </MainLayout>
   );
 };

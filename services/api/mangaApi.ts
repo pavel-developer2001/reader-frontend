@@ -16,4 +16,7 @@ export default class MangaApi {
   static async getManga(id: string | string[] | undefined) {
     return ReaderApi.get("/mangas/" + id);
   }
+  static async searchManga(query: { title: string }) {
+    return ReaderApi.get("/mangas/search", { params: query });
+  }
 }

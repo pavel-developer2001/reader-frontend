@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { Avatar, Empty, Spin } from "antd";
 import { Typography } from "antd";
 import { Tabs } from "antd";
@@ -21,7 +21,7 @@ import {
 import styles from "./Users.module.scss";
 
 const CreateTeamModal = dynamic(
-  () => import("../../components/user/UI/CreateTeamModal"),
+  () => import("../../components/pages/user/CreateTeamModal"),
   {
     loading: () => (
       <div className="loader-block">
@@ -31,7 +31,7 @@ const CreateTeamModal = dynamic(
   }
 );
 const InvitationsInTeamsBlock = dynamic(
-  () => import("../../components/user/UI/InvitationsInTeamsBlock"),
+  () => import("../../components/pages/user/InvitationsInTeamsBlock"),
   {
     loading: () => (
       <div className="loader-block">
@@ -41,7 +41,7 @@ const InvitationsInTeamsBlock = dynamic(
   }
 );
 const UserInTeamsBlock = dynamic(
-  () => import("../../components/user/UI/UserInTeamsBlock"),
+  () => import("../../components/pages/user/UserInTeamsBlock"),
   {
     loading: () => (
       <div className="loader-block">
@@ -50,13 +50,16 @@ const UserInTeamsBlock = dynamic(
     ),
   }
 );
-const DynamicCardManga = dynamic(() => import("../../components/CardManga"), {
-  loading: () => (
-    <div className="loader-block">
-      <Spin />
-    </div>
-  ),
-});
+const DynamicCardManga = dynamic(
+  () => import("../../components/UI/CardManga"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin />
+      </div>
+    ),
+  }
+);
 const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
   loading: () => (
     <div className="loader-block">
@@ -76,7 +79,6 @@ const User = () => {
   const loading = useSelector(selectUserLoading);
   const bookMarks = useSelector(selectBookMarksData);
   const loadingMark = useSelector(selectBookMarkLoading);
-  const [tabPosition, setTabPosition] = useState("left");
 
   useEffect(() => {
     dispatch(getBookMarks(router.query.id));
@@ -124,9 +126,7 @@ const User = () => {
               </div>
             </div>{" "}
             <div className={styles.body}>
-              <Tabs //@ts-ignore
-                tabPosition={tabPosition}
-              >
+              <Tabs tabPosition={"left"}>
                 <TabPane tab="Профиль" key="1">
                   id:{" "}
                   {

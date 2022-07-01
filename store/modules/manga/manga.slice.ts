@@ -20,6 +20,12 @@ export const getManga = createAsyncThunk(
     return await MangaApi.getManga(id);
   }
 );
+export const searchManga = createAsyncThunk(
+  "manga/searchManga",
+  async (query: { title: string }) => {
+    return await MangaApi.searchManga(query);
+  }
+);
 interface MangaItems {
   manga: IManga[];
   genre: IGenre[];
@@ -28,28 +34,23 @@ interface MangaItems {
 interface MangaState {
   mangas: IManga[];
   manga: MangaItems;
+  searchMangas: IManga[];
+  isSearchLoading: boolean;
   status: null | string;
   loading: boolean;
 }
 const initialState: MangaState = {
   mangas: [],
   manga: { manga: [], genre: [], tag: [] },
+  searchMangas: [],
+  isSearchLoading: true,
   status: null,
   loading: true,
 };
 const mangaSlice = createSlice({
   name: "manga",
   initialState,
-  reducers: {
-    setMangas(state, action) {
-      state.mangas = action.payload;
-      state.loading = false;
-    },
-    setManga(state, action) {
-      state.manga = action.payload;
-      state.loading = false;
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) =>
     builder
@@ -68,8 +69,11 @@ const mangaSlice = createSlice({
       .addCase(getManga.fulfilled, (state, action) => {
         state.manga = action.payload.data;
         state.loading = false;
+      })
+      .addCase(searchManga.fulfilled, (state, action) => {
+        state.searchMangas = action.payload.data;
+        state.isSearchLoading = false;
       }),
 });
 
 export default mangaSlice.reducer;
-export const { setMangas, setManga } = mangaSlice.actions;

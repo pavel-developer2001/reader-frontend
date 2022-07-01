@@ -2,6 +2,7 @@
 @import "./variables.scss";
 @import "./customizable-ui.scss";
 @import "./reset.scss";
+@import "./scroll.scss";
 
 body {
   background-color: var(#{--body-background-default}) !important;
@@ -20,4 +21,11 @@ a {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+.error {
+  color: red;
+  margin-top: -1.7rem;
+}
+.error-field {
+  color: red;
 }

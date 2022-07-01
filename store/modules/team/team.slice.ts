@@ -37,6 +37,12 @@ export const getTeamsForUser = createAsyncThunk(
     return await TeamApi.getAllTeamsForUser(id);
   }
 );
+export const getTeamsForInvitations = createAsyncThunk(
+  "team/getTeamsForInvitations",
+  async (id: string) => {
+    return await TeamApi.getAllTeamsForUser(id);
+  }
+);
 export const connectMangaForTeam = createAsyncThunk(
   "team/connectMangaForTeam",
   async (payload: {
@@ -101,6 +107,8 @@ interface TeamState {
   teamInvitations: ITeamInvitationsForUser[];
   status: null;
   loading: boolean;
+  teamsForInvitations: ITeamsForUser[];
+  isLoadingForTeamInvitations: boolean;
 }
 const initialState: TeamState = {
   teams: [],
@@ -110,17 +118,13 @@ const initialState: TeamState = {
   teamInvitations: [],
   status: null,
   loading: true,
+  teamsForInvitations: [],
+  isLoadingForTeamInvitations: true,
 };
 const teamSlice = createSlice({
   name: "team",
   initialState,
-  reducers: {
-    setTeams(state, action) {
-      state.teams = action.payload;
-      state.loading = false;
-    },
-  },
-
+  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(HYDRATE, (state, action: any) => {
@@ -172,8 +176,11 @@ const teamSlice = createSlice({
         state.team.members = state.team.members.filter(
           (item) => item.id != action.payload.data.id
         );
+      })
+      .addCase(getTeamsForInvitations.fulfilled, (state, action) => {
+        state.teamsForInvitations = action.payload.data;
+        state.isLoadingForTeamInvitations = false;
       }),
 });
 
 export default teamSlice.reducer;
-export const { setTeams } = teamSlice.actions;
