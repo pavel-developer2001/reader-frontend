@@ -4,7 +4,7 @@ import { IRating } from "../../../shared/api/reader/models";
 
 export const selectRating = (state: RootState) => state.rating;
 
-export const selectRatingItemData = (state: RootState): IRating[] =>
+export const selectRatingItemData = (state: RootState): IRating =>
   selectRating(state).rating;
 
 export const selectRatingLoading = (state: RootState): boolean =>

@@ -6,15 +6,19 @@ import styles from "../../app/styles//pages/Notification.module.scss";
 import { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
 import { wrapper } from "../../app/store";
+import { getMangas } from "../../entities/manga/model/manga.slice";
 const { TabPane } = Tabs;
 
-const DynamicMainLayout = dynamic(() => import("../../shared/ui/layouts/MainLayout"), {
-  loading: () => (
-    <div className="loader-block">
-      <Spin size="large" />
-    </div>
-  ),
-});
+const DynamicMainLayout = dynamic(
+  () => import("../../shared/ui/layouts/MainLayout"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin size="large" />
+      </div>
+    ),
+  }
+);
 
 const Notification = () => {
   return (
@@ -60,8 +64,7 @@ export const getServerSideProps: GetServerSideProps =
       "public, s-maxage=10, stale-while-revalidate=59"
     );
     try {
-      //@ts-ignore
-      await store.dispatch(getMangas());
+      await store.dispatch<any>(getMangas());
       return {
         props: {},
       };

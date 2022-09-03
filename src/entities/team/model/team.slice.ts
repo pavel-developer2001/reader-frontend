@@ -5,12 +5,7 @@ import { IChapter, IManga, IMember, ITeam, ITeamInvitationsForUser, ITeamsForMan
 
 export const addNewTeam = createAsyncThunk(
   "team/addNewTeam",
-  async (payload: {
-    teamName: string;
-    teamSubtitle: string;
-    teamDescription: string;
-    userId: number;
-  }) => {
+  async (payload: FormData) => {
     return await TeamApi.createTeam(payload);
   }
 );
@@ -25,7 +20,7 @@ export const getTeam = createAsyncThunk(
 );
 export const getTeamsForUser = createAsyncThunk(
   "team/getTeamsForUser",
-  async (id: string) => {
+  async (id: string | string[]) => {
     return await TeamApi.getAllTeamsForUser(id);
   }
 );
@@ -68,7 +63,7 @@ export const agreeToJoin = createAsyncThunk(
     invitationId: number;
     rank: string;
     teamId: number;
-    userId: number;
+    userId: string | string[] | undefined;
   }) => {
     return await TeamApi.agreeToJoinToTeam(payload);
   }
@@ -81,7 +76,7 @@ export const refucalToJoin = createAsyncThunk(
 );
 export const removeMember = createAsyncThunk(
   "team/removeMember",
-  async (id: string) => {
+  async (id: number) => {
     return await TeamApi.deleteMemberFromTeam(id);
   }
 );

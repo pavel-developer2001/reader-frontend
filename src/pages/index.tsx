@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { GetServerSideProps } from "next";
 import styles from "../app/styles/pages/Home.module.scss";
 import { Spin } from "antd";
-import { wrapper } from "../app/store";
+import {  wrapper } from "../app/store";
 import { getMangas } from "../entities/manga/model/manga.slice";
 
 const MainLayout = dynamic(() => import("../shared/ui/layouts/MainLayout"), {
@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps =
       "public, s-maxage=10, stale-while-revalidate=59"
     );
     try {
-      await store.dispatch(getMangas());
+      await store.dispatch<any>(getMangas());
       return {
         props: {},
       };

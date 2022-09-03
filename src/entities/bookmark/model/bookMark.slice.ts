@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { IBookMark } from "../../../../store/modules/bookMark/types/IBookMark";
 import BookMarksApi from "../../../shared/api/reader/apis/bookMarksApi";
+import { IBookMark } from "../../../shared/api/reader/models";
 
 export const addBookMark = createAsyncThunk(
   "bookMark/addBookMark",
@@ -37,7 +37,6 @@ export const getBookMarkCountToManga = createAsyncThunk(
 interface BookMarkState {
   bookMarks: IBookMark[];
   bookMark: null;
-  status: null | string;
   loading: boolean;
   count: number;
   isLoadingForCount: boolean;
@@ -47,7 +46,6 @@ const initialState: BookMarkState = {
   bookMark: null,
   count: 0,
   isLoadingForCount: true,
-  status: null,
   loading: true,
 };
 const bookMarkSlice = createSlice({

@@ -1,4 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import {
+  createElement,
+  FC,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from "react";
 import { Comment, Tooltip, Avatar, Switch, Button, message, Spin } from "antd";
 import moment from "moment";
 import {
@@ -54,7 +60,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
   const [spoiler, setSpoiler] = useState(commentSpoiler);
   const [commentText, setCommentText] = useState(text);
   const [edit, setEdit] = useState(false);
-  const [action, setAction] = React.useState<string | null>(null);
+  const [action, setAction] = useState<string | null>(null);
 
   const like = () => {
     setLikes(likes + 1);
@@ -68,15 +74,13 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
   const actions = [
     <Tooltip key="comment-basic-like" title="Like">
       <span onClick={like} className={styles.likeBtn}>
-        {React.createElement(action === "liked" ? LikeFilled : LikeOutlined)}
+        {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
         <span className={styles.like}>{likes}</span>
       </span>
     </Tooltip>,
     <Tooltip key="comment-basic-dislike" title="Dislike">
       <span onClick={dislike} className={styles.likeBtn}>
-        {React.createElement(
-          action === "disliked" ? DislikeFilled : DislikeOutlined
-        )}
+        {createElement(action === "disliked" ? DislikeFilled : DislikeOutlined)}
       </span>
     </Tooltip>,
   ];
@@ -88,9 +92,7 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
       message.error("Произошла ошибка", error);
     }
   };
-  const handleUpdateComment = async (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleUpdateComment: MouseEventHandler<HTMLDivElement> = async (e) => {
     e.preventDefault();
     try {
       const data = { id: commentId, payload: { commentText, spoiler } };
@@ -148,7 +150,6 @@ const CommentsBlock: FC<CommentsBlockProps> = ({
             ) : (
               <div className={styles.editBlock}>
                 <TextArea
-                  showCount
                   value={commentText}
                   onChange={(e) => setCommentText(e.target.value)}
                   autoSize={{ minRows: 2, maxRows: 3 }}

@@ -9,7 +9,7 @@ import {
 
 export const addNewChapter = createAsyncThunk(
   "chapter/addNewChapter",
-  async (payload) => {
+  async (payload: FormData) => {
     return await ChapterApi.createChapter(payload);
   }
 );
@@ -25,7 +25,7 @@ export const getChapters = createAsyncThunk(
 );
 export const getImages = createAsyncThunk(
   "chapter/getImages ",
-  async (id: string | string[], thunkApi) => {
+  async (id: string | string[] | undefined, thunkApi) => {
     try {
       return await ChapterApi.getImagesForChapter(id);
     } catch (error) {
@@ -45,7 +45,6 @@ export const getUpdateChapters = createAsyncThunk(
 );
 interface ChapterState {
   chapters: IChapter[];
-  status: null;
   loading: boolean;
   images: IImage[];
   updateChapter: IUpdateChapter[];
@@ -53,7 +52,6 @@ interface ChapterState {
 }
 const initialState: ChapterState = {
   chapters: [],
-  status: null,
   loading: true,
   images: [],
   updateChapter: [],

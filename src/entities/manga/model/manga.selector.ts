@@ -1,5 +1,4 @@
-
-import { RootState } from "../../../../store/reducer";
+import { RootState } from "../../../app/store/reducer";
 import { IManga } from "../../../shared/api/reader/models";
 
 export const selectManga = (state: RootState) => state.manga;
@@ -12,7 +11,7 @@ export const selectMangaLoading = (state: RootState): boolean =>
 
 export const selectMangaItem = (state: RootState) => selectManga(state).manga;
 
-export const selectSearchListManga = (state: RootState) =>
+export const selectSearchListManga = (state: RootState): IManga[] =>
   selectManga(state).searchMangas;
 
 export const selectSearchLoading = (state: RootState): boolean =>

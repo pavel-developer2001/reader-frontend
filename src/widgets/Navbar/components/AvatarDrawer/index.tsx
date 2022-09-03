@@ -72,7 +72,10 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
   };
   return (
     <div className={styles.main}>
-      <Avatar size="large" icon={<UserOutlined />} onClick={showDrawer} />
+      <div onClick={showDrawer}>
+        <Avatar size="large" icon={<UserOutlined />} />
+      </div>
+
       <Drawer
         title={<AvatarHeader token={token} />}
         placement={"right"}

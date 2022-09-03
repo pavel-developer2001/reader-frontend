@@ -5,7 +5,7 @@ import { IGenre, IManga, ITag } from "../../../shared/api/reader/models";
 
 export const addNewManga = createAsyncThunk(
   "manga/addNewManga",
-  async (payload) => {
+  async (payload: FormData) => {
     return await MangaApi.createManga(payload);
   }
 );

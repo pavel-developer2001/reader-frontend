@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps =
       "public, s-maxage=10, stale-while-revalidate=59"
     );
     try {
-      await store.dispatch(getImages(params.chapterId));
+      await store.dispatch<any>(getImages(params?.chapterId));
       return {
         props: {},
       };

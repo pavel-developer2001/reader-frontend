@@ -1,11 +1,12 @@
 import Select from "antd/lib/select";
 import React, { FC } from "react";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import styles from "./SelectAgeRatingForManga.module.scss";
 
 const { Option } = Select;
 
 interface SelectAgeRatingForMangaProps {
-  field: any;
+  field: ControllerRenderProps<FieldValues, "ageRatingManga">;
 }
 
 const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({

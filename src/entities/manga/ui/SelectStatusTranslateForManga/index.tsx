@@ -1,11 +1,12 @@
 import { Select } from "antd";
 import React, { FC } from "react";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import styles from "./SelectStatusTranslateForManga.module.scss";
 
 const { Option } = Select;
 
 interface SelectStatusTranslateForMangaProps {
-  field: any;
+  field: ControllerRenderProps<FieldValues, "statusManga">;
 }
 
 const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
