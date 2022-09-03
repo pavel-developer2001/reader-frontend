@@ -19,10 +19,24 @@ import { wrapper } from "../../app/store";
 import { addNewManga } from "../../entities/manga/model/manga.slice";
 
 const CreateMangaFormSchema = yup.object().shape({
-  title: yup.string().required("Введите название"),
-  englishTitle: yup.string().required("Введите английское название"),
-  originalTitle: yup.string().required("Введите оригинальное название"),
-  mangaDescription: yup.string().required("Введите описание"),
+  title: yup
+    .string()
+    .required("Введите название")
+    .min(3, "Минимум 3 символа")
+    .max(255, "Максимум 255 символов"),
+  englishTitle: yup
+    .string()
+    .required("Введите английское название")
+    .min(3, "Минимум 3 символа"),
+  originalTitle: yup
+    .string()
+    .required("Введите оригинальное название")
+    .min(3, "Минимум 3 символа")
+    .max(255, "Максимум 255 символов"),
+  mangaDescription: yup
+    .string()
+    .required("Введите описание")
+    .min(3, "Минимум 3 символа"),
   yearOfIssue: yup
     .number()
     .typeError("Введите год числом")
@@ -32,7 +46,9 @@ const CreateMangaFormSchema = yup.object().shape({
   genres: yup.array().typeError("Выберите жанры").required("Выберите жанры"),
   statusManga: yup.string().required("Выберите статус"),
   tags: yup.array().typeError("Выберите теги").required("Выберите теги"),
-  ageRatingManga: yup.string().required("Выберите возрастной статус"),
+  ageRatingManga: yup
+    .string()
+    .required("Выберите возрастной статус")
 });
 const CreateManga = () => {
   const {
