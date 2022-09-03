@@ -77,13 +77,16 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   return (
     <>
       <div className={styles.card}>
-        <Image
-          width={250}
-          height={350}
-          src={cover}
-          alt="cover manga"
-          className={styles.img}
-        />
+        {cover && (
+          <Image
+            width={250}
+            height={350}
+            src={cover}
+            alt="cover manga"
+            className={styles.img}
+          />
+        )}
+
         {token && (
           <div className={styles.settings}>
             <div className={styles.features}>

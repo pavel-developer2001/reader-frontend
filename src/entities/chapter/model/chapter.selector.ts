@@ -1,7 +1,9 @@
-
 import { RootState } from "../../../app/store/reducer";
-import { IChapter, IImage, IUpdateChapter } from "../../../shared/api/reader/models";
-
+import {
+  IChapter,
+  IImage,
+  IUpdateChapter,
+} from "../../../shared/api/reader/models";
 
 export const selectChapter = (state: RootState) => state.chapter;
 
@@ -16,3 +18,6 @@ export const selectChaptersData = (state: RootState): IChapter[] =>
 
 export const selectChapterImagesData = (state: RootState): IImage[] =>
   selectChapter(state).images;
+
+export const selectChapterError = (state: RootState): string=>
+  selectChapter(state).error;
