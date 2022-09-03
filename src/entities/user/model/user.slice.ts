@@ -5,14 +5,25 @@ import { IUser } from "../../../shared/api/reader/models";
 
 export const registerUsers = createAsyncThunk(
   "user/registerUsers",
-  async (payload: { name: string; email: string; password: string }) => {
-    return await UserApi.registration(payload);
+  async (
+    payload: { name: string; email: string; password: string },
+    thunkAPI
+  ) => {
+    try {
+      return await UserApi.registration(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
 export const loginUsers = createAsyncThunk(
   "user/loginUsers",
-  async (payload: { email: string; password: string }) => {
-    return await UserApi.login(payload);
+  async (payload: { email: string; password: string }, thunkAPI) => {
+    try {
+      return await UserApi.login(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
 export const getUserData = createAsyncThunk(
@@ -26,12 +37,14 @@ interface UserState {
   token: string;
   status: null | string;
   loading: boolean;
+  error: string;
 }
 const initialState: UserState = {
   user: [],
   token: "",
   status: null,
   loading: true,
+  error: "",
 };
 const userSlice = createSlice({
   name: "user",
@@ -54,11 +67,17 @@ const userSlice = createSlice({
         state.loading = false;
         state.token = action.payload.data.token;
       })
+      .addCase(loginUsers.rejected, (state, action) => {
+        state.error = (action.payload as any).response.data.message;
+      })
       .addCase(registerUsers.fulfilled, (state, action) => {
         state.user.push(action.payload.data);
         window.localStorage.setItem("token", action.payload.data.access_token);
         state.loading = false;
         state.token = action.payload.data.access_token;
+      })
+      .addCase(registerUsers.rejected, (state, action) => {
+        state.error = (action.payload as any).response.data.message;
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         state.user = action.payload.data;
