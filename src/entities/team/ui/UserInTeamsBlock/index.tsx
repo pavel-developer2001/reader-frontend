@@ -44,7 +44,7 @@ const UserInTeamsBlock = () => {
   const loading = useSelector(selectTeamLoading);
 
   useEffect(() => {
-    if (router.query.id) dispatch(getTeamsForUser(router.query.id));
+    if (router.query.id) dispatch(getTeamsForUser(Number(router.query.id)));
   }, [router.query]);
 
   return (
