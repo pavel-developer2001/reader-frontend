@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+@import "./variables.scss";
+@import "./customizable-ui.scss";
+@import "./reset.scss";
+@import "./scroll.scss";
+
+body {
+  background-color: var(#{--body-background-default}) !important;
+}
+a {
+  color: var(#{--text-secondary-color-default}) !important;
+}
+.main-container {
+  margin: 0 auto !important;
+  max-width: calc(1440px + (100vw / 72 * 2) * 2) !important;
+}
+.loader-block {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+.error {
+  color: red;
+  margin-top: -1.7rem;
+}
+.error-field {
+  color: red;
+}

@@ -1,0 +1,32 @@
+.main {
+  &:hover {
+    cursor: pointer;
+  }
+  display: flex;
+  flex: 1 0 auto;
+  max-width: 393px;
+  margin-bottom: 4px;
+  .leftBlock {
+    img {
+      width: 60px;
+      height: 90px;
+      border-radius: 6px;
+    }
+  }
+  .rightBlock {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 0.35em;
+      color: var(#{--text-secondary-color-default}) !important;
+    }
+    .year {
+      font-size: 13.3px;
+      font-weight: 500;
+      color: var(#{--text-secondary-color-default}) !important;
+    }
+  }
+}
