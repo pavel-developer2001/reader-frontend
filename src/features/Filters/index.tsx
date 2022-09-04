@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Button, Select } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import styles from "./Filters.module.scss";
+import { SelectValue } from "antd/lib/select";
 
 const { Option } = Select;
 
 const Filters = () => {
-  const [types, setTypes] = useState<any>("");
+  const [types, setTypes] = useState<SelectValue>("");
   console.log("TYPES", types);
   const typesArray = [
     { value: "манга", title: "Манга" },
@@ -15,7 +16,7 @@ const Filters = () => {
     { value: "западный комикс", title: "Западный комикс" },
     { value: "рукомикс", title: "Рукомикс" },
   ];
-  const [genres, setGenres] = useState<any>("");
+  const [genres, setGenres] = useState<SelectValue>("");
   console.log("Genres", genres);
   const genresArray = [
     { value: "боевик", title: "Боевик" },
@@ -31,7 +32,7 @@ const Filters = () => {
     { value: "триллер", title: "Триллер" },
     { value: "этти", title: "Этти" },
   ];
-  const [tags, setTags] = useState<any>("");
+  const [tags, setTags] = useState<SelectValue>("");
   console.log("Tags", tags);
   const tagsArray = [
     { value: "алхимия", title: "Алхимия" },
@@ -50,7 +51,7 @@ const Filters = () => {
     { value: "владыка демона", title: "Владыка демона" },
     { value: "гг имба", title: "ГГ имба" },
   ];
-  const [statusTranslate, setStatusTranslate] = useState<any>("");
+  const [statusTranslate, setStatusTranslate] = useState<SelectValue>("");
   console.log("StatusTranslate,", statusTranslate);
   const statusTranslateArray = [
     { value: "закончен", title: "Закончен" },
@@ -59,7 +60,7 @@ const Filters = () => {
     { value: "нет переводчика", title: "Нет переводчика" },
     { value: "анонс", title: "Анонс" },
   ];
-  const [ageRating, setAgeRating] = useState<any>("");
+  const [ageRating, setAgeRating] = useState<SelectValue>("");
   console.log("AgeRating", ageRating);
   const ageRatingArray = [
     { value: "для всех", title: "Для всех" },
@@ -81,9 +82,6 @@ const Filters = () => {
     console.log("focus");
   }
 
-  function onSearch(val: any) {
-    console.log("search:", val);
-  }
   const childrenGenres = [];
   childrenGenres.push(
     genresArray.map((genres) => (
@@ -121,12 +119,11 @@ const Filters = () => {
         onChange={(value) => setTypes(value)}
         onFocus={onFocus}
         onBlur={onBlur}
-        onSearch={onSearch}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        filterOption={(input, option) =>
+          option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {typesArray.map((type, index) => (
+        {typesArray.map((type) => (
           <Option value={type.value} key={type.value}>
             {type.title}
           </Option>
@@ -160,12 +157,11 @@ const Filters = () => {
         onChange={(value) => setStatusTranslate(value)}
         onFocus={onFocus}
         onBlur={onBlur}
-        onSearch={onSearch}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        filterOption={(input, option) =>
+          option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {statusTranslateArray.map((type, index) => (
+        {statusTranslateArray.map((type) => (
           <Option value={type.value} key={type.value}>
             {type.title}
           </Option>
@@ -179,12 +175,11 @@ const Filters = () => {
         onChange={(value) => setAgeRating(value)}
         onFocus={onFocus}
         onBlur={onBlur}
-        onSearch={onSearch}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        filterOption={(input, option) =>
+          option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {ageRatingArray.map((type, index) => (
+        {ageRatingArray.map((type) => (
           <Option value={type.value} key={type.value}>
             {type.title}
           </Option>
@@ -201,12 +196,11 @@ const Filters = () => {
         onChange={(value) => setTypes(value)}
         onFocus={onFocus}
         onBlur={onBlur}
-        onSearch={onSearch}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        filterOption={(input, option) =>
+          option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {typesArray.map((type, index) => (
+        {typesArray.map((type) => (
           <Option value={type.value} key={type.value}>
             {type.title}
           </Option>

@@ -27,8 +27,8 @@ const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({
         style={{ width: 200 }}
         placeholder="Возрастной рейтинг"
         optionFilterProp="children"
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        filterOption={(input, option) =>
+          option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
         {ageRatingArray.map((type, index) => (

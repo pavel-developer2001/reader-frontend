@@ -12,7 +12,7 @@ import {
   selectTeamsForInvitationsData,
 } from "../../../../model/team.selector";
 import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const { Option } = Select;
@@ -21,6 +21,11 @@ const InvitationBtnFormSchema = yup.object().shape({
   teamId: yup.string().required("Выберите команду"),
   rank: yup.string().required("Выберите Должность"),
 });
+type FormValues = {
+  rank: string;
+  teamId: string;
+  userId: string;
+};
 
 const InvitationBtn = () => {
   const {
@@ -28,7 +33,7 @@ const InvitationBtn = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(InvitationBtnFormSchema),
   });
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -46,13 +51,9 @@ const InvitationBtn = () => {
   useEffect(() => {
     if (dataUser) dispatch(getTeamsForInvitations(dataUser));
   }, []);
-  const handleAddInvitation = async (data: any) => {
+  const handleAddInvitation: SubmitHandler<FormValues> = async (data) => {
     try {
-      const payload: {
-        rank: string;
-        teamId: number;
-        userId: any;
-      } = await {
+      const payload = await {
         rank: data.rank,
         teamId: data.teamId,
         userId: router.query.id,
@@ -95,8 +96,8 @@ const InvitationBtn = () => {
                 style={{ width: 200 }}
                 placeholder="Выбрать команду"
                 optionFilterProp="children"
-                filterOption={(input, option: any) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                filterOption={(input, option) =>
+                  option?.children.toLowerCase().indexOf(input.toLowerCase()) >=
                   0
                 }
               >
@@ -126,8 +127,8 @@ const InvitationBtn = () => {
                 style={{ width: 200 }}
                 placeholder="Должность"
                 optionFilterProp="children"
-                filterOption={(input, option: any) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                filterOption={(input, option) =>
+                  option?.children.toLowerCase().indexOf(input.toLowerCase()) >=
                   0
                 }
               >

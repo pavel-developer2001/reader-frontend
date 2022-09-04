@@ -36,14 +36,14 @@ export const getBookMarkCountToManga = createAsyncThunk(
 
 interface BookMarkState {
   bookMarks: IBookMark[];
-  bookMark: null;
+  bookMark: IBookMark;
   loading: boolean;
   count: number;
   isLoadingForCount: boolean;
 }
 const initialState: BookMarkState = {
   bookMarks: [],
-  bookMark: null,
+  bookMark: {} as IBookMark,
   count: 0,
   isLoadingForCount: true,
   loading: true,

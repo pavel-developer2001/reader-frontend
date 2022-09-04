@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import TeamApi from "../../../shared/api/reader/apis/teamApi";
-import { IChapter, IManga, IMember, ITeam, ITeamInvitationsForUser, ITeamsForManga, ITeamsForUser } from "../../../shared/api/reader/models";
+import { ITeam } from "../../../shared/api/reader/models";
+import { TeamState } from "./team.types";
 
 export const addNewTeam = createAsyncThunk(
   "team/addNewTeam",
@@ -20,13 +21,13 @@ export const getTeam = createAsyncThunk(
 );
 export const getTeamsForUser = createAsyncThunk(
   "team/getTeamsForUser",
-  async (id: string | string[]) => {
+  async (id: number | null) => {
     return await TeamApi.getAllTeamsForUser(id);
   }
 );
 export const getTeamsForInvitations = createAsyncThunk(
   "team/getTeamsForInvitations",
-  async (id: string) => {
+  async (id: number | null) => {
     return await TeamApi.getAllTeamsForUser(id);
   }
 );
@@ -47,7 +48,11 @@ export const getTeamsForManga = createAsyncThunk(
 );
 export const addInvitation = createAsyncThunk(
   "team/addInvitation",
-  async (payload: { rank: string; teamId: number; userId: number }) => {
+  async (payload: {
+    rank: string;
+    teamId: string;
+    userId: string | string[] | undefined;
+  }) => {
     return await TeamApi.addInvitationForUser(payload);
   }
 );
@@ -80,26 +85,15 @@ export const removeMember = createAsyncThunk(
     return await TeamApi.deleteMemberFromTeam(id);
   }
 );
-interface TeamItems {
-  team: ITeam[];
-  members: IMember[];
-  mangas: IManga[];
-  chapters: IChapter[];
-}
-interface TeamState {
-  teams: ITeam[];
-  team: TeamItems;
-  teamsUser: ITeamsForUser[];
-  teamsManga: ITeamsForManga[];
-  teamInvitations: ITeamInvitationsForUser[];
-  status: null;
-  loading: boolean;
-  teamsForInvitations: ITeamsForUser[];
-  isLoadingForTeamInvitations: boolean;
-}
+
 const initialState: TeamState = {
   teams: [],
-  team: { team: [], members: [], mangas: [], chapters: [] },
+  team: {
+    team: {} as ITeam,
+    members: [],
+    mangas: [],
+    chapters: [],
+  },
   teamsUser: [],
   teamsManga: [],
   teamInvitations: [],
@@ -143,7 +137,7 @@ const teamSlice = createSlice({
         state.loading = false;
       })
       .addCase(connectMangaForTeam.fulfilled, (state, action) => {
-        state.team.mangas.push(action.payload.data);
+        state.team.mangas = action.payload.data;
       })
       .addCase(addInvitation.fulfilled, (state, action) => {
         state.teamInvitations.push(action.payload.data);

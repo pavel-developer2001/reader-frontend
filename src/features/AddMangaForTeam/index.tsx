@@ -14,7 +14,7 @@ import {
   selectTeamsUserData,
 } from "../../entities/team/model/team.selector";
 import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const { Option } = Select;
@@ -22,6 +22,9 @@ const { Option } = Select;
 const AddMangaForTeamFormSchema = yup.object().shape({
   teamId: yup.string().required("Выберите команду"),
 });
+type FormValues = {
+  teamId: string;
+};
 
 const AddMangaForTeam = () => {
   const {
@@ -29,7 +32,7 @@ const AddMangaForTeam = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(AddMangaForTeamFormSchema),
   });
   const router = useRouter();
@@ -51,7 +54,7 @@ const AddMangaForTeam = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const handleAddMangaForTeam = async (data: any) => {
+  const handleAddMangaForTeam: SubmitHandler<FormValues> = async (data) => {
     try {
       const payload = await { mangaId: router.query.id, teamId: data.teamId };
       await dispatch(connectMangaForTeam(payload));
@@ -87,8 +90,8 @@ const AddMangaForTeam = () => {
                 style={{ width: 200 }}
                 placeholder="Выбрать команду"
                 optionFilterProp="children"
-                filterOption={(input, option: any) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                filterOption={(input, option) =>
+                  option?.children.toLowerCase().indexOf(input.toLowerCase()) >=
                   0
                 }
               >

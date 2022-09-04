@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginUsers } from "../../../../../model/user.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserError } from "../../../../../model/user.selector";
+import { SubmitHandler } from "react-hook-form/dist/types";
 
 interface LoginProps {
   setRegister: (arg: boolean) => void;
@@ -18,6 +19,10 @@ const LoginComponentFormSchema = yup.object().shape({
     .min(6, "​Минимальная длина пароля 6 символов")
     .required(),
 });
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
   const dispatch = useDispatch();
@@ -26,14 +31,14 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(LoginComponentFormSchema),
   });
   const errorHandling = useSelector(selectUserError);
   useEffect(() => {
     if (errorHandling) message.error(errorHandling);
   }, [errorHandling]);
-  const handleLogin = (data: any) => {
+  const handleLogin: SubmitHandler<FormValues> = (data) => {
     const payload = {
       email: data.email,
       password: data.password,

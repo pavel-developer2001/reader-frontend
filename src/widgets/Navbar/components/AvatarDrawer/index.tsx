@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, MouseEventHandler, useState } from "react";
 import styles from "./AvatarDrawer.module.scss";
 import { Drawer, Spin } from "antd";
 import {
@@ -23,7 +23,7 @@ const DynamicAuthModal = dynamic(
   }
 );
 
-const AvatarHeader = ({ token }: any) => {
+const AvatarHeader = ({ token }: { token: string }) => {
   return (
     <div className={styles.header}>
       {token ? (
@@ -50,8 +50,8 @@ const AvatarHeader = ({ token }: any) => {
   );
 };
 interface AvatarDrawerProps {
-  changeTheme: any;
-  menuArrays: any;
+  changeTheme: MouseEventHandler<HTMLDivElement> | undefined;
+  menuArrays: { left: Array<{ title: string; link: string }>; right: any };
 }
 
 const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
@@ -84,7 +84,7 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
         visible={visible}
         key={"right"}
       >
-        {menuArrays.left.map((menu: any, index: number) => (
+        {menuArrays.left.map((menu, index: number) => (
           <p key={index} className={styles.menu}>
             <Link href={menu.link}>
               <a>{menu.title}</a>

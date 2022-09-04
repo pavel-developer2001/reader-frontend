@@ -1,8 +1,7 @@
 import ReaderApi from "../base";
 
-
 export default class MangaApi {
-  static async createManga(payload: any) {
+  static async createManga(payload: FormData) {
     return ReaderApi.post("/mangas/create", payload, {
       headers: {
         accept: "application/json",

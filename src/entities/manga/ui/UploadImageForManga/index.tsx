@@ -8,7 +8,7 @@ function getBase64(img: Blob, callback: any) {
   reader.addEventListener("load", () => callback(reader.result));
   reader.readAsDataURL(img);
 }
-function beforeUpload(file: any) {
+function beforeUpload(file: File) {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
   if (!isJpgOrPng) {
     message.error("You can only upload JPG/PNG file!");

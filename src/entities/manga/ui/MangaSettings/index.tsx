@@ -145,8 +145,8 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
                   onFocus={onFocus}
                   onBlur={onBlur}
                   onSearch={onSearch}
-                  filterOption={(input, option: any) =>
-                    option.children
+                  filterOption={(input, option) =>
+                    option?.children
                       .toLowerCase()
                       .indexOf(input.toLowerCase()) >= 0
                   }

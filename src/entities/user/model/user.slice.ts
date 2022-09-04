@@ -33,14 +33,14 @@ export const getUserData = createAsyncThunk(
   }
 );
 interface UserState {
-  user: IUser[];
+  user: IUser;
   token: string;
   status: null | string;
   loading: boolean;
   error: string;
 }
 const initialState: UserState = {
-  user: [],
+  user: {} as IUser,
   token: "",
   status: null,
   loading: true,
@@ -57,12 +57,12 @@ const userSlice = createSlice({
 
   extraReducers: (builder) =>
     builder
-      .addCase(HYDRATE, (state, action) => {
+      .addCase(HYDRATE, (state, action: any) => {
         state.user = action.payload.user.user;
         state.loading = false;
       })
       .addCase(loginUsers.fulfilled, (state, action) => {
-        state.user.push(action.payload.data);
+        state.user = action.payload.data;
         window.localStorage.setItem("token", action.payload.data.access_token);
         state.loading = false;
         state.token = action.payload.data.token;
@@ -71,7 +71,7 @@ const userSlice = createSlice({
         state.error = (action.payload as any).response.data.message;
       })
       .addCase(registerUsers.fulfilled, (state, action) => {
-        state.user.push(action.payload.data);
+        state.user = action.payload.data;
         window.localStorage.setItem("token", action.payload.data.access_token);
         state.loading = false;
         state.token = action.payload.data.access_token;

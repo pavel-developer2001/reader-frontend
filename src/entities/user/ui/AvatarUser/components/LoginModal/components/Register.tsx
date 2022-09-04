@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react";
 import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message } from "antd";
@@ -28,6 +28,13 @@ const RegisterComponentFormSchema = yup.object().shape({
     .required(),
 });
 
+type FormValues = {
+  name: string;
+  email: string;
+  password: string;
+  password2: string;
+};
+
 const RegisterComponent: FC<RegisterComponent> = ({
   register,
   setIsModalVisible,
@@ -38,14 +45,14 @@ const RegisterComponent: FC<RegisterComponent> = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(RegisterComponentFormSchema),
   });
   const errorHandling = useSelector(selectUserError);
   useEffect(() => {
     if (errorHandling) message.error(errorHandling);
   }, [errorHandling]);
-  const handleRegistration = (data: any) => {
+  const handleRegistration: SubmitHandler<FormValues> = (data) => {
     if (data.password !== data.password2) return alert("Пароли не совпадают");
     if (data.password === data.password2) {
       const payload = {

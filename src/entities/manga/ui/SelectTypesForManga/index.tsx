@@ -26,8 +26,8 @@ const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({ field }) => {
         style={{ width: 200 }}
         placeholder="Типы"
         optionFilterProp="children"
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        filterOption={(input, option) =>
+          option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
         {typesArray.map((type) => (

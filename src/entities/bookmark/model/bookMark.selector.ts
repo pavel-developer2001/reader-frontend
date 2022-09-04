@@ -1,10 +1,9 @@
 import { RootState } from "../../../app/store/reducer";
 import { IBookMark } from "../../../shared/api/reader/models";
 
-
 export const selectBookMark = (state: RootState) => state.bookMark;
 
-export const selectBookMarkItemData = (state: RootState): any =>
+export const selectBookMarkItemData = (state: RootState): IBookMark =>
   selectBookMark(state).bookMark;
 
 export const selectBookMarkLoading = (state: RootState): boolean =>
