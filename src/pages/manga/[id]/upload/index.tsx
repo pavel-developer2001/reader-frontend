@@ -3,27 +3,11 @@ import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
 import { Upload, Modal, Button, Select, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD:pages/manga/[id]/upload/index.tsx
-import { GetServerSideProps } from "next";
-import { dataUser } from "../../../../utils/getDataUserFromToken";
-import MainLayout from "../../../../layouts/MainLayout";
-import { addNewChapter } from "../../../../store/modules/chapter/chapter.slice";
-import { getTeamsForUser } from "../../../../store/modules/team/team.slice";
-import {
-  selectTeamLoading,
-  selectTeamsUserData,
-} from "../../../../store/modules/team/team.selector";
-import { wrapper } from "../../../../store";
-=======
 import styles from "../../../../app/styles/pages/Upload.module.scss";
 import { GetServerSideProps } from "next";
->>>>>>> main:src/pages/manga/[id]/upload/index.tsx
 import * as yup from "yup";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-<<<<<<< HEAD:pages/manga/[id]/upload/index.tsx
-import styles from "./Upload.module.scss";
-=======
 import {
   selectTeamLoading,
   selectTeamsUserData,
@@ -35,7 +19,6 @@ import { wrapper } from "../../../../app/store";
 import { addNewChapter } from "../../../../entities/chapter/model/chapter.slice";
 import { SelectValue } from "antd/lib/select";
 import { UploadFile } from "antd/lib/upload/interface";
->>>>>>> main:src/pages/manga/[id]/upload/index.tsx
 
 const { Option } = Select;
 

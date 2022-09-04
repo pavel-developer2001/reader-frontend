@@ -3,28 +3,16 @@ import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
 import { useSelector } from "react-redux";
-<<<<<<< HEAD:pages/manga/[id]/chapter/[chapterId].tsx
-import { Spin } from "antd";
-import dynamic from "next/dynamic";
-import { wrapper } from "../../../../store";
-import { getImages } from "../../../../store/modules/chapter/chapter.slice";
-=======
 import styles from "../../../../app/styles/pages/Chapter.module.scss";
 import { Spin } from "antd";
 import dynamic from "next/dynamic";
->>>>>>> main:src/pages/manga/[id]/chapter/[chapterId].tsx
 import {
   selectChapterError,
   selectChapterImagesData,
   selectChapterLoading,
-<<<<<<< HEAD:pages/manga/[id]/chapter/[chapterId].tsx
-} from "../../../../store/modules/chapter/chapter.selector";
-import styles from "./Chapter.module.scss";
-=======
 } from "../../../../entities/chapter/model/chapter.selector";
 import { wrapper } from "../../../../app/store";
 import { getImages } from "../../../../entities/chapter/model/chapter.slice";
->>>>>>> main:src/pages/manga/[id]/chapter/[chapterId].tsx
 
 const DynamicChapterLayout = dynamic(
   () => import("../../../../shared/ui/layouts/ChapterLayout"),
