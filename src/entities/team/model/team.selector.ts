@@ -1,5 +1,7 @@
 import { RootState } from "../../../app/store/reducer";
 import { ITeam, ITeamInvitationsForUser, ITeamsForManga, ITeamsForUser } from "../../../shared/api/reader/models";
+import { TeamItems } from "./team.types";
+
 
 export const selectTeam = (state: RootState) => state.team;
 
@@ -19,7 +21,7 @@ export const selectTeamInvitationsData = (
   state: RootState
 ): ITeamInvitationsForUser[] => selectTeam(state).teamInvitations;
 
-export const selectTeamItemData = (state: RootState): any =>
+export const selectTeamItemData = (state: RootState): TeamItems =>
   selectTeam(state).team;
 
 export const selectTeamsForInvitationsData = (

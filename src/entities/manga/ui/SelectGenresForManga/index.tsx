@@ -1,11 +1,12 @@
 import Select from "antd/lib/select";
 import React, { FC } from "react";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import styles from "./SelectGenresForManga.module.scss";
 
 const { Option } = Select;
 
 interface SelectGenresForMangaProps {
-  field: any;
+  field: ControllerRenderProps<FieldValues, "genres">;
 }
 
 const SelectGenresForManga: FC<SelectGenresForMangaProps> = ({ field }) => {

@@ -1,5 +1,5 @@
 export const storage = {
-  setItem: (name: string, item: any) => {
+  setItem: (name: string, item: unknown) => {
     window.localStorage.setItem(name, JSON.stringify(item));
   },
   getItem: (name: string) => {

@@ -34,7 +34,7 @@ export const getRatingCount = createAsyncThunk(
   }
 );
 interface RatingState {
-  rating: IRating[];
+  rating: IRating;
   ratings: IRating[];
   status: null;
   loading: boolean;
@@ -42,7 +42,7 @@ interface RatingState {
   isLoadingForRating: boolean;
 }
 const initialState: RatingState = {
-  rating: [],
+  rating: {} as IRating,
   ratings: [],
   status: null,
   loading: true,

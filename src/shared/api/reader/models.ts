@@ -88,7 +88,7 @@ export interface IBookMark {
   category: string;
   createdAt: string;
   id: number;
-  mangaId: number;
+  manga: IManga;
   updatedAt: string;
   userId: number;
 }
@@ -97,8 +97,8 @@ export interface IRating {
   rating: number;
   createdAt: string;
   updatedAt: string;
-  mangaId: number;
-  userId: number;
+  manga: IManga;
+  user: IUser;
 }
 export interface IMember {
   createdAt: string;

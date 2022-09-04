@@ -15,7 +15,6 @@ export const addComment = createAsyncThunk(
     commentText: string;
     mangaId: string | string[] | undefined;
     spoiler: boolean;
-    userId: number;
   }) => {
     return await CommentsApi.addCommentForManga(payload);
   }

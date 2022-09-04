@@ -1,11 +1,12 @@
 import { Select } from "antd";
 import React, { FC } from "react";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import styles from "./SelectStatusTranslateForManga.module.scss";
 
 const { Option } = Select;
 
 interface SelectStatusTranslateForMangaProps {
-  field: any;
+  field: ControllerRenderProps<FieldValues, "statusManga">;
 }
 
 const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
@@ -27,8 +28,8 @@ const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
         style={{ width: 200 }}
         placeholder="Статус перевода"
         optionFilterProp="children"
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        filterOption={(input, option) =>
+          option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
         {statusTranslateArray.map((type, index) => (

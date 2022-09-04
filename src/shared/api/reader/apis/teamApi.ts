@@ -1,13 +1,7 @@
 import ReaderApi from "../base";
 
-
 export default class TeamApi {
-  static async createTeam(payload: {
-    teamName: string;
-    teamSubtitle: string;
-    teamDescription: string;
-    userId: number;
-  }) {
+  static async createTeam(payload: FormData) {
     return ReaderApi.post("/teams/add", payload);
   }
   static async getAllTeam() {
@@ -16,7 +10,7 @@ export default class TeamApi {
   static async getTeam(id: string | string[] | undefined) {
     return ReaderApi.get("/teams/" + id);
   }
-  static async getAllTeamsForUser(userId: string) {
+  static async getAllTeamsForUser(userId: number | null) {
     return ReaderApi.get("/teams/user/" + userId);
   }
   static async addTeamForManga(payload: {
@@ -30,8 +24,8 @@ export default class TeamApi {
   }
   static async addInvitationForUser(payload: {
     rank: string;
-    teamId: number;
-    userId: number;
+    teamId: string;
+    userId: string | string[] | undefined;
   }) {
     return ReaderApi.post("/teams/invitation/add", payload);
   }
@@ -42,14 +36,14 @@ export default class TeamApi {
     invitationId: number;
     rank: string;
     teamId: number;
-    userId: number;
+    userId: string | string[] | undefined;
   }) {
     return ReaderApi.post("/teams/invitation/user/join", payload);
   }
   static async refucalToJoinTeam(id: number) {
     return ReaderApi.delete("/teams/invitation/user/refusal/" + id);
   }
-  static async deleteMemberFromTeam(id: string) {
+  static async deleteMemberFromTeam(id: number) {
     return ReaderApi.delete("/teams/member/" + id);
   }
 }

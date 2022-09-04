@@ -1,45 +1,61 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import ChapterApi from "../../../shared/api/reader/apis/chapterApi";
-import { IChapter, IImage, IUpdateChapter } from "../../../shared/api/reader/models";
+import {
+  IChapter,
+  IImage,
+  IUpdateChapter,
+} from "../../../shared/api/reader/models";
 
 export const addNewChapter = createAsyncThunk(
   "chapter/addNewChapter",
-  async (payload) => {
+  async (payload: FormData) => {
     return await ChapterApi.createChapter(payload);
   }
 );
 export const getChapters = createAsyncThunk(
   "chapter/getChapters",
-  async (id: string | string[]) => {
-    return await ChapterApi.getChaptersForManga(id);
+  async (id: string | string[], thunkApi) => {
+    try {
+      return await ChapterApi.getChaptersForManga(id);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
   }
 );
 export const getImages = createAsyncThunk(
   "chapter/getImages ",
-  async (id: string | string[]) => {
-    return await ChapterApi.getImagesForChapter(id);
+  async (id: string | string[] | undefined, thunkApi) => {
+    try {
+      return await ChapterApi.getImagesForChapter(id);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
   }
 );
 export const getUpdateChapters = createAsyncThunk(
   "chapter/getUpdateChapters",
-  async () => {
-    return await ChapterApi.getLaterChapters();
+  async (_, thunkApi) => {
+    try {
+      return await ChapterApi.getLaterChapters();
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
   }
 );
 interface ChapterState {
   chapters: IChapter[];
-  status: null;
   loading: boolean;
   images: IImage[];
   updateChapter: IUpdateChapter[];
+  error: string;
 }
 const initialState: ChapterState = {
   chapters: [],
-  status: null,
   loading: true,
   images: [],
   updateChapter: [],
+  error: "",
 };
 const chapterSlice = createSlice({
   name: "chapter",
@@ -70,13 +86,24 @@ const chapterSlice = createSlice({
         state.chapters = action.payload.data;
         state.loading = false;
       })
+      .addCase(getChapters.rejected, (state, action) => {
+        state.error = (action.payload as any).message;
+        state.loading = false;
+      })
       .addCase(getImages.fulfilled, (state, action) => {
-        console.log("IIIIIIIIIIIi", action.payload.data);
         state.images = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(getImages.rejected, (state, action) => {
+        state.error = (action.payload as any).message;
         state.loading = false;
       })
       .addCase(getUpdateChapters.fulfilled, (state, action) => {
         state.updateChapter = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(getUpdateChapters.rejected, (state, action) => {
+        state.error = (action.payload as any).message;
         state.loading = false;
       })
       .addCase(addNewChapter.fulfilled, (state, action: any) => {

@@ -7,7 +7,6 @@ const TisketListCard = () => {
   return (
     <div className={styles.main}>
       <div className={styles.leftBlock}>
-        {" "}
         <Image
           className={styles.img}
           src="https://api.remanga.org//media/titles/tales_of_demons_and_gods/high_cover.jpg"

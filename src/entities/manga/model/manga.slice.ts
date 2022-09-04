@@ -5,7 +5,7 @@ import { IGenre, IManga, ITag } from "../../../shared/api/reader/models";
 
 export const addNewManga = createAsyncThunk(
   "manga/addNewManga",
-  async (payload) => {
+  async (payload: FormData) => {
     return await MangaApi.createManga(payload);
   }
 );
@@ -14,8 +14,12 @@ export const getMangas = createAsyncThunk("manga/getMangas", async () => {
 });
 export const getManga = createAsyncThunk(
   "manga/getManga",
-  async (id: string | string[] | undefined) => {
-    return await MangaApi.getManga(id);
+  async (id: string | string[] | undefined, thunkAPI) => {
+    try {
+      return await MangaApi.getManga(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
 export const searchManga = createAsyncThunk(
@@ -36,6 +40,7 @@ interface MangaState {
   isSearchLoading: boolean;
   status: null | string;
   loading: boolean;
+  error: string;
 }
 const initialState: MangaState = {
   mangas: [],
@@ -44,6 +49,7 @@ const initialState: MangaState = {
   isSearchLoading: true,
   status: null,
   loading: true,
+  error: "",
 };
 const mangaSlice = createSlice({
   name: "manga",
@@ -66,6 +72,10 @@ const mangaSlice = createSlice({
       })
       .addCase(getManga.fulfilled, (state, action) => {
         state.manga = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(getManga.rejected, (state, action) => {
+        state.error = (action.payload as any).message;
         state.loading = false;
       })
       .addCase(searchManga.fulfilled, (state, action) => {

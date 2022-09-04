@@ -5,6 +5,7 @@ import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getChapters } from "../../model/chapter.slice";
 import {
+  selectChapterError,
   selectChapterLoading,
   selectChaptersData,
 } from "../../model/chapter.selector";
@@ -48,6 +49,7 @@ const ChapterList: FC<ChapterListProps> = memo(({ mangaId }) => {
   const chapters = useSelector(selectChaptersData);
   const loading = useSelector(selectChapterLoading);
   const dispatch = useDispatch();
+  const errorHandling = useSelector(selectChapterError);
   useEffect(() => {
     if (mangaId) {
       dispatch(getChapters(mangaId));
@@ -55,6 +57,7 @@ const ChapterList: FC<ChapterListProps> = memo(({ mangaId }) => {
   }, [mangaId]);
   return (
     <div className={styles.mainList}>
+      {errorHandling && <div>{errorHandling}</div>}
       {loading ? (
         <Spin />
       ) : chapters.length > 0 ? (

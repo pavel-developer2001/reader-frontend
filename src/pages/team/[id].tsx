@@ -47,10 +47,6 @@ const DynamicCardManga = dynamic(
 
 const { TabPane } = Tabs;
 
-function callback(key: string) {
-  console.log(key);
-}
-
 const Team = () => {
   const team = useSelector(selectTeamItemData);
   const loading = useSelector(selectTeamLoading);
@@ -60,7 +56,6 @@ const Team = () => {
         <Spin />
       ) : (
         <>
-          {" "}
           <div className={styles.header}>
             <div className={styles.avatar}>
               <Avatar
@@ -81,15 +76,14 @@ const Team = () => {
             </div>
           </div>
           <div>
-            {" "}
-            <Tabs defaultActiveKey="1" onChange={callback}>
+            <Tabs defaultActiveKey="1">
               <TabPane tab="Профиль" key="1">
                 <Paragraph>{team?.team?.teamDescription}</Paragraph>
                 <MemberBlock members={team?.members} />
               </TabPane>
               <TabPane tab="Тайтлы" key="2">
                 <div className={styles.mangaList}>
-                  {team?.mangas?.map((manga: any) => (
+                  {team?.mangas?.map((manga) => (
                     <DynamicCardManga key={manga.id} manga={manga.manga} />
                   ))}
                 </div>
@@ -97,7 +91,7 @@ const Team = () => {
               <TabPane tab="Лента" key="3">
                 <div className={styles.update}>
                   {team?.chapters?.length > 0 ? (
-                    team?.chapters?.map((chapter: any) => (
+                    team?.chapters?.map((chapter) => (
                       <UpdateListItem
                         key={chapter.id}
                         chapterId={chapter.chapter.id}
@@ -129,7 +123,7 @@ export const getServerSideProps: GetServerSideProps =
       "public, s-maxage=10, stale-while-revalidate=59"
     );
     try {
-      await store.dispatch(getTeam(params?.id));
+      await store.dispatch<any>(getTeam(params?.id));
       return {
         props: {},
       };

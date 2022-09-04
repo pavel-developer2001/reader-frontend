@@ -1,16 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import TeamApi from "../../../shared/api/reader/apis/teamApi";
-import { IChapter, IManga, IMember, ITeam, ITeamInvitationsForUser, ITeamsForManga, ITeamsForUser } from "../../../shared/api/reader/models";
+import { ITeam } from "../../../shared/api/reader/models";
+import { TeamState } from "./team.types";
 
 export const addNewTeam = createAsyncThunk(
   "team/addNewTeam",
-  async (payload: {
-    teamName: string;
-    teamSubtitle: string;
-    teamDescription: string;
-    userId: number;
-  }) => {
+  async (payload: FormData) => {
     return await TeamApi.createTeam(payload);
   }
 );
@@ -25,13 +21,13 @@ export const getTeam = createAsyncThunk(
 );
 export const getTeamsForUser = createAsyncThunk(
   "team/getTeamsForUser",
-  async (id: string) => {
+  async (id: number | null) => {
     return await TeamApi.getAllTeamsForUser(id);
   }
 );
 export const getTeamsForInvitations = createAsyncThunk(
   "team/getTeamsForInvitations",
-  async (id: string) => {
+  async (id: number | null) => {
     return await TeamApi.getAllTeamsForUser(id);
   }
 );
@@ -52,7 +48,11 @@ export const getTeamsForManga = createAsyncThunk(
 );
 export const addInvitation = createAsyncThunk(
   "team/addInvitation",
-  async (payload: { rank: string; teamId: number; userId: number }) => {
+  async (payload: {
+    rank: string;
+    teamId: string;
+    userId: string | string[] | undefined;
+  }) => {
     return await TeamApi.addInvitationForUser(payload);
   }
 );
@@ -68,7 +68,7 @@ export const agreeToJoin = createAsyncThunk(
     invitationId: number;
     rank: string;
     teamId: number;
-    userId: number;
+    userId: string | string[] | undefined;
   }) => {
     return await TeamApi.agreeToJoinToTeam(payload);
   }
@@ -81,30 +81,19 @@ export const refucalToJoin = createAsyncThunk(
 );
 export const removeMember = createAsyncThunk(
   "team/removeMember",
-  async (id: string) => {
+  async (id: number) => {
     return await TeamApi.deleteMemberFromTeam(id);
   }
 );
-interface TeamItems {
-  team: ITeam[];
-  members: IMember[];
-  mangas: IManga[];
-  chapters: IChapter[];
-}
-interface TeamState {
-  teams: ITeam[];
-  team: TeamItems;
-  teamsUser: ITeamsForUser[];
-  teamsManga: ITeamsForManga[];
-  teamInvitations: ITeamInvitationsForUser[];
-  status: null;
-  loading: boolean;
-  teamsForInvitations: ITeamsForUser[];
-  isLoadingForTeamInvitations: boolean;
-}
+
 const initialState: TeamState = {
   teams: [],
-  team: { team: [], members: [], mangas: [], chapters: [] },
+  team: {
+    team: {} as ITeam,
+    members: [],
+    mangas: [],
+    chapters: [],
+  },
   teamsUser: [],
   teamsManga: [],
   teamInvitations: [],
@@ -148,7 +137,7 @@ const teamSlice = createSlice({
         state.loading = false;
       })
       .addCase(connectMangaForTeam.fulfilled, (state, action) => {
-        state.team.mangas.push(action.payload.data);
+        state.team.mangas = action.payload.data;
       })
       .addCase(addInvitation.fulfilled, (state, action) => {
         state.teamInvitations.push(action.payload.data);

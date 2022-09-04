@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { getUpdateChapters } from "../../model/chapter.slice";
 import {
+  selectChapterError,
   selectChapterLoading,
   selectUpdateChapterData,
 } from "../../model/chapter.selector";
@@ -20,51 +21,55 @@ interface UpdateListItemProps {
   titleManga: string;
   date: string;
 }
-export const UpdateListItem: FC<UpdateListItemProps> = memo(({
-  chapterId,
-  volumeChapter,
-  numberChapter,
-  mangaId,
-  cover,
-  titleManga,
-  date,
-}) => {
-  return (
-    <div className={styles.item}>
-      <Link href={"/manga/" + mangaId}>
-        <a className={styles.leftBlock}>
-          <Image width={64} height={96} src={cover} alt="manga cover" />
-        </a>
-      </Link>
-
-      <div className={styles.rightBlock}>
+export const UpdateListItem: FC<UpdateListItemProps> = memo(
+  ({
+    chapterId,
+    volumeChapter,
+    numberChapter,
+    mangaId,
+    cover,
+    titleManga,
+    date,
+  }) => {
+    return (
+      <div className={styles.item}>
         <Link href={"/manga/" + mangaId}>
-          <a className={styles.title}>{titleManga}</a>
-        </Link>
-
-        <Link href={"/manga/" + mangaId + "/chapter/" + chapterId}>
-          <a className={styles.chapter}>
-            Том {volumeChapter}. Глава {numberChapter}.
+          <a className={styles.leftBlock}>
+            <Image width={64} height={96} src={cover} alt="manga cover" />
           </a>
         </Link>
 
-        <span className={styles.date}>{moment().from(date)} назад</span>
+        <div className={styles.rightBlock}>
+          <Link href={"/manga/" + mangaId}>
+            <a className={styles.title}>{titleManga}</a>
+          </Link>
+
+          <Link href={"/manga/" + mangaId + "/chapter/" + chapterId}>
+            <a className={styles.chapter}>
+              Том {volumeChapter}. Глава {numberChapter}.
+            </a>
+          </Link>
+
+          <span className={styles.date}>{moment().from(date)} назад</span>
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 const UpdateList = () => {
   const dispatch = useDispatch();
   const updateChapter = useSelector(selectUpdateChapterData);
   const loading = useSelector(selectChapterLoading);
+  const errorHandling = useSelector(selectChapterError);
   useEffect(() => {
     dispatch(getUpdateChapters());
   }, []);
   return (
     <div className={styles.list}>
+      {errorHandling && <div>{errorHandling}</div>}
       {loading ? (
-        <Spin /> 
+        <Spin />
       ) : updateChapter.length > 0 ? (
         updateChapter.map((lateChapter) => (
           <UpdateListItem

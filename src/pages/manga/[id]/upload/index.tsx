@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "../../../../app/styles/pages/Upload.module.scss";
 import { GetServerSideProps } from "next";
 import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   selectTeamLoading,
@@ -17,6 +17,8 @@ import { dataUser } from "../../../../shared/lib/utils/getDataUserFromToken";
 import MainLayout from "../../../../shared/ui/layouts/MainLayout";
 import { wrapper } from "../../../../app/store";
 import { addNewChapter } from "../../../../entities/chapter/model/chapter.slice";
+import { SelectValue } from "antd/lib/select";
+import { UploadFile } from "antd/lib/upload/interface";
 
 const { Option } = Select;
 
@@ -38,6 +40,12 @@ const AddNewChapterFormSchema = yup.object().shape({
   titleChapter: yup.string().required("Введите загаловок главы"),
   language: yup.string().required("Выберите язык перевода"),
 });
+type FormValues = {
+  numberChapter: any;
+  volumeChapter: any;
+  titleChapter: string;
+  language: string;
+};
 
 const AddNewChapter = () => {
   const {
@@ -45,15 +53,15 @@ const AddNewChapter = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(AddNewChapterFormSchema),
   });
   const router = useRouter();
   const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setPreviewTitle] = useState("");
-  const [imagesList, setImagesList] = useState<any>([]);
-  const mangaId: any = router.query.id;
+  const [previewImage, setPreviewImage] = useState<string | undefined>("");
+  const [previewTitle, setPreviewTitle] = useState<string | undefined>("");
+  const [imagesList, setImagesList] = useState<UploadFile<any>[]>([]);
+  const mangaId = router.query.id;
   const uploadButton = (
     <div>
       <div className={styles.plus}>+</div>
@@ -63,18 +71,19 @@ const AddNewChapter = () => {
     setPreviewVisible(false);
   };
 
-  const handlePreview = async (file: any) => {
+  const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
+      (file.preview as unknown) = await getBase64(file.originFileObj as Blob);
     }
     setPreviewImage(file.url || file.preview);
     setPreviewVisible(true);
     setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+      file.name || file.url?.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-  const handleChange = ({ fileList }: any) => setImagesList(fileList);
-  const [teamId, setTeamId] = useState<any>("");
+  const handleChange = ({ fileList }: { fileList: UploadFile<any>[] }) =>
+    setImagesList(fileList);
+  const [teamId, setTeamId] = useState<SelectValue>("");
   const teams = useSelector(selectTeamsUserData);
   const loading = useSelector(selectTeamLoading);
   useEffect(() => {
@@ -95,17 +104,20 @@ const AddNewChapter = () => {
     { lang: "Другой" },
   ];
   const dispatch = useDispatch();
-  const handleNewChapter = async (data: any) => {
+  const handleNewChapter: SubmitHandler<FormValues> = async (data) => {
     try {
       const formData = new FormData();
       formData.append("numberChapter", data.numberChapter);
       formData.append("volumeChapter", data.volumeChapter);
       formData.append("titleChapter", data.titleChapter);
       formData.append("language", data.language);
-      formData.append("mangaId", mangaId);
-      formData.append("teamId", teamId);
+      formData.append("mangaId", mangaId as string);
+      formData.append("teamId", teamId as string | Blob);
       for (let i = 0; i < imagesList.length; i++) {
-        formData.append("imagesList[]", imagesList[i].originFileObj);
+        formData.append(
+          "imagesList[]",
+          imagesList[i].originFileObj as string | Blob
+        );
       }
 
       dispatch(addNewChapter(formData));
@@ -167,8 +179,8 @@ const AddNewChapter = () => {
                     style={{ width: 200 }}
                     placeholder="Язык"
                     optionFilterProp="children"
-                    filterOption={(input, option: any) =>
-                      option.children
+                    filterOption={(input, option) =>
+                      option?.children
                         .toLowerCase()
                         .indexOf(input.toLowerCase()) >= 0
                     }
@@ -218,8 +230,8 @@ const AddNewChapter = () => {
                     placeholder="Выбрать команду"
                     optionFilterProp="children"
                     onChange={(value) => setTeamId(value)}
-                    filterOption={(input, option: any) =>
-                      option.children
+                    filterOption={(input, option) =>
+                      option?.children
                         .toLowerCase()
                         .indexOf(input.toLowerCase()) >= 0
                     }

@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message } from "antd";
 import { registerUsers } from "../../../../../model/user.slice";
+import { selectUserError } from "../../../../../model/user.selector";
 
 interface RegisterComponent {
   register: boolean;
@@ -27,6 +28,13 @@ const RegisterComponentFormSchema = yup.object().shape({
     .required(),
 });
 
+type FormValues = {
+  name: string;
+  email: string;
+  password: string;
+  password2: string;
+};
+
 const RegisterComponent: FC<RegisterComponent> = ({
   register,
   setIsModalVisible,
@@ -37,25 +45,25 @@ const RegisterComponent: FC<RegisterComponent> = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(RegisterComponentFormSchema),
   });
-  const handleRegistration = async (data: any) => {
-    try {
-      if (data.password !== data.password2) return alert("Пароли не совпадают");
-      if (data.password === data.password2) {
-        const payload = await {
-          name: data.name,
-          email: data.email,
-          password: data.password,
-        };
-        dispatch(registerUsers(payload));
-        reset();
-        message.success("Вы успешно создали свои аккаунт");
-        setIsModalVisible(false);
-      }
-    } catch (error: any) {
-      message.error("Произошла ошибка", error);
+  const errorHandling = useSelector(selectUserError);
+  useEffect(() => {
+    if (errorHandling) message.error(errorHandling);
+  }, [errorHandling]);
+  const handleRegistration: SubmitHandler<FormValues> = (data) => {
+    if (data.password !== data.password2) return alert("Пароли не совпадают");
+    if (data.password === data.password2) {
+      const payload = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      };
+      dispatch(registerUsers(payload));
+      reset();
+      //  message.success("Вы успешно создали свои аккаунт");
+      setIsModalVisible(false);
     }
   };
   return (

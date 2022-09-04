@@ -15,9 +15,12 @@ import { Spin } from "antd";
 const DynamicMobile = dynamic(() => import("../../shared/ui/devices/Mobile"), {
   loading: () => <Spin />,
 });
-const DynamicDesktop = dynamic(() => import("../../shared/ui/devices/Desktop"), {
-  loading: () => <Spin />,
-});
+const DynamicDesktop = dynamic(
+  () => import("../../shared/ui/devices/Desktop"),
+  {
+    loading: () => <Spin />,
+  }
+);
 const DynamicAvatarDrawer = dynamic(
   () => import("../Navbar/components/AvatarDrawer"),
   {
@@ -70,7 +73,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
               </Link>
             </div>
             <div className={styles.center}>
-              {id <= 0 ? null : <CaretLeftOutlined />}
+              {/* {id <= 0 ? null : <CaretLeftOutlined />} */}
               <span># {page}</span>
               <CaretRightOutlined />
             </div>
@@ -97,7 +100,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
               </Link>
             </div>
             <div className={styles.center}>
-              {id <= 0 ? null : <CaretLeftOutlined />}
+              {/* {id <= 0 ? null : <CaretLeftOutlined />} */}
               <span># {page}</span>
               <CaretRightOutlined />
             </div>

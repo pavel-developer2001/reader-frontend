@@ -7,9 +7,12 @@ import { useDebounce } from "../../shared/lib/hooks/useDebounce";
 import { useDispatch } from "react-redux";
 import { searchManga } from "../../entities/manga/model/manga.slice";
 
-const DynamicFoundBlock = dynamic(() => import("../../entities/manga/ui/FoundBlock"), {
-  loading: () => <Spin />,
-});
+const DynamicFoundBlock = dynamic(
+  () => import("../../entities/manga/ui/FoundBlock"),
+  {
+    loading: () => <Spin />,
+  }
+);
 
 const SearchModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -20,7 +23,6 @@ const SearchModal = () => {
   useEffect(() => {
     if (debouncedSearchTerm) {
       const params = { title: value };
-      //@ts-ignore
       dispatch(searchManga(params));
     }
   }, [debouncedSearchTerm]);

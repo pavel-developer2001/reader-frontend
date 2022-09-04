@@ -1,10 +1,12 @@
 import { Button, Form, Input, message } from "antd";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginUsers } from "../../../../../model/user.slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserError } from "../../../../../model/user.selector";
+import { SubmitHandler } from "react-hook-form/dist/types";
 
 interface LoginProps {
   setRegister: (arg: boolean) => void;
@@ -17,6 +19,10 @@ const LoginComponentFormSchema = yup.object().shape({
     .min(6, "​Минимальная длина пароля 6 символов")
     .required(),
 });
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
   const dispatch = useDispatch();
@@ -25,21 +31,21 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(LoginComponentFormSchema),
   });
-  const handleLogin = async (data: any) => {
-    try {
-      const payload = await {
-        email: data.email,
-        password: data.password,
-      };
-      dispatch(loginUsers(payload));
-      message.success("Вы успешно вошли в свой аккаунт");
-      reset();
-    } catch (error: any) {
-      message.error("Произошла ошибка", error);
-    }
+  const errorHandling = useSelector(selectUserError);
+  useEffect(() => {
+    if (errorHandling) message.error(errorHandling);
+  }, [errorHandling]);
+  const handleLogin: SubmitHandler<FormValues> = (data) => {
+    const payload = {
+      email: data.email,
+      password: data.password,
+    };
+    dispatch(loginUsers(payload));
+    // message.success("Вы успешно вошли в свой аккаунт");
+    reset();
   };
   return (
     <form onSubmit={handleSubmit(handleLogin)}>

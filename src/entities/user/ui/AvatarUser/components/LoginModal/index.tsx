@@ -7,7 +7,7 @@ interface LoginModalProps {
   isModalVisible: boolean | undefined;
   handleOk: () => void;
   handleCancel: () => void;
-  setIsModalVisible: any;
+  setIsModalVisible: (arg: boolean) => void;
 }
 const LoginModal: FC<LoginModalProps> = ({
   isModalVisible,

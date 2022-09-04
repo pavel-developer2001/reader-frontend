@@ -6,7 +6,11 @@ import { useSelector } from "react-redux";
 import styles from "../../../../app/styles/pages/Chapter.module.scss";
 import { Spin } from "antd";
 import dynamic from "next/dynamic";
-import { selectChapterImagesData, selectChapterLoading } from "../../../../entities/chapter/model/chapter.selector";
+import {
+  selectChapterError,
+  selectChapterImagesData,
+  selectChapterLoading,
+} from "../../../../entities/chapter/model/chapter.selector";
 import { wrapper } from "../../../../app/store";
 import { getImages } from "../../../../entities/chapter/model/chapter.slice";
 
@@ -24,7 +28,7 @@ const Chapter = () => {
   const router = useRouter();
   const mangaId = router.query?.id;
   const images = useSelector(selectChapterImagesData);
-  console.log("IMAGES", images);
+  const errorHandling = useSelector(selectChapterError);
   const loading = useSelector(selectChapterLoading);
 
   return loading ? (
@@ -36,6 +40,7 @@ const Chapter = () => {
       page={images[0]?.chapter?.numberChapter}
     >
       <div className={styles.main}>
+        {errorHandling && <div>{errorHandling}</div>}
         {images?.map((image) => (
           <Image
             key={image.id}
@@ -57,7 +62,7 @@ export const getServerSideProps: GetServerSideProps =
       "public, s-maxage=10, stale-while-revalidate=59"
     );
     try {
-      await store.dispatch(getImages(params.chapterId));
+      await store.dispatch<any>(getImages(params?.chapterId));
       return {
         props: {},
       };

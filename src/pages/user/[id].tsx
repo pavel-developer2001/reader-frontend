@@ -169,7 +169,7 @@ export const getServerSideProps: GetServerSideProps =
       "public, s-maxage=10, stale-while-revalidate=59"
     );
     try {
-      await store.dispatch(getUserData(params.id));
+      await store.dispatch<any>(getUserData(params?.id));
       return {
         props: {},
       };

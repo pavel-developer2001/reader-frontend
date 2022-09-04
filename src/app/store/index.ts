@@ -1,4 +1,4 @@
-import { configureStore, ThunkAction, Action, Store } from "@reduxjs/toolkit";
+import { configureStore, Store } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { rootReducer, RootState } from "./reducer";
 

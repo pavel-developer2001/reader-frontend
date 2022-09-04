@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
 import { wrapper } from "../../app/store";
+import { getMangas } from "../../entities/manga/model/manga.slice";
 
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
@@ -25,8 +26,7 @@ export const getServerSideProps: GetServerSideProps =
       "public, s-maxage=10, stale-while-revalidate=59"
     );
     try {
-      //@ts-ignore
-      await store.dispatch(getMangas());
+      await store.dispatch<any>(getMangas());
       return {
         props: {},
       };

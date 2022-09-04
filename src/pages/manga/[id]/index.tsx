@@ -145,7 +145,7 @@ export const getServerSideProps: GetServerSideProps =
       "public, s-maxage=10, stale-while-revalidate=59"
     );
     try {
-      await store.dispatch(getManga(params.id));
+      await store.dispatch<any>(getManga(params?.id));
       return {
         props: {},
       };

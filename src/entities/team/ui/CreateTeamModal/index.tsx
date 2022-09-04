@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { addNewTeam } from "../../model/team.slice";
 import styles from "./CreateTeamModal.module.scss";
 import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const CreateTeamModalFormSchema = yup.object().shape({
@@ -14,6 +14,11 @@ const CreateTeamModalFormSchema = yup.object().shape({
   teamSubtitle: yup.string().required("Введите подзагаловок команды"),
   teamDescription: yup.string().required("Введите описание команды"),
 });
+type FormValues = {
+  teamName: string;
+  teamSubtitle: string;
+  teamDescription: string;
+};
 
 const CreateTeamModal = () => {
   const {
@@ -21,7 +26,7 @@ const CreateTeamModal = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(CreateTeamModalFormSchema),
   });
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -43,14 +48,14 @@ const CreateTeamModal = () => {
   /////////////////////////////////////////////
   const [teamCover, setTeamCover] = useState("");
 
-  const handleAddTeam = async (data: any) => {
+  const handleAddTeam: SubmitHandler<FormValues> = async (data) => {
     try {
       const formData = new FormData();
       formData.append("teamName", data.teamName);
       formData.append("teamSubtitle", data.teamSubtitle);
       formData.append("teamDescription", data.teamDescription);
       formData.append("teamCover", teamCover);
-     
+
       dispatch(addNewTeam(formData));
       message.success("Команда была создана");
       reset();
@@ -69,12 +74,12 @@ const CreateTeamModal = () => {
     </div>
   );
 
-  function getBase64(img: any, callback: any) {
+  function getBase64(img: Blob, callback: any) {
     const reader = new FileReader();
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(img);
   }
-  function beforeUpload(file: any) {
+  function beforeUpload(file: File) {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
       message.error("You can only upload JPG/PNG file!");
@@ -92,7 +97,7 @@ const CreateTeamModal = () => {
       return;
     }
     if (e.file.status === "done") {
-      getBase64(e.file.originFileObj, (imageUrl: any) => {
+      getBase64(e.file.originFileObj, (imageUrl: string) => {
         setImageUrl(imageUrl);
         setLoading(false);
       });

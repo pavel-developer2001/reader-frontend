@@ -1,11 +1,12 @@
 import Select from "antd/lib/select";
 import React, { FC } from "react";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import styles from "./SelectTypesForManga.module.scss";
 
 const { Option } = Select;
 
 interface SelectTypesForMangaProps {
-  field: any;
+  field: ControllerRenderProps<FieldValues, "typeManga">;
 }
 
 const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({ field }) => {
@@ -25,11 +26,11 @@ const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({ field }) => {
         style={{ width: 200 }}
         placeholder="Типы"
         optionFilterProp="children"
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        filterOption={(input, option) =>
+          option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {typesArray.map((type, index) => (
+        {typesArray.map((type) => (
           <Option value={type.value} key={type.value}>
             {type.title}
           </Option>

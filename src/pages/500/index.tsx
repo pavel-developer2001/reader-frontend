@@ -2,13 +2,16 @@ import { Spin } from "antd";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const DynamicMainLayout = dynamic(() => import("../../layouts/MainLayout"), {
-  loading: () => (
-    <div className="loader-block">
-      <Spin size="large" />
-    </div>
-  ),
-});
+const DynamicMainLayout = dynamic(
+  () => import("../../shared/ui/layouts/MainLayout"),
+  {
+    loading: () => (
+      <div className="loader-block">
+        <Spin size="large" />
+      </div>
+    ),
+  }
+);
 
 const Custom500 = () => {
   return (
