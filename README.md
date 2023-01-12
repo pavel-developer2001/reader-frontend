@@ -37,6 +37,4 @@ yarn dev
 ```
 
 - 3 Нужно запустить backend:
-Новая версия бекэнда проекта [здесь](https://github.com/pavel-developer2001/reader-backend-nest).
-
-Старая версия бекэнда  проекта [здесь](https://github.com/pavel-developer2001/reader-backend).
+Backend проекта [здесь](https://github.com/pavel-developer2001/reader-backend-nest).
