@@ -36,7 +36,7 @@ npm run dev
 yarn dev
 ```
 
-!!! Для полноценной работы, надо поднять бекэнд.
-Новая версия бекэнда этого проекта [здесь](https://github.com/pavel-developer2001/reader-backend-nest).
+- 3 Нужно запустить backend:
+Новая версия бекэнда проекта [здесь](https://github.com/pavel-developer2001/reader-backend-nest).
 
-Старая версия бекэнда этого проекта [здесь](https://github.com/pavel-developer2001/reader-backend).
+Старая версия бекэнда  проекта [здесь](https://github.com/pavel-developer2001/reader-backend).
