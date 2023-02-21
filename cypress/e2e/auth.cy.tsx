@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe("Testing", () => {
   it("auth testing, comment testing", () => {
     cy.visit("/");
