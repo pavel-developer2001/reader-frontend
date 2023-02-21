@@ -1,12 +1,12 @@
-import Select from "antd/lib/select";
-import React, { FC } from "react";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import styles from "./SelectAgeRatingForManga.module.scss";
+import Select from "antd/lib/select"
+import React, { FC } from "react"
+import { ControllerRenderProps, FieldValues } from "react-hook-form"
+import styles from "./SelectAgeRatingForManga.module.scss"
 
-const { Option } = Select;
+const { Option } = Select
 
 interface SelectAgeRatingForMangaProps {
-  field: ControllerRenderProps<FieldValues, "ageRatingManga">;
+  field: ControllerRenderProps<FieldValues, "ageRatingManga">
 }
 
 const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({
@@ -16,7 +16,7 @@ const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({
     { value: "Для всех", title: "Для всех" },
     { value: "16+", title: "16+" },
     { value: "18+", title: "18+" },
-  ];
+  ]
   return (
     <>
       {" "}
@@ -38,7 +38,7 @@ const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({
         ))}
       </Select>
     </>
-  );
-};
+  )
+}
 
-export default SelectAgeRatingForManga;
+export default SelectAgeRatingForManga

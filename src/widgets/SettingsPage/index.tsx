@@ -3,9 +3,9 @@ import {
   HeartOutlined,
   MessageOutlined,
   OrderedListOutlined,
-} from "@ant-design/icons";
-import React from "react";
-import styles from "./SettingsPage.module.scss";
+} from "@ant-design/icons"
+import React from "react"
+import styles from "./SettingsPage.module.scss"
 
 const SettingPage = () => {
   return (
@@ -26,7 +26,7 @@ const SettingPage = () => {
         <ExclamationCircleOutlined />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SettingPage;
+export default SettingPage

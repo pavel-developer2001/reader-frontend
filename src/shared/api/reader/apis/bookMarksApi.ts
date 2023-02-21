@@ -1,23 +1,22 @@
-import ReaderApi from "../base";
-
+import ReaderApi from "../base"
 
 export default class BookMarksApi {
   static async addBookMarkForUser(payload: {
-    category: string;
-    mangaId: number;
+    category: string
+    mangaId: number
   }) {
-    return ReaderApi.post("/marks/add", payload);
+    return ReaderApi.post("/marks/add", payload)
   }
   static async getAllBookMarksForUser(id: string | string[] | undefined) {
-    return ReaderApi.get("/marks/" + id);
+    return ReaderApi.get("/marks/" + id)
   }
   static async updateBookMark(payload: { category: string; mangaId: number }) {
-    return ReaderApi.patch(`/marks/change`, payload);
+    return ReaderApi.patch(`/marks/change`, payload)
   }
   static async getBookMarkForManga(id: string | string[] | undefined) {
-    return ReaderApi.get("/marks/manga/" + id);
+    return ReaderApi.get("/marks/manga/" + id)
   }
   static async getBookMarkCountForManga(id: string | string[] | undefined) {
-    return ReaderApi.get("/marks/count/" + id);
+    return ReaderApi.get("/marks/count/" + id)
   }
 }

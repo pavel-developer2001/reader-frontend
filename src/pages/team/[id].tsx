@@ -1,18 +1,18 @@
-import { Avatar, Spin, Typography } from "antd";
-const { Title, Paragraph, Text } = Typography;
-import React from "react";
-import { Tabs } from "antd";
-import { useSelector } from "react-redux";
-import { GetServerSideProps } from "next";
-import dynamic from "next/dynamic";
-import styles from "../../app/styles/pages/Team.module.scss";
-import { wrapper } from "../../app/store";
+import { Avatar, Spin, Typography } from "antd"
+const { Title, Paragraph, Text } = Typography
+import React from "react"
+import { Tabs } from "antd"
+import { useSelector } from "react-redux"
+import { GetServerSideProps } from "next"
+import dynamic from "next/dynamic"
+import styles from "../../app/styles/pages/Team.module.scss"
+import { wrapper } from "../../app/store"
 import {
   selectTeamItemData,
   selectTeamLoading,
-} from "../../entities/team/model/team.selector";
-import { getTeam } from "../../entities/team/model/team.slice";
-import { UpdateListItem } from "../../entities/chapter/ui/UpdateList";
+} from "../../entities/team/model/team.selector"
+import { getTeam } from "../../entities/team/model/team.slice"
+import { UpdateListItem } from "../../entities/chapter/ui/UpdateList"
 
 const MemberBlock = dynamic(
   () => import("../../entities/team/ui/MemberBlock"),
@@ -23,7 +23,7 @@ const MemberBlock = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
   {
@@ -33,7 +33,7 @@ const DynamicMainLayout = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicCardManga = dynamic(
   () => import("../../entities/manga/ui/CardManga"),
   {
@@ -43,13 +43,13 @@ const DynamicCardManga = dynamic(
       </div>
     ),
   }
-);
+)
 
-const { TabPane } = Tabs;
+const { TabPane } = Tabs
 
 const Team = () => {
-  const team = useSelector(selectTeamItemData);
-  const loading = useSelector(selectTeamLoading);
+  const team = useSelector(selectTeamItemData)
+  const loading = useSelector(selectTeamLoading)
   return (
     <DynamicMainLayout>
       {loading ? (
@@ -113,25 +113,25 @@ const Team = () => {
         </>
       )}
     </DynamicMainLayout>
-  );
-};
+  )
+}
 
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async ({ params, res }) => {
     res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"
-    );
+    )
     try {
-      await store.dispatch<any>(getTeam(params?.id));
+      await store.dispatch<any>(getTeam(params?.id))
       return {
         props: {},
-      };
+      }
     } catch (error) {
-      console.log("ERROR!", error);
+      console.log("ERROR!", error)
       return {
         props: {},
-      };
+      }
     }
-  });
-export default Team;
+  })
+export default Team

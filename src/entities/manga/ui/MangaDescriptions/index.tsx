@@ -1,17 +1,20 @@
-import { Spin, Tag } from "antd";
-import React, { FC, memo } from "react";
-import styles from "./MangaDescriptions.module.scss";
-import dynamic from "next/dynamic";
-import { IGenre, ITag } from "../../../../shared/api/reader/models";
+import { Spin, Tag } from "antd"
+import React, { FC, memo } from "react"
+import styles from "./MangaDescriptions.module.scss"
+import dynamic from "next/dynamic"
+import { IGenre, ITag } from "../../../../shared/api/reader/models"
 
-const DynamicAuthorBlock = dynamic(() => import("../../../../shared/ui/AuthorBlock"), {
-  loading: () => <Spin />,
-});
+const DynamicAuthorBlock = dynamic(
+  () => import("../../../../shared/ui/AuthorBlock"),
+  {
+    loading: () => <Spin />,
+  }
+)
 
 interface MangaDescriptionsProps {
-  mangaDescription: string;
-  tags: ITag[];
-  genres: IGenre[];
+  mangaDescription: string
+  tags: ITag[]
+  genres: IGenre[]
 }
 const MangaDescriptions: FC<MangaDescriptionsProps> = memo(
   ({ mangaDescription, tags, genres }) => {
@@ -36,8 +39,8 @@ const MangaDescriptions: FC<MangaDescriptionsProps> = memo(
           </div>
         </div>
       </div>
-    );
+    )
   }
-);
+)
 
-export default MangaDescriptions;
+export default MangaDescriptions

@@ -1,6 +1,6 @@
-import { configureStore, Store } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
-import { rootReducer, RootState } from "./reducer";
+import { configureStore, Store } from "@reduxjs/toolkit"
+import { createWrapper } from "next-redux-wrapper"
+import { rootReducer, RootState } from "./reducer"
 
 export const makeStore = (): Store<RootState> =>
   configureStore({
@@ -9,6 +9,6 @@ export const makeStore = (): Store<RootState> =>
       getDefaultMiddleware({
         serializableCheck: false,
       }),
-  });
+  })
 
-export const wrapper = createWrapper(makeStore, { debug: true });
+export const wrapper = createWrapper(makeStore, { debug: true })

@@ -1,12 +1,12 @@
-import Select from "antd/lib/select";
-import React, { FC } from "react";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import styles from "./SelectTypesForManga.module.scss";
+import Select from "antd/lib/select"
+import React, { FC } from "react"
+import { ControllerRenderProps, FieldValues } from "react-hook-form"
+import styles from "./SelectTypesForManga.module.scss"
 
-const { Option } = Select;
+const { Option } = Select
 
 interface SelectTypesForMangaProps {
-  field: ControllerRenderProps<FieldValues, "typeManga">;
+  field: ControllerRenderProps<FieldValues, "typeManga">
 }
 
 const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({ field }) => {
@@ -16,7 +16,7 @@ const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({ field }) => {
     { value: "Маньхуа", title: "Маньхуа" },
     { value: "Западный комикс", title: "Западный комикс" },
     { value: "Рукомикс", title: "Рукомикс" },
-  ];
+  ]
   return (
     <>
       <span className={styles.text}>Тип</span>
@@ -37,7 +37,7 @@ const SelectTypesForManga: FC<SelectTypesForMangaProps> = ({ field }) => {
         ))}
       </Select>
     </>
-  );
-};
+  )
+}
 
-export default SelectTypesForManga;
+export default SelectTypesForManga

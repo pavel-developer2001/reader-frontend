@@ -1,70 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { Modal, message, Spin } from "antd";
-import { StarFilled } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/dist/client/router";
-import {
-  addRating,
-  getRating,
-  updateRating,
-} from "../../model/rating.slice";
+import React, { useEffect, useState } from "react"
+import { Modal, message, Spin } from "antd"
+import { StarFilled } from "@ant-design/icons"
+import { useDispatch, useSelector } from "react-redux"
+import { useRouter } from "next/dist/client/router"
+import { addRating, getRating, updateRating } from "../../model/rating.slice"
 import {
   selectRatingItemData,
   selectRatingLoading,
-} from "../../model/rating.selector";
-import styles from "./Rating.module.scss";
-import RatingCount from "./components/RatingCount";
+} from "../../model/rating.selector"
+import styles from "./Rating.module.scss"
+import RatingCount from "./components/RatingCount"
 
 const Rating = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [ratingCount, setRatingCount] = useState<null | number>(null);
-  const rating = useSelector(selectRatingItemData);
-  const loading = useSelector(selectRatingLoading);
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [ratingCount, setRatingCount] = useState<null | number>(null)
+  const rating = useSelector(selectRatingItemData)
+  const loading = useSelector(selectRatingLoading)
   const dataManga: { id: string | string[] | undefined } = {
     id: router.query.id,
-  };
+  }
   useEffect(() => {
-    dispatch(getRating(dataManga));
-  }, [router]);
+    dispatch(getRating(dataManga))
+  }, [router])
   const payload: {
-    rating: number | null;
-    mangaId: string | string[] | undefined;
+    rating: number | null
+    mangaId: string | string[] | undefined
   } = {
     rating: ratingCount,
     mangaId: router.query.id,
-  };
+  }
   useEffect(() => {
     if (ratingCount && !rating) {
-      setIsModalVisible(false);
-      dispatch(addRating(payload));
-      message.success("Ваша оценка для манги была добавлена");
+      setIsModalVisible(false)
+      dispatch(addRating(payload))
+      message.success("Ваша оценка для манги была добавлена")
     }
     if (ratingCount && rating) {
-      dispatch(updateRating(payload));
-      message.success("Ваша оценка была успешна обновлена");
-      setIsModalVisible(false);
+      dispatch(updateRating(payload))
+      message.success("Ваша оценка была успешна обновлена")
+      setIsModalVisible(false)
     }
-  }, [ratingCount]);
+  }, [ratingCount])
   const ratingArray = [
     { count: 5, text: "ЭТО ШЕДЕВР!" },
     { count: 4, text: "Отлично" },
     { count: 3, text: "Нормас" },
     { count: 2, text: "Убожество" },
     { count: 1, text: "Не стоит потраченного времени" },
-  ];
+  ]
   const showModal = () => {
-    setIsModalVisible(true);
-  };
+    setIsModalVisible(true)
+  }
 
   const handleOk = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
 
   const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
   return (
     <div>
       {loading ? (
@@ -96,7 +92,7 @@ const Rating = () => {
         ))}
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default Rating;
+export default Rating

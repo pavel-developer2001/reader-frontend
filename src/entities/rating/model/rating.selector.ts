@@ -1,17 +1,15 @@
-import { RootState } from "../../../app/store/reducer";
-import { IRating } from "../../../shared/api/reader/models";
+import { RootState } from "../../../app/store/reducer"
+import { IRating } from "../../../shared/api/reader/models"
 
-
-export const selectRating = (state: RootState) => state.rating;
+export const selectRating = (state: RootState) => state.rating
 
 export const selectRatingItemData = (state: RootState): IRating =>
-  selectRating(state).rating;
+  selectRating(state).rating
 
 export const selectRatingLoading = (state: RootState): boolean =>
-  selectRating(state).loading;
+  selectRating(state).loading
 
 export const selectRatingCountLoading = (state: RootState): boolean =>
-  selectRating(state).isLoadingForRating;
+  selectRating(state).isLoadingForRating
 
-export const selectRatingCount = (state: RootState) =>
-  selectRating(state).count;
+export const selectRatingCount = (state: RootState) => selectRating(state).count

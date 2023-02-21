@@ -1,79 +1,79 @@
-import { EditOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons";
-import { Button, message, Spin, Tooltip } from "antd";
-import Image from "next/image";
-import { Select } from "antd";
-import { useRouter } from "next/dist/client/router";
-import Link from "next/link";
-import React, { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { EditOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons"
+import { Button, message, Spin, Tooltip } from "antd"
+import Image from "next/image"
+import { Select } from "antd"
+import { useRouter } from "next/dist/client/router"
+import Link from "next/link"
+import React, { FC, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import {
   addBookMark,
   getBookMarkToManga,
   updateBookMark,
-} from "../../../bookmark/model/bookMark.slice";
+} from "../../../bookmark/model/bookMark.slice"
 import {
   selectBookMarkItemData,
   selectBookMarkLoading,
-} from "../../../bookmark/model/bookMark.selector";
-import { selectUserToken } from "../../../user/model/user.selector";
-import styles from "./MangaSettings.module.scss";
-import dynamic from "next/dynamic";
+} from "../../../bookmark/model/bookMark.selector"
+import { selectUserToken } from "../../../user/model/user.selector"
+import styles from "./MangaSettings.module.scss"
+import dynamic from "next/dynamic"
 
 const DynamicAddMangaForTeam = dynamic(
   () => import("../../../../features/AddMangaForTeam"),
   {
     loading: () => <Spin />,
   }
-);
+)
 interface MangaSettingsProps {
-  cover: string;
-  id: number;
+  cover: string
+  id: number
 }
 const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
-  const dispatch = useDispatch();
-  const token = useSelector(selectUserToken);
-  const bookMark = useSelector(selectBookMarkItemData);
-  const loading = useSelector(selectBookMarkLoading);
-  const { Option } = Select;
+  const dispatch = useDispatch()
+  const token = useSelector(selectUserToken)
+  const bookMark = useSelector(selectBookMarkItemData)
+  const loading = useSelector(selectBookMarkLoading)
+  const { Option } = Select
 
   function onBlur() {
-    console.log("blur");
+    console.log("blur")
   }
 
   function onFocus() {
-    console.log("focus");
+    console.log("focus")
   }
   const changeMark = async (value: string) => {
-    setCategory(value);
-    const payload = await { category: value, mangaId: id };
+    setCategory(value)
+    const payload = await { category: value, mangaId: id }
     if (!bookMark) {
-      await dispatch(addBookMark(payload));
-      message.success("Манга добавлена в закладки");
+      await dispatch(addBookMark(payload))
+      message.success("Манга добавлена в закладки")
     }
     if (bookMark && payload.category != "Удалить из закладок") {
-      await dispatch(updateBookMark(payload));
-      message.success("Манга была добавлена в другую категорию закладкок");
+      await dispatch(updateBookMark(payload))
+      message.success("Манга была добавлена в другую категорию закладкок")
     }
     if (payload.category == "Удалить из закладок") {
-      await dispatch(addBookMark(payload));
-      message.success("Манга была удалена из закладок");
+      await dispatch(addBookMark(payload))
+      message.success("Манга была удалена из закладок")
     }
-  };
+  }
 
   function onSearch(val: string) {
-    console.log("search:", val);
+    console.log("search:", val)
   }
-  const router = useRouter();
-  const [category, setCategory] = useState("");
+  const router = useRouter()
+  const [category, setCategory] = useState("")
 
   const dataManga: { mangaId: string | string[] | undefined } = {
     mangaId: router.query.id,
-  };
+  }
   useEffect(() => {
     if (token) {
-      dispatch(getBookMarkToManga(dataManga));
+      dispatch(getBookMarkToManga(dataManga))
     }
-  }, [router, loading]);
+  }, [router, loading])
   return (
     <>
       <div className={styles.card}>
@@ -176,7 +176,7 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default MangaSettings;
+export default MangaSettings

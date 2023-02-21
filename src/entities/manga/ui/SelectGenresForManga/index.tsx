@@ -1,12 +1,12 @@
-import Select from "antd/lib/select";
-import React, { FC } from "react";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import styles from "./SelectGenresForManga.module.scss";
+import Select from "antd/lib/select"
+import React, { FC } from "react"
+import { ControllerRenderProps, FieldValues } from "react-hook-form"
+import styles from "./SelectGenresForManga.module.scss"
 
-const { Option } = Select;
+const { Option } = Select
 
 interface SelectGenresForMangaProps {
-  field: ControllerRenderProps<FieldValues, "genres">;
+  field: ControllerRenderProps<FieldValues, "genres">
 }
 
 const SelectGenresForManga: FC<SelectGenresForMangaProps> = ({ field }) => {
@@ -23,15 +23,15 @@ const SelectGenresForManga: FC<SelectGenresForMangaProps> = ({ field }) => {
     { value: "Фантастика", title: "Фантастика" },
     { value: "Триллер", title: "Триллер" },
     { value: "Этти", title: "Этти" },
-  ];
-  const childrenGenres = [];
+  ]
+  const childrenGenres = []
   childrenGenres.push(
     genresArray.map((genres) => (
       <Option value={genres.value} key={genres.value.toString()}>
         {genres.title.toString()}
       </Option>
     ))
-  );
+  )
   return (
     <>
       <span className={styles.text}>Жанры</span>
@@ -46,7 +46,7 @@ const SelectGenresForManga: FC<SelectGenresForMangaProps> = ({ field }) => {
         {childrenGenres}
       </Select>
     </>
-  );
-};
+  )
+}
 
-export default SelectGenresForManga;
+export default SelectGenresForManga

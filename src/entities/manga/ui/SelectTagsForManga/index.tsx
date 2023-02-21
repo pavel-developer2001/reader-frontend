@@ -1,11 +1,11 @@
-import Select from "antd/lib/select";
-import React, { FC } from "react";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import styles from "./SelectTagsForManga.module.scss";
-const { Option } = Select;
+import Select from "antd/lib/select"
+import React, { FC } from "react"
+import { ControllerRenderProps, FieldValues } from "react-hook-form"
+import styles from "./SelectTagsForManga.module.scss"
+const { Option } = Select
 
 interface SelectTagsForMangaProps {
-  field: ControllerRenderProps<FieldValues, "tags">;
+  field: ControllerRenderProps<FieldValues, "tags">
 }
 
 const SelectTagsForManga: FC<SelectTagsForMangaProps> = ({ field }) => {
@@ -25,15 +25,15 @@ const SelectTagsForManga: FC<SelectTagsForMangaProps> = ({ field }) => {
     { value: "Система", title: "Система" },
     { value: "Владыка демона", title: "Владыка демона" },
     { value: "ГГ имба", title: "ГГ имба" },
-  ];
-  const childrenTags = [];
+  ]
+  const childrenTags = []
   childrenTags.push(
     tagsArray.map((genres) => (
       <Option value={genres.value} key={genres.value.toString()}>
         {genres.title.toString()}
       </Option>
     ))
-  );
+  )
   return (
     <>
       <span className={styles.text}>Категории</span>
@@ -48,7 +48,7 @@ const SelectTagsForManga: FC<SelectTagsForMangaProps> = ({ field }) => {
         {childrenTags}
       </Select>
     </>
-  );
-};
+  )
+}
 
-export default SelectTagsForManga;
+export default SelectTagsForManga

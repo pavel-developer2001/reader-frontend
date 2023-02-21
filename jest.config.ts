@@ -1,8 +1,8 @@
-import nextJest from "next/jest";
+import nextJest from "next/jest"
 
 const createJestConfig = nextJest({
   dir: "./",
-});
+})
 
 const customJestConfig = {
   // moduleDirectories: ["node_modules", "<rootDir>/"],
@@ -19,6 +19,6 @@ const customJestConfig = {
     "^.+\\.svg$": "jest-svg-transformer",
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
   },
-};
+}
 
-module.exports = createJestConfig(customJestConfig);
+module.exports = createJestConfig(customJestConfig)

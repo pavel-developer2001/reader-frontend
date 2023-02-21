@@ -1,30 +1,30 @@
-import { Spin } from "antd";
-import dynamic from "next/dynamic";
-import React from "react";
-import styles from "./AuthModal.module.scss";
+import { Spin } from "antd"
+import dynamic from "next/dynamic"
+import React from "react"
+import styles from "./AuthModal.module.scss"
 
 const DynamicLoginModal = dynamic(
   () => import("../AvatarUser/components/LoginModal"),
   { loading: () => <Spin /> }
-);
+)
 
 const AuthModal = () => {
-  const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false)
 
   const showModal = () => {
-    setIsModalVisible(true);
-  };
+    setIsModalVisible(true)
+  }
 
   const handleOk = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
 
   const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
   return (
     <>
-      <div data-testid='authModal' className={styles.menu} onClick={showModal}>
+      <div data-testid="authModal" className={styles.menu} onClick={showModal}>
         Войти
       </div>
       <DynamicLoginModal
@@ -34,7 +34,7 @@ const AuthModal = () => {
         handleCancel={handleCancel}
       />
     </>
-  );
-};
+  )
+}
 
-export default AuthModal;
+export default AuthModal

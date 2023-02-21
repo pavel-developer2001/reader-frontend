@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { message, Button } from "antd";
-import TextArea from "rc-textarea";
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/dist/client/router";
-import styles from "../../app/styles/pages/CreateManga.module.scss";
-import { GetServerSideProps } from "next";
-import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import MainLayout from "../../shared/ui/layouts/MainLayout";
-import UploadImageForManga from "../../entities/manga/ui/UploadImageForManga";
-import SelectTypesForManga from "../../entities/manga/ui/SelectTypesForManga";
-import SelectStatusTranslateForManga from "../../entities/manga/ui/SelectStatusTranslateForManga";
-import SelectTagsForManga from "../../entities/manga/ui/SelectTagsForManga";
-import SelectAgeRatingForManga from "../../entities/manga/ui/SelectAgeRatingForManga";
-import SelectGenresForManga from "../../entities/manga/ui/SelectGenresForManga";
-import { wrapper } from "../../app/store";
-import { addNewManga } from "../../entities/manga/model/manga.slice";
+import React, { useState } from "react"
+import { message, Button } from "antd"
+import TextArea from "rc-textarea"
+import { useDispatch } from "react-redux"
+import { useRouter } from "next/dist/client/router"
+import styles from "../../app/styles/pages/CreateManga.module.scss"
+import { GetServerSideProps } from "next"
+import * as yup from "yup"
+import { useForm, Controller } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import MainLayout from "../../shared/ui/layouts/MainLayout"
+import UploadImageForManga from "../../entities/manga/ui/UploadImageForManga"
+import SelectTypesForManga from "../../entities/manga/ui/SelectTypesForManga"
+import SelectStatusTranslateForManga from "../../entities/manga/ui/SelectStatusTranslateForManga"
+import SelectTagsForManga from "../../entities/manga/ui/SelectTagsForManga"
+import SelectAgeRatingForManga from "../../entities/manga/ui/SelectAgeRatingForManga"
+import SelectGenresForManga from "../../entities/manga/ui/SelectGenresForManga"
+import { wrapper } from "../../app/store"
+import { addNewManga } from "../../entities/manga/model/manga.slice"
 
 const CreateMangaFormSchema = yup.object().shape({
   title: yup
@@ -46,10 +46,8 @@ const CreateMangaFormSchema = yup.object().shape({
   genres: yup.array().typeError("Выберите жанры").required("Выберите жанры"),
   statusManga: yup.string().required("Выберите статус"),
   tags: yup.array().typeError("Выберите теги").required("Выберите теги"),
-  ageRatingManga: yup
-    .string()
-    .required("Выберите возрастной статус")
-});
+  ageRatingManga: yup.string().required("Выберите возрастной статус"),
+})
 const CreateManga = () => {
   const {
     control,
@@ -58,41 +56,41 @@ const CreateManga = () => {
     reset,
   } = useForm({
     resolver: yupResolver(CreateMangaFormSchema),
-  });
+  })
 
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const [mangaCover, setMangaCover] = useState("");
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const [mangaCover, setMangaCover] = useState("")
 
   const handleCreateNewManga = async (data: any) => {
     try {
-      const formData = new FormData();
-      formData.append("title", data.title);
-      formData.append("englishTitle", data.englishTitle);
-      formData.append("originalTitle", data.originalTitle);
-      formData.append("mangaDescription", data.mangaDescription);
-      formData.append("typeManga", data.typeManga);
+      const formData = new FormData()
+      formData.append("title", data.title)
+      formData.append("englishTitle", data.englishTitle)
+      formData.append("originalTitle", data.originalTitle)
+      formData.append("mangaDescription", data.mangaDescription)
+      formData.append("typeManga", data.typeManga)
       for (let i = 0; i < data.genres.length; i++) {
-        formData.append("genres", data.genres[i]);
+        formData.append("genres", data.genres[i])
       }
       for (let j = 0; j < data.tags.length; j++) {
-        formData.append("tags", data.tags[j]);
+        formData.append("tags", data.tags[j])
       }
-      formData.append("statusManga", data.statusManga);
-      formData.append("ageRatingManga", data.ageRatingManga);
-      formData.append("yearOfIssue", data.yearOfIssue);
-      formData.append("mangaCover", mangaCover);
-      dispatch(addNewManga(formData));
-      message.success("Тайтл был успешно добавлен на сайт");
-      reset();
-      setImageUrl("");
-      router.push("/");
+      formData.append("statusManga", data.statusManga)
+      formData.append("ageRatingManga", data.ageRatingManga)
+      formData.append("yearOfIssue", data.yearOfIssue)
+      formData.append("mangaCover", mangaCover)
+      dispatch(addNewManga(formData))
+      message.success("Тайтл был успешно добавлен на сайт")
+      reset()
+      setImageUrl("")
+      router.push("/")
     } catch (error: any) {
-      message.error("Произошла ошибка", error);
+      message.error("Произошла ошибка", error)
     }
-  };
+  }
 
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("")
 
   return (
     <MainLayout>
@@ -295,17 +293,17 @@ const CreateManga = () => {
         </div>
       </form>
     </MainLayout>
-  );
-};
+  )
+}
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async (ctx) => {
     ctx.res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"
-    );
+    )
     return {
       props: {},
-    };
-  });
+    }
+  })
 
-export default CreateManga;
+export default CreateManga

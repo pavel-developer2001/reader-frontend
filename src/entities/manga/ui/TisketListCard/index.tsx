@@ -1,7 +1,7 @@
-import Link from "next/link";
-import React from "react";
-import Image from "next/image";
-import styles from "./TisketListCard.module.scss";
+import Link from "next/link"
+import React from "react"
+import Image from "next/image"
+import styles from "./TisketListCard.module.scss"
 
 const TisketListCard = () => {
   return (
@@ -20,7 +20,7 @@ const TisketListCard = () => {
         <span className={styles.year}>2015</span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TisketListCard;
+export default TisketListCard

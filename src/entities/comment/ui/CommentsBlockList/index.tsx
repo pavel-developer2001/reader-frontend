@@ -4,9 +4,9 @@ import {
   MouseEventHandler,
   useEffect,
   useState,
-} from "react";
-import { Comment, Tooltip, Avatar, Switch, Button, message, Spin } from "antd";
-import moment from "moment";
+} from "react"
+import { Comment, Tooltip, Avatar, Switch, Button, message, Spin } from "antd"
+import moment from "moment"
 import {
   DislikeOutlined,
   LikeOutlined,
@@ -15,34 +15,34 @@ import {
   EditOutlined,
   DeleteOutlined,
   CheckOutlined,
-} from "@ant-design/icons";
-import Link from "next/link";
-import TextArea from "rc-textarea";
-import { useRouter } from "next/dist/client/router";
-import { useDispatch, useSelector } from "react-redux";
-import AddCommentForManga from "../../../../features/AddCommentForManga";
+} from "@ant-design/icons"
+import Link from "next/link"
+import TextArea from "rc-textarea"
+import { useRouter } from "next/dist/client/router"
+import { useDispatch, useSelector } from "react-redux"
+import AddCommentForManga from "../../../../features/AddCommentForManga"
 import {
   deleteComment,
   getComments,
   updateComment,
-} from "../../model/comment.slice";
+} from "../../model/comment.slice"
 import {
   selectCommentLoading,
   selectCommentsData,
-} from "../../model/comment.selector";
-import { selectUserToken } from "../../../user/model/user.selector";
-import styles from "./CommentsBlockList.module.scss";
+} from "../../model/comment.selector"
+import { selectUserToken } from "../../../user/model/user.selector"
+import styles from "./CommentsBlockList.module.scss"
 
 interface CommentsBlockProps {
-  commentId: number;
-  text: string;
-  commentSpoiler: boolean;
-  commentLikes: number;
-  date: string;
-  userAvatar: string;
-  userName: string;
-  userId: number;
-  token: string;
+  commentId: number
+  text: string
+  commentSpoiler: boolean
+  commentLikes: number
+  date: string
+  userAvatar: string
+  userName: string
+  userId: number
+  token: string
 }
 export const CommentsBlock: FC<CommentsBlockProps> = ({
   commentId,
@@ -55,21 +55,21 @@ export const CommentsBlock: FC<CommentsBlockProps> = ({
   userId,
   token,
 }) => {
-  const dispatch = useDispatch();
-  const [likes, setLikes] = useState(commentLikes);
-  const [spoiler, setSpoiler] = useState(commentSpoiler);
-  const [commentText, setCommentText] = useState(text);
-  const [edit, setEdit] = useState(false);
-  const [action, setAction] = useState<string | null>(null);
+  const dispatch = useDispatch()
+  const [likes, setLikes] = useState(commentLikes)
+  const [spoiler, setSpoiler] = useState(commentSpoiler)
+  const [commentText, setCommentText] = useState(text)
+  const [edit, setEdit] = useState(false)
+  const [action, setAction] = useState<string | null>(null)
 
   const like = () => {
-    setLikes(likes + 1);
-    setAction("liked");
-  };
+    setLikes(likes + 1)
+    setAction("liked")
+  }
 
   const dislike = () => {
-    setLikes(likes - 1);
-  };
+    setLikes(likes - 1)
+  }
 
   const actions = [
     <Tooltip key="comment-basic-like" title="Like">
@@ -83,26 +83,26 @@ export const CommentsBlock: FC<CommentsBlockProps> = ({
         {createElement(action === "disliked" ? DislikeFilled : DislikeOutlined)}
       </span>
     </Tooltip>,
-  ];
+  ]
   const handleRemoveComment = async () => {
     try {
-      await dispatch(deleteComment(commentId));
-      message.success("Комментарий был удалён");
+      await dispatch(deleteComment(commentId))
+      message.success("Комментарий был удалён")
     } catch (error: any) {
-      message.error("Произошла ошибка", error);
+      message.error("Произошла ошибка", error)
     }
-  };
+  }
   const handleUpdateComment: MouseEventHandler<HTMLDivElement> = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const data = { id: commentId, payload: { commentText, spoiler } };
-      await dispatch(updateComment(data));
-      message.success("Комментарий был обновлён");
-      setEdit(false);
+      const data = { id: commentId, payload: { commentText, spoiler } }
+      await dispatch(updateComment(data))
+      message.success("Комментарий был обновлён")
+      setEdit(false)
     } catch (error: any) {
-      message.error("Произошла ошибка", error);
+      message.error("Произошла ошибка", error)
     }
-  };
+  }
   return (
     <div data-testid="comment-item">
       <Comment
@@ -189,20 +189,20 @@ export const CommentsBlock: FC<CommentsBlockProps> = ({
         }
       />
     </div>
-  );
-};
+  )
+}
 const CommentBlockList = () => {
-  const token = useSelector(selectUserToken);
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const mangaId = router.query.id;
-  const comments = useSelector(selectCommentsData);
-  const loading = useSelector(selectCommentLoading);
+  const token = useSelector(selectUserToken)
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const mangaId = router.query.id
+  const comments = useSelector(selectCommentsData)
+  const loading = useSelector(selectCommentLoading)
   useEffect(() => {
     if (mangaId) {
-      dispatch(getComments(mangaId));
+      dispatch(getComments(mangaId))
     }
-  }, [mangaId]);
+  }, [mangaId])
   return (
     <div className={styles.list} data-testid="div">
       {loading ? (
@@ -234,7 +234,7 @@ const CommentBlockList = () => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CommentBlockList;
+export default CommentBlockList

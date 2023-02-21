@@ -1,24 +1,24 @@
-import { Avatar, Button } from "antd";
-import Link from "next/link";
-import React, { FC, memo } from "react";
-import { useDispatch } from "react-redux";
-import { IMember } from "../../../../shared/api/reader/models";
-import { removeMember } from "../../model/team.slice";
-import styles from "./MemberBlock.module.scss";
+import { Avatar, Button } from "antd"
+import Link from "next/link"
+import React, { FC, memo } from "react"
+import { useDispatch } from "react-redux"
+import { IMember } from "../../../../shared/api/reader/models"
+import { removeMember } from "../../model/team.slice"
+import styles from "./MemberBlock.module.scss"
 
 interface MemberBlockItemProps {
-  id: number;
-  role: string;
-  userId: number;
-  name: string;
-  avatar: string;
+  id: number
+  role: string
+  userId: number
+  name: string
+  avatar: string
 }
 const MemberBlockItem: FC<MemberBlockItemProps> = memo(
   ({ id, role, userId, name, avatar }) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const handleRemoveMember = async () => {
-      await dispatch(removeMember(id));
-    };
+      await dispatch(removeMember(id))
+    }
     return (
       <div>
         {" "}
@@ -46,11 +46,11 @@ const MemberBlockItem: FC<MemberBlockItemProps> = memo(
           ) : null}
         </div>
       </div>
-    );
+    )
   }
-);
+)
 interface MemberBlockProps {
-  members: IMember[];
+  members: IMember[]
 }
 const MemberBlock: FC<MemberBlockProps> = ({ members }) => {
   return (
@@ -69,7 +69,7 @@ const MemberBlock: FC<MemberBlockProps> = ({ members }) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MemberBlock;
+export default MemberBlock

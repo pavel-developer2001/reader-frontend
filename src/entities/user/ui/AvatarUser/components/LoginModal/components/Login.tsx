@@ -1,15 +1,15 @@
-import { Button, Form, Input, message } from "antd";
-import React, { FC, useEffect } from "react";
-import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { loginUsers } from "../../../../../model/user.slice";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUserError } from "../../../../../model/user.selector";
-import { SubmitHandler } from "react-hook-form/dist/types";
+import { Button, Form, Input, message } from "antd"
+import React, { FC, useEffect } from "react"
+import * as yup from "yup"
+import { useForm, Controller } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { loginUsers } from "../../../../../model/user.slice"
+import { useDispatch, useSelector } from "react-redux"
+import { selectUserError } from "../../../../../model/user.selector"
+import { SubmitHandler } from "react-hook-form/dist/types"
 
 interface LoginProps {
-  setRegister: (arg: boolean) => void;
+  setRegister: (arg: boolean) => void
 }
 
 const LoginComponentFormSchema = yup.object().shape({
@@ -18,14 +18,14 @@ const LoginComponentFormSchema = yup.object().shape({
     .string()
     .min(6, "​Минимальная длина пароля 6 символов")
     .required(),
-});
+})
 type FormValues = {
-  email: string;
-  password: string;
-};
+  email: string
+  password: string
+}
 
 const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const {
     control,
     handleSubmit,
@@ -33,20 +33,20 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
     reset,
   } = useForm<FormValues>({
     resolver: yupResolver(LoginComponentFormSchema),
-  });
-  const errorHandling = useSelector(selectUserError);
+  })
+  const errorHandling = useSelector(selectUserError)
   useEffect(() => {
-    if (errorHandling) message.error(errorHandling);
-  }, [errorHandling]);
+    if (errorHandling) message.error(errorHandling)
+  }, [errorHandling])
   const handleLogin: SubmitHandler<FormValues> = (data) => {
     const payload = {
       email: data.email,
       password: data.password,
-    };
-    dispatch(loginUsers(payload));
+    }
+    dispatch(loginUsers(payload))
     // message.success("Вы успешно вошли в свой аккаунт");
-    reset();
-  };
+    reset()
+  }
   return (
     <form onSubmit={handleSubmit(handleLogin)}>
       <Controller
@@ -67,7 +67,12 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
       {!!errors?.email && <p className="error">{errors?.email?.message}</p>}
       <Controller
         render={({ field }) => (
-          <Form.Item {...field} data-testid="loginPassword" label="Пароль" name="password">
+          <Form.Item
+            {...field}
+            data-testid="loginPassword"
+            label="Пароль"
+            name="password"
+          >
             <Input.Password />
           </Form.Item>
         )}
@@ -79,7 +84,7 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
         <p className="error">{errors?.password?.message}</p>
       )}
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" data-testid='login' htmlType="submit">
+        <Button type="primary" data-testid="login" htmlType="submit">
           Войти
         </Button>
         <Button onClick={() => setRegister(true)} htmlType="submit">
@@ -87,7 +92,7 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
         </Button>
       </Form.Item>
     </form>
-  );
-};
+  )
+}
 
-export default LoginComponent;
+export default LoginComponent

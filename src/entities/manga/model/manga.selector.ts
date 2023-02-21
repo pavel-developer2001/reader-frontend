@@ -1,18 +1,18 @@
-import { RootState } from "../../../app/store/reducer";
-import { IManga } from "../../../shared/api/reader/models";
+import { RootState } from "../../../app/store/reducer"
+import { IManga } from "../../../shared/api/reader/models"
 
-export const selectManga = (state: RootState) => state.manga;
+export const selectManga = (state: RootState) => state.manga
 
 export const selectMangasData = (state: RootState): IManga[] =>
-  selectManga(state).mangas;
+  selectManga(state).mangas
 
 export const selectMangaLoading = (state: RootState): boolean =>
-  selectManga(state).loading;
+  selectManga(state).loading
 
-export const selectMangaItem = (state: RootState) => selectManga(state).manga;
+export const selectMangaItem = (state: RootState) => selectManga(state).manga
 
 export const selectSearchListManga = (state: RootState): IManga[] =>
-  selectManga(state).searchMangas;
+  selectManga(state).searchMangas
 
 export const selectSearchLoading = (state: RootState): boolean =>
-  selectManga(state).isSearchLoading;
+  selectManga(state).isSearchLoading

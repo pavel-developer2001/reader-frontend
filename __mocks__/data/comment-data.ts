@@ -23,4 +23,4 @@ export const commentData = [
     createdAt: "2022-01-20T09:24:59.361Z",
     updatedAt: "2022-01-20T09:24:59.361Z",
   },
-];
+]

@@ -1,45 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { Modal, Input, Spin } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import styles from "./SearchModal.module.scss";
-import dynamic from "next/dynamic";
-import { useDebounce } from "../../shared/lib/hooks/useDebounce";
-import { useDispatch } from "react-redux";
-import { searchManga } from "../../entities/manga/model/manga.slice";
+import React, { useEffect, useState } from "react"
+import { Modal, Input, Spin } from "antd"
+import { SearchOutlined } from "@ant-design/icons"
+import styles from "./SearchModal.module.scss"
+import dynamic from "next/dynamic"
+import { useDebounce } from "../../shared/lib/hooks/useDebounce"
+import { useDispatch } from "react-redux"
+import { searchManga } from "../../entities/manga/model/manga.slice"
 
 const DynamicFoundBlock = dynamic(
   () => import("../../entities/manga/ui/FoundBlock"),
   {
     loading: () => <Spin />,
   }
-);
+)
 
 const SearchModal = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [value, setValue] = useState("");
-  const dispatch = useDispatch();
-  const debouncedSearchTerm = useDebounce(value, 500);
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [value, setValue] = useState("")
+  const dispatch = useDispatch()
+  const debouncedSearchTerm = useDebounce(value, 500)
 
   useEffect(() => {
     if (debouncedSearchTerm) {
-      const params = { title: value };
-      dispatch(searchManga(params));
+      const params = { title: value }
+      dispatch(searchManga(params))
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm])
 
   const showModal = () => {
-    setIsModalVisible(true);
-  };
+    setIsModalVisible(true)
+  }
 
   const handleOk = () => {
-    setIsModalVisible(false);
-    setValue("");
-  };
+    setIsModalVisible(false)
+    setValue("")
+  }
 
   const handleCancel = () => {
-    setIsModalVisible(false);
-    setValue("");
-  };
+    setIsModalVisible(false)
+    setValue("")
+  }
   return (
     <div>
       <div onClick={showModal}>
@@ -62,7 +62,7 @@ const SearchModal = () => {
         {value ? <DynamicFoundBlock /> : null}
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default SearchModal;
+export default SearchModal
