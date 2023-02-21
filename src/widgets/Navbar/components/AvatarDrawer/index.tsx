@@ -1,27 +1,27 @@
-import React, { FC, MouseEventHandler, useState } from "react";
-import styles from "./AvatarDrawer.module.scss";
-import { Drawer, Spin } from "antd";
+import React, { FC, MouseEventHandler, useState } from "react"
+import styles from "./AvatarDrawer.module.scss"
+import { Drawer, Spin } from "antd"
 import {
   ExportOutlined,
   FormatPainterOutlined,
   PlusOutlined,
   UserOutlined,
-} from "@ant-design/icons";
-import Avatar from "antd/lib/avatar/avatar";
-import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import { message } from "antd";
-import { setToken } from "../../../../entities/user/model/user.slice";
-import { selectUserToken } from "../../../../entities/user/model/user.selector";
-import { dataUser } from "../../../../shared/lib/utils/getDataUserFromToken";
-import dynamic from "next/dynamic";
+} from "@ant-design/icons"
+import Avatar from "antd/lib/avatar/avatar"
+import Link from "next/link"
+import { useDispatch, useSelector } from "react-redux"
+import { message } from "antd"
+import { setToken } from "../../../../entities/user/model/user.slice"
+import { selectUserToken } from "../../../../entities/user/model/user.selector"
+import { dataUser } from "../../../../shared/lib/utils/getDataUserFromToken"
+import dynamic from "next/dynamic"
 
 const DynamicAuthModal = dynamic(
   () => import("../../../../entities/user/ui/AuthModal"),
   {
     loading: () => <Spin />,
   }
-);
+)
 
 const AvatarHeader = ({ token }: { token: string }) => {
   return (
@@ -47,29 +47,29 @@ const AvatarHeader = ({ token }: { token: string }) => {
         <DynamicAuthModal />
       )}
     </div>
-  );
-};
+  )
+}
 interface AvatarDrawerProps {
-  changeTheme: MouseEventHandler<HTMLDivElement> | undefined;
-  menuArrays: { left: Array<{ title: string; link: string }>; right: any };
+  changeTheme: MouseEventHandler<HTMLDivElement> | undefined
+  menuArrays: { left: Array<{ title: string; link: string }>; right: any }
 }
 
 const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
-  const [visible, setVisible] = useState(false);
-  const dispatch = useDispatch();
-  const token = useSelector(selectUserToken);
+  const [visible, setVisible] = useState(false)
+  const dispatch = useDispatch()
+  const token = useSelector(selectUserToken)
 
   const onClose = () => {
-    setVisible(false);
-  };
+    setVisible(false)
+  }
   const showDrawer = () => {
-    setVisible(true);
-  };
+    setVisible(true)
+  }
   const handleExitUser = () => {
-    window.localStorage.removeItem("token");
-    dispatch(setToken(""));
-    message.success("Вы вышли из аккаунта");
-  };
+    window.localStorage.removeItem("token")
+    dispatch(setToken(""))
+    message.success("Вы вышли из аккаунта")
+  }
   return (
     <div className={styles.main}>
       <div onClick={showDrawer}>
@@ -114,7 +114,7 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
         )}
       </Drawer>
     </div>
-  );
-};
+  )
+}
 
-export default AvatarDrawer;
+export default AvatarDrawer

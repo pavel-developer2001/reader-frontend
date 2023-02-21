@@ -1,15 +1,15 @@
-import React, { FC, useEffect } from "react";
-import * as yup from "yup";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Input, message } from "antd";
-import { registerUsers } from "../../../../../model/user.slice";
-import { selectUserError } from "../../../../../model/user.selector";
+import React, { FC, useEffect } from "react"
+import * as yup from "yup"
+import { useForm, Controller, SubmitHandler } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { useDispatch, useSelector } from "react-redux"
+import { Button, Form, Input, message } from "antd"
+import { registerUsers } from "../../../../../model/user.slice"
+import { selectUserError } from "../../../../../model/user.selector"
 
 interface RegisterComponent {
-  register: boolean;
-  setIsModalVisible: (arg: false) => void;
+  register: boolean
+  setIsModalVisible: (arg: false) => void
 }
 
 const RegisterComponentFormSchema = yup.object().shape({
@@ -26,20 +26,20 @@ const RegisterComponentFormSchema = yup.object().shape({
     .string()
     .min(6, "​Минимальная длина пароля 6 символов")
     .required(),
-});
+})
 
 type FormValues = {
-  name: string;
-  email: string;
-  password: string;
-  password2: string;
-};
+  name: string
+  email: string
+  password: string
+  password2: string
+}
 
 const RegisterComponent: FC<RegisterComponent> = ({
   register,
   setIsModalVisible,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const {
     control,
     handleSubmit,
@@ -47,25 +47,25 @@ const RegisterComponent: FC<RegisterComponent> = ({
     reset,
   } = useForm<FormValues>({
     resolver: yupResolver(RegisterComponentFormSchema),
-  });
-  const errorHandling = useSelector(selectUserError);
+  })
+  const errorHandling = useSelector(selectUserError)
   useEffect(() => {
-    if (errorHandling) message.error(errorHandling);
-  }, [errorHandling]);
+    if (errorHandling) message.error(errorHandling)
+  }, [errorHandling])
   const handleRegistration: SubmitHandler<FormValues> = (data) => {
-    if (data.password !== data.password2) return alert("Пароли не совпадают");
+    if (data.password !== data.password2) return alert("Пароли не совпадают")
     if (data.password === data.password2) {
       const payload = {
         name: data.name,
         email: data.email,
         password: data.password,
-      };
-      dispatch(registerUsers(payload));
-      reset();
+      }
+      dispatch(registerUsers(payload))
+      reset()
       //  message.success("Вы успешно создали свои аккаунт");
-      setIsModalVisible(false);
+      setIsModalVisible(false)
     }
-  };
+  }
   return (
     <form onSubmit={handleSubmit(handleRegistration)}>
       <Controller
@@ -123,7 +123,7 @@ const RegisterComponent: FC<RegisterComponent> = ({
         </Button>
       </Form.Item>
     </form>
-  );
-};
+  )
+}
 
-export default RegisterComponent;
+export default RegisterComponent

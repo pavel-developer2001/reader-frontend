@@ -1,14 +1,17 @@
-import { Spin } from "antd";
-import dynamic from "next/dynamic";
-import React, { FC, memo } from "react";
-import styles from "./TisketList.module.scss";
+import { Spin } from "antd"
+import dynamic from "next/dynamic"
+import React, { FC, memo } from "react"
+import styles from "./TisketList.module.scss"
 
-const DynamicTisketListCard = dynamic(() => import("../../entities/manga/ui/TisketListCard"), {
-  loading: () => <Spin />,
-});
+const DynamicTisketListCard = dynamic(
+  () => import("../../entities/manga/ui/TisketListCard"),
+  {
+    loading: () => <Spin />,
+  }
+)
 
 interface TisketListProps {
-  popularTitle: string;
+  popularTitle: string
 }
 const TisketList: FC<TisketListProps> = memo(({ popularTitle }) => {
   return (
@@ -21,7 +24,7 @@ const TisketList: FC<TisketListProps> = memo(({ popularTitle }) => {
       <DynamicTisketListCard />
       <DynamicTisketListCard />
     </div>
-  );
-});
+  )
+})
 
-export default TisketList;
+export default TisketList

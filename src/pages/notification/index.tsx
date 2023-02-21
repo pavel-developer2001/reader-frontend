@@ -1,13 +1,13 @@
-import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Spin } from "antd";
-import React from "react";
-import { Tabs } from "antd";
-import styles from "../../app/styles//pages/Notification.module.scss";
-import { GetServerSideProps } from "next";
-import dynamic from "next/dynamic";
-import { wrapper } from "../../app/store";
-import { getMangas } from "../../entities/manga/model/manga.slice";
-const { TabPane } = Tabs;
+import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons"
+import { Button, Spin } from "antd"
+import React from "react"
+import { Tabs } from "antd"
+import styles from "../../app/styles//pages/Notification.module.scss"
+import { GetServerSideProps } from "next"
+import dynamic from "next/dynamic"
+import { wrapper } from "../../app/store"
+import { getMangas } from "../../entities/manga/model/manga.slice"
+const { TabPane } = Tabs
 
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
@@ -18,7 +18,7 @@ const DynamicMainLayout = dynamic(
       </div>
     ),
   }
-);
+)
 
 const Notification = () => {
   return (
@@ -55,24 +55,24 @@ const Notification = () => {
         </Tabs>
       </div>
     </DynamicMainLayout>
-  );
-};
+  )
+}
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async (ctx) => {
     ctx.res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"
-    );
+    )
     try {
-      await store.dispatch<any>(getMangas());
+      await store.dispatch<any>(getMangas())
       return {
         props: {},
-      };
+      }
     } catch (error) {
-      console.log("ERROR!");
+      console.log("ERROR!")
       return {
         props: {},
-      };
+      }
     }
-  });
-export default Notification;
+  })
+export default Notification

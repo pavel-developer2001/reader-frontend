@@ -1,17 +1,17 @@
-import React from "react";
-import { Spin, Tabs } from "antd";
-import dynamic from "next/dynamic";
-import { GetServerSideProps } from "next";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/dist/client/router";
-import styles from "../../../app/styles/pages/Manga.module.scss";
+import React from "react"
+import { Spin, Tabs } from "antd"
+import dynamic from "next/dynamic"
+import { GetServerSideProps } from "next"
+import { useSelector } from "react-redux"
+import { useRouter } from "next/dist/client/router"
+import styles from "../../../app/styles/pages/Manga.module.scss"
 import {
   selectMangaItem,
   selectMangaLoading,
-} from "../../../entities/manga/model/manga.selector";
-import { RootState } from "../../../app/store/reducer";
-import { wrapper } from "../../../app/store";
-import { getManga } from "../../../entities/manga/model/manga.slice";
+} from "../../../entities/manga/model/manga.selector"
+import { RootState } from "../../../app/store/reducer"
+import { wrapper } from "../../../app/store"
+import { getManga } from "../../../entities/manga/model/manga.slice"
 
 const CommentsBlockList = dynamic(
   () => import("../../../entities/comment/ui/CommentsBlockList"),
@@ -22,7 +22,7 @@ const CommentsBlockList = dynamic(
       </div>
     ),
   }
-);
+)
 const ChapterList = dynamic(
   () => import("../../../entities/chapter/ui/ChapterList"),
   {
@@ -32,7 +32,7 @@ const ChapterList = dynamic(
       </div>
     ),
   }
-);
+)
 const MangaAddition = dynamic(
   () => import("../../../entities/team/ui/MangaAddition"),
   {
@@ -42,7 +42,7 @@ const MangaAddition = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicMainLayout = dynamic(
   () => import("../../../shared/ui/layouts/MainLayout"),
   {
@@ -52,7 +52,7 @@ const DynamicMainLayout = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicMangaData = dynamic(
   () => import("../../../entities/rating/ui/MangaData"),
   {
@@ -62,7 +62,7 @@ const DynamicMangaData = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicMangaDescriptions = dynamic(
   () => import("../../../entities/manga/ui/MangaDescriptions"),
   {
@@ -72,7 +72,7 @@ const DynamicMangaDescriptions = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicMangaSettings = dynamic(
   () => import("../../../entities/manga/ui/MangaSettings"),
   {
@@ -82,14 +82,14 @@ const DynamicMangaSettings = dynamic(
       </div>
     ),
   }
-);
+)
 
-const { TabPane } = Tabs;
+const { TabPane } = Tabs
 
 const PageManga = () => {
-  const manga = useSelector<RootState, any>(selectMangaItem);
-  const loading = useSelector(selectMangaLoading);
-  const router = useRouter();
+  const manga = useSelector<RootState, any>(selectMangaItem)
+  const loading = useSelector(selectMangaLoading)
+  const router = useRouter()
   return (
     <DynamicMainLayout>
       <div className={styles.wrapper}>
@@ -136,24 +136,24 @@ const PageManga = () => {
         </>
       </div>
     </DynamicMainLayout>
-  );
-};
+  )
+}
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async ({ params, res }) => {
     res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"
-    );
+    )
     try {
-      await store.dispatch<any>(getManga(params?.id));
+      await store.dispatch<any>(getManga(params?.id))
       return {
         props: {},
-      };
+      }
     } catch (error) {
-      console.log("ERROR!", error);
+      console.log("ERROR!", error)
       return {
         props: {},
-      };
+      }
     }
-  });
-export default PageManga;
+  })
+export default PageManga

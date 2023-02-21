@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
-import { Layout } from "antd";
-const { Footer } = Layout;
+import { Layout } from "antd"
+const { Footer } = Layout
 
 const MyFooter = () => {
   return (
@@ -10,7 +10,7 @@ const MyFooter = () => {
         Reader - Читать мангу онлайн на русском
       </div>
     </Footer>
-  );
-};
+  )
+}
 
-export default MyFooter;
+export default MyFooter

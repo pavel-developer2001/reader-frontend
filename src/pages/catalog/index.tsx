@@ -1,17 +1,17 @@
-import Title from "antd/lib/typography/Title";
-import React from "react";
-import { useSelector } from "react-redux";
-import { Spin, Tabs } from "antd";
-import styles from "../../app/styles/pages/Catalog.module.scss";
-import dynamic from "next/dynamic";
-import { GetServerSideProps } from "next";
+import Title from "antd/lib/typography/Title"
+import React from "react"
+import { useSelector } from "react-redux"
+import { Spin, Tabs } from "antd"
+import styles from "../../app/styles/pages/Catalog.module.scss"
+import dynamic from "next/dynamic"
+import { GetServerSideProps } from "next"
 import {
   selectMangaLoading,
   selectMangasData,
-} from "../../entities/manga/model/manga.selector";
-import { wrapper } from "../../app/store";
-import { getMangas } from "../../entities/manga/model/manga.slice";
-const { TabPane } = Tabs;
+} from "../../entities/manga/model/manga.selector"
+import { wrapper } from "../../app/store"
+import { getMangas } from "../../entities/manga/model/manga.slice"
+const { TabPane } = Tabs
 
 const DynamicCardManga = dynamic(
   () => import("../../entities/manga/ui/CardManga"),
@@ -22,7 +22,7 @@ const DynamicCardManga = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicTeamList = dynamic(
   () => import("../../entities/team/ui/TeamList"),
   {
@@ -32,14 +32,14 @@ const DynamicTeamList = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicFilters = dynamic(() => import("../../features/Filters"), {
   loading: () => (
     <div className="loader-block">
       <Spin />
     </div>
   ),
-});
+})
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
   {
@@ -49,11 +49,11 @@ const DynamicMainLayout = dynamic(
       </div>
     ),
   }
-);
+)
 
 const Catalog = () => {
-  const mangas = useSelector(selectMangasData);
-  const loading = useSelector(selectMangaLoading);
+  const mangas = useSelector(selectMangasData)
+  const loading = useSelector(selectMangaLoading)
 
   return (
     <DynamicMainLayout>
@@ -80,25 +80,25 @@ const Catalog = () => {
         </TabPane>
       </Tabs>
     </DynamicMainLayout>
-  );
-};
+  )
+}
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async (ctx) => {
     ctx.res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"
-    );
+    )
     try {
-      await store.dispatch<any>(getMangas());
+      await store.dispatch<any>(getMangas())
       return {
         props: {},
-      };
+      }
     } catch (error) {
-      console.log("ERROR!");
+      console.log("ERROR!")
       return {
         props: {},
-      };
+      }
     }
-  });
+  })
 
-export default Catalog;
+export default Catalog

@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { Modal, Button, Select, message } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/dist/client/router";
+import React, { useEffect, useState } from "react"
+import { Modal, Button, Select, message } from "antd"
+import { useDispatch, useSelector } from "react-redux"
+import { useRouter } from "next/dist/client/router"
 import {
   addInvitation,
   getTeamsForInvitations,
-} from "../../../../model/team.slice";
-import { dataUser } from "../../../../../../shared/lib/utils/getDataUserFromToken";
+} from "../../../../model/team.slice"
+import { dataUser } from "../../../../../../shared/lib/utils/getDataUserFromToken"
 import {
   selectTeamForInvitationsLoading,
   selectTeamsForInvitationsData,
-} from "../../../../model/team.selector";
-import * as yup from "yup";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+} from "../../../../model/team.selector"
+import * as yup from "yup"
+import { useForm, Controller, SubmitHandler } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
 
-const { Option } = Select;
+const { Option } = Select
 
 const InvitationBtnFormSchema = yup.object().shape({
   teamId: yup.string().required("Выберите команду"),
   rank: yup.string().required("Выберите Должность"),
-});
+})
 type FormValues = {
-  rank: string;
-  teamId: string;
-  userId: string;
-};
+  rank: string
+  teamId: string
+  userId: string
+}
 
 const InvitationBtn = () => {
   const {
@@ -35,46 +35,46 @@ const InvitationBtn = () => {
     reset,
   } = useForm<FormValues>({
     resolver: yupResolver(InvitationBtnFormSchema),
-  });
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const router = useRouter();
+  })
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const router = useRouter()
   const rankArray = [
     { role: "Переводчик" },
     { role: "Модератор" },
     { role: "Клинер" },
     { role: "Тайпер" },
     { role: "Редактор" },
-  ];
-  const dispatch = useDispatch();
-  const teams = useSelector(selectTeamsForInvitationsData);
-  const loading = useSelector(selectTeamForInvitationsLoading);
+  ]
+  const dispatch = useDispatch()
+  const teams = useSelector(selectTeamsForInvitationsData)
+  const loading = useSelector(selectTeamForInvitationsLoading)
   useEffect(() => {
-    if (dataUser) dispatch(getTeamsForInvitations(dataUser));
-  }, []);
+    if (dataUser) dispatch(getTeamsForInvitations(dataUser))
+  }, [])
   const handleAddInvitation: SubmitHandler<FormValues> = async (data) => {
     try {
       const payload = await {
         rank: data.rank,
         teamId: data.teamId,
         userId: router.query.id,
-      };
-      dispatch(addInvitation(payload));
-      message.success("Приглашение было создано");
-      setIsModalVisible(false);
-      reset();
+      }
+      dispatch(addInvitation(payload))
+      message.success("Приглашение было создано")
+      setIsModalVisible(false)
+      reset()
     } catch (error: any) {
-      message.error("Произошла ошибка", error);
+      message.error("Произошла ошибка", error)
     }
-  };
+  }
   const showModal = () => {
-    setIsModalVisible(true);
-  };
+    setIsModalVisible(true)
+  }
   const handleOk = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
   const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
   return (
     <div>
       <Button type="primary" onClick={showModal}>
@@ -155,7 +155,7 @@ const InvitationBtn = () => {
         </form>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default InvitationBtn;
+export default InvitationBtn

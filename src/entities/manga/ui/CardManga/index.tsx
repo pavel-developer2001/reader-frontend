@@ -1,16 +1,16 @@
-import Image from "next/image";
-import Link from "next/link";
-import React, { FC, memo } from "react";
-import { IManga } from "../../../../shared/api/reader/models";
-import styles from "./CardManga.module.scss";
+import Image from "next/image"
+import Link from "next/link"
+import React, { FC, memo } from "react"
+import { IManga } from "../../../../shared/api/reader/models"
+import styles from "./CardManga.module.scss"
 
 interface CardMangaProps {
-  manga: IManga;
+  manga: IManga
 }
 
 const CardManga: FC<CardMangaProps> = memo(({ manga }) => {
   return (
-    <div className={styles.main}>
+    <div data-testid="cardManga" className={styles.main}>
       <Link href={"/manga/" + manga.id}>
         <a>
           <Image
@@ -28,6 +28,6 @@ const CardManga: FC<CardMangaProps> = memo(({ manga }) => {
         </a>
       </Link>
     </div>
-  );
-});
-export default CardManga;
+  )
+})
+export default CardManga

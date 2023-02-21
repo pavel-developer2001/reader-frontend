@@ -1,19 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Avatar, Popover, Spin } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import { selectUserToken } from "../../model/user.selector";
-import styles from "./AvatarUser.module.scss";
-import dynamic from "next/dynamic";
+import React from "react"
+import { useSelector } from "react-redux"
+import { Avatar, Popover, Spin } from "antd"
+import { UserOutlined } from "@ant-design/icons"
+import { selectUserToken } from "../../model/user.selector"
+import styles from "./AvatarUser.module.scss"
+import dynamic from "next/dynamic"
 
 const DynamicMenuUser = dynamic(() => import("./components/MenuUser"), {
   loading: () => <Spin />,
-});
+})
 const DynamicAuthModal = dynamic(() => import("../AuthModal"), {
   loading: () => <Spin />,
-});
+})
 const AvatarUser = () => {
-  const token = useSelector(selectUserToken);
+  const token = useSelector(selectUserToken)
   return (
     <>
       {token ? (
@@ -30,7 +30,7 @@ const AvatarUser = () => {
         <DynamicAuthModal />
       )}
     </>
-  );
-};
+  )
+}
 
-export default AvatarUser;
+export default AvatarUser

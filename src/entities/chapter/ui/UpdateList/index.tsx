@@ -1,25 +1,25 @@
-import moment from "moment";
-import Link from "next/link";
-import React, { FC, memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Image from "next/image";
-import { getUpdateChapters } from "../../model/chapter.slice";
+import moment from "moment"
+import Link from "next/link"
+import React, { FC, memo, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import Image from "next/image"
+import { getUpdateChapters } from "../../model/chapter.slice"
 import {
   selectChapterError,
   selectChapterLoading,
   selectUpdateChapterData,
-} from "../../model/chapter.selector";
-import styles from "./UpdateList.module.scss";
-import { Spin } from "antd";
+} from "../../model/chapter.selector"
+import styles from "./UpdateList.module.scss"
+import { Spin } from "antd"
 
 interface UpdateListItemProps {
-  chapterId: number;
-  volumeChapter: string;
-  numberChapter: string;
-  mangaId: number;
-  cover: string;
-  titleManga: string;
-  date: string;
+  chapterId: number
+  volumeChapter: string
+  numberChapter: string
+  mangaId: number
+  cover: string
+  titleManga: string
+  date: string
 }
 export const UpdateListItem: FC<UpdateListItemProps> = memo(
   ({
@@ -53,18 +53,18 @@ export const UpdateListItem: FC<UpdateListItemProps> = memo(
           <span className={styles.date}>{moment().from(date)} назад</span>
         </div>
       </div>
-    );
+    )
   }
-);
+)
 
 const UpdateList = () => {
-  const dispatch = useDispatch();
-  const updateChapter = useSelector(selectUpdateChapterData);
-  const loading = useSelector(selectChapterLoading);
-  const errorHandling = useSelector(selectChapterError);
+  const dispatch = useDispatch()
+  const updateChapter = useSelector(selectUpdateChapterData)
+  const loading = useSelector(selectChapterLoading)
+  const errorHandling = useSelector(selectChapterError)
   useEffect(() => {
-    dispatch(getUpdateChapters());
-  }, []);
+    dispatch(getUpdateChapters())
+  }, [])
   return (
     <div className={styles.list}>
       {errorHandling && <div>{errorHandling}</div>}
@@ -87,7 +87,7 @@ const UpdateList = () => {
         <p>Нет глав</p>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default UpdateList;
+export default UpdateList

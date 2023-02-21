@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
-import { Avatar, Empty, Spin } from "antd";
-import { Typography } from "antd";
-import { Tabs } from "antd";
-import { GetServerSideProps } from "next";
-import { useRouter } from "next/dist/client/router";
-import { useDispatch, useSelector } from "react-redux";
-import dynamic from "next/dynamic";
-import styles from "../../app/styles/pages/Users.module.scss";
+import React, { useEffect } from "react"
+import { Avatar, Empty, Spin } from "antd"
+import { Typography } from "antd"
+import { Tabs } from "antd"
+import { GetServerSideProps } from "next"
+import { useRouter } from "next/dist/client/router"
+import { useDispatch, useSelector } from "react-redux"
+import dynamic from "next/dynamic"
+import styles from "../../app/styles/pages/Users.module.scss"
 import {
   selectUserData,
   selectUserLoading,
   selectUserToken,
-} from "../../entities/user/model/user.selector";
+} from "../../entities/user/model/user.selector"
 import {
   selectBookMarkLoading,
   selectBookMarksData,
-} from "../../entities/bookmark/model/bookMark.selector";
-import { getBookMarks } from "../../entities/bookmark/model/bookMark.slice";
-import { wrapper } from "../../app/store";
-import { getUserData } from "../../entities/user/model/user.slice";
+} from "../../entities/bookmark/model/bookMark.selector"
+import { getBookMarks } from "../../entities/bookmark/model/bookMark.slice"
+import { wrapper } from "../../app/store"
+import { getUserData } from "../../entities/user/model/user.slice"
 
 const CreateTeamModal = dynamic(
   () => import("../../entities/team/ui/CreateTeamModal"),
@@ -29,7 +29,7 @@ const CreateTeamModal = dynamic(
       </div>
     ),
   }
-);
+)
 const InvitationsInTeamsBlock = dynamic(
   () => import("../../entities/team/ui/InvitationsInTeamsBlock"),
   {
@@ -39,7 +39,7 @@ const InvitationsInTeamsBlock = dynamic(
       </div>
     ),
   }
-);
+)
 const UserInTeamsBlock = dynamic(
   () => import("../../entities/team/ui/UserInTeamsBlock"),
   {
@@ -49,7 +49,7 @@ const UserInTeamsBlock = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicCardManga = dynamic(
   () => import("../../entities/manga/ui/CardManga"),
   {
@@ -59,7 +59,7 @@ const DynamicCardManga = dynamic(
       </div>
     ),
   }
-);
+)
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
   {
@@ -69,28 +69,28 @@ const DynamicMainLayout = dynamic(
       </div>
     ),
   }
-);
+)
 
-const { TabPane } = Tabs;
-const { Title } = Typography;
+const { TabPane } = Tabs
+const { Title } = Typography
 
 const User = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const token = useSelector(selectUserToken);
-  const user = useSelector(selectUserData);
-  const loading = useSelector(selectUserLoading);
-  const bookMarks = useSelector(selectBookMarksData);
-  const loadingMark = useSelector(selectBookMarkLoading);
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const token = useSelector(selectUserToken)
+  const user = useSelector(selectUserData)
+  const loading = useSelector(selectUserLoading)
+  const bookMarks = useSelector(selectBookMarksData)
+  const loadingMark = useSelector(selectBookMarkLoading)
 
   useEffect(() => {
-    dispatch(getBookMarks(router.query.id));
-  }, [router.query.id]);
+    dispatch(getBookMarks(router.query.id))
+  }, [router.query.id])
   const info = [
     { count: "13.9K", text: "Прочитано глав" },
     { count: "10.8K", text: "Лайков к главам" },
     { count: "687", text: "Комментариев" },
-  ];
+  ]
 
   return (
     <DynamicMainLayout>
@@ -160,24 +160,24 @@ const User = () => {
         )}
       </div>
     </DynamicMainLayout>
-  );
-};
+  )
+}
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async ({ params, res }) => {
     res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"
-    );
+    )
     try {
-      await store.dispatch<any>(getUserData(params?.id));
+      await store.dispatch<any>(getUserData(params?.id))
       return {
         props: {},
-      };
+      }
     } catch (error) {
-      console.log("ERROR!", error);
+      console.log("ERROR!", error)
       return {
         props: {},
-      };
+      }
     }
-  });
-export default User;
+  })
+export default User

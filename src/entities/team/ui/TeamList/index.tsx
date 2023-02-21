@@ -1,19 +1,16 @@
-import { Avatar, Spin } from "antd";
-import Link from "next/link";
-import React, { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getTeams } from "../../model/team.slice";
-import {
-  selectTeamLoading,
-  selectTeamsData,
-} from "../../model/team.selector";
-import styles from "./TeamList.module.scss";
+import { Avatar, Spin } from "antd"
+import Link from "next/link"
+import React, { FC, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getTeams } from "../../model/team.slice"
+import { selectTeamLoading, selectTeamsData } from "../../model/team.selector"
+import styles from "./TeamList.module.scss"
 
 interface TeamListItemProps {
-  teamId: number;
-  name: string;
-  subtitle: string;
-  cover: string;
+  teamId: number
+  name: string
+  subtitle: string
+  cover: string
 }
 const TeamListItem: FC<TeamListItemProps> = ({
   teamId,
@@ -38,15 +35,15 @@ const TeamListItem: FC<TeamListItemProps> = ({
         </div>
       </a>
     </Link>
-  );
-};
+  )
+}
 const TeamList = () => {
-  const dispatch = useDispatch();
-  const teams = useSelector(selectTeamsData);
-  const loading = useSelector(selectTeamLoading);
+  const dispatch = useDispatch()
+  const teams = useSelector(selectTeamsData)
+  const loading = useSelector(selectTeamLoading)
   useEffect(() => {
-    dispatch(getTeams());
-  }, []);
+    dispatch(getTeams())
+  }, [])
   return (
     <div className={styles.mainList}>
       {loading ? (
@@ -65,7 +62,7 @@ const TeamList = () => {
         <p>Пусто</p>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TeamList;
+export default TeamList

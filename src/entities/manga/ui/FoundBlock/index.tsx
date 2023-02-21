@@ -1,14 +1,14 @@
-import { Avatar, Spin } from "antd";
-import Link from "next/link";
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
-import { IManga } from "../../../../shared/api/reader/models";
+import { Avatar, Spin } from "antd"
+import Link from "next/link"
+import React, { FC } from "react"
+import { useSelector } from "react-redux"
+import { IManga } from "../../../../shared/api/reader/models"
 import {
   selectSearchListManga,
   selectSearchLoading,
-} from "../../model/manga.selector";
+} from "../../model/manga.selector"
 
-import styles from "./FoundBlock.module.scss";
+import styles from "./FoundBlock.module.scss"
 
 const FoundBlockItem: FC<{ manga: IManga }> = ({ manga }) => {
   return (
@@ -27,17 +27,17 @@ const FoundBlockItem: FC<{ manga: IManga }> = ({ manga }) => {
         </a>
       </Link>
     </div>
-  );
-};
+  )
+}
 const FoundBlock = () => {
-  const mangas = useSelector(selectSearchListManga);
-  const isLoading = useSelector(selectSearchLoading);
+  const mangas = useSelector(selectSearchListManga)
+  const isLoading = useSelector(selectSearchLoading)
   if (isLoading) {
     return (
       <div className={styles.mainList}>
         <Spin />
       </div>
-    );
+    )
   }
   return (
     <div className={styles.mainList}>
@@ -47,7 +47,7 @@ const FoundBlock = () => {
         <div className={styles.mainList}>Пусто</div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default FoundBlock;
+export default FoundBlock

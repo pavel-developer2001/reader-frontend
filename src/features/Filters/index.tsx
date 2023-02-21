@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { Button, Select } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
-import styles from "./Filters.module.scss";
-import { SelectValue } from "antd/lib/select";
+import React, { useState } from "react"
+import { Button, Select } from "antd"
+import { CloseOutlined } from "@ant-design/icons"
+import styles from "./Filters.module.scss"
+import { SelectValue } from "antd/lib/select"
 
-const { Option } = Select;
+const { Option } = Select
 
 const Filters = () => {
-  const [types, setTypes] = useState<SelectValue>("");
-  console.log("TYPES", types);
+  const [types, setTypes] = useState<SelectValue>("")
+  console.log("TYPES", types)
   const typesArray = [
     { value: "манга", title: "Манга" },
     { value: "манхва", title: "Манхва" },
     { value: "маньхуа", title: "Маньхуа" },
     { value: "западный комикс", title: "Западный комикс" },
     { value: "рукомикс", title: "Рукомикс" },
-  ];
-  const [genres, setGenres] = useState<SelectValue>("");
-  console.log("Genres", genres);
+  ]
+  const [genres, setGenres] = useState<SelectValue>("")
+  console.log("Genres", genres)
   const genresArray = [
     { value: "боевик", title: "Боевик" },
     { value: "боевые искусства", title: "Боевые искусства" },
@@ -31,9 +31,9 @@ const Filters = () => {
     { value: "фантастика", title: "Фантастика" },
     { value: "триллер", title: "Триллер" },
     { value: "этти", title: "Этти" },
-  ];
-  const [tags, setTags] = useState<SelectValue>("");
-  console.log("Tags", tags);
+  ]
+  const [tags, setTags] = useState<SelectValue>("")
+  console.log("Tags", tags)
   const tagsArray = [
     { value: "алхимия", title: "Алхимия" },
     { value: "ангелы", title: "Ангелы" },
@@ -50,54 +50,54 @@ const Filters = () => {
     { value: "система", title: "Система" },
     { value: "владыка демона", title: "Владыка демона" },
     { value: "гг имба", title: "ГГ имба" },
-  ];
-  const [statusTranslate, setStatusTranslate] = useState<SelectValue>("");
-  console.log("StatusTranslate,", statusTranslate);
+  ]
+  const [statusTranslate, setStatusTranslate] = useState<SelectValue>("")
+  console.log("StatusTranslate,", statusTranslate)
   const statusTranslateArray = [
     { value: "закончен", title: "Закончен" },
     { value: "продолжается", title: "Продолжается" },
     { value: "заморожен", title: "Заморожен" },
     { value: "нет переводчика", title: "Нет переводчика" },
     { value: "анонс", title: "Анонс" },
-  ];
-  const [ageRating, setAgeRating] = useState<SelectValue>("");
-  console.log("AgeRating", ageRating);
+  ]
+  const [ageRating, setAgeRating] = useState<SelectValue>("")
+  console.log("AgeRating", ageRating)
   const ageRatingArray = [
     { value: "для всех", title: "Для всех" },
     { value: "16+", title: "16+" },
     { value: "18+", title: "18+" },
-  ];
+  ]
   const handleCleanCategories = () => {
-    setTypes("");
-    setGenres("");
-    setTags("");
-    setStatusTranslate("");
-    setAgeRating("");
-  };
+    setTypes("")
+    setGenres("")
+    setTags("")
+    setStatusTranslate("")
+    setAgeRating("")
+  }
   function onBlur() {
-    console.log("blur");
+    console.log("blur")
   }
 
   function onFocus() {
-    console.log("focus");
+    console.log("focus")
   }
 
-  const childrenGenres = [];
+  const childrenGenres = []
   childrenGenres.push(
     genresArray.map((genres) => (
       <Option value={genres.value} key={genres.value.toString()}>
         {genres.title.toString()}
       </Option>
     ))
-  );
-  const childrenTags = [];
+  )
+  const childrenTags = []
   childrenTags.push(
     tagsArray.map((genres) => (
       <Option value={genres.value} key={genres.value.toString()}>
         {genres.title.toString()}
       </Option>
     ))
-  );
+  )
   return (
     <div className={styles.block}>
       <div>
@@ -227,7 +227,7 @@ const Filters = () => {
         {childrenTags}
       </Select>
     </div>
-  );
-};
+  )
+}
 
-export default Filters;
+export default Filters

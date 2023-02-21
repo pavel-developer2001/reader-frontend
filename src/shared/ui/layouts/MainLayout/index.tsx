@@ -1,15 +1,15 @@
-import { Spin } from "antd";
-import dynamic from "next/dynamic";
-import Head from "next/head";
-import React, { ReactNode } from "react";
-import Navbar from "../../../../widgets/Navbar";
-import styles from "./MainLayout.module.css";
+import { Spin } from "antd"
+import dynamic from "next/dynamic"
+import Head from "next/head"
+import React, { ReactNode } from "react"
+import Navbar from "../../../../widgets/Navbar"
+import styles from "./MainLayout.module.css"
 
 const DynamicMyFooter = dynamic(() => import("../../../../widgets/MyFooter"), {
   loading: () => <Spin />,
-});
+})
 interface MainLayoutProps {
-  children: ReactNode;
+  children: ReactNode
 }
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
@@ -33,7 +33,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       </div>
       <DynamicMyFooter />
     </div>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout

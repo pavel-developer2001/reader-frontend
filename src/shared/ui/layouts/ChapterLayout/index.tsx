@@ -1,30 +1,33 @@
-import Head from "next/head";
-import React, { memo, ReactNode } from "react";
-import styles from "./ChapterLayout.module.scss";
-import { Spin } from "antd";
-import dynamic from "next/dynamic";
+import Head from "next/head"
+import React, { memo, ReactNode } from "react"
+import styles from "./ChapterLayout.module.scss"
+import { Spin } from "antd"
+import dynamic from "next/dynamic"
 
-const DynamicSettingPage = dynamic(() => import("../../../../widgets/SettingsPage"), {
-  loading: () => <Spin />,
-  ssr: false,
-});
+const DynamicSettingPage = dynamic(
+  () => import("../../../../widgets/SettingsPage"),
+  {
+    loading: () => <Spin />,
+    ssr: false,
+  }
+)
 const DynamicMyFooter = dynamic(() => import("../../../../widgets/MyFooter"), {
   loading: () => <Spin />,
   ssr: false,
-});
+})
 const DynamicChapterNavbar = dynamic(
   () => import("../../../../widgets/ChapterNavbar"),
   {
     loading: () => <Spin />,
     ssr: false,
   }
-);
+)
 
 interface ChapterLayoutProps {
-  children: ReactNode;
-  title: string;
-  page: string;
-  id: string | string[] | undefined;
+  children: ReactNode
+  title: string
+  page: string
+  id: string | string[] | undefined
 }
 const ChapterLayout: React.FC<ChapterLayoutProps> = memo(
   ({ title, page, children, id }) => {
@@ -52,8 +55,8 @@ const ChapterLayout: React.FC<ChapterLayoutProps> = memo(
         </div>
         <DynamicMyFooter />
       </div>
-    );
+    )
   }
-);
+)
 
-export default ChapterLayout;
+export default ChapterLayout

@@ -1,6 +1,6 @@
-import { Spin } from "antd";
-import dynamic from "next/dynamic";
-import React from "react";
+import { Spin } from "antd"
+import dynamic from "next/dynamic"
+import React from "react"
 
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
@@ -11,7 +11,7 @@ const DynamicMainLayout = dynamic(
       </div>
     ),
   }
-);
+)
 
 const Custom500 = () => {
   return (
@@ -19,7 +19,7 @@ const Custom500 = () => {
       Произошла ошибка в облачном хранилище. Извиняемся за неудобства, наши
       специалисты уже разбираются.
     </DynamicMainLayout>
-  );
-};
+  )
+}
 
-export default Custom500;
+export default Custom500
