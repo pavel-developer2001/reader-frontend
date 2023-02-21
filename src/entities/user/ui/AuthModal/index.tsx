@@ -24,7 +24,7 @@ const AuthModal = () => {
   };
   return (
     <>
-      <div className={styles.menu} onClick={showModal}>
+      <div data-testid='authModal' className={styles.menu} onClick={showModal}>
         Войти
       </div>
       <DynamicLoginModal

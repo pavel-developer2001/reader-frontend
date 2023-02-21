@@ -32,6 +32,7 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
   return (
     <div className={styles.addComment}>
       <TextArea
+        data-testid="commentInput"
         showCount
         value={commentText}
         onChange={(e) => setCommentText(e.target.value)}
@@ -47,6 +48,7 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
           {commentText.length > 3 && (
             <Button
               type="default"
+              data-testid="addCommentBtn"
               shape="circle"
               onClick={handleAddComment}
               icon={<SendOutlined />}

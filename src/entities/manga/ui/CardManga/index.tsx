@@ -10,7 +10,7 @@ interface CardMangaProps {
 
 const CardManga: FC<CardMangaProps> = memo(({ manga }) => {
   return (
-    <div className={styles.main}>
+    <div data-testid='cardManga' className={styles.main}>
       <Link href={"/manga/" + manga.id}>
         <a>
           <Image

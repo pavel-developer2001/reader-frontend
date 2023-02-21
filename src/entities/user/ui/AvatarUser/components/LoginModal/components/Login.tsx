@@ -51,7 +51,12 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
     <form onSubmit={handleSubmit(handleLogin)}>
       <Controller
         render={({ field }) => (
-          <Form.Item {...field} label="Email" name="email">
+          <Form.Item
+            data-testid="loginEmail"
+            {...field}
+            label="Email"
+            name="email"
+          >
             <Input />
           </Form.Item>
         )}
@@ -62,7 +67,7 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
       {!!errors?.email && <p className="error">{errors?.email?.message}</p>}
       <Controller
         render={({ field }) => (
-          <Form.Item {...field} label="Пароль" name="password">
+          <Form.Item {...field} data-testid="loginPassword" label="Пароль" name="password">
             <Input.Password />
           </Form.Item>
         )}
@@ -74,7 +79,7 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
         <p className="error">{errors?.password?.message}</p>
       )}
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" data-testid='login' htmlType="submit">
           Войти
         </Button>
         <Button onClick={() => setRegister(true)} htmlType="submit">
