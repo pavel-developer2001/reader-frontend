@@ -1,23 +1,38 @@
-import { render, screen } from "@testing-library/react"
+import { screen } from "@testing-library/react"
 import CommentBlockList from "."
-import * as reduxHooks from "react-redux"
-import * as router from "next/dist/client/router"
+import { commentData } from "../../../../../__mocks__/data/comment-data"
+import { useSelector } from "react-redux"
+import { renderWithRouter } from "../../../../shared/lib/test-utils/renderWithRouter"
 
-jest.mock("react-redux")
+jest.mock("react-redux", () => ({
+  useDispatch: () => jest.fn(),
+  useSelector: jest.fn(),
+  // useSelector: jest
+  //   .fn()
+  //   .mockReturnValueOnce(true)
+  //   .mockReturnValueOnce([])
+  //   .mockReturnValueOnce(false),
+}))
 
-const mockedUseSelector = jest.spyOn(reduxHooks, "useSelector")
-const mockedUseDispatch = jest.spyOn(reduxHooks, "useDispatch")
-const mockerUseRouter = jest.spyOn(router, "useRouter")
-const dispatch = jest.fn()
 describe("CommentsBlockList testing", () => {
+  afterEach(() => {
+    useSelector.mockClear()
+  })
   test("Render component", () => {
-    // mockedUseSelector.mockReturnValue([]);
-    // mockerUseRouter.mockReturnValue(() => {
-    //   query: {
-    //     id: "1";
-    //   }
-    // });
-    // render(<CommentBlockList />);
-    // screen.debug();
+    // useSelector
+    //   .mockReturnValueOnce(true)
+    //   .mockReturnValueOnce([{}])
+    //   .mockReturnValueOnce(false)
+    const storeInitialState = {
+      user: { token: true },
+      comment: { comments: [], loading: false },
+    }
+    //@ts-ignore/
+    useSelector.mockImplementation((callback) => {
+      return callback(storeInitialState)
+    })
+
+    renderWithRouter({ query: { id: "2" } }, <CommentBlockList />)
+    screen.debug()
   })
 })
