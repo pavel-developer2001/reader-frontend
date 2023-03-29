@@ -1,48 +1,44 @@
-import React, { FC, memo } from "react";
-import {
-  CaretLeftOutlined,
-  CaretRightOutlined,
-  FormatPainterOutlined,
-} from "@ant-design/icons";
-import { Header } from "antd/lib/layout/layout";
-import Link from "next/link";
-import dynamic from "next/dynamic";
-import styles from "./ChapterNavbar.module.scss";
-import { Theme } from "../../app/context/ThemeContext";
-import { useTheme } from "../../shared/lib/hooks/useTheme";
-import { Spin } from "antd";
+import { FC, memo } from "react"
+import { CaretRightOutlined, FormatPainterOutlined } from "@ant-design/icons"
+import { Header } from "antd/lib/layout/layout"
+import Link from "next/link"
+import dynamic from "next/dynamic"
+import { Spin } from "antd"
+import styles from "./ChapterNavbar.module.scss"
+import { Theme } from "../../app/context/ThemeContext"
+import { useTheme } from "../../shared/lib/hooks/useTheme"
 
 const DynamicMobile = dynamic(() => import("../../shared/ui/devices/Mobile"), {
   loading: () => <Spin />,
-});
+})
 const DynamicDesktop = dynamic(
   () => import("../../shared/ui/devices/Desktop"),
   {
     loading: () => <Spin />,
   }
-);
+)
 const DynamicAvatarDrawer = dynamic(
   () => import("../Navbar/components/AvatarDrawer"),
   {
     loading: () => <Spin />,
   }
-);
+)
 const DynamicAvatarUser = dynamic(
   () => import("../../entities/user/ui/AvatarUser"),
   {
     loading: () => <Spin />,
   }
-);
+)
 
 interface ChapterNavbarProps {
-  title: string;
-  page: string;
-  id: string | string[] | undefined;
+  title: string
+  page: string
+  id: string | string[] | undefined
 }
 const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
-  const theme = useTheme();
+  const theme = useTheme()
   function changeTheme() {
-    theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
+    theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)
   }
   const menuArrays = {
     left: [
@@ -56,7 +52,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
       },
     ],
     right: [],
-  };
+  }
   return (
     <Header className={styles.header}>
       <DynamicDesktop>
@@ -68,7 +64,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
                   <a>Reader</a>
                 </Link>
               </div>
-              <Link href={"/manga/" + id}>
+              <Link href={`/manga/${id}`}>
                 <a className={styles.title}> {title}</a>
               </Link>
             </div>
@@ -95,7 +91,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
                   <a>Reader</a>
                 </Link>
               </div>
-              <Link href={"/manga/" + id}>
+              <Link href={`/manga/${id}`}>
                 <a className={styles.title}> {title}</a>
               </Link>
             </div>
@@ -114,7 +110,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
         </div>
       </DynamicMobile>
     </Header>
-  );
-});
+  )
+})
 
-export default ChapterNavbar;
+export default ChapterNavbar

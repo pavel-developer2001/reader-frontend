@@ -1,12 +1,12 @@
-import { Select } from "antd";
-import React, { FC } from "react";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import styles from "./SelectStatusTranslateForManga.module.scss";
+import { Select } from "antd"
+import { FC } from "react"
+import { ControllerRenderProps, FieldValues } from "react-hook-form"
+import styles from "./SelectStatusTranslateForManga.module.scss"
 
-const { Option } = Select;
+const { Option } = Select
 
 interface SelectStatusTranslateForMangaProps {
-  field: ControllerRenderProps<FieldValues, "statusManga">;
+  field: ControllerRenderProps<FieldValues, "statusManga">
 }
 
 const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
@@ -18,7 +18,7 @@ const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
     { value: "Заморожен", title: "Заморожен" },
     { value: "Нет переводчика", title: "Нет переводчика" },
     { value: "Анонс", title: "Анонс" },
-  ];
+  ]
   return (
     <>
       <span className={styles.text}>Статус перевода</span>
@@ -32,14 +32,14 @@ const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
           option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {statusTranslateArray.map((type, index) => (
+        {statusTranslateArray.map((type) => (
           <Option value={type.value} key={type.value}>
             {type.title}
           </Option>
         ))}
       </Select>
     </>
-  );
-};
+  )
+}
 
-export default SelectStatusTranslateForManga;
+export default SelectStatusTranslateForManga

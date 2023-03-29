@@ -1,31 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Modal, Button, Select, message } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/dist/client/router";
+import { useEffect, useState } from "react"
+import { Modal, Button, Select, message } from "antd"
+import { useDispatch, useSelector } from "react-redux"
+import { useRouter } from "next/dist/client/router"
+import * as yup from "yup"
+import { useForm, Controller, SubmitHandler } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
 import {
   addInvitation,
   getTeamsForInvitations,
-} from "../../../../model/team.slice";
-import { dataUser } from "../../../../../../shared/lib/utils/getDataUserFromToken";
-import {
-  selectTeamForInvitationsLoading,
-  selectTeamsForInvitationsData,
-} from "../../../../model/team.selector";
-import * as yup from "yup";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+} from "../../../../model/team.slice"
+import { dataUser } from "../../../../../../shared/lib/utils/getDataUserFromToken"
+import { selectTeamsForInvitationsData } from "../../../../model/team.selector"
 
-const { Option } = Select;
+const { Option } = Select
 
 const InvitationBtnFormSchema = yup.object().shape({
   teamId: yup.string().required("Выберите команду"),
   rank: yup.string().required("Выберите Должность"),
-});
+})
 type FormValues = {
-  rank: string;
-  teamId: string;
-  userId: string;
-};
+  rank: string
+  teamId: string
+  userId: string
+}
 
 const InvitationBtn = () => {
   const {
@@ -35,46 +32,45 @@ const InvitationBtn = () => {
     reset,
   } = useForm<FormValues>({
     resolver: yupResolver(InvitationBtnFormSchema),
-  });
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const router = useRouter();
+  })
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const router = useRouter()
   const rankArray = [
     { role: "Переводчик" },
     { role: "Модератор" },
     { role: "Клинер" },
     { role: "Тайпер" },
     { role: "Редактор" },
-  ];
-  const dispatch = useDispatch();
-  const teams = useSelector(selectTeamsForInvitationsData);
-  const loading = useSelector(selectTeamForInvitationsLoading);
+  ]
+  const dispatch = useDispatch()
+  const teams = useSelector(selectTeamsForInvitationsData)
   useEffect(() => {
-    if (dataUser) dispatch(getTeamsForInvitations(dataUser));
-  }, []);
+    if (dataUser) dispatch(getTeamsForInvitations(dataUser))
+  }, [])
   const handleAddInvitation: SubmitHandler<FormValues> = async (data) => {
     try {
       const payload = await {
         rank: data.rank,
         teamId: data.teamId,
         userId: router.query.id,
-      };
-      dispatch(addInvitation(payload));
-      message.success("Приглашение было создано");
-      setIsModalVisible(false);
-      reset();
+      }
+      dispatch(addInvitation(payload))
+      message.success("Приглашение было создано")
+      setIsModalVisible(false)
+      reset()
     } catch (error: any) {
-      message.error("Произошла ошибка", error);
+      message.error("Произошла ошибка", error)
     }
-  };
+  }
   const showModal = () => {
-    setIsModalVisible(true);
-  };
+    setIsModalVisible(true)
+  }
   const handleOk = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
   const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
   return (
     <div>
       <Button type="primary" onClick={showModal}>
@@ -102,7 +98,7 @@ const InvitationBtn = () => {
                 }
               >
                 {teams
-                  .filter((item) => item.roleInTeam == "Глава")
+                  .filter((item) => item.roleInTeam === "Глава")
                   .map((team) => (
                     <Option key={team.id} value={team.team.id}>
                       {team.team.teamName}
@@ -132,8 +128,8 @@ const InvitationBtn = () => {
                   0
                 }
               >
-                {rankArray.map((rank, index) => (
-                  <Option key={index} value={rank.role}>
+                {rankArray.map((rank) => (
+                  <Option key={rank.role} value={rank.role}>
                     {rank.role}
                   </Option>
                 ))}
@@ -155,7 +151,7 @@ const InvitationBtn = () => {
         </form>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default InvitationBtn;
+export default InvitationBtn

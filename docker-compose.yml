@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   client:
@@ -15,7 +15,7 @@ services:
     ports:
       - 5000:5000
     depends_on:
-      - db  
+      - db
     volumes:
       - /backend/node_modules
       - ./server:/backend

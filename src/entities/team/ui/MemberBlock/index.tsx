@@ -1,36 +1,33 @@
-import { Avatar, Button } from "antd";
-import Link from "next/link";
-import React, { FC, memo } from "react";
-import { useDispatch } from "react-redux";
-import { IMember } from "../../../../shared/api/reader/models";
-import { removeMember } from "../../model/team.slice";
-import styles from "./MemberBlock.module.scss";
+import { Avatar, Button } from "antd"
+import Link from "next/link"
+import { FC, memo } from "react"
+import { useDispatch } from "react-redux"
+import { IMember } from "../../../../shared/api/reader/models"
+import { removeMember } from "../../model/team.slice"
+import styles from "./MemberBlock.module.scss"
 
 interface MemberBlockItemProps {
-  id: number;
-  role: string;
-  userId: number;
-  name: string;
-  avatar: string;
+  id: number
+  role: string
+  userId: number
+  name: string
+  avatar: string
 }
 const MemberBlockItem: FC<MemberBlockItemProps> = memo(
   ({ id, role, userId, name, avatar }) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const handleRemoveMember = async () => {
-      //@ts-ignore
-      await dispatch(removeMember(id));
-    };
+      await dispatch(removeMember(id))
+    }
     return (
       <div>
         {" "}
-        <Link href={"/user/" + userId}>
+        <Link href={`/user/${userId}`}>
           <a className={styles.main}>
             <Avatar
               size={54}
               src={
-                avatar
-                  ? avatar
-                  : "https://api.remanga.org//media/users/2814/avatar.jpg"
+                avatar || "https://api.remanga.org//media/users/2814/avatar.jpg"
               }
             />
             <div className={styles.data}>
@@ -40,37 +37,35 @@ const MemberBlockItem: FC<MemberBlockItemProps> = memo(
           </a>
         </Link>
         <div>
-          {role != "Глава" ? (
+          {role !== "Глава" ? (
             <Button type="primary" onClick={handleRemoveMember}>
               Удалить
             </Button>
           ) : null}
         </div>
       </div>
-    );
+    )
   }
-);
+)
 interface MemberBlockProps {
-  members: IMember[];
+  members: IMember[]
 }
-const MemberBlock: FC<MemberBlockProps> = ({ members }) => {
-  return (
-    <div className={styles.mainBlock}>
-      <div className={styles.title}>Состав</div>
-      <div className={styles.mainList}>
-        {members?.map((member) => (
-          <MemberBlockItem
-            key={member.id}
-            id={member.id}
-            role={member.roleInTeam}
-            userId={member.user.id}
-            name={member.user.name}
-            avatar={member.user.avatar}
-          />
-        ))}
-      </div>
+const MemberBlock: FC<MemberBlockProps> = ({ members }) => (
+  <div className={styles.mainBlock}>
+    <div className={styles.title}>Состав</div>
+    <div className={styles.mainList}>
+      {members?.map((member) => (
+        <MemberBlockItem
+          key={member.id}
+          id={member.id}
+          role={member.roleInTeam}
+          userId={member.user.id}
+          name={member.user.name}
+          avatar={member.user.avatar}
+        />
+      ))}
     </div>
-  );
-};
+  </div>
+)
 
-export default MemberBlock;
+export default MemberBlock

@@ -1,30 +1,30 @@
-import { HeartOutlined } from "@ant-design/icons";
-import { useRouter } from "next/dist/client/router";
-import Link from "next/link";
-import React, { FC, memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getChapters } from "../../model/chapter.slice";
+import { HeartOutlined } from "@ant-design/icons"
+import { useRouter } from "next/dist/client/router"
+import Link from "next/link"
+import { FC, memo, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Spin } from "antd"
+import { getChapters } from "../../model/chapter.slice"
 import {
   selectChapterError,
   selectChapterLoading,
   selectChaptersData,
-} from "../../model/chapter.selector";
-import styles from "./ChapterList.module.scss";
-import { Spin } from "antd";
+} from "../../model/chapter.selector"
+import styles from "./ChapterList.module.scss"
 
 interface ChapterListItemProps {
-  chapterId: number;
-  volume: string;
-  number: string;
-  likes: string;
-  date: string;
+  chapterId: number
+  volume: string
+  number: string
+  likes: string
+  date: string
 }
 const ChapterListItem: FC<ChapterListItemProps> = memo(
-  ({ chapterId, volume, number, likes, date }) => {
-    const router = useRouter();
+  ({ chapterId, volume, number, likes }) => {
+    const router = useRouter()
     return (
       <div className={styles.main}>
-        <Link href={"/manga/" + router.query.id + "/chapter/" + chapterId}>
+        <Link href={`/manga/${router.query.id}/chapter/${chapterId}`}>
           <a className={styles.numbers}>
             <strong className={styles.volume}>{volume}</strong>
             <span>Глава {number}</span>
@@ -39,22 +39,22 @@ const ChapterListItem: FC<ChapterListItemProps> = memo(
           {likes}
         </div>
       </div>
-    );
+    )
   }
-);
+)
 interface ChapterListProps {
-  mangaId: string | string[] | undefined;
+  mangaId: string | string[] | undefined
 }
 const ChapterList: FC<ChapterListProps> = memo(({ mangaId }) => {
-  const chapters = useSelector(selectChaptersData);
-  const loading = useSelector(selectChapterLoading);
-  const dispatch = useDispatch();
-  const errorHandling = useSelector(selectChapterError);
+  const chapters = useSelector(selectChaptersData)
+  const loading = useSelector(selectChapterLoading)
+  const dispatch = useDispatch()
+  const errorHandling = useSelector(selectChapterError)
   useEffect(() => {
     if (mangaId) {
-      dispatch(getChapters(mangaId));
+      dispatch(getChapters(mangaId))
     }
-  }, [mangaId]);
+  }, [mangaId])
   return (
     <div className={styles.mainList}>
       {errorHandling && <div>{errorHandling}</div>}
@@ -75,7 +75,7 @@ const ChapterList: FC<ChapterListProps> = memo(({ mangaId }) => {
         <p>Нет глав</p>
       )}
     </div>
-  );
-});
+  )
+})
 
-export default ChapterList;
+export default ChapterList

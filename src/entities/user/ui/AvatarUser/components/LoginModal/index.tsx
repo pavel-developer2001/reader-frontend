@@ -1,13 +1,14 @@
-import Modal from "antd/lib/modal";
-import React, { FC, useState } from "react";
-import LoginComponent from "./components/Login";
-import RegisterComponent from "./components/Register";
+import Modal from "antd/lib/modal"
+import { FC, useState } from "react"
+import LoginComponent from "./components/Login"
+import RegisterComponent from "./components/Register"
 
 interface LoginModalProps {
-  isModalVisible: boolean | undefined;
-  handleOk: () => void;
-  handleCancel: () => void;
-  setIsModalVisible: (arg: boolean) => void;
+  isModalVisible: boolean | undefined
+  handleOk: () => void
+  handleCancel: () => void
+  // eslint-disable-next-line no-unused-vars
+  setIsModalVisible: (arg: boolean) => void
 }
 const LoginModal: FC<LoginModalProps> = ({
   isModalVisible,
@@ -15,7 +16,7 @@ const LoginModal: FC<LoginModalProps> = ({
   handleCancel,
   setIsModalVisible,
 }) => {
-  const [register, setRegister] = useState<boolean>(false);
+  const [register, setRegister] = useState<boolean>(false)
   return (
     <Modal
       title={register ? "Регистрация" : "Войти"}
@@ -32,7 +33,7 @@ const LoginModal: FC<LoginModalProps> = ({
         <LoginComponent setRegister={setRegister} />
       )}
     </Modal>
-  );
-};
+  )
+}
 
-export default LoginModal;
+export default LoginModal

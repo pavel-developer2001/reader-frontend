@@ -1,42 +1,42 @@
-import React from "react";
-import { Layout, Spin } from "antd";
-const { Header } = Layout;
-import { BellOutlined, FormatPainterOutlined } from "@ant-design/icons";
-import Link from "next/link";
-import styles from "./Navbar.module.scss";
-import { Theme } from "../../app/context/ThemeContext";
-import { useTheme } from "../../shared/lib/hooks/useTheme";
-import { selectUserToken } from "../../entities/user/model/user.selector";
-import { useSelector } from "react-redux";
-import dynamic from "next/dynamic";
+import { Layout, Spin } from "antd"
+import { BellOutlined, FormatPainterOutlined } from "@ant-design/icons"
+import Link from "next/link"
+import { useSelector } from "react-redux"
+import dynamic from "next/dynamic"
+import styles from "./Navbar.module.scss"
+import { Theme } from "../../app/context/ThemeContext"
+import { useTheme } from "../../shared/lib/hooks/useTheme"
+import { selectUserToken } from "../../entities/user/model/user.selector"
 
-const DynamicDesktop = dynamic(() => import("../../shared/ui/devices/Desktop"), {
-  loading: () => <Spin />,
-});
-const DynamicMobile = dynamic(() => import("../../shared/ui/devices/Mobile"), {
-  loading: () => <Spin />,
-});
-const DynamicAvatarDrawer = dynamic(() => import("./components/AvatarDrawer"), {
-  loading: () => <Spin />,
-});
-const DynamicSearchModal = dynamic(
-  () => import("../../features/SearchModal"),
+const { Header } = Layout
+
+const DynamicDesktop = dynamic(
+  () => import("../../shared/ui/devices/Desktop"),
   {
     loading: () => <Spin />,
   }
-);
+)
+const DynamicMobile = dynamic(() => import("../../shared/ui/devices/Mobile"), {
+  loading: () => <Spin />,
+})
+const DynamicAvatarDrawer = dynamic(() => import("./components/AvatarDrawer"), {
+  loading: () => <Spin />,
+})
+const DynamicSearchModal = dynamic(() => import("../../features/SearchModal"), {
+  loading: () => <Spin />,
+})
 const DynamicAvatarUser = dynamic(
   () => import("../../entities/user/ui/AvatarUser"),
   {
     loading: () => <Spin />,
   }
-);
+)
 const Navbar = () => {
-  const theme = useTheme();
-  const token = useSelector(selectUserToken);
+  const theme = useTheme()
+  const token = useSelector(selectUserToken)
 
   function changeTheme() {
-    theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
+    theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)
   }
   const menuArrays = {
     left: [
@@ -50,7 +50,7 @@ const Navbar = () => {
       },
     ],
     right: [],
-  };
+  }
   return (
     <Header className={styles.header}>
       <DynamicDesktop>
@@ -62,8 +62,8 @@ const Navbar = () => {
                   <a>Reader</a>
                 </Link>
               </div>
-              {menuArrays.left.map((menu, index) => (
-                <div key={index} className={styles.menu}>
+              {menuArrays.left.map((menu) => (
+                <div key={menu.link} className={styles.menu}>
                   <Link href={menu.link}>
                     <a>{menu.title}</a>
                   </Link>
@@ -125,7 +125,7 @@ const Navbar = () => {
         </div>
       </DynamicMobile>
     </Header>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

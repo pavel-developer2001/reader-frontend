@@ -1,22 +1,22 @@
-import { EyeFilled, HeartFilled } from "@ant-design/icons";
-import Title from "antd/lib/typography/Title";
-import React, { FC, memo } from "react";
-import { useSelector } from "react-redux";
-import { selectRatingItemData } from "../../model/rating.selector";
-import { selectUserToken } from "../../../user/model/user.selector";
-import Rating from "../Rating";
-import CountMarks from "../../../bookmark/ui/CountMarks";
-import styles from "./MangaData.module.scss";
+import { EyeFilled, HeartFilled } from "@ant-design/icons"
+import Title from "antd/lib/typography/Title"
+import { FC, memo } from "react"
+import { useSelector } from "react-redux"
+import { selectRatingItemData } from "../../model/rating.selector"
+import { selectUserToken } from "../../../user/model/user.selector"
+import Rating from "../Rating"
+import CountMarks from "../../../bookmark/ui/CountMarks"
+import styles from "./MangaData.module.scss"
 
 interface MangaDataProps {
-  title: string;
-  englishTitle: string;
-  originalTitle: string;
-  yearOfIssue: string;
-  ageRating: string;
-  statusManga: string;
-  typeManga: string;
-  watchCount: string;
+  title: string
+  englishTitle: string
+  originalTitle: string
+  yearOfIssue: string
+  ageRating: string
+  statusManga: string
+  typeManga: string
+  watchCount: string
 }
 const MangaData: FC<MangaDataProps> = memo(
   ({
@@ -29,8 +29,8 @@ const MangaData: FC<MangaDataProps> = memo(
     typeManga,
     watchCount,
   }) => {
-    const rating = useSelector(selectRatingItemData);
-    const token = useSelector(selectUserToken);
+    const rating = useSelector(selectRatingItemData)
+    const token = useSelector(selectUserToken)
 
     return (
       <div>
@@ -48,7 +48,7 @@ const MangaData: FC<MangaDataProps> = memo(
             {token ? (
               <Rating />
             ) : (
-              //@ts-ignore
+              // @ts-ignore
               rating.rating
             )}
           </div>
@@ -64,8 +64,8 @@ const MangaData: FC<MangaDataProps> = memo(
           <div className={styles.date}>{yearOfIssue}</div>
         </div>
       </div>
-    );
+    )
   }
-);
+)
 
-export default MangaData;
+export default MangaData

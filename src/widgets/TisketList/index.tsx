@@ -1,27 +1,28 @@
-import { Spin } from "antd";
-import dynamic from "next/dynamic";
-import React, { FC, memo } from "react";
-import styles from "./TisketList.module.scss";
+import { Spin } from "antd"
+import dynamic from "next/dynamic"
+import { FC, memo } from "react"
+import styles from "./TisketList.module.scss"
 
-const DynamicTisketListCard = dynamic(() => import("../../entities/manga/ui/TisketListCard"), {
-  loading: () => <Spin />,
-});
+const DynamicTisketListCard = dynamic(
+  () => import("../../entities/manga/ui/TisketListCard"),
+  {
+    loading: () => <Spin />,
+  }
+)
 
 interface TisketListProps {
-  popularTitle: string;
+  popularTitle: string
 }
-const TisketList: FC<TisketListProps> = memo(({ popularTitle }) => {
-  return (
-    <div className={styles.tisket}>
-      <h3 className={styles.popularCategory}>{popularTitle}</h3>
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-    </div>
-  );
-});
+const TisketList: FC<TisketListProps> = memo(({ popularTitle }) => (
+  <div className={styles.tisket}>
+    <h3 className={styles.popularCategory}>{popularTitle}</h3>
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+  </div>
+))
 
-export default TisketList;
+export default TisketList

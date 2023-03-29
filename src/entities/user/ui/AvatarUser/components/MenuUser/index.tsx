@@ -1,24 +1,23 @@
-import { ExportOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons";
-import { Menu, message } from "antd";
-import React from "react";
-import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { setToken } from "../../../../model/user.slice";
-import { dataUser } from "../../../../../../shared/lib/utils/getDataUserFromToken";
-import styles from "./MenuUser.module.css";
+import { ExportOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons"
+import { Menu, message } from "antd"
+import Link from "next/link"
+import { useDispatch } from "react-redux"
+import { setToken } from "../../../../model/user.slice"
+import { dataUser } from "../../../../../../shared/lib/utils/getDataUserFromToken"
+import styles from "./MenuUser.module.css"
 
 const MenuUser = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleExitUser = () => {
-    window.localStorage.removeItem("token");
-    dispatch(setToken(""));
-    message.success("Вы вышли из аккаунта");
-  };
+    window.localStorage.removeItem("token")
+    dispatch(setToken(""))
+    message.success("Вы вышли из аккаунта")
+  }
   return (
     <div className={styles.block}>
       <Menu>
         <Menu.Item key="profile" icon={<UserOutlined />}>
-          <Link href={"/user/" + dataUser}>
+          <Link href={`/user/${dataUser}`}>
             <a>Профиль пользователя</a>
           </Link>
         </Menu.Item>
@@ -36,7 +35,7 @@ const MenuUser = () => {
         </Menu.Item>
       </Menu>
     </div>
-  );
-};
+  )
+}
 
-export default MenuUser;
+export default MenuUser

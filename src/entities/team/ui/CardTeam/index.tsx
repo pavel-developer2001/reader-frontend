@@ -1,17 +1,17 @@
-import { Avatar } from "antd";
-import Link from "next/link";
-import React, { FC, memo } from "react";
-import styles from "./CardTeam.module.scss";
+import { Avatar } from "antd"
+import Link from "next/link"
+import { FC, memo } from "react"
+import styles from "./CardTeam.module.scss"
 
 interface CardTeamProps {
-  teamId: number;
-  name: string;
-  subtitle: string;
-  cover: string;
+  teamId: number
+  name: string
+  subtitle: string
+  cover: string
 }
-const CardTeam: FC<CardTeamProps> = memo(({ teamId, name, subtitle, cover }) => {
-  return (
-    <Link href={"/team/" + teamId}>
+const CardTeam: FC<CardTeamProps> = memo(
+  ({ teamId, name, subtitle, cover }) => (
+    <Link href={`/team/${teamId}`}>
       <a className={styles.main}>
         {" "}
         <div className={styles.left}>
@@ -20,9 +20,8 @@ const CardTeam: FC<CardTeamProps> = memo(({ teamId, name, subtitle, cover }) => 
             className={styles.avatar}
             size={56}
             src={
-              cover
-                ? cover
-                : "https://api.remanga.org//media/publishers/syndicate_manga_team/low_cover.jpg"
+              cover ||
+              "https://api.remanga.org//media/publishers/syndicate_manga_team/low_cover.jpg"
             }
           />
         </div>
@@ -32,7 +31,7 @@ const CardTeam: FC<CardTeamProps> = memo(({ teamId, name, subtitle, cover }) => 
         </div>
       </a>
     </Link>
-  );
-});
+  )
+)
 
-export default CardTeam;
+export default CardTeam

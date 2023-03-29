@@ -1,34 +1,34 @@
-import TextArea from "antd/lib/input/TextArea";
-import { useRouter } from "next/dist/client/router";
-import React, { useEffect, useState } from "react";
-import { Upload, Modal, Button, Select, message } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "../../../../app/styles/pages/Upload.module.scss";
-import { GetServerSideProps } from "next";
-import * as yup from "yup";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import TextArea from "antd/lib/input/TextArea"
+import { useRouter } from "next/dist/client/router"
+import { useEffect, useState } from "react"
+import { Upload, Modal, Button, Select, message } from "antd"
+import { useDispatch, useSelector } from "react-redux"
+import { GetServerSideProps } from "next"
+import * as yup from "yup"
+import { useForm, Controller, SubmitHandler } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { SelectValue } from "antd/lib/select"
+import { UploadFile } from "antd/lib/upload/interface"
+import styles from "../../../../app/styles/pages/Upload.module.scss"
 import {
   selectTeamLoading,
   selectTeamsUserData,
-} from "../../../../entities/team/model/team.selector";
-import { getTeamsForUser } from "../../../../entities/team/model/team.slice";
-import { dataUser } from "../../../../shared/lib/utils/getDataUserFromToken";
-import MainLayout from "../../../../shared/ui/layouts/MainLayout";
-import { wrapper } from "../../../../app/store";
-import { addNewChapter } from "../../../../entities/chapter/model/chapter.slice";
-import { SelectValue } from "antd/lib/select";
-import { UploadFile } from "antd/lib/upload/interface";
+} from "../../../../entities/team/model/team.selector"
+import { getTeamsForUser } from "../../../../entities/team/model/team.slice"
+import { dataUser } from "../../../../shared/lib/utils/getDataUserFromToken"
+import MainLayout from "../../../../shared/ui/layouts/MainLayout"
+import { wrapper } from "../../../../app/store"
+import { addNewChapter } from "../../../../entities/chapter/model/chapter.slice"
 
-const { Option } = Select;
+const { Option } = Select
 
 function getBase64(file: Blob) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = (error) => reject(error)
+  })
 }
 
 const AddNewChapterFormSchema = yup.object().shape({
@@ -39,13 +39,13 @@ const AddNewChapterFormSchema = yup.object().shape({
   volumeChapter: yup.number().typeError("Введите том").required("Введите том"),
   titleChapter: yup.string().required("Введите загаловок главы"),
   language: yup.string().required("Выберите язык перевода"),
-});
+})
 type FormValues = {
-  numberChapter: any;
-  volumeChapter: any;
-  titleChapter: string;
-  language: string;
-};
+  numberChapter: any
+  volumeChapter: any
+  titleChapter: string
+  language: string
+}
 
 const AddNewChapter = () => {
   const {
@@ -55,41 +55,42 @@ const AddNewChapter = () => {
     reset,
   } = useForm<FormValues>({
     resolver: yupResolver(AddNewChapterFormSchema),
-  });
-  const router = useRouter();
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState<string | undefined>("");
-  const [previewTitle, setPreviewTitle] = useState<string | undefined>("");
-  const [imagesList, setImagesList] = useState<UploadFile<any>[]>([]);
-  const mangaId = router.query.id;
+  })
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const [previewVisible, setPreviewVisible] = useState(false)
+  const [previewImage, setPreviewImage] = useState<string | undefined>("")
+  const [previewTitle, setPreviewTitle] = useState<string | undefined>("")
+  const [imagesList, setImagesList] = useState<UploadFile<any>[]>([])
+  const mangaId = router.query.id
   const uploadButton = (
     <div>
       <div className={styles.plus}>+</div>
     </div>
-  );
+  )
   const handleCancel = () => {
-    setPreviewVisible(false);
-  };
+    setPreviewVisible(false)
+  }
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
-      (file.preview as unknown) = await getBase64(file.originFileObj as Blob);
+      ;(file.preview as unknown) = await getBase64(file.originFileObj as Blob)
     }
-    setPreviewImage(file.url || file.preview);
-    setPreviewVisible(true);
+    setPreviewImage(file.url || file.preview)
+    setPreviewVisible(true)
     setPreviewTitle(
       file.name || file.url?.substring(file.url.lastIndexOf("/") + 1)
-    );
-  };
+    )
+  }
   const handleChange = ({ fileList }: { fileList: UploadFile<any>[] }) =>
-    setImagesList(fileList);
-  const [teamId, setTeamId] = useState<SelectValue>("");
-  const teams = useSelector(selectTeamsUserData);
-  const loading = useSelector(selectTeamLoading);
+    setImagesList(fileList)
+  const [teamId, setTeamId] = useState<SelectValue>("")
+  const teams = useSelector(selectTeamsUserData)
+  const loading = useSelector(selectTeamLoading)
   useEffect(() => {
-    dispatch(getTeamsForUser(dataUser));
-  }, []);
-  ////////////////////////////////////////////////////////////////////
+    dispatch(getTeamsForUser(dataUser))
+  }, [])
+  /// /////////////////////////////////////////////////////////////////
 
   const languageArray = [
     { lang: "Русский" },
@@ -102,41 +103,41 @@ const AddNewChapter = () => {
     { lang: "Француский" },
     { lang: "Португальский" },
     { lang: "Другой" },
-  ];
-  const dispatch = useDispatch();
+  ]
+
   const handleNewChapter: SubmitHandler<FormValues> = async (data) => {
     try {
-      const formData = new FormData();
-      formData.append("numberChapter", data.numberChapter);
-      formData.append("volumeChapter", data.volumeChapter);
-      formData.append("titleChapter", data.titleChapter);
-      formData.append("language", data.language);
-      formData.append("mangaId", mangaId as string);
-      formData.append("teamId", teamId as string | Blob);
+      const formData = new FormData()
+      formData.append("numberChapter", data.numberChapter)
+      formData.append("volumeChapter", data.volumeChapter)
+      formData.append("titleChapter", data.titleChapter)
+      formData.append("language", data.language)
+      formData.append("mangaId", mangaId as string)
+      formData.append("teamId", teamId as string | Blob)
       for (let i = 0; i < imagesList.length; i++) {
         formData.append(
           "imagesList[]",
           imagesList[i].originFileObj as string | Blob
-        );
+        )
       }
 
-      dispatch(addNewChapter(formData));
-      message.success("Глава была успешно добавлена");
-      router.push("/manga/" + mangaId);
-      reset();
-      setTeamId("");
-      setImagesList([]);
+      dispatch(addNewChapter(formData))
+      message.success("Глава была успешно добавлена")
+      router.push(`/manga/${mangaId}`)
+      reset()
+      setTeamId("")
+      setImagesList([])
     } catch (error: any) {
-      message.error("Произошла ошибка", error);
+      message.error("Произошла ошибка", error)
     }
-  };
+  }
   return (
     <MainLayout>
       <form onSubmit={handleSubmit(handleNewChapter)}>
         <div className={styles.main}>
           <div
             className={styles.userData}
-            onClick={() => router.push("/manga/" + mangaId)}
+            onClick={() => router.push(`/manga/${mangaId}`)}
           >
             Начало после конца
           </div>
@@ -185,8 +186,8 @@ const AddNewChapter = () => {
                         .indexOf(input.toLowerCase()) >= 0
                     }
                   >
-                    {languageArray.map((arr, index) => (
-                      <Option key={index} value={arr.lang}>
+                    {languageArray.map((arr) => (
+                      <Option key={arr.lang} value={arr.lang}>
                         {arr.lang}
                       </Option>
                     ))}
@@ -237,7 +238,7 @@ const AddNewChapter = () => {
                     }
                   >
                     {teams
-                      .filter((item) => item.roleInTeam == "Глава")
+                      .filter((item) => item.roleInTeam === "Глава")
                       .map((team) => (
                         <Option key={team.id} value={team.team.id}>
                           {team.team.teamName}
@@ -276,17 +277,17 @@ const AddNewChapter = () => {
         </div>
       </form>
     </MainLayout>
-  );
-};
+  )
+}
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async (ctx) => {
+  wrapper.getServerSideProps(() => async (ctx) => {
     ctx.res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"
-    );
+    )
     return {
       props: {},
-    };
-  });
+    }
+  })
 
-export default AddNewChapter;
+export default AddNewChapter

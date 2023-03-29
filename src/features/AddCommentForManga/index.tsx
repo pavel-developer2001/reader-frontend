@@ -1,38 +1,38 @@
-import { SendOutlined } from "@ant-design/icons";
-import { Button, message, Switch } from "antd";
-import TextArea from "antd/lib/input/TextArea";
-import React, { FC, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addComment } from "../../entities/comment/model/comment.slice";
-import styles from "./AddCommentForManga.module.scss";
+import { SendOutlined } from "@ant-design/icons"
+import { Button, message, Switch } from "antd"
+import TextArea from "antd/lib/input/TextArea"
+import { FC, useState } from "react"
+import { useDispatch } from "react-redux"
+import { addComment } from "../../entities/comment/model/comment.slice"
+import styles from "./AddCommentForManga.module.scss"
 
 interface AddCommentForMangaProps {
-  mangaId: string | string[] | undefined;
+  mangaId: string | string[] | undefined
 }
 const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
-  const dispatch = useDispatch();
-  const [spoiler, setSpoiler] = useState(false);
-  const [commentText, setCommentText] = useState("");
+  const dispatch = useDispatch()
+  const [spoiler, setSpoiler] = useState(false)
+  const [commentText, setCommentText] = useState("")
   const handleAddComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const payload: {
-        commentText: string;
-        mangaId: string | string[] | undefined;
-        spoiler: boolean;
-      } = { commentText, spoiler, mangaId };
-      //@ts-ignore
-      await dispatch(addComment(payload));
-      message.success("Комментарий был создан");
-      setCommentText("");
-      setSpoiler(false);
+        commentText: string
+        mangaId: string | string[] | undefined
+        spoiler: boolean
+      } = { commentText, spoiler, mangaId }
+      await dispatch(addComment(payload))
+      message.success("Комментарий был создан")
+      setCommentText("")
+      setSpoiler(false)
     } catch (e: any) {
-      message.error("Произошла ошибка", e);
+      message.error("Произошла ошибка", e)
     }
-  };
+  }
   return (
     <div className={styles.addComment}>
       <TextArea
+        data-testid="commentInput"
         showCount
         value={commentText}
         onChange={(e) => setCommentText(e.target.value)}
@@ -48,6 +48,7 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
           {commentText.length > 3 && (
             <Button
               type="default"
+              data-testid="addCommentBtn"
               shape="circle"
               onClick={handleAddComment}
               icon={<SendOutlined />}
@@ -57,7 +58,7 @@ const AddCommentForManga: FC<AddCommentForMangaProps> = ({ mangaId }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddCommentForManga;
+export default AddCommentForManga
