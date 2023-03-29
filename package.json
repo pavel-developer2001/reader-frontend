@@ -12,7 +12,13 @@
     "cypress:headless": "cypress run",
     "e2e": "start-server-and-test start http://localhost:3000 cypress",
     "e2e:headless": "start-server-and-test start http://localhost:3000 cypress:headless",
-    "test": "jest  --watchAll "
+    "test": "jest"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn format",
+      "yarn lint --fix"
+    ]
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
@@ -53,7 +59,9 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
     "jest": "27.5.1",
+    "lint-staged": "^13.2.0",
     "msw": "^1.0.1",
     "pinst": "^2.1.6",
     "prettier": "^2.8.4",
