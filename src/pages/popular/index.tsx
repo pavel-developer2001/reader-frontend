@@ -1,7 +1,6 @@
 import { Spin } from "antd"
 import { GetServerSideProps } from "next"
 import dynamic from "next/dynamic"
-import React from "react"
 import { wrapper } from "../../app/store"
 import { getMangas } from "../../entities/manga/model/manga.slice"
 
@@ -29,6 +28,7 @@ export const getServerSideProps: GetServerSideProps =
         props: {},
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log("ERROR!")
       return {
         props: {},

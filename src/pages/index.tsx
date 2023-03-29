@@ -58,6 +58,7 @@ export const getServerSideProps: GetServerSideProps =
         props: {},
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log("ERROR!")
       return {
         props: {},

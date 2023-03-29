@@ -1,7 +1,7 @@
 import { HeartOutlined } from "@ant-design/icons"
 import { useRouter } from "next/dist/client/router"
 import Link from "next/link"
-import React, { FC, memo, useEffect } from "react"
+import  { FC, memo, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Spin } from "antd"
 import { getChapters } from "../../model/chapter.slice"
@@ -20,7 +20,7 @@ interface ChapterListItemProps {
   date: string
 }
 const ChapterListItem: FC<ChapterListItemProps> = memo(
-  ({ chapterId, volume, number, likes, date }) => {
+  ({ chapterId, volume, number, likes }) => {
     const router = useRouter()
     return (
       <div className={styles.main}>

@@ -1,5 +1,5 @@
 import Select from "antd/lib/select"
-import React, { FC } from "react"
+import  { FC } from "react"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 import styles from "./SelectAgeRatingForManga.module.scss"
 
@@ -19,7 +19,6 @@ const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({
   ]
   return (
     <>
-      {" "}
       <span className={styles.text}>Возрастной рейтинг</span>
       <Select
         {...field}
@@ -31,7 +30,7 @@ const SelectAgeRatingForManga: FC<SelectAgeRatingForMangaProps> = ({
           option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {ageRatingArray.map((type, index) => (
+        {ageRatingArray.map((type) => (
           <Option value={type.value} key={type.value}>
             {type.title}
           </Option>

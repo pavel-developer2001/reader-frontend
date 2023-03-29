@@ -1,4 +1,3 @@
-import React from "react"
 import { useSelector } from "react-redux"
 import { Avatar, Popover, Spin } from "antd"
 import { UserOutlined } from "@ant-design/icons"
@@ -14,22 +13,14 @@ const DynamicAuthModal = dynamic(() => import("../AuthModal"), {
 })
 const AvatarUser = () => {
   const token = useSelector(selectUserToken)
-  return (
-    <>
-      {token ? (
-        <div className={styles.menu}>
-          <Popover
-            placement="bottom"
-            content={<DynamicMenuUser />}
-            trigger="click"
-          >
-            <Avatar size="large" icon={<UserOutlined />} />
-          </Popover>
-        </div>
-      ) : (
-        <DynamicAuthModal />
-      )}
-    </>
+  return token ? (
+    <div className={styles.menu}>
+      <Popover placement="bottom" content={<DynamicMenuUser />} trigger="click">
+        <Avatar size="large" icon={<UserOutlined />} />
+      </Popover>
+    </div>
+  ) : (
+    <DynamicAuthModal />
   )
 }
 

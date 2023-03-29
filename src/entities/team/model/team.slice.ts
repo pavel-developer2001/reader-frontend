@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { HYDRATE } from "next-redux-wrapper"
 import TeamApi from "../../../shared/api/reader/apis/teamApi"

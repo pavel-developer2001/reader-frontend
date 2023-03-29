@@ -1,5 +1,5 @@
 import { Select } from "antd"
-import React, { FC } from "react"
+import { FC } from "react"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 import styles from "./SelectStatusTranslateForManga.module.scss"
 
@@ -32,7 +32,7 @@ const SelectStatusTranslateForManga: FC<SelectStatusTranslateForMangaProps> = ({
           option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {statusTranslateArray.map((type, index) => (
+        {statusTranslateArray.map((type) => (
           <Option value={type.value} key={type.value}>
             {type.title}
           </Option>

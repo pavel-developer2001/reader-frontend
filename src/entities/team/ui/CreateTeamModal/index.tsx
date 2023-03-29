@@ -1,7 +1,7 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons"
 import { Button, message, Modal, Upload } from "antd"
 import TextArea from "antd/lib/input/TextArea"
-import React, { useState } from "react"
+import  { useState } from "react"
 import { useDispatch } from "react-redux"
 import * as yup from "yup"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
@@ -29,7 +29,7 @@ const CreateTeamModal = () => {
   } = useForm<FormValues>({
     resolver: yupResolver(CreateTeamModalFormSchema),
   })
-  const [isModalVisible, setIsModalVisible] = React.useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const dispatch = useDispatch()
   const showModal = () => {
     setIsModalVisible(true)

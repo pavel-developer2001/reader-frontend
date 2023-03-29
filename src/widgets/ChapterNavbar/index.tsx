@@ -1,9 +1,5 @@
-import React, { FC, memo } from "react"
-import {
-  CaretLeftOutlined,
-  CaretRightOutlined,
-  FormatPainterOutlined,
-} from "@ant-design/icons"
+import { FC, memo } from "react"
+import { CaretRightOutlined, FormatPainterOutlined } from "@ant-design/icons"
 import { Header } from "antd/lib/layout/layout"
 import Link from "next/link"
 import dynamic from "next/dynamic"

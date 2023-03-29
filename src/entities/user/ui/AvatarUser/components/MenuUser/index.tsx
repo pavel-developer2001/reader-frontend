@@ -1,6 +1,5 @@
 import { ExportOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons"
 import { Menu, message } from "antd"
-import React from "react"
 import Link from "next/link"
 import { useDispatch } from "react-redux"
 import { setToken } from "../../../../model/user.slice"

@@ -1,7 +1,7 @@
 import { Button, message, Spin } from "antd"
 import { useRouter } from "next/dist/client/router"
 import Link from "next/link"
-import React, { FC, memo, useEffect } from "react"
+import { FC, memo, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import dynamic from "next/dynamic"
 import {

@@ -1,6 +1,6 @@
 import { Spin } from "antd"
 import dynamic from "next/dynamic"
-import React, { FC, memo } from "react"
+import { FC, memo } from "react"
 import styles from "./TisketList.module.scss"
 
 const DynamicTisketListCard = dynamic(

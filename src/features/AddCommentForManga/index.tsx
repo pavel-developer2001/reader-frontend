@@ -1,7 +1,7 @@
 import { SendOutlined } from "@ant-design/icons"
 import { Button, message, Switch } from "antd"
 import TextArea from "antd/lib/input/TextArea"
-import React, { FC, useState } from "react"
+import { FC, useState } from "react"
 import { useDispatch } from "react-redux"
 import { addComment } from "../../entities/comment/model/comment.slice"
 import styles from "./AddCommentForManga.module.scss"

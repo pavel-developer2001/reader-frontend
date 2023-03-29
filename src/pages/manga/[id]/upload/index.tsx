@@ -1,6 +1,6 @@
 import TextArea from "antd/lib/input/TextArea"
 import { useRouter } from "next/dist/client/router"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Upload, Modal, Button, Select, message } from "antd"
 import { useDispatch, useSelector } from "react-redux"
 import { GetServerSideProps } from "next"
@@ -57,6 +57,7 @@ const AddNewChapter = () => {
     resolver: yupResolver(AddNewChapterFormSchema),
   })
   const router = useRouter()
+  const dispatch = useDispatch()
   const [previewVisible, setPreviewVisible] = useState(false)
   const [previewImage, setPreviewImage] = useState<string | undefined>("")
   const [previewTitle, setPreviewTitle] = useState<string | undefined>("")
@@ -103,7 +104,7 @@ const AddNewChapter = () => {
     { lang: "Португальский" },
     { lang: "Другой" },
   ]
-  const dispatch = useDispatch()
+
   const handleNewChapter: SubmitHandler<FormValues> = async (data) => {
     try {
       const formData = new FormData()
@@ -185,8 +186,8 @@ const AddNewChapter = () => {
                         .indexOf(input.toLowerCase()) >= 0
                     }
                   >
-                    {languageArray.map((arr, index) => (
-                      <Option key={index} value={arr.lang}>
+                    {languageArray.map((arr) => (
+                      <Option key={arr.lang} value={arr.lang}>
                         {arr.lang}
                       </Option>
                     ))}
@@ -237,7 +238,7 @@ const AddNewChapter = () => {
                     }
                   >
                     {teams
-                      .filter((item) => item.roleInTeam == "Глава")
+                      .filter((item) => item.roleInTeam === "Глава")
                       .map((team) => (
                         <Option key={team.id} value={team.team.id}>
                           {team.team.teamName}
@@ -279,7 +280,7 @@ const AddNewChapter = () => {
   )
 }
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async (ctx) => {
+  wrapper.getServerSideProps(() => async (ctx) => {
     ctx.res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"

@@ -1,5 +1,5 @@
 import { Button, message, Modal, Spin, Tooltip, Select } from "antd"
-import React, { useEffect, useState } from "react"
+import  { useEffect, useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/dist/client/router"
@@ -96,7 +96,7 @@ const AddMangaForTeam = () => {
                 }
               >
                 {teams
-                  .filter((item) => item.roleInTeam == "Глава")
+                  .filter((item) => item.roleInTeam === "Глава")
                   .map((team) => (
                     <Option key={team.id} value={team.team.id}>
                       {team.team.teamName}

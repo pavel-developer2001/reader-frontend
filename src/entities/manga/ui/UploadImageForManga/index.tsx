@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import  { FC, useState } from "react"
 import { Upload, message } from "antd"
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons"
 import styles from "./UploadImageForManga.module.scss"
@@ -22,7 +22,9 @@ function beforeUpload(file: File) {
 
 interface UploadImageForMangaProps {
   imageUrl: string
+  // eslint-disable-next-line no-unused-vars
   setImageUrl: (arg: string) => void
+  // eslint-disable-next-line no-unused-vars
   setMangaCover: (arg: string) => void
 }
 

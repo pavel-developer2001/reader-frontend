@@ -1,4 +1,3 @@
-import React from "react"
 import { Layout, Spin } from "antd"
 import { BellOutlined, FormatPainterOutlined } from "@ant-design/icons"
 import Link from "next/link"
@@ -63,8 +62,8 @@ const Navbar = () => {
                   <a>Reader</a>
                 </Link>
               </div>
-              {menuArrays.left.map((menu, index) => (
-                <div key={index} className={styles.menu}>
+              {menuArrays.left.map((menu) => (
+                <div key={menu.link} className={styles.menu}>
                   <Link href={menu.link}>
                     <a>{menu.title}</a>
                   </Link>

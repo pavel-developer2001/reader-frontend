@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import  { useState } from "react"
 import { message, Button } from "antd"
 import TextArea from "rc-textarea"
 import { useDispatch } from "react-redux"
@@ -61,6 +61,7 @@ const CreateManga = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const [mangaCover, setMangaCover] = useState("")
+  const [imageUrl, setImageUrl] = useState("")
 
   const handleCreateNewManga = async (data: any) => {
     try {
@@ -90,7 +91,7 @@ const CreateManga = () => {
     }
   }
 
-  const [imageUrl, setImageUrl] = useState("")
+  
 
   return (
     <MainLayout>
@@ -296,7 +297,7 @@ const CreateManga = () => {
   )
 }
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async (ctx) => {
+  wrapper.getServerSideProps(() => async (ctx) => {
     ctx.res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"

@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+/* eslint-disable no-console */
+import  { useState } from "react"
 import { Button, Select } from "antd"
 import { CloseOutlined } from "@ant-design/icons"
 import { SelectValue } from "antd/lib/select"

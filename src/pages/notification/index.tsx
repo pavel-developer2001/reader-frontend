@@ -1,6 +1,5 @@
 import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons"
 import { Button, Spin, Tabs } from "antd"
-import React from "react"
 
 import { GetServerSideProps } from "next"
 import dynamic from "next/dynamic"
@@ -68,6 +67,7 @@ export const getServerSideProps: GetServerSideProps =
         props: {},
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log("ERROR!")
       return {
         props: {},

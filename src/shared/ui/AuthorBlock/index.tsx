@@ -1,5 +1,5 @@
 import Image from "next/image"
-import React from "react"
+
 import styles from "./AuthorBlock.module.scss"
 
 const AuthorBlock = () => (

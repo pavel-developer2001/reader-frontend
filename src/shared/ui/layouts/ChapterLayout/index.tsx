@@ -1,5 +1,5 @@
 import Head from "next/head"
-import React, { memo, ReactNode } from "react"
+import { memo, ReactNode } from "react"
 import { Spin } from "antd"
 import dynamic from "next/dynamic"
 import styles from "./ChapterLayout.module.scss"

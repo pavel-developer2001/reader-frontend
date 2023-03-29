@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react"
+import  { FC, useEffect } from "react"
 import * as yup from "yup"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -9,6 +9,7 @@ import { selectUserError } from "../../../../../model/user.selector"
 
 interface RegisterComponent {
   register: boolean
+  // eslint-disable-next-line no-unused-vars
   setIsModalVisible: (arg: false) => void
 }
 
@@ -52,7 +53,9 @@ const RegisterComponent: FC<RegisterComponent> = ({
   useEffect(() => {
     if (errorHandling) message.error(errorHandling)
   }, [errorHandling])
+  // eslint-disable-next-line consistent-return
   const handleRegistration: SubmitHandler<FormValues> = (data) => {
+    // eslint-disable-next-line no-alert
     if (data.password !== data.password2) return alert("Пароли не совпадают")
     if (data.password === data.password2) {
       const payload = {

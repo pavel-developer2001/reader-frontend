@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Modal, Button, Select, message } from "antd"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/dist/client/router"
@@ -11,7 +11,6 @@ import {
 } from "../../../../model/team.slice"
 import { dataUser } from "../../../../../../shared/lib/utils/getDataUserFromToken"
 import {
-  selectTeamForInvitationsLoading,
   selectTeamsForInvitationsData,
 } from "../../../../model/team.selector"
 
@@ -47,7 +46,6 @@ const InvitationBtn = () => {
   ]
   const dispatch = useDispatch()
   const teams = useSelector(selectTeamsForInvitationsData)
-  const loading = useSelector(selectTeamForInvitationsLoading)
   useEffect(() => {
     if (dataUser) dispatch(getTeamsForInvitations(dataUser))
   }, [])
@@ -102,7 +100,7 @@ const InvitationBtn = () => {
                 }
               >
                 {teams
-                  .filter((item) => item.roleInTeam == "Глава")
+                  .filter((item) => item.roleInTeam === "Глава")
                   .map((team) => (
                     <Option key={team.id} value={team.team.id}>
                       {team.team.teamName}
@@ -132,8 +130,8 @@ const InvitationBtn = () => {
                   0
                 }
               >
-                {rankArray.map((rank, index) => (
-                  <Option key={index} value={rank.role}>
+                {rankArray.map((rank) => (
+                  <Option key={rank.role} value={rank.role}>
                     {rank.role}
                   </Option>
                 ))}

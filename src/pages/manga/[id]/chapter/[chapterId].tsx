@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next"
 import Image from "next/image"
 import { useRouter } from "next/dist/client/router"
-import React from "react"
 import { useSelector } from "react-redux"
 import { Spin } from "antd"
 import dynamic from "next/dynamic"
@@ -67,6 +66,7 @@ export const getServerSideProps: GetServerSideProps =
         props: {},
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log("ERROR!", error)
       return {
         props: {},

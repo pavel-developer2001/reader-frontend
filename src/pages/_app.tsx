@@ -1,6 +1,6 @@
 import "../app/styles/index.scss"
 import "antd/dist/antd.css"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { AppProps } from "next/app"
 import { useDispatch, useSelector } from "react-redux"
 import { selectUserToken } from "../entities/user/model/user.selector"

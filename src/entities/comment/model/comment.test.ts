@@ -22,7 +22,7 @@ describe("comment Async Thunk", () => {
     // @ts-ignore
     await thunk(dispatch, () => ({}))
     const { calls } = dispatch.mock
-    const [start, end] = calls
+    const [, end] = calls
     expect(end[0].payload.data).toEqual(commentData)
   })
 })

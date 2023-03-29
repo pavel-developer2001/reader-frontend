@@ -1,4 +1,3 @@
-import React from "react"
 import { Spin, Tabs } from "antd"
 import dynamic from "next/dynamic"
 import { GetServerSideProps } from "next"
@@ -148,6 +147,7 @@ export const getServerSideProps: GetServerSideProps =
         props: {},
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log("ERROR!", error)
       return {
         props: {},

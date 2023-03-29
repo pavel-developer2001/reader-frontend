@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useState } from "react"
+import { FC, MouseEventHandler, useState } from "react"
 import { Drawer, Spin, message } from "antd"
 import {
   ExportOutlined,
@@ -82,8 +82,8 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
         visible={visible}
         key="right"
       >
-        {menuArrays.left.map((menu, index: number) => (
-          <p key={index} className={styles.menu}>
+        {menuArrays.left.map((menu) => (
+          <p key={menu.link} className={styles.menu}>
             <Link href={menu.link}>
               <a>{menu.title}</a>
             </Link>

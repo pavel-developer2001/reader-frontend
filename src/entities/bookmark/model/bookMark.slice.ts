@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { HYDRATE } from "next-redux-wrapper"
 import BookMarksApi from "../../../shared/api/reader/apis/bookMarksApi"
@@ -55,8 +56,10 @@ const bookMarkSlice = createSlice({
         state.bookMarks = action.payload.bookMark.bookMarks
         state.loading = false
       })
+      // eslint-disable-next-line consistent-return
       .addCase(addBookMark.fulfilled, (state, action) => {
         if (action.payload.data.category == "Удалить из закладок") {
+          // eslint-disable-next-line no-return-assign
           return (state.bookMarks = state.bookMarks.filter(
             (item) => item.id !== action.payload.data.id
           ))

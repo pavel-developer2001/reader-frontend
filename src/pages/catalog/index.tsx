@@ -1,5 +1,4 @@
 import Title from "antd/lib/typography/Title"
-import React from "react"
 import { useSelector } from "react-redux"
 import { Spin, Tabs } from "antd"
 import dynamic from "next/dynamic"
@@ -95,6 +94,7 @@ export const getServerSideProps: GetServerSideProps =
         props: {},
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log("ERROR!")
       return {
         props: {},

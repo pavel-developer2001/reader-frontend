@@ -1,6 +1,6 @@
 import { Avatar, Spin } from "antd"
 import Link from "next/link"
-import React, { FC } from "react"
+import  { FC } from "react"
 import { useSelector } from "react-redux"
 import { IManga } from "../../../../shared/api/reader/models"
 import {

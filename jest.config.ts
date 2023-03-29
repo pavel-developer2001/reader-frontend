@@ -5,13 +5,6 @@ const createJestConfig = nextJest({
 })
 
 const customJestConfig = {
-  // moduleDirectories: ["node_modules", "<rootDir>/"],
-  // setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-  // moduleNameMapper: {
-  //   "^@/components/(.*)$": "<rootDir>/components/$1",
-  // },
-  // testPathIgnorePatterns: ["cypress"],
-  // testEnvironment: "jsdom",
   clearMocks: true,
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   testEnvironment: "jsdom",
@@ -21,4 +14,4 @@ const customJestConfig = {
   },
 }
 
-module.exports = createJestConfig(customJestConfig)
+export default createJestConfig(customJestConfig)

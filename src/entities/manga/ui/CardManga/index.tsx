@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import React, { FC, memo } from "react"
+import  { FC, memo } from "react"
 import { IManga } from "../../../../shared/api/reader/models"
 import styles from "./CardManga.module.scss"
 

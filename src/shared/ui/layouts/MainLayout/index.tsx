@@ -1,7 +1,7 @@
 import { Spin } from "antd"
 import dynamic from "next/dynamic"
 import Head from "next/head"
-import React, { ReactNode } from "react"
+import { ReactNode } from "react"
 import Navbar from "../../../../widgets/Navbar"
 import styles from "./MainLayout.module.css"
 

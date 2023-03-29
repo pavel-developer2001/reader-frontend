@@ -197,10 +197,6 @@ const CommentBlockList = () => {
   const mangaId = router.query.id
   const comments = useSelector(selectCommentsData)
   const loading = useSelector(selectCommentLoading)
-  console.log("@router", router.query.id)
-  console.log("@token", token)
-  console.log("@loading", loading)
-  console.log("@comments", comments)
   useEffect(() => {
     if (mangaId) {
       dispatch(getComments(mangaId))

@@ -23,6 +23,12 @@ module.exports = {
     "react/no-unescaped-entities": "off",
     "jsx-a11y/control-has-associated-label": "off",
     "import/extensions": "off",
+    "no-param-reassign": "off",
+    "no-nested-ternary": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "no-redeclare": "off",
     "react/jsx-filename-extension": [
       2,
       {
@@ -33,8 +39,13 @@ module.exports = {
     "import/no-unresolved": "off",
     "jsx-a11y/anchor-has-content": "off",
     "react/button-has-type": "off",
+    "react/prop-types": "off",
     "no-shadow": "off",
     "no-undef": "off",
+    "react/jsx-no-bind": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-plusplus": "off",
+    "no-return-await": "off",
     "react/function-component-definition": [
       2,
       {

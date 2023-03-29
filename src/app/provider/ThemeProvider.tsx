@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react"
+import { ReactNode, useMemo, useState } from "react"
 import { Theme, ThemeContext } from "../context/ThemeContext"
 import { changeCssRootVariables } from "../../shared/lib/utils/changeCssRootVariables"
 import { storage } from "../../shared/lib/utils/storage"
@@ -17,15 +17,15 @@ export const ThemeProvider = ({ children, ...props }: Props) => {
     setTheme(theme)
     changeCssRootVariables(theme)
   }
-
+  const memoReturnValues = useMemo(
+    () => ({
+      theme,
+      changeTheme,
+    }),
+    [theme, changeTheme]
+  )
   return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        changeTheme,
-      }}
-      {...props}
-    >
+    <ThemeContext.Provider value={memoReturnValues} {...props}>
       {children}
     </ThemeContext.Provider>
   )

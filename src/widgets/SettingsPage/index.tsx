@@ -4,7 +4,6 @@ import {
   MessageOutlined,
   OrderedListOutlined,
 } from "@ant-design/icons"
-import React from "react"
 import styles from "./SettingsPage.module.scss"
 
 const SettingPage = () => (

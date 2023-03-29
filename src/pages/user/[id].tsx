@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { Avatar, Empty, Spin, Typography, Tabs } from "antd"
 
 import { GetServerSideProps } from "next"
@@ -113,8 +113,8 @@ const User = () => {
                   {user.name}
                 </Title>
                 <div className={styles.count}>
-                  {info.map((obj, index) => (
-                    <div className={styles.text} key={index}>
+                  {info.map((obj) => (
+                    <div className={styles.text} key={obj.text}>
                       <strong>{obj.count}</strong> {obj.text}
                     </div>
                   ))}
@@ -128,11 +128,10 @@ const User = () => {
                 </TabPane>
                 <TabPane tab="Закладки" key="2">
                   <div className={styles.markList}>
-                    {" "}
                     {loadingMark ? (
                       <Spin />
                     ) : bookMarks.length > 0 ? (
-                      bookMarks.map((mark, index) => (
+                      bookMarks.map((mark) => (
                         <DynamicCardManga key={mark.id} manga={mark.manga} />
                       ))
                     ) : (
@@ -173,6 +172,7 @@ export const getServerSideProps: GetServerSideProps =
         props: {},
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log("ERROR!", error)
       return {
         props: {},

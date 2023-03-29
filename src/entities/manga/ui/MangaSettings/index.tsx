@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 import { EditOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons"
 import { Button, message, Spin, Tooltip, Select } from "antd"
 import Image from "next/image"
 
 import { useRouter } from "next/dist/client/router"
 import Link from "next/link"
-import React, { FC, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import dynamic from "next/dynamic"
 import {
@@ -30,6 +31,9 @@ interface MangaSettingsProps {
   id: number
 }
 const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
+  const router = useRouter()
+  // eslint-disable-next-line no-unused-vars
+  const [category, setCategory] = useState("")
   const dispatch = useDispatch()
   const token = useSelector(selectUserToken)
   const bookMark = useSelector(selectBookMarkItemData)
@@ -50,11 +54,11 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
       await dispatch(addBookMark(payload))
       message.success("Манга добавлена в закладки")
     }
-    if (bookMark && payload.category != "Удалить из закладок") {
+    if (bookMark && payload.category !== "Удалить из закладок") {
       await dispatch(updateBookMark(payload))
       message.success("Манга была добавлена в другую категорию закладкок")
     }
-    if (payload.category == "Удалить из закладок") {
+    if (payload.category === "Удалить из закладок") {
       await dispatch(addBookMark(payload))
       message.success("Манга была удалена из закладок")
     }
@@ -63,8 +67,6 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
   function onSearch(val: string) {
     console.log("search:", val)
   }
-  const router = useRouter()
-  const [category, setCategory] = useState("")
 
   const dataManga: { mangaId: string | string[] | undefined } = {
     mangaId: router.query.id,

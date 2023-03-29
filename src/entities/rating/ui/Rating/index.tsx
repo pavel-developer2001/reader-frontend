@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Modal, message, Spin } from "antd"
 import { StarFilled } from "@ant-design/icons"
 import { useDispatch, useSelector } from "react-redux"

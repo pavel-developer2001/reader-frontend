@@ -1,6 +1,6 @@
+import { useState } from "react"
 import { Spin } from "antd"
 import dynamic from "next/dynamic"
-import React from "react"
 import styles from "./AuthModal.module.scss"
 
 const DynamicLoginModal = dynamic(
@@ -9,7 +9,7 @@ const DynamicLoginModal = dynamic(
 )
 
 const AuthModal = () => {
-  const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false)
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
 
   const showModal = () => {
     setIsModalVisible(true)

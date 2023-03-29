@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Modal, Input, Spin } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import dynamic from "next/dynamic"

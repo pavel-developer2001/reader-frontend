@@ -1,6 +1,6 @@
 import { EyeFilled, HeartFilled } from "@ant-design/icons"
 import Title from "antd/lib/typography/Title"
-import React, { FC, memo } from "react"
+import { FC, memo } from "react"
 import { useSelector } from "react-redux"
 import { selectRatingItemData } from "../../model/rating.selector"
 import { selectUserToken } from "../../../user/model/user.selector"

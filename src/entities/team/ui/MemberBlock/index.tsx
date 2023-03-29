@@ -1,6 +1,6 @@
 import { Avatar, Button } from "antd"
 import Link from "next/link"
-import React, { FC, memo } from "react"
+import  { FC, memo } from "react"
 import { useDispatch } from "react-redux"
 import { IMember } from "../../../../shared/api/reader/models"
 import { removeMember } from "../../model/team.slice"
@@ -37,7 +37,7 @@ const MemberBlockItem: FC<MemberBlockItemProps> = memo(
           </a>
         </Link>
         <div>
-          {role != "Глава" ? (
+          {role !== "Глава" ? (
             <Button type="primary" onClick={handleRemoveMember}>
               Удалить
             </Button>

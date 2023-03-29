@@ -1,5 +1,4 @@
 import { Avatar, Spin, Typography, Tabs } from "antd"
-import React from "react"
 
 import { useSelector } from "react-redux"
 import { GetServerSideProps } from "next"
@@ -129,6 +128,7 @@ export const getServerSideProps: GetServerSideProps =
         props: {},
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log("ERROR!", error)
       return {
         props: {},

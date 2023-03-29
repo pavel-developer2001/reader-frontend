@@ -1,5 +1,5 @@
 import { Spin, Tag } from "antd"
-import React, { FC, memo } from "react"
+import  { FC, memo } from "react"
 import dynamic from "next/dynamic"
 import styles from "./MangaDescriptions.module.scss"
 import { IGenre, ITag } from "../../../../shared/api/reader/models"

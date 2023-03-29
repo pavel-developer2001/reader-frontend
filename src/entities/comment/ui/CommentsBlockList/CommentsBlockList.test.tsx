@@ -1,6 +1,7 @@
 import { screen } from "@testing-library/react"
 import { useSelector } from "react-redux"
 import CommentBlockList from "."
+// eslint-disable-next-line no-unused-vars
 import { commentData } from "../../../../../__mocks__/data/comment-data"
 import { renderWithRouter } from "../../../../shared/lib/test-utils/renderWithRouter"
 
@@ -16,6 +17,7 @@ jest.mock("react-redux", () => ({
 
 describe("CommentsBlockList testing", () => {
   afterEach(() => {
+    // @ts-ignore
     useSelector.mockClear()
   })
   test("Render component", () => {
