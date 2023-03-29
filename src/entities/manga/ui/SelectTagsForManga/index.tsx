@@ -2,6 +2,7 @@ import Select from "antd/lib/select"
 import React, { FC } from "react"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 import styles from "./SelectTagsForManga.module.scss"
+
 const { Option } = Select
 
 interface SelectTagsForMangaProps {

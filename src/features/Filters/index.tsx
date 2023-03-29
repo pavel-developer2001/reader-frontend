@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { Button, Select } from "antd"
 import { CloseOutlined } from "@ant-design/icons"
-import styles from "./Filters.module.scss"
 import { SelectValue } from "antd/lib/select"
+import styles from "./Filters.module.scss"
 
 const { Option } = Select
 
@@ -144,7 +144,7 @@ const Filters = () => {
         allowClear
         style={{ width: "100%" }}
         placeholder="Теги"
-        defaultValue={""}
+        defaultValue=""
         onChange={(value: string) => setTags(value)}
       >
         {childrenTags}

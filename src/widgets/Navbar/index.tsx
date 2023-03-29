@@ -1,14 +1,15 @@
 import React from "react"
 import { Layout, Spin } from "antd"
-const { Header } = Layout
 import { BellOutlined, FormatPainterOutlined } from "@ant-design/icons"
 import Link from "next/link"
+import { useSelector } from "react-redux"
+import dynamic from "next/dynamic"
 import styles from "./Navbar.module.scss"
 import { Theme } from "../../app/context/ThemeContext"
 import { useTheme } from "../../shared/lib/hooks/useTheme"
 import { selectUserToken } from "../../entities/user/model/user.selector"
-import { useSelector } from "react-redux"
-import dynamic from "next/dynamic"
+
+const { Header } = Layout
 
 const DynamicDesktop = dynamic(
   () => import("../../shared/ui/devices/Desktop"),

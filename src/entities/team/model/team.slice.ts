@@ -6,45 +6,35 @@ import { TeamState } from "./team.types"
 
 export const addNewTeam = createAsyncThunk(
   "team/addNewTeam",
-  async (payload: FormData) => {
-    return await TeamApi.createTeam(payload)
-  }
+  async (payload: FormData) => await TeamApi.createTeam(payload)
 )
-export const getTeams = createAsyncThunk("team/getTeams", async () => {
-  return await TeamApi.getAllTeam()
-})
+export const getTeams = createAsyncThunk(
+  "team/getTeams",
+  async () => await TeamApi.getAllTeam()
+)
 export const getTeam = createAsyncThunk(
   "team/getTeam",
-  async (id: string | string[] | undefined) => {
-    return await TeamApi.getTeam(id)
-  }
+  async (id: string | string[] | undefined) => await TeamApi.getTeam(id)
 )
 export const getTeamsForUser = createAsyncThunk(
   "team/getTeamsForUser",
-  async (id: number | null) => {
-    return await TeamApi.getAllTeamsForUser(id)
-  }
+  async (id: number | null) => await TeamApi.getAllTeamsForUser(id)
 )
 export const getTeamsForInvitations = createAsyncThunk(
   "team/getTeamsForInvitations",
-  async (id: number | null) => {
-    return await TeamApi.getAllTeamsForUser(id)
-  }
+  async (id: number | null) => await TeamApi.getAllTeamsForUser(id)
 )
 export const connectMangaForTeam = createAsyncThunk(
   "team/connectMangaForTeam",
   async (payload: {
     mangaId: string | string[] | undefined
     teamId: string | undefined
-  }) => {
-    return await TeamApi.addTeamForManga(payload)
-  }
+  }) => await TeamApi.addTeamForManga(payload)
 )
 export const getTeamsForManga = createAsyncThunk(
   "team/getTeamsForManga",
-  async (id: string | string[] | undefined) => {
-    return await TeamApi.getAllTeamsForManga(id)
-  }
+  async (id: string | string[] | undefined) =>
+    await TeamApi.getAllTeamsForManga(id)
 )
 export const addInvitation = createAsyncThunk(
   "team/addInvitation",
@@ -52,15 +42,12 @@ export const addInvitation = createAsyncThunk(
     rank: string
     teamId: string
     userId: string | string[] | undefined
-  }) => {
-    return await TeamApi.addInvitationForUser(payload)
-  }
+  }) => await TeamApi.addInvitationForUser(payload)
 )
 export const getInvitationsForUser = createAsyncThunk(
   "team/getInvitationsForUser",
-  async (id: string | string[] | undefined) => {
-    return await TeamApi.getAllInvitationsForUser(id)
-  }
+  async (id: string | string[] | undefined) =>
+    await TeamApi.getAllInvitationsForUser(id)
 )
 export const agreeToJoin = createAsyncThunk(
   "team/agreeToJoin",
@@ -69,21 +56,15 @@ export const agreeToJoin = createAsyncThunk(
     rank: string
     teamId: number
     userId: string | string[] | undefined
-  }) => {
-    return await TeamApi.agreeToJoinToTeam(payload)
-  }
+  }) => await TeamApi.agreeToJoinToTeam(payload)
 )
 export const refucalToJoin = createAsyncThunk(
   "team/refucalToJoin",
-  async (id: number) => {
-    return await TeamApi.refucalToJoinTeam(id)
-  }
+  async (id: number) => await TeamApi.refucalToJoinTeam(id)
 )
 export const removeMember = createAsyncThunk(
   "team/removeMember",
-  async (id: number) => {
-    return await TeamApi.deleteMemberFromTeam(id)
-  }
+  async (id: number) => await TeamApi.deleteMemberFromTeam(id)
 )
 
 const initialState: TeamState = {

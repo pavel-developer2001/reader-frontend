@@ -9,9 +9,7 @@ import {
 
 export const addNewChapter = createAsyncThunk(
   "chapter/addNewChapter",
-  async (payload: FormData) => {
-    return await ChapterApi.createChapter(payload)
-  }
+  async (payload: FormData) => await ChapterApi.createChapter(payload)
 )
 export const getChapters = createAsyncThunk(
   "chapter/getChapters",

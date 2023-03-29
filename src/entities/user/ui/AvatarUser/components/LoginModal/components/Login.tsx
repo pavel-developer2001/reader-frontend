@@ -3,10 +3,10 @@ import React, { FC, useEffect } from "react"
 import * as yup from "yup"
 import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { loginUsers } from "../../../../../model/user.slice"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUserError } from "../../../../../model/user.selector"
 import { SubmitHandler } from "react-hook-form/dist/types"
+import { loginUsers } from "../../../../../model/user.slice"
+import { selectUserError } from "../../../../../model/user.selector"
 
 interface LoginProps {
   setRegister: (arg: boolean) => void

@@ -3,9 +3,9 @@ import Image from "next/image"
 import { useRouter } from "next/dist/client/router"
 import React from "react"
 import { useSelector } from "react-redux"
-import styles from "../../../../app/styles/pages/Chapter.module.scss"
 import { Spin } from "antd"
 import dynamic from "next/dynamic"
+import styles from "../../../../app/styles/pages/Chapter.module.scss"
 import {
   selectChapterError,
   selectChapterImagesData,

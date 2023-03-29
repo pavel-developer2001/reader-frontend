@@ -28,9 +28,7 @@ export const loginUsers = createAsyncThunk(
 )
 export const getUserData = createAsyncThunk(
   "user/getUserData",
-  async (id: string | string[] | undefined) => {
-    return await UserApi.getUser(id)
-  }
+  async (id: string | string[] | undefined) => await UserApi.getUser(id)
 )
 interface UserState {
   user: IUser

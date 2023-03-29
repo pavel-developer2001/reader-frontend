@@ -13,18 +13,16 @@ const DynamicTisketListCard = dynamic(
 interface TisketListProps {
   popularTitle: string
 }
-const TisketList: FC<TisketListProps> = memo(({ popularTitle }) => {
-  return (
-    <div className={styles.tisket}>
-      <h3 className={styles.popularCategory}>{popularTitle}</h3>
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-      <DynamicTisketListCard />
-    </div>
-  )
-})
+const TisketList: FC<TisketListProps> = memo(({ popularTitle }) => (
+  <div className={styles.tisket}>
+    <h3 className={styles.popularCategory}>{popularTitle}</h3>
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+    <DynamicTisketListCard />
+  </div>
+))
 
 export default TisketList

@@ -7,10 +7,10 @@ import {
 import { Header } from "antd/lib/layout/layout"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import { Spin } from "antd"
 import styles from "./ChapterNavbar.module.scss"
 import { Theme } from "../../app/context/ThemeContext"
 import { useTheme } from "../../shared/lib/hooks/useTheme"
-import { Spin } from "antd"
 
 const DynamicMobile = dynamic(() => import("../../shared/ui/devices/Mobile"), {
   loading: () => <Spin />,
@@ -68,7 +68,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
                   <a>Reader</a>
                 </Link>
               </div>
-              <Link href={"/manga/" + id}>
+              <Link href={`/manga/${id}`}>
                 <a className={styles.title}> {title}</a>
               </Link>
             </div>
@@ -95,7 +95,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
                   <a>Reader</a>
                 </Link>
               </div>
-              <Link href={"/manga/" + id}>
+              <Link href={`/manga/${id}`}>
                 <a className={styles.title}> {title}</a>
               </Link>
             </div>

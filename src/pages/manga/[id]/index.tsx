@@ -93,47 +93,45 @@ const PageManga = () => {
   return (
     <DynamicMainLayout>
       <div className={styles.wrapper}>
-        <>
-          {loading ? (
-            <Spin />
-          ) : (
-            <>
-              <DynamicMangaSettings cover={manga?.mangaCover} id={manga?.id} />
-              <div className={styles.main}>
-                <DynamicMangaData
-                  title={manga?.title}
-                  englishTitle={manga?.englishTitle}
-                  originalTitle={manga?.originalTitle}
-                  yearOfIssue={manga?.yearOfIssue}
-                  ageRating={manga?.ageRatingManga}
-                  typeManga={manga?.typeManga}
-                  statusManga={manga?.statusManga}
-                  watchCount={manga?.watchCount}
-                />
-                <div className={styles.table}>
-                  <div className={styles.mainBlock}>
-                    <Tabs defaultActiveKey="1">
-                      <TabPane tab="Описание" key="1">
-                        <DynamicMangaDescriptions
-                          mangaDescription={manga?.mangaDescription}
-                          tags={manga.tags}
-                          genres={manga.genres}
-                        />
-                        <MangaAddition />
-                      </TabPane>
-                      <TabPane tab="Главы" key="2">
-                        <ChapterList mangaId={router.query.id} />
-                      </TabPane>
-                      <TabPane tab="Комментарии" key="3">
-                        <CommentsBlockList />
-                      </TabPane>
-                    </Tabs>
-                  </div>
+        {loading ? (
+          <Spin />
+        ) : (
+          <>
+            <DynamicMangaSettings cover={manga?.mangaCover} id={manga?.id} />
+            <div className={styles.main}>
+              <DynamicMangaData
+                title={manga?.title}
+                englishTitle={manga?.englishTitle}
+                originalTitle={manga?.originalTitle}
+                yearOfIssue={manga?.yearOfIssue}
+                ageRating={manga?.ageRatingManga}
+                typeManga={manga?.typeManga}
+                statusManga={manga?.statusManga}
+                watchCount={manga?.watchCount}
+              />
+              <div className={styles.table}>
+                <div className={styles.mainBlock}>
+                  <Tabs defaultActiveKey="1">
+                    <TabPane tab="Описание" key="1">
+                      <DynamicMangaDescriptions
+                        mangaDescription={manga?.mangaDescription}
+                        tags={manga.tags}
+                        genres={manga.genres}
+                      />
+                      <MangaAddition />
+                    </TabPane>
+                    <TabPane tab="Главы" key="2">
+                      <ChapterList mangaId={router.query.id} />
+                    </TabPane>
+                    <TabPane tab="Комментарии" key="3">
+                      <CommentsBlockList />
+                    </TabPane>
+                  </Tabs>
                 </div>
               </div>
-            </>
-          )}
-        </>
+            </div>
+          </>
+        )}
       </div>
     </DynamicMainLayout>
   )

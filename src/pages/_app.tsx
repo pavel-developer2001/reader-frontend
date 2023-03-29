@@ -8,7 +8,7 @@ import { setToken } from "../entities/user/model/user.slice"
 import { ThemeProvider } from "../app/provider/ThemeProvider"
 import { wrapper } from "../app/store"
 
-export function MyApp({ Component, pageProps }: AppProps) {
+export const MyApp = ({ Component, pageProps }: AppProps) => {
   const token = useSelector(selectUserToken)
   const dispatch = useDispatch()
   useEffect(() => {

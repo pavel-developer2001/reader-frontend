@@ -10,12 +10,15 @@ export default class MangaApi {
       },
     })
   }
+
   static async getAllManga() {
     return ReaderApi.get("/mangas/")
   }
+
   static async getManga(id: string | string[] | undefined) {
-    return ReaderApi.get("/mangas/" + id)
+    return ReaderApi.get(`/mangas/${id}`)
   }
+
   static async searchManga(query: { title: string }) {
     return ReaderApi.get("/mangas/search", { params: query })
   }

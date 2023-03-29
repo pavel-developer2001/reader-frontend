@@ -5,9 +5,7 @@ import { IComment } from "../../../shared/api/reader/models"
 
 export const getComments = createAsyncThunk(
   "comment/getComments",
-  async (id: string | string[]) => {
-    return await CommentsApi.getAllCommentsForManga(id)
-  }
+  async (id: string | string[]) => await CommentsApi.getAllCommentsForManga(id)
 )
 export const addComment = createAsyncThunk(
   "comment/addComment",
@@ -15,24 +13,18 @@ export const addComment = createAsyncThunk(
     commentText: string
     mangaId: string | string[] | undefined
     spoiler: boolean
-  }) => {
-    return await CommentsApi.addCommentForManga(payload)
-  }
+  }) => await CommentsApi.addCommentForManga(payload)
 )
 export const updateComment = createAsyncThunk(
   "comment/updateComment",
   async (data: {
     id: number
     payload: { commentText: string; spoiler: boolean }
-  }) => {
-    return await CommentsApi.updateCommentForManga(data.id, data.payload)
-  }
+  }) => await CommentsApi.updateCommentForManga(data.id, data.payload)
 )
 export const deleteComment = createAsyncThunk(
   "comment/deleteComment",
-  async (id: number) => {
-    return await CommentsApi.deleteCommentForManga(id)
-  }
+  async (id: number) => await CommentsApi.deleteCommentForManga(id)
 )
 interface CommentState {
   comments: IComment[]

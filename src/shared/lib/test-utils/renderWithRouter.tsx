@@ -30,10 +30,9 @@ function createMockRouter(router: Partial<NextRouter>): NextRouter {
   }
 }
 
-export const renderWithRouter = (router: any, children: any) => {
-  return render(
+export const renderWithRouter = (router: any, children: any) =>
+  render(
     <RouterContext.Provider value={createMockRouter(router)}>
       {children}
     </RouterContext.Provider>
   )
-}

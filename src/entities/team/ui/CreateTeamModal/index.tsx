@@ -3,11 +3,11 @@ import { Button, message, Modal, Upload } from "antd"
 import TextArea from "antd/lib/input/TextArea"
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { addNewTeam } from "../../model/team.slice"
-import styles from "./CreateTeamModal.module.scss"
 import * as yup from "yup"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
+import styles from "./CreateTeamModal.module.scss"
+import { addNewTeam } from "../../model/team.slice"
 
 const CreateTeamModalFormSchema = yup.object().shape({
   teamName: yup.string().required("Введите название команды"),
@@ -45,7 +45,7 @@ const CreateTeamModal = () => {
   const [loading, setLoading] = useState<boolean | null>()
   const [imageUrl, setImageUrl] = useState("")
 
-  /////////////////////////////////////////////
+  /// //////////////////////////////////////////
   const [teamCover, setTeamCover] = useState("")
 
   const handleAddTeam: SubmitHandler<FormValues> = async (data) => {
@@ -66,7 +66,7 @@ const CreateTeamModal = () => {
       message.error("Произошла ошибка", error)
     }
   }
-  ////////////////////////////////////////////////
+  /// /////////////////////////////////////////////
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}

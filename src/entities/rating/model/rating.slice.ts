@@ -8,30 +8,24 @@ export const addRating = createAsyncThunk(
   async (payload: {
     rating: number | null
     mangaId: string | string[] | undefined
-  }) => {
-    return await RatingApi.addRatingForManga(payload)
-  }
+  }) => await RatingApi.addRatingForManga(payload)
 )
 export const updateRating = createAsyncThunk(
   "rating/updateRating",
   async (payload: {
     rating: number | null
     mangaId: string | string[] | undefined
-  }) => {
-    return await RatingApi.updateRatingForManga(payload)
-  }
+  }) => await RatingApi.updateRatingForManga(payload)
 )
 export const getRating = createAsyncThunk(
   "rating/getRating",
-  async (dataManga: { id: string | string[] | undefined }) => {
-    return await RatingApi.getRatingForManga(dataManga.id)
-  }
+  async (dataManga: { id: string | string[] | undefined }) =>
+    await RatingApi.getRatingForManga(dataManga.id)
 )
 export const getRatingCount = createAsyncThunk(
   "rating/getRatingCount",
-  async (id: string | string[] | undefined) => {
-    return await RatingApi.getRatingCountForManga(id)
-  }
+  async (id: string | string[] | undefined) =>
+    await RatingApi.getRatingCountForManga(id)
 )
 interface RatingState {
   rating: IRating

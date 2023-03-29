@@ -1,6 +1,5 @@
 import React, { FC, MouseEventHandler, useState } from "react"
-import styles from "./AvatarDrawer.module.scss"
-import { Drawer, Spin } from "antd"
+import { Drawer, Spin, message } from "antd"
 import {
   ExportOutlined,
   FormatPainterOutlined,
@@ -10,11 +9,12 @@ import {
 import Avatar from "antd/lib/avatar/avatar"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
-import { message } from "antd"
+
+import dynamic from "next/dynamic"
 import { setToken } from "../../../../entities/user/model/user.slice"
 import { selectUserToken } from "../../../../entities/user/model/user.selector"
 import { dataUser } from "../../../../shared/lib/utils/getDataUserFromToken"
-import dynamic from "next/dynamic"
+import styles from "./AvatarDrawer.module.scss"
 
 const DynamicAuthModal = dynamic(
   () => import("../../../../entities/user/ui/AuthModal"),
@@ -23,32 +23,30 @@ const DynamicAuthModal = dynamic(
   }
 )
 
-const AvatarHeader = ({ token }: { token: string }) => {
-  return (
-    <div className={styles.header}>
-      {token ? (
-        <>
-          <div className={styles.headerUser}>
-            <Link href={"/user/" + dataUser}>
-              <Avatar size="large" icon={<UserOutlined />} />
-            </Link>
+const AvatarHeader = ({ token }: { token: string }) => (
+  <div className={styles.header}>
+    {token ? (
+      <>
+        <div className={styles.headerUser}>
+          <Link href={`/user/${dataUser}`}>
+            <Avatar size="large" icon={<UserOutlined />} />
+          </Link>
 
-            <div className={styles.headerData}>
-              {" "}
-              <strong>
-                <Link href={"/user/" + dataUser}>UserName</Link>
-              </strong>{" "}
-              <span>0 ₽</span>
-            </div>
+          <div className={styles.headerData}>
+            {" "}
+            <strong>
+              <Link href={`/user/${dataUser}`}>UserName</Link>
+            </strong>{" "}
+            <span>0 ₽</span>
           </div>
-          <div>Пополнить Баланс</div>
-        </>
-      ) : (
-        <DynamicAuthModal />
-      )}
-    </div>
-  )
-}
+        </div>
+        <div>Пополнить Баланс</div>
+      </>
+    ) : (
+      <DynamicAuthModal />
+    )}
+  </div>
+)
 interface AvatarDrawerProps {
   changeTheme: MouseEventHandler<HTMLDivElement> | undefined
   menuArrays: { left: Array<{ title: string; link: string }>; right: any }
@@ -78,11 +76,11 @@ const AvatarDrawer: FC<AvatarDrawerProps> = ({ changeTheme, menuArrays }) => {
 
       <Drawer
         title={<AvatarHeader token={token} />}
-        placement={"right"}
+        placement="right"
         closable={false}
         onClose={onClose}
         visible={visible}
-        key={"right"}
+        key="right"
       >
         {menuArrays.left.map((menu, index: number) => (
           <p key={index} className={styles.menu}>

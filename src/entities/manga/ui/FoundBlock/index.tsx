@@ -10,25 +10,23 @@ import {
 
 import styles from "./FoundBlock.module.scss"
 
-const FoundBlockItem: FC<{ manga: IManga }> = ({ manga }) => {
-  return (
-    <div>
-      <Link href={"/manga/" + manga.id}>
-        <a className={styles.main}>
-          <Avatar
-            size={30}
-            src={
-              manga.mangaCover
-                ? manga.mangaCover
-                : "https://joeschmoe.io/api/v1/random"
-            }
-          />
-          <strong>{manga.title}</strong>
-        </a>
-      </Link>
-    </div>
-  )
-}
+const FoundBlockItem: FC<{ manga: IManga }> = ({ manga }) => (
+  <div>
+    <Link href={`/manga/${manga.id}`}>
+      <a className={styles.main}>
+        <Avatar
+          size={30}
+          src={
+            manga.mangaCover
+              ? manga.mangaCover
+              : "https://joeschmoe.io/api/v1/random"
+          }
+        />
+        <strong>{manga.title}</strong>
+      </a>
+    </Link>
+  </div>
+)
 const FoundBlock = () => {
   const mangas = useSelector(selectSearchListManga)
   const isLoading = useSelector(selectSearchLoading)

@@ -108,7 +108,7 @@ export const CommentsBlock: FC<CommentsBlockProps> = ({
       <Comment
         actions={!edit ? actions : undefined}
         author={
-          <Link href={"/user/" + userId}>
+          <Link href={`/user/${userId}`}>
             <a className={styles.userName}>{userName}</a>
           </Link>
         }
@@ -116,9 +116,8 @@ export const CommentsBlock: FC<CommentsBlockProps> = ({
           <Avatar
             className={styles.avatar}
             src={
-              userAvatar
-                ? userAvatar
-                : "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              userAvatar ||
+              "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
             }
             alt={userName}
           />

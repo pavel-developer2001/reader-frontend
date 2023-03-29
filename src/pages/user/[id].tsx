@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
-import { Avatar, Empty, Spin } from "antd"
-import { Typography } from "antd"
-import { Tabs } from "antd"
+import { Avatar, Empty, Spin, Typography, Tabs } from "antd"
+
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/dist/client/router"
 import { useDispatch, useSelector } from "react-redux"
@@ -123,7 +122,7 @@ const User = () => {
               </div>
             </div>{" "}
             <div className={styles.body}>
-              <Tabs tabPosition={"left"}>
+              <Tabs tabPosition="left">
                 <TabPane tab="Профиль" key="1">
                   id: {user.id} Пол: Мужской
                 </TabPane>

@@ -3,11 +3,13 @@ import { useRouter } from "next/dist/client/router"
 import React, { useEffect, useState } from "react"
 import { Upload, Modal, Button, Select, message } from "antd"
 import { useDispatch, useSelector } from "react-redux"
-import styles from "../../../../app/styles/pages/Upload.module.scss"
 import { GetServerSideProps } from "next"
 import * as yup from "yup"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { SelectValue } from "antd/lib/select"
+import { UploadFile } from "antd/lib/upload/interface"
+import styles from "../../../../app/styles/pages/Upload.module.scss"
 import {
   selectTeamLoading,
   selectTeamsUserData,
@@ -17,8 +19,6 @@ import { dataUser } from "../../../../shared/lib/utils/getDataUserFromToken"
 import MainLayout from "../../../../shared/ui/layouts/MainLayout"
 import { wrapper } from "../../../../app/store"
 import { addNewChapter } from "../../../../entities/chapter/model/chapter.slice"
-import { SelectValue } from "antd/lib/select"
-import { UploadFile } from "antd/lib/upload/interface"
 
 const { Option } = Select
 
@@ -89,7 +89,7 @@ const AddNewChapter = () => {
   useEffect(() => {
     dispatch(getTeamsForUser(dataUser))
   }, [])
-  ////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
 
   const languageArray = [
     { lang: "Русский" },
@@ -122,7 +122,7 @@ const AddNewChapter = () => {
 
       dispatch(addNewChapter(formData))
       message.success("Глава была успешно добавлена")
-      router.push("/manga/" + mangaId)
+      router.push(`/manga/${mangaId}`)
       reset()
       setTeamId("")
       setImagesList([])
@@ -136,7 +136,7 @@ const AddNewChapter = () => {
         <div className={styles.main}>
           <div
             className={styles.userData}
-            onClick={() => router.push("/manga/" + mangaId)}
+            onClick={() => router.push(`/manga/${mangaId}`)}
           >
             Начало после конца
           </div>

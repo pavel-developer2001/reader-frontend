@@ -19,11 +19,7 @@ const RatingCount = () => {
   }, [router.query.id])
 
   if (isLoading) {
-    return (
-      <>
-        <Spin />
-      </>
-    )
+    return <Spin />
   }
 
   return <>(голосов: {count})</>

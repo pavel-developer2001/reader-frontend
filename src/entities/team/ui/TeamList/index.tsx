@@ -17,26 +17,22 @@ const TeamListItem: FC<TeamListItemProps> = ({
   name,
   subtitle,
   cover,
-}) => {
-  return (
-    <Link href={"/team/" + teamId}>
-      <a className={styles.main}>
-        <Avatar
-          size={100}
-          src={
-            cover
-              ? cover
-              : "https://api.remanga.org//media/publishers/254/mid_cover.jpg"
-          }
-        />
-        <div className={styles.content}>
-          <strong>{name}</strong>
-          <p>{subtitle}</p>
-        </div>
-      </a>
-    </Link>
-  )
-}
+}) => (
+  <Link href={`/team/${teamId}`}>
+    <a className={styles.main}>
+      <Avatar
+        size={100}
+        src={
+          cover || "https://api.remanga.org//media/publishers/254/mid_cover.jpg"
+        }
+      />
+      <div className={styles.content}>
+        <strong>{name}</strong>
+        <p>{subtitle}</p>
+      </div>
+    </a>
+  </Link>
+)
 const TeamList = () => {
   const dispatch = useDispatch()
   const teams = useSelector(selectTeamsData)

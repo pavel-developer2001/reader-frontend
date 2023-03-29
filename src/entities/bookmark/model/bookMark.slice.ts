@@ -5,33 +5,28 @@ import { IBookMark } from "../../../shared/api/reader/models"
 
 export const addBookMark = createAsyncThunk(
   "bookMark/addBookMark",
-  async (payload: { category: string; mangaId: number }) => {
-    return await BookMarksApi.addBookMarkForUser(payload)
-  }
+  async (payload: { category: string; mangaId: number }) =>
+    await BookMarksApi.addBookMarkForUser(payload)
 )
 export const updateBookMark = createAsyncThunk(
   "bookMark/updateBookMark",
-  async (payload: { category: string; mangaId: number }) => {
-    return await BookMarksApi.updateBookMark(payload)
-  }
+  async (payload: { category: string; mangaId: number }) =>
+    await BookMarksApi.updateBookMark(payload)
 )
 export const getBookMarks = createAsyncThunk(
   "bookMark/getBookMarks",
-  async (id: string | string[] | undefined) => {
-    return await BookMarksApi.getAllBookMarksForUser(id)
-  }
+  async (id: string | string[] | undefined) =>
+    await BookMarksApi.getAllBookMarksForUser(id)
 )
 export const getBookMarkToManga = createAsyncThunk(
   "bookMark/getBookMarkToManga",
-  async (dataManga: { mangaId: string | string[] | undefined }) => {
-    return await BookMarksApi.getBookMarkForManga(dataManga.mangaId)
-  }
+  async (dataManga: { mangaId: string | string[] | undefined }) =>
+    await BookMarksApi.getBookMarkForManga(dataManga.mangaId)
 )
 export const getBookMarkCountToManga = createAsyncThunk(
   "bookMark/getBookMarkCountToManga",
-  async (id: string | string[] | undefined) => {
-    return await BookMarksApi.getBookMarkCountForManga(id)
-  }
+  async (id: string | string[] | undefined) =>
+    await BookMarksApi.getBookMarkCountForManga(id)
 )
 
 interface BookMarkState {
@@ -54,7 +49,7 @@ const bookMarkSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) =>
-    //@ts-ignore
+    // @ts-ignore
     builder
       .addCase(HYDRATE, (state, action: any) => {
         state.bookMarks = action.payload.bookMark.bookMarks

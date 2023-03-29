@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { Modal, Input, Spin } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
-import styles from "./SearchModal.module.scss"
 import dynamic from "next/dynamic"
-import { useDebounce } from "../../shared/lib/hooks/useDebounce"
 import { useDispatch } from "react-redux"
+import styles from "./SearchModal.module.scss"
+import { useDebounce } from "../../shared/lib/hooks/useDebounce"
 import { searchManga } from "../../entities/manga/model/manga.slice"
 
 const DynamicFoundBlock = dynamic(

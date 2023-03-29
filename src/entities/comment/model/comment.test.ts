@@ -1,4 +1,4 @@
-import { commentData } from "./../../../../__mocks__/data/comment-data"
+import { commentData } from "../../../../__mocks__/data/comment-data"
 import commentSlice, { getComments } from "./comment.slice"
 
 describe("commentSlice", () => {
@@ -19,7 +19,7 @@ describe("comment Async Thunk", () => {
   })
   test("should getComments with data", async () => {
     const thunk = getComments("1")
-    //@ts-ignore
+    // @ts-ignore
     await thunk(dispatch, () => ({}))
     const { calls } = dispatch.mock
     const [start, end] = calls

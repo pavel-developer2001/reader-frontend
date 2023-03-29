@@ -1,8 +1,8 @@
 import type { NextPage } from "next"
 import dynamic from "next/dynamic"
 import { GetServerSideProps } from "next"
-import styles from "../app/styles/pages/Home.module.scss"
 import { Spin } from "antd"
+import styles from "../app/styles/pages/Home.module.scss"
 import { wrapper } from "../app/store"
 import { getMangas } from "../entities/manga/model/manga.slice"
 
@@ -35,19 +35,17 @@ const UpdateList = dynamic(() => import("../entities/chapter/ui/UpdateList"), {
   ),
 })
 
-const Home: NextPage = () => {
-  return (
-    <MainLayout>
-      <PopularList />
-      <div className={styles.tisket}>
-        <TisketList popularTitle="Рекомендации" />
-        <TisketList popularTitle="Топ дня" />
-        <TisketList popularTitle="Топ месяца" />
-      </div>
-      <UpdateList />
-    </MainLayout>
-  )
-}
+const Home: NextPage = () => (
+  <MainLayout>
+    <PopularList />
+    <div className={styles.tisket}>
+      <TisketList popularTitle="Рекомендации" />
+      <TisketList popularTitle="Топ дня" />
+      <TisketList popularTitle="Топ месяца" />
+    </div>
+    <UpdateList />
+  </MainLayout>
+)
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async (ctx) => {
     ctx.res.setHeader(

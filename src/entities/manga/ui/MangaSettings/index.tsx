@@ -1,11 +1,12 @@
 import { EditOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons"
-import { Button, message, Spin, Tooltip } from "antd"
+import { Button, message, Spin, Tooltip, Select } from "antd"
 import Image from "next/image"
-import { Select } from "antd"
+
 import { useRouter } from "next/dist/client/router"
 import Link from "next/link"
 import React, { FC, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import dynamic from "next/dynamic"
 import {
   addBookMark,
   getBookMarkToManga,
@@ -17,7 +18,6 @@ import {
 } from "../../../bookmark/model/bookMark.selector"
 import { selectUserToken } from "../../../user/model/user.selector"
 import styles from "./MangaSettings.module.scss"
-import dynamic from "next/dynamic"
 
 const DynamicAddMangaForTeam = dynamic(
   () => import("../../../../features/AddMangaForTeam"),
@@ -75,107 +75,100 @@ const MangaSettings: FC<MangaSettingsProps> = ({ cover, id }) => {
     }
   }, [router, loading])
   return (
-    <>
-      <div className={styles.card}>
-        {cover && (
-          <Image
-            width={250}
-            height={350}
-            src={cover}
-            alt="cover manga"
-            className={styles.img}
-          />
-        )}
+    <div className={styles.card}>
+      {cover && (
+        <Image
+          width={250}
+          height={350}
+          src={cover}
+          alt="cover manga"
+          className={styles.img}
+        />
+      )}
 
-        {token && (
-          <div className={styles.settings}>
-            <div className={styles.features}>
-              <div className={styles.feature}>
-                <Link href={"/manga/" + id + "/upload"}>
-                  <a>
-                    <Tooltip title="Добавить новые главы">
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        icon={<PlusOutlined />}
-                      />
-                    </Tooltip>
-                  </a>
-                </Link>
-              </div>
-              <div className={styles.feature}>
-                <DynamicAddMangaForTeam />
-              </div>
-              <div className={styles.feature}>
-                <Tooltip title="Сообщение модератору">
-                  <Button
-                    type="primary"
-                    shape="circle"
-                    icon={<WarningOutlined />}
-                  />
-                </Tooltip>
-              </div>
-              <div className={styles.feature}>
-                <Tooltip title="Редактировать мангу">
-                  <Button
-                    type="primary"
-                    shape="circle"
-                    icon={<EditOutlined />}
-                  />
-                </Tooltip>
-              </div>
+      {token && (
+        <div className={styles.settings}>
+          <div className={styles.features}>
+            <div className={styles.feature}>
+              <Link href={`/manga/${id}/upload`}>
+                <a>
+                  <Tooltip title="Добавить новые главы">
+                    <Button
+                      type="primary"
+                      shape="circle"
+                      icon={<PlusOutlined />}
+                    />
+                  </Tooltip>
+                </a>
+              </Link>
             </div>
-            <div className={styles.item}>
-              {" "}
-              {loading ? (
-                <Spin />
-              ) : (
-                <Select
-                  showSearch
-                  style={{ width: 200 }}
-                  placeholder={
-                    loading
-                      ? "Добавить в закладки"
-                      : bookMark != null
-                      ? bookMark?.category
-                      : "Добавить в закладки"
-                  }
-                  optionFilterProp="children"
-                  onChange={changeMark}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                  onSearch={onSearch}
-                  filterOption={(input, option) =>
-                    option?.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  <Option value="Читаю">Читаю</Option>
-                  <Option value="Прочитано">Прочитано</Option>
-                  <Option value="Буду читать">Буду читать</Option>
-                  <Option value="Брошено">Брошено</Option>
-                  <Option value="Неинтересно">Неинтересно</Option>
-                  <Option value="Отложено">Отложено</Option>
-                  {bookMark != null ? (
-                    bookMark?.category ? (
-                      <Option value="Удалить из закладок">
-                        Удалить из закладок
-                      </Option>
-                    ) : null
-                  ) : null}
-                </Select>
-              )}
+            <div className={styles.feature}>
+              <DynamicAddMangaForTeam />
             </div>
-            <div className={styles.item}>
-              <Button type="primary" shape="round" size="large">
-                Читать
-              </Button>
+            <div className={styles.feature}>
+              <Tooltip title="Сообщение модератору">
+                <Button
+                  type="primary"
+                  shape="circle"
+                  icon={<WarningOutlined />}
+                />
+              </Tooltip>
+            </div>
+            <div className={styles.feature}>
+              <Tooltip title="Редактировать мангу">
+                <Button type="primary" shape="circle" icon={<EditOutlined />} />
+              </Tooltip>
             </div>
           </div>
-        )}
-      </div>
-    </>
+          <div className={styles.item}>
+            {" "}
+            {loading ? (
+              <Spin />
+            ) : (
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder={
+                  loading
+                    ? "Добавить в закладки"
+                    : bookMark != null
+                    ? bookMark?.category
+                    : "Добавить в закладки"
+                }
+                optionFilterProp="children"
+                onChange={changeMark}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+                filterOption={(input, option) =>
+                  option?.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+              >
+                <Option value="Читаю">Читаю</Option>
+                <Option value="Прочитано">Прочитано</Option>
+                <Option value="Буду читать">Буду читать</Option>
+                <Option value="Брошено">Брошено</Option>
+                <Option value="Неинтересно">Неинтересно</Option>
+                <Option value="Отложено">Отложено</Option>
+                {bookMark != null ? (
+                  bookMark?.category ? (
+                    <Option value="Удалить из закладок">
+                      Удалить из закладок
+                    </Option>
+                  ) : null
+                ) : null}
+              </Select>
+            )}
+          </div>
+          <div className={styles.item}>
+            <Button type="primary" shape="round" size="large">
+              Читать
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 

@@ -5,13 +5,12 @@ import { IGenre, IManga, ITag } from "../../../shared/api/reader/models"
 
 export const addNewManga = createAsyncThunk(
   "manga/addNewManga",
-  async (payload: FormData) => {
-    return await MangaApi.createManga(payload)
-  }
+  async (payload: FormData) => await MangaApi.createManga(payload)
 )
-export const getMangas = createAsyncThunk("manga/getMangas", async () => {
-  return await MangaApi.getAllManga()
-})
+export const getMangas = createAsyncThunk(
+  "manga/getMangas",
+  async () => await MangaApi.getAllManga()
+)
 export const getManga = createAsyncThunk(
   "manga/getManga",
   async (id: string | string[] | undefined, thunkAPI) => {
@@ -24,9 +23,7 @@ export const getManga = createAsyncThunk(
 )
 export const searchManga = createAsyncThunk(
   "manga/searchManga",
-  async (query: { title: string }) => {
-    return await MangaApi.searchManga(query)
-  }
+  async (query: { title: string }) => await MangaApi.searchManga(query)
 )
 interface MangaItems {
   manga: IManga[]

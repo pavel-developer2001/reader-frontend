@@ -1,7 +1,6 @@
-import { Avatar, Spin, Typography } from "antd"
-const { Title, Paragraph, Text } = Typography
+import { Avatar, Spin, Typography, Tabs } from "antd"
 import React from "react"
-import { Tabs } from "antd"
+
 import { useSelector } from "react-redux"
 import { GetServerSideProps } from "next"
 import dynamic from "next/dynamic"
@@ -13,6 +12,8 @@ import {
 } from "../../entities/team/model/team.selector"
 import { getTeam } from "../../entities/team/model/team.slice"
 import { UpdateListItem } from "../../entities/chapter/ui/UpdateList"
+
+const { Title, Paragraph, Text } = Typography
 
 const MemberBlock = dynamic(
   () => import("../../entities/team/ui/MemberBlock"),

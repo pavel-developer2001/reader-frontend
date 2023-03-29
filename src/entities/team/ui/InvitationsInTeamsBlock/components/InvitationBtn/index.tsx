@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react"
 import { Modal, Button, Select, message } from "antd"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/dist/client/router"
+import * as yup from "yup"
+import { useForm, Controller, SubmitHandler } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
 import {
   addInvitation,
   getTeamsForInvitations,
@@ -11,9 +14,6 @@ import {
   selectTeamForInvitationsLoading,
   selectTeamsForInvitationsData,
 } from "../../../../model/team.selector"
-import * as yup from "yup"
-import { useForm, Controller, SubmitHandler } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
 
 const { Option } = Select
 

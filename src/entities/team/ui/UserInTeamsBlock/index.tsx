@@ -17,25 +17,22 @@ interface UserInTeamsBlockItemProps {
   teamId: number
 }
 const UserInTeamsBlockItem: FC<UserInTeamsBlockItemProps> = memo(
-  ({ cover, name, teamId }) => {
-    return (
-      <Link href={"/team/" + teamId}>
-        <a className={styles.main}>
-          <Avatar
-            shape="square"
-            alt="avatar team"
-            size={72}
-            src={
-              cover
-                ? cover
-                : "https://api.remanga.org//static/images/publishers/no-image.jpg"
-            }
-          />
-          <strong>{name}</strong>
-        </a>
-      </Link>
-    )
-  }
+  ({ cover, name, teamId }) => (
+    <Link href={`/team/${teamId}`}>
+      <a className={styles.main}>
+        <Avatar
+          shape="square"
+          alt="avatar team"
+          size={72}
+          src={
+            cover ||
+            "https://api.remanga.org//static/images/publishers/no-image.jpg"
+          }
+        />
+        <strong>{name}</strong>
+      </a>
+    </Link>
+  )
 )
 const UserInTeamsBlock = () => {
   const router = useRouter()

@@ -3,6 +3,7 @@ import { useRouter } from "next/dist/client/router"
 import Link from "next/link"
 import React, { FC, memo, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Spin } from "antd"
 import { getChapters } from "../../model/chapter.slice"
 import {
   selectChapterError,
@@ -10,7 +11,6 @@ import {
   selectChaptersData,
 } from "../../model/chapter.selector"
 import styles from "./ChapterList.module.scss"
-import { Spin } from "antd"
 
 interface ChapterListItemProps {
   chapterId: number
@@ -24,7 +24,7 @@ const ChapterListItem: FC<ChapterListItemProps> = memo(
     const router = useRouter()
     return (
       <div className={styles.main}>
-        <Link href={"/manga/" + router.query.id + "/chapter/" + chapterId}>
+        <Link href={`/manga/${router.query.id}/chapter/${chapterId}`}>
           <a className={styles.numbers}>
             <strong className={styles.volume}>{volume}</strong>
             <span>Глава {number}</span>

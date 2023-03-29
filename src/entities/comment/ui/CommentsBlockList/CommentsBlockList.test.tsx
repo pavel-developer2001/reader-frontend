@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react"
+import { useSelector } from "react-redux"
 import CommentBlockList from "."
 import { commentData } from "../../../../../__mocks__/data/comment-data"
-import { useSelector } from "react-redux"
 import { renderWithRouter } from "../../../../shared/lib/test-utils/renderWithRouter"
 
 jest.mock("react-redux", () => ({
@@ -27,10 +27,8 @@ describe("CommentsBlockList testing", () => {
       user: { token: true },
       comment: { comments: [], loading: false },
     }
-    //@ts-ignore/
-    useSelector.mockImplementation((callback) => {
-      return callback(storeInitialState)
-    })
+    // @ts-ignore/
+    useSelector.mockImplementation((callback) => callback(storeInitialState))
 
     renderWithRouter({ query: { id: "2" } }, <CommentBlockList />)
     screen.debug()

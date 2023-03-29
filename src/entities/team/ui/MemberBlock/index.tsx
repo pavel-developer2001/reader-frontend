@@ -22,14 +22,12 @@ const MemberBlockItem: FC<MemberBlockItemProps> = memo(
     return (
       <div>
         {" "}
-        <Link href={"/user/" + userId}>
+        <Link href={`/user/${userId}`}>
           <a className={styles.main}>
             <Avatar
               size={54}
               src={
-                avatar
-                  ? avatar
-                  : "https://api.remanga.org//media/users/2814/avatar.jpg"
+                avatar || "https://api.remanga.org//media/users/2814/avatar.jpg"
               }
             />
             <div className={styles.data}>
@@ -52,24 +50,22 @@ const MemberBlockItem: FC<MemberBlockItemProps> = memo(
 interface MemberBlockProps {
   members: IMember[]
 }
-const MemberBlock: FC<MemberBlockProps> = ({ members }) => {
-  return (
-    <div className={styles.mainBlock}>
-      <div className={styles.title}>Состав</div>
-      <div className={styles.mainList}>
-        {members?.map((member) => (
-          <MemberBlockItem
-            key={member.id}
-            id={member.id}
-            role={member.roleInTeam}
-            userId={member.user.id}
-            name={member.user.name}
-            avatar={member.user.avatar}
-          />
-        ))}
-      </div>
+const MemberBlock: FC<MemberBlockProps> = ({ members }) => (
+  <div className={styles.mainBlock}>
+    <div className={styles.title}>Состав</div>
+    <div className={styles.mainList}>
+      {members?.map((member) => (
+        <MemberBlockItem
+          key={member.id}
+          id={member.id}
+          role={member.roleInTeam}
+          userId={member.user.id}
+          name={member.user.name}
+          avatar={member.user.avatar}
+        />
+      ))}
     </div>
-  )
-}
+  </div>
+)
 
 export default MemberBlock

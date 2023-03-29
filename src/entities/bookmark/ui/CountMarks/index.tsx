@@ -1,15 +1,14 @@
 import { CopyFilled } from "@ant-design/icons"
 import { useRouter } from "next/router"
 import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { Spin } from "antd"
 import {
   selectBookMarkCount,
   selectBookMarkLoadingForCount,
 } from "../../model/bookMark.selector"
 import { getBookMarkCountToManga } from "../../model/bookMark.slice"
 import styles from "./CountMarks.module.scss"
-import { useSelector } from "react-redux"
-import { Spin } from "antd"
 
 const CountMarks = () => {
   const router = useRouter()
