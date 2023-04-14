@@ -7,8 +7,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /frontend/node_modules
-      - ./client:/frontend
+      - /app/node_modules
+      - ./client:/app
   server:
     build: ../backend-nest
     restart: always
@@ -17,8 +17,10 @@ services:
     depends_on:
       - db
     volumes:
-      - /backend/node_modules
-      - ./server:/backend
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      POSTGRES_PASSWORD: password
   db:
     image: postgres
     restart: always
@@ -26,7 +28,7 @@ services:
       - postgres_data:/var/lib/postgresql
     environment:
       POSTGRES_PASSWORD: password
-      POSTGRES_DATABASE: reader-nest
+      POSTGRES_DATABASE: reader_nest
   adminer:
     image: adminer
     restart: always
