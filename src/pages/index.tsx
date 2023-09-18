@@ -1,30 +1,18 @@
 import type { NextPage } from "next"
 import dynamic from "next/dynamic"
 import { GetServerSideProps } from "next"
-import { Spin } from "antd"
 import { wrapper } from "../app/store"
 import { getMangas } from "../entities/manga/model/manga.slice"
+import { Loader } from "../shared/ui/Loader/Loader"
 
 const MainLayout = dynamic(() => import("../shared/ui/layouts/MainLayout"), {
-  loading: () => (
-    <span className="loader-block">
-      <Spin size="large" />
-    </span>
-  ),
+  loading: () => <Loader />,
 })
 const PopularList = dynamic(() => import("../entities/manga/ui/PopularList"), {
-  loading: () => (
-    <span className="loader-block">
-      <Spin />
-    </span>
-  ),
+  loading: () => <Loader />,
 })
 const UpdateList = dynamic(() => import("../entities/chapter/ui/UpdateList"), {
-  loading: () => (
-    <span className="loader-block">
-      <Spin />
-    </span>
-  ),
+  loading: () => <Loader />,
 })
 
 const Home: NextPage = () => (

@@ -11,37 +11,26 @@ import {
 } from "../../entities/team/model/team.selector"
 import { getTeam } from "../../entities/team/model/team.slice"
 import { UpdateListItem } from "../../entities/chapter/ui/UpdateList"
+import { Loader } from "../../shared/ui/Loader/Loader"
 
 const { Title, Paragraph, Text } = Typography
 
 const MemberBlock = dynamic(
   () => import("../../entities/team/ui/MemberBlock"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin size="large" />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 const DynamicCardManga = dynamic(
   () => import("../../entities/manga/ui/CardManga"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 

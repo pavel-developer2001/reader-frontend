@@ -1,18 +1,14 @@
-import { Spin } from "antd"
 import { GetServerSideProps } from "next"
 import dynamic from "next/dynamic"
 import { wrapper } from "../../app/store"
 import { getUserData } from "../../entities/user/model/user.slice"
 import { UserInfo } from "../../widgets/UserInfo/UserInfo"
+import { Loader } from "../../shared/ui/Loader/Loader"
 
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin size="large" />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 

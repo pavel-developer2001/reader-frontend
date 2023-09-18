@@ -11,75 +11,48 @@ import {
 import { RootState } from "../../../app/store/reducer"
 import { wrapper } from "../../../app/store"
 import { getManga } from "../../../entities/manga/model/manga.slice"
+import { Loader } from "../../../shared/ui/Loader/Loader"
 
 const CommentsBlockList = dynamic(
   () => import("../../../entities/comment/ui/CommentsBlockList"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 const ChapterList = dynamic(
   () => import("../../../entities/chapter/ui/ChapterList"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 const MangaAddition = dynamic(
   () => import("../../../entities/team/ui/MangaAddition"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 const DynamicMainLayout = dynamic(
   () => import("../../../shared/ui/layouts/MainLayout"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin size="large" />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 const DynamicMangaData = dynamic(
   () => import("../../../entities/rating/ui/MangaData"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 const DynamicMangaDescriptions = dynamic(
   () => import("../../../entities/manga/ui/MangaDescriptions"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 const DynamicMangaSettings = dynamic(
   () => import("../../../entities/manga/ui/MangaSettings"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 

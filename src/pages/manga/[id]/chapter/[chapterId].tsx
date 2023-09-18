@@ -12,15 +12,12 @@ import {
 } from "../../../../entities/chapter/model/chapter.selector"
 import { wrapper } from "../../../../app/store"
 import { getImages } from "../../../../entities/chapter/model/chapter.slice"
+import { Loader } from "../../../../shared/ui/Loader/Loader"
 
 const DynamicChapterLayout = dynamic(
   () => import("../../../../shared/ui/layouts/ChapterLayout"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin size="large" />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 const Chapter = () => {

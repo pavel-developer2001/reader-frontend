@@ -9,6 +9,7 @@ import {
 } from "../../entities/manga/model/manga.selector"
 import { wrapper } from "../../app/store"
 import { getMangas } from "../../entities/manga/model/manga.slice"
+import { Loader } from "../../shared/ui/Loader/Loader"
 
 const { TabPane } = Tabs
 
@@ -25,22 +26,14 @@ const DynamicCardManga = dynamic(
 const DynamicTeamList = dynamic(
   () => import("../../entities/team/ui/TeamList"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
   {
-    loading: () => (
-      <div className="loader-block">
-        <Spin size="large" />
-      </div>
-    ),
+    loading: () => <Loader />,
   }
 )
 
