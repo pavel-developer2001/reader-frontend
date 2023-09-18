@@ -1,12 +1,10 @@
 import { Layout, Spin } from "antd"
-import { BellOutlined, FormatPainterOutlined } from "@ant-design/icons"
 import Link from "next/link"
-import { useSelector } from "react-redux"
 import dynamic from "next/dynamic"
+import { FormatPainterOutlined } from "@ant-design/icons"
 import styles from "./Navbar.module.scss"
 import { Theme } from "../../app/context/ThemeContext"
 import { useTheme } from "../../shared/lib/hooks/useTheme"
-import { selectUserToken } from "../../entities/user/model/user.selector"
 
 const { Header } = Layout
 
@@ -33,7 +31,6 @@ const DynamicAvatarUser = dynamic(
 )
 const Navbar = () => {
   const theme = useTheme()
-  const token = useSelector(selectUserToken)
 
   function changeTheme() {
     theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)
@@ -43,10 +40,6 @@ const Navbar = () => {
       {
         title: "Каталог",
         link: "/catalog",
-      },
-      {
-        title: "В топе",
-        link: "/popular",
       },
     ],
     right: [],
@@ -74,15 +67,6 @@ const Navbar = () => {
               <div className={styles.menu}>
                 <DynamicSearchModal />
               </div>
-              {token && (
-                <div className={styles.menu}>
-                  <Link href="/notification">
-                    <a>
-                      <BellOutlined />
-                    </a>
-                  </Link>
-                </div>
-              )}
 
               <div className={styles.menu}>
                 <FormatPainterOutlined onClick={changeTheme} />
@@ -106,15 +90,6 @@ const Navbar = () => {
               <div className={styles.menu}>
                 <DynamicSearchModal />
               </div>
-              {token && (
-                <div className={styles.menu}>
-                  <Link href="/notification">
-                    <a>
-                      <BellOutlined />
-                    </a>
-                  </Link>
-                </div>
-              )}
 
               <DynamicAvatarDrawer
                 changeTheme={changeTheme}

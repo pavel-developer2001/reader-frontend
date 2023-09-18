@@ -1,9 +1,8 @@
 import Title from "antd/lib/typography/Title"
 import { useSelector } from "react-redux"
-import { Spin, Tabs } from "antd"
+import { Space, Spin, Tabs } from "antd"
 import dynamic from "next/dynamic"
 import { GetServerSideProps } from "next"
-import styles from "../../app/styles/pages/Catalog.module.scss"
 import {
   selectMangaLoading,
   selectMangasData,
@@ -33,13 +32,7 @@ const DynamicTeamList = dynamic(
     ),
   }
 )
-const DynamicFilters = dynamic(() => import("../../features/Filters"), {
-  loading: () => (
-    <div className="loader-block">
-      <Spin />
-    </div>
-  ),
-})
+
 const DynamicMainLayout = dynamic(
   () => import("../../shared/ui/layouts/MainLayout"),
   {
@@ -60,8 +53,8 @@ const Catalog = () => {
       <Title level={2}>Каталог</Title>
       <Tabs defaultActiveKey="1">
         <TabPane tab="Тайтлы" key="1">
-          <div className={styles.block}>
-            <div className={styles.mangaList}>
+          <Space>
+            <Space wrap>
               {loading ? (
                 <Spin />
               ) : (
@@ -69,11 +62,8 @@ const Catalog = () => {
                   <DynamicCardManga key={manga.id} manga={manga} />
                 ))
               )}
-            </div>
-            <div className={styles.filters}>
-              <DynamicFilters />
-            </div>
-          </div>
+            </Space>
+          </Space>
         </TabPane>
         <TabPane tab="Команды переводчиков" key="2">
           <DynamicTeamList />

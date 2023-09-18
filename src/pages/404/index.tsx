@@ -12,11 +12,6 @@ const DynamicMainLayout = dynamic(
   }
 )
 
-const Custom404 = () => (
-  <DynamicMainLayout>
-    Произошла ошибка на стороне админов. Извиняемся за неудобства, наши
-    специалисты уже разбираются.
-  </DynamicMainLayout>
-)
+const Custom404 = () => <DynamicMainLayout>Not found Page</DynamicMainLayout>
 
 export default Custom404

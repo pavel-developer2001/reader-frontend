@@ -7,23 +7,23 @@ import { getMangas } from "../entities/manga/model/manga.slice"
 
 const MainLayout = dynamic(() => import("../shared/ui/layouts/MainLayout"), {
   loading: () => (
-    <div className="loader-block">
+    <span className="loader-block">
       <Spin size="large" />
-    </div>
+    </span>
   ),
 })
 const PopularList = dynamic(() => import("../entities/manga/ui/PopularList"), {
   loading: () => (
-    <div className="loader-block">
+    <span className="loader-block">
       <Spin />
-    </div>
+    </span>
   ),
 })
 const UpdateList = dynamic(() => import("../entities/chapter/ui/UpdateList"), {
   loading: () => (
-    <div className="loader-block">
+    <span className="loader-block">
       <Spin />
-    </div>
+    </span>
   ),
 })
 

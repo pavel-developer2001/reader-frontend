@@ -12,7 +12,7 @@ interface MainLayoutProps {
   children: ReactNode
 }
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
-  <div className={styles.wrapper}>
+  <main className={styles.wrapper}>
     <Head>
       <title>Reader - читалка</title>
       <meta
@@ -31,7 +31,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
       <div className="main-container">{children}</div>
     </div>
     <DynamicMyFooter />
-  </div>
+  </main>
 )
 
 export default MainLayout
