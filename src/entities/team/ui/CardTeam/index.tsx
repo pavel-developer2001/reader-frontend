@@ -1,6 +1,6 @@
 import { Avatar } from "antd"
 import Link from "next/link"
-import  { FC, memo } from "react"
+import { FC, memo } from "react"
 import styles from "./CardTeam.module.scss"
 
 interface CardTeamProps {

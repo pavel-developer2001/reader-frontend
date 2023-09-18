@@ -1,6 +1,6 @@
 import { Avatar, Spin } from "antd"
 import Link from "next/link"
-import  { FC, useEffect } from "react"
+import { FC, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getTeams } from "../../model/team.slice"
 import { selectTeamLoading, selectTeamsData } from "../../model/team.selector"

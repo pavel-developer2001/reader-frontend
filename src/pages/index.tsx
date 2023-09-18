@@ -2,7 +2,6 @@ import type { NextPage } from "next"
 import dynamic from "next/dynamic"
 import { GetServerSideProps } from "next"
 import { Spin } from "antd"
-import styles from "../app/styles/pages/Home.module.scss"
 import { wrapper } from "../app/store"
 import { getMangas } from "../entities/manga/model/manga.slice"
 
@@ -20,13 +19,6 @@ const PopularList = dynamic(() => import("../entities/manga/ui/PopularList"), {
     </div>
   ),
 })
-const TisketList = dynamic(() => import("../widgets/TisketList"), {
-  loading: () => (
-    <div className="loader-block">
-      <Spin />
-    </div>
-  ),
-})
 const UpdateList = dynamic(() => import("../entities/chapter/ui/UpdateList"), {
   loading: () => (
     <div className="loader-block">
@@ -38,11 +30,6 @@ const UpdateList = dynamic(() => import("../entities/chapter/ui/UpdateList"), {
 const Home: NextPage = () => (
   <MainLayout>
     <PopularList />
-    <div className={styles.tisket}>
-      <TisketList popularTitle="Рекомендации" />
-      <TisketList popularTitle="Топ дня" />
-      <TisketList popularTitle="Топ месяца" />
-    </div>
     <UpdateList />
   </MainLayout>
 )

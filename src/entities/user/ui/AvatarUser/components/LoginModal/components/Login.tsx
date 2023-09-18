@@ -1,5 +1,5 @@
 import { Button, Form, Input, message } from "antd"
-import  { FC, useEffect } from "react"
+import { FC, useEffect } from "react"
 import * as yup from "yup"
 import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"

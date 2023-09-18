@@ -1,7 +1,7 @@
 import { Avatar, Spin } from "antd"
 import { useRouter } from "next/dist/client/router"
 import Link from "next/link"
-import  { FC, memo, useEffect } from "react"
+import { FC, memo, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import {
   selectTeamLoading,

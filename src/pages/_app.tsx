@@ -3,6 +3,7 @@ import "antd/dist/antd.css"
 import { useEffect } from "react"
 import { AppProps } from "next/app"
 import { useDispatch, useSelector } from "react-redux"
+import { ConfigProvider } from "antd"
 import { selectUserToken } from "../entities/user/model/user.selector"
 import { setToken } from "../entities/user/model/user.slice"
 import { ThemeProvider } from "../app/provider/ThemeProvider"
@@ -16,9 +17,11 @@ export const MyApp = ({ Component, pageProps }: AppProps) => {
   }, [token])
   const isBrowser = typeof window !== "undefined"
   return isBrowser ? (
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <ConfigProvider>
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </ConfigProvider>
   ) : null
 }
 export default wrapper.withRedux(MyApp)

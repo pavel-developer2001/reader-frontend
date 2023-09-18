@@ -10,9 +10,7 @@ import {
   getTeamsForInvitations,
 } from "../../../../model/team.slice"
 import { dataUser } from "../../../../../../shared/lib/utils/getDataUserFromToken"
-import {
-  selectTeamsForInvitationsData,
-} from "../../../../model/team.selector"
+import { selectTeamsForInvitationsData } from "../../../../model/team.selector"
 
 const { Option } = Select
 

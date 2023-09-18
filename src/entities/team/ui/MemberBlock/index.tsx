@@ -1,6 +1,6 @@
 import { Avatar, Button } from "antd"
 import Link from "next/link"
-import  { FC, memo } from "react"
+import { FC, memo } from "react"
 import { useDispatch } from "react-redux"
 import { IMember } from "../../../../shared/api/reader/models"
 import { removeMember } from "../../model/team.slice"

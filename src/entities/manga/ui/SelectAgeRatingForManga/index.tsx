@@ -1,5 +1,5 @@
 import Select from "antd/lib/select"
-import  { FC } from "react"
+import { FC } from "react"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 import styles from "./SelectAgeRatingForManga.module.scss"
 

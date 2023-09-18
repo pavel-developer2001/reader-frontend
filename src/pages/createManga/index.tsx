@@ -1,4 +1,4 @@
-import  { useState } from "react"
+import { useState } from "react"
 import { message, Button } from "antd"
 import TextArea from "rc-textarea"
 import { useDispatch } from "react-redux"
@@ -90,8 +90,6 @@ const CreateManga = () => {
       message.error("Произошла ошибка", error)
     }
   }
-
-  
 
   return (
     <MainLayout>
