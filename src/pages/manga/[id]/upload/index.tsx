@@ -1,7 +1,7 @@
 import TextArea from "antd/lib/input/TextArea"
 import { useRouter } from "next/dist/client/router"
 import { useEffect, useState } from "react"
-import { Upload, Modal, Button, Select, message } from "antd"
+import { Upload, Modal, Button, Select, message, Typography } from "antd"
 import { useDispatch, useSelector } from "react-redux"
 import { GetServerSideProps } from "next"
 import * as yup from "yup"
@@ -153,7 +153,9 @@ const AddNewChapter = () => {
                 defaultValue=""
               />
               {!!errors?.volumeChapter && (
-                <p className="error-field">{errors?.volumeChapter?.message}</p>
+                <Typography.Text type="danger">
+                  {errors?.volumeChapter?.message}
+                </Typography.Text>
               )}
             </div>
             <div className={styles.select}>
@@ -167,7 +169,9 @@ const AddNewChapter = () => {
                 defaultValue=""
               />
               {!!errors?.numberChapter && (
-                <p className="error-field">{errors?.numberChapter?.message}</p>
+                <Typography.Text type="danger">
+                  {errors?.numberChapter?.message}
+                </Typography.Text>
               )}
             </div>
             <div className={styles.select}>
@@ -198,7 +202,9 @@ const AddNewChapter = () => {
                 defaultValue=""
               />
               {!!errors?.language && (
-                <p className="error-field">{errors?.language?.message}</p>
+                <Typography.Text type="danger">
+                  {errors?.language?.message}
+                </Typography.Text>
               )}
             </div>
           </div>
@@ -214,7 +220,9 @@ const AddNewChapter = () => {
                 defaultValue=""
               />
               {!!errors?.titleChapter && (
-                <p className="error-field">{errors?.titleChapter?.message}</p>
+                <Typography.Text type="danger">
+                  {errors?.titleChapter?.message}
+                </Typography.Text>
               )}
             </div>
             <div className={styles.selectSecondary}>

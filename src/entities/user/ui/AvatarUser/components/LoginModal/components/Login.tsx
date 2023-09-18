@@ -65,7 +65,11 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
         control={control}
         defaultValue=""
       />
-      {!!errors?.email && <p className="error">{errors?.email?.message}</p>}
+      {!!errors?.email && (
+        <p style={{ color: "red", marginTop: "-1.7rem" }}>
+          {errors?.email?.message}
+        </p>
+      )}
       <Controller
         render={({ field }) => (
           <Form.Item
@@ -82,7 +86,9 @@ const LoginComponent: FC<LoginProps> = ({ setRegister }) => {
         defaultValue=""
       />
       {!!errors?.password && (
-        <p className="error">{errors?.password?.message}</p>
+        <p style={{ color: "red", marginTop: "-1.7rem" }}>
+          {errors?.password?.message}
+        </p>
       )}
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" data-testid="login" htmlType="submit">

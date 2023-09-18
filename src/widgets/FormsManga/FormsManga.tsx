@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { message, Button } from "antd"
+import { message, Button, Typography } from "antd"
 import TextArea from "rc-textarea"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/dist/client/router"
@@ -118,7 +118,9 @@ export const FormsManga = () => {
                 defaultValue=""
               />
               {!!errors?.title && (
-                <p className="error-field">{errors?.title?.message}</p>
+                <Typography.Text type="danger">
+                  {errors?.title?.message}
+                </Typography.Text>
               )}
             </div>
             <div className={styles.block}>
@@ -137,7 +139,9 @@ export const FormsManga = () => {
                 defaultValue=""
               />
               {!!errors?.englishTitle && (
-                <p className="error-field">{errors?.englishTitle?.message}</p>
+                <Typography.Text type="danger">
+                  {errors?.englishTitle?.message}
+                </Typography.Text>
               )}
             </div>
             <div className={styles.block}>
@@ -156,7 +160,9 @@ export const FormsManga = () => {
                 defaultValue=""
               />
               {!!errors?.originalTitle && (
-                <p className="error-field">{errors?.originalTitle?.message}</p>
+                <Typography.Text type="danger">
+                  {errors?.originalTitle?.message}
+                </Typography.Text>
               )}
             </div>
           </div>
@@ -177,7 +183,9 @@ export const FormsManga = () => {
             defaultValue=""
           />
           {!!errors?.mangaDescription && (
-            <p className="error-field">{errors?.mangaDescription?.message}</p>
+            <Typography.Text type="danger">
+              {errors?.mangaDescription?.message}
+            </Typography.Text>
           )}
         </div>
         <div className={styles.bottomBlock}>
@@ -191,7 +199,9 @@ export const FormsManga = () => {
                   defaultValue=""
                 />
                 {!!errors?.typeManga && (
-                  <p className="error-field">{errors?.typeManga?.message}</p>
+                  <Typography.Text type="danger">
+                    {errors?.typeManga?.message}
+                  </Typography.Text>
                 )}
               </div>
               <div className={styles.select}>
@@ -204,7 +214,9 @@ export const FormsManga = () => {
                   defaultValue=""
                 />
                 {!!errors?.statusManga && (
-                  <p className="error-field">{errors?.statusManga?.message}</p>
+                  <Typography.Text type="danger">
+                    {errors?.statusManga?.message}
+                  </Typography.Text>
                 )}
               </div>
             </div>
@@ -217,7 +229,9 @@ export const FormsManga = () => {
                   defaultValue=""
                 />
                 {!!errors?.tags && (
-                  <p className="error-field">{errors?.tags?.message}</p>
+                  <Typography.Text type="danger">
+                    {errors?.tags?.message}
+                  </Typography.Text>
                 )}
               </div>
             </div>
@@ -234,9 +248,9 @@ export const FormsManga = () => {
                   defaultValue=""
                 />
                 {!!errors?.ageRatingManga && (
-                  <p className="error-field">
+                  <Typography.Text type="danger">
                     {errors?.ageRatingManga?.message}
-                  </p>
+                  </Typography.Text>
                 )}
               </div>
               <div className={styles.select}>
@@ -255,7 +269,9 @@ export const FormsManga = () => {
                   defaultValue=""
                 />
                 {!!errors?.yearOfIssue && (
-                  <p className="error-field">{errors?.yearOfIssue?.message}</p>
+                  <Typography.Text type="danger">
+                    {errors?.yearOfIssue?.message}
+                  </Typography.Text>
                 )}
               </div>
             </div>
@@ -268,7 +284,9 @@ export const FormsManga = () => {
                   defaultValue=""
                 />
                 {!!errors?.genres && (
-                  <p className="error-field">{errors?.genres?.message}</p>
+                  <Typography.Text type="danger">
+                    {errors?.genres?.message}
+                  </Typography.Text>
                 )}
               </div>
             </div>

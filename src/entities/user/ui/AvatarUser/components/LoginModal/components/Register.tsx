@@ -81,7 +81,11 @@ const RegisterComponent: FC<RegisterComponent> = ({
         control={control}
         defaultValue=""
       />
-      {!!errors?.name && <p className="error">{errors?.name?.message}</p>}
+      {!!errors?.name && (
+        <p style={{ color: "red", marginTop: "-1.7rem" }}>
+          {errors?.name?.message}
+        </p>
+      )}
 
       <Controller
         render={({ field }) => (
@@ -93,7 +97,11 @@ const RegisterComponent: FC<RegisterComponent> = ({
         control={control}
         defaultValue=""
       />
-      {!!errors?.email && <p className="error">{errors?.email?.message}</p>}
+      {!!errors?.email && (
+        <p style={{ color: "red", marginTop: "-1.7rem" }}>
+          {errors?.email?.message}
+        </p>
+      )}
       <Controller
         render={({ field }) => (
           <Form.Item {...field} label="Пароль" name="password">
@@ -105,7 +113,9 @@ const RegisterComponent: FC<RegisterComponent> = ({
         defaultValue=""
       />
       {!!errors?.password && (
-        <p className="error">{errors?.password?.message}</p>
+        <p style={{ color: "red", marginTop: "-1.7rem" }}>
+          {errors?.password?.message}
+        </p>
       )}
       <Controller
         render={({ field }) => (
@@ -118,7 +128,9 @@ const RegisterComponent: FC<RegisterComponent> = ({
         defaultValue=""
       />
       {!!errors?.password2 && (
-        <p className="error">{errors?.password2?.message}</p>
+        <p style={{ color: "red", marginTop: "-1.7rem" }}>
+          {errors?.password2?.message}
+        </p>
       )}
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type={register ? "primary" : "link"} htmlType="submit">

@@ -1,5 +1,5 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons"
-import { Button, message, Modal, Upload } from "antd"
+import { Button, message, Modal, Typography, Upload } from "antd"
 import TextArea from "antd/lib/input/TextArea"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
@@ -143,7 +143,9 @@ const CreateTeamModal = () => {
             defaultValue=""
           />
           {!!errors?.teamName && (
-            <p className="error-field">{errors?.teamName?.message}</p>
+            <Typography.Text type="danger">
+              {errors?.teamName?.message}
+            </Typography.Text>
           )}
 
           <div style={{ margin: "24px 0" }} />
@@ -160,7 +162,9 @@ const CreateTeamModal = () => {
             defaultValue=""
           />
           {!!errors?.teamSubtitle && (
-            <p className="error-field">{errors?.teamSubtitle?.message}</p>
+            <Typography.Text type="danger">
+              {errors?.teamSubtitle?.message}
+            </Typography.Text>
           )}
 
           <div style={{ margin: "24px 0" }} />
@@ -177,7 +181,9 @@ const CreateTeamModal = () => {
             defaultValue=""
           />
           {!!errors?.teamDescription && (
-            <p className="error-field">{errors?.teamDescription?.message}</p>
+            <Typography.Text type="danger">
+              {errors?.teamDescription?.message}
+            </Typography.Text>
           )}
 
           <div style={{ margin: "24px 0" }} />

@@ -1,4 +1,4 @@
-import { Button, message, Modal, Spin, Tooltip, Select } from "antd"
+import { Button, message, Modal, Spin, Tooltip, Select, Typography } from "antd"
 import { useEffect, useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
@@ -109,7 +109,9 @@ const AddMangaForTeam = () => {
             defaultValue=""
           />
           {!!errors?.teamId && (
-            <p className="error-field">{errors?.teamId?.message}</p>
+            <Typography.Text type="danger">
+              {errors?.teamId?.message}
+            </Typography.Text>
           )}
 
           <div>

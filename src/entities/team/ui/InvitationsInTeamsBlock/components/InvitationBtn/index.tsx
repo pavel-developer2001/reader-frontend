@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Modal, Button, Select, message } from "antd"
+import { Modal, Button, Select, message, Typography } from "antd"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/dist/client/router"
 import * as yup from "yup"
@@ -111,7 +111,9 @@ const InvitationBtn = () => {
             defaultValue=""
           />
           {!!errors?.teamId && (
-            <p className="error-field">{errors?.teamId?.message}</p>
+            <Typography.Text type="danger">
+              {errors?.teamId?.message}
+            </Typography.Text>
           )}
 
           <div>В качестве: </div>
@@ -140,7 +142,9 @@ const InvitationBtn = () => {
             defaultValue=""
           />
           {!!errors?.rank && (
-            <p className="error-field">{errors?.rank?.message}</p>
+            <Typography.Text type="danger">
+              {errors?.rank?.message}
+            </Typography.Text>
           )}
 
           <div>
