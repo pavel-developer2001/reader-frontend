@@ -21,6 +21,7 @@
     ]
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.17.0",
     "@ant-design/icons": "^4.6.4",
     "@hookform/resolvers": "^2.9.0",
     "@react-leaflet/core": "^1.1.1",

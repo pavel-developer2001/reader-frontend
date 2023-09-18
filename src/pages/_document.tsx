@@ -1,34 +1,42 @@
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentContext,
-} from "next/document"
+/* eslint-disable react/no-danger */
+import { createCache, extractStyle, StyleProvider } from "@ant-design/cssinjs"
+import Document, { Head, Html, Main, NextScript } from "next/document"
+import type { DocumentContext } from "next/document"
 
-class AppDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
-  }
+const MyDocument = () => (
+  <Html lang="en">
+    <Head />
+    <body>
+      <Main />
+      <NextScript />
+    </body>
+  </Html>
+)
 
-  render() {
-    return (
-      <Html lang="ru">
-        <Head>
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    )
+MyDocument.getInitialProps = async (ctx: DocumentContext) => {
+  const cache = createCache()
+  const originalRenderPage = ctx.renderPage
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: (App) => (props) =>
+        (
+          <StyleProvider cache={cache}>
+            <App {...props} />
+          </StyleProvider>
+        ),
+    })
+
+  const initialProps = await Document.getInitialProps(ctx)
+  const style = extractStyle(cache, true)
+  return {
+    ...initialProps,
+    styles: (
+      <>
+        {initialProps.styles}
+        <style dangerouslySetInnerHTML={{ __html: style }} />
+      </>
+    ),
   }
 }
 
-export default AppDocument
+export default MyDocument
