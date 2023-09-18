@@ -1,26 +1,37 @@
-# Reader - сайт, где можно читать комиксы онлайн.
+# Reader - manga platform.
 
-## Версия 0.3.5
+## Features
 
-## Текущие фичи
+- Registration and authorization.
+- Manga(Create,Read).
+- Chapters(Create,Read).
+- Comments(CRUD)
+- Bookmarks
+- Teams
+- Search
 
-- Простая регистрация и авторизация.
-- Комиксы(Create,Read).
-- Главы(Create,Read).
-- Комментарии(CRUD)
-- Закладки
-- Команды переводчиков
-- Поиск
+## Technology stack:
 
-## В разработке применяется:
-
-- Next js + TypeScript
+- Next js
+- Typescript
 - Redux Toolkit
-- UI библиотека - Ant Design
+- Ant Design
+- React-hook-form
 
-## Установка
+## Linting:
 
-- 1 Надо установить все пакеты:
+- ESLint
+- Prettier
+
+## Tests:
+
+- Jest
+- React Testing Library
+- Cypress
+
+## Install
+
+- 1 Install all packages:
 
 ```bash
 npm i
@@ -28,7 +39,7 @@ npm i
 yarn install
 ```
 
-- 2 Запускаем приложение:
+- 2 Start app:
 
 ```bash
 npm run dev
@@ -36,5 +47,5 @@ npm run dev
 yarn dev
 ```
 
-- 3 Нужно запустить backend:
-  Backend проекта [здесь](https://github.com/pavel-developer2001/reader-backend-nest).
+- 3 You need to raise the backend. :
+  The backend version [here](https://github.com/pavel-developer2001/reader-backend-nest).
