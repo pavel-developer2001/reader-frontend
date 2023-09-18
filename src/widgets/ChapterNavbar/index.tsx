@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { FC, memo } from "react"
-import { CaretRightOutlined, FormatPainterOutlined } from "@ant-design/icons"
+import { FormatPainterOutlined } from "@ant-design/icons"
 import { Header } from "antd/lib/layout/layout"
 import Link from "next/link"
 import dynamic from "next/dynamic"
@@ -69,9 +70,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
               </Link>
             </div>
             <div className={styles.center}>
-              {/* {id <= 0 ? null : <CaretLeftOutlined />} */}
-              <span># {page}</span>
-              <CaretRightOutlined />
+              здесь должно быть переключение между главами
             </div>
             <div className={styles.right}>
               <div className={styles.menu}>
@@ -96,9 +95,7 @@ const ChapterNavbar: FC<ChapterNavbarProps> = memo(({ title, page, id }) => {
               </Link>
             </div>
             <div className={styles.center}>
-              {/* {id <= 0 ? null : <CaretLeftOutlined />} */}
-              <span># {page}</span>
-              <CaretRightOutlined />
+              здесь должно быть переключение между главами
             </div>
             <div className={styles.right}>
               <DynamicAvatarDrawer

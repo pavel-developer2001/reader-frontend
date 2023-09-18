@@ -4,13 +4,6 @@ import { Spin } from "antd"
 import dynamic from "next/dynamic"
 import styles from "./ChapterLayout.module.scss"
 
-const DynamicSettingPage = dynamic(
-  () => import("../../../../widgets/SettingsPage"),
-  {
-    loading: () => <Spin />,
-    ssr: false,
-  }
-)
 const DynamicMyFooter = dynamic(() => import("../../../../widgets/MyFooter"), {
   loading: () => <Spin />,
   ssr: false,
@@ -48,9 +41,7 @@ const ChapterLayout: React.FC<ChapterLayoutProps> = memo(
       <DynamicChapterNavbar title={title} page={page} id={id} />
       <div className={styles.main}>
         <div className={styles.container}>{children}</div>
-        <div className={styles.right}>
-          <DynamicSettingPage />
-        </div>
+        <div className={styles.right} />
       </div>
       <DynamicMyFooter />
     </div>
